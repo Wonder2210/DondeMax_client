@@ -1,0 +1,14 @@
+{
+    "semi": true,
+    "trailingComma": "all",
+    "printWidth": 120,
+    "tabWidth": 2,
+    "endOfLine": "auto",
+    "parser": "typescript",
+    "extends": [
+        "plugin:prettier/recommended",
+        "prettier/typescript",
+        "prettier/react",
+        "prettier/standard"
+    ]
+}
