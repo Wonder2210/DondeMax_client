@@ -1,10 +1,16 @@
 import * as React from "react";
 import { IconButton as IconBtn, IconButtonProps } from "@chakra-ui/core";
 
-const IconButton: React.FC<IconButtonProps> = ({ color, backgroundColor, icon, borderRadius }) => (
+const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = ({
+  color,
+  backgroundColor,
+  icon,
+  borders,
+}) => (
   <IconBtn
     aria-label="Icon"
-    borderRadius={borderRadius ?? "35px"}
+    roundedLeft={borders[0] ?? "35px"}
+    roundedRight={borders[1] ?? "35px"}
     color={color}
     backgroundColor={backgroundColor}
     width="62px"
