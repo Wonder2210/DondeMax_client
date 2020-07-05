@@ -1,16 +1,13 @@
 import * as React from "react";
-import { withDesign } from "storybook-addon-designs";
 import { Icon } from "@iconify/react";
 import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
 import heart from "@iconify/icons-cil/heart";
 import share from "@iconify/icons-cil/share";
-import storyConfig from "../../../utils/pluginFigmaConfig";
 import IconButton from "./IconButton";
 import Button from "./Button";
 
 export default {
   title: "Atoms/Button",
-  decorators: [withDesign],
 };
 
 export const BasicUsage = () => (
@@ -40,7 +37,5 @@ export const iconbuttonShare = () => (
     icon={() => <Icon icon={share} width="25px" height="24px" />}
   />
 );
-
-BasicUsage.story = storyConfig;
 
 //rafce

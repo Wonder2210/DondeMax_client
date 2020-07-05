@@ -19,6 +19,7 @@
     "next": "^9.3.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-responsive": "^8.1.0",
     "react-transition-group": "^4.4.1"
   },
   "devDependencies": {
