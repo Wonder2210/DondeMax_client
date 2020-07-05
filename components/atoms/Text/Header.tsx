@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Text } from "@chakra-ui/core";
+import { Heading } from "@chakra-ui/core";
 
-const Header: React.FC<{ color: string }> = ({ children, color }) => (
-  <Text size={["56px", "76px", "96px"]} color={color && "white"}>
+const Header: React.FC<{ color?: string }> = ({ children, color }) => (
+  <Heading fontSize={["56px", "76px", "96px", "96px"]} color={color ?? "black"}>
     {children}
-  </Text>
+  </Heading>
 );
 export default Header;

@@ -4,13 +4,15 @@ import List from "./List";
 
 export const SimpleList = () => {
   return (
-    <div style={{ width: "350px" }}>
-      <List spacing={3}>
-        <ListItem>Chocolate</ListItem>
-        <ListItem>Vainilla</ListItem>
-        <ListItem>Mantecado</ListItem>
-        <ListItem>Coco</ListItem>
-        <ListItem>Fresa</ListItem>
+    <div style={{ width: "250px" }}>
+      <List spacing={5} padding={3} borderWidth="1px" borders={["0px", "35px"]}>
+        <ListItem icon="phone">
+          <a href="/#">Chocolate</a>
+        </ListItem>
+        <ListItem icon="phone">Vainilla</ListItem>
+        <ListItem icon="phone">Mantecado</ListItem>
+        <ListItem icon="phone">Coco</ListItem>
+        <ListItem icon="phone">Fresa</ListItem>
       </List>
     </div>
   );

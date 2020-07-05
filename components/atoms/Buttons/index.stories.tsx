@@ -17,13 +17,7 @@ export const BasicUsage = () => (
   <Button
     backgroundColor="rose.600"
     rightIcon={() => (
-      <Icon
-        icon={chevronRight}
-        color="white"
-        height="46px"
-        width="38px"
-        style={{ marginLeft: "10%" }}
-      />
+      <Icon icon={chevronRight} color="white" height="46px" width="38px" style={{ marginLeft: "10%" }} />
     )}
   >
     Nuestras Tortas

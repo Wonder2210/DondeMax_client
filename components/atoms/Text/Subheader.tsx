@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Text } from "@chakra-ui/core";
 
-const Subheader: React.FC<{ color: string }> = ({ children, color }) => {
+const Subheader: React.FC<{ color?: string }> = ({ children, color }) => {
   return (
-    <Text size="24px" color={color}>
+    <Text fontSize="xl" color={color ?? "black"}>
       {children}
     </Text>
   );

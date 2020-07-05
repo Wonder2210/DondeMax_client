@@ -8,7 +8,7 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 9001"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
