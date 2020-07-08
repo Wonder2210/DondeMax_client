@@ -1,0 +1,33 @@
+.inner{
+    position:absolute;
+    z-index:1;
+    width:100%;
+   
+}
+.dropdown{
+    width:100%;
+    background-color:white;
+    border-radius: 0 0 35px 35px;
+
+}
+
+.dropdown-enter {
+    transform: translateY(-110%);
+
+
+  }
+  .dropdown-enter-active {
+    transform: translateX(0%);
+    border-radius: 0 0 35px 35px;
+
+    transition: all 0.5s ease;
+  }
+  .dropdown-exit {
+  
+  }
+  .dropdown-exit-active {
+    border-radius: 0 ;
+
+    transform: translateY(-110%);
+    transition: all 0.5s ease;
+  }

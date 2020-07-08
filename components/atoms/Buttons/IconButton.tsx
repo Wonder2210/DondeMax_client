@@ -5,17 +5,24 @@ const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = (
   color,
   backgroundColor,
   icon,
-  borders,
+  onClick,
+  width = "62px",
+  height = "35px",
+  borders = ["35px", "35px"],
+  margin = 1,
 }) => (
   <IconBtn
     aria-label="Icon"
-    roundedLeft={borders[0] ?? "35px"}
-    roundedRight={borders[1] ?? "35px"}
+    onClick={onClick}
+    roundedLeft={borders[0]}
+    roundedRight={borders[1]}
     color={color}
     backgroundColor={backgroundColor}
-    width="62px"
-    height="35px"
+    width={width}
+    height={height}
     icon={icon}
+    margin={margin}
+    _hover={{}}
   />
 );
 

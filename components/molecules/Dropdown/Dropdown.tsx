@@ -1,16 +1,22 @@
 import * as React from "react";
-
-const { useState } = React;
+import { CSSTransition } from "react-transition-group";
+import { List } from "../../atoms/List";
+import "./styles.css";
 
 type props = {
-  list: string[];
+  show: boolean;
 };
 
-const Dropdown: React.FC<props> = () => {
-  let [state, setState] = useState({ open: false, selected: "" });
+const Dropdown: React.FC<props> = ({ show, children }) => {
   return (
-    <div>
-      <h1>Here</h1>
+    <div className="inner">
+      <CSSTransition in={show} timeout={1000} classNames="dropdown" unmountOnExit>
+        <div className="dropdown">
+          <List spacing={6} padding={3}>
+            {children}
+          </List>
+        </div>
+      </CSSTransition>
     </div>
   );
 };
