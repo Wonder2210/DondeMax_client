@@ -6,8 +6,8 @@ import { ShoppingCart } from "../../atoms/Buttons";
 
 const Navbar = () => {
   return (
-    <Box position="absolute" display="flex" width="100%" height="72px" top="0">
-      <Flex justify="space-between" top="10%" flexDirection="row" position="absolute" left="0" width="40%">
+    <Box zIndex={1} position="absolute" display="flex" width="100%" height="72px" top="0">
+      <Flex justify="space-evenly" top="10%" flexDirection="row" position="absolute" left="0" width="50%">
         <Link href="/" passHref>
           <StyleLink>Acerca de Nosotros </StyleLink>
         </Link>

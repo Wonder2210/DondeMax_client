@@ -1,25 +1,17 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/self-closing-comp */
 import * as React from "react";
-import { CSSTransition } from "react-transition-group";
-
-const { useState } = React;
+import { Box } from "@chakra-ui/core";
+import { Navbar } from "../components/molecules/Navbar";
+import { Split } from "../components/layouts/Split";
 
 const index = () => {
-  const [state, setstate] = useState("main");
-  const compare = () => (state === "main" ? "secondary" : "main");
   return (
-    <div className="full-body">
-      <button onClick={() => setstate(compare)}>Transition</button>
-      <div className="inner">
-        <CSSTransition in={state === "main"} timeout={500} classNames="menu-primary" unmountOnExit>
-          <div className="left"></div>
-        </CSSTransition>
-        <CSSTransition in={state === "secondary"} timeout={500} classNames="menu-secondary" unmountOnExit>
-          <div className="right"></div>
-        </CSSTransition>
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <Split>
+        <Box bg="rgb(255,0,0)" w="100%" h="100%" />
+        <Box bg="rgb(255,100,0)" w="100%" h="100%" />
+      </Split>
+    </>
   );
 };
 

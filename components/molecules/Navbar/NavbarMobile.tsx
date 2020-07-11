@@ -44,7 +44,7 @@ const NavbarMobile = () => {
   };
 
   return (
-    <Box position="absolute" backgroundColor="rgba(0,0,0,0.5)" top="0" right="0" h={state.height} w="100%">
+    <Box zIndex={1} position="absolute" backgroundColor="rgba(0,0,0,0.5)" top="0" right="0" h={state.height} w="100%">
       <Box
         position="relative"
         bg="white"

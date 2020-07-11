@@ -3,7 +3,7 @@ import { Text } from "@chakra-ui/core";
 
 const Subheader: React.FC<{ color?: string }> = ({ children, color }) => {
   return (
-    <Text fontSize="xl" color={color ?? "black"}>
+    <Text fontSize={["1rem", "1rem", "xl", "xl"]} fontWeight="medium" color={color ?? "black"}>
       {children}
     </Text>
   );

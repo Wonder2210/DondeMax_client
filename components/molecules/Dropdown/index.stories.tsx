@@ -8,7 +8,7 @@ export const testDropdown = () => {
   return (
     <>
       <button onClick={() => setOpen(!open)}>Open ANd close</button>
-      <Dropdown open={open}>
+      <Dropdown show={open}>
         <Link href="/" passHref>
           <StyleLink>Acerca de Nosotros </StyleLink>
         </Link>

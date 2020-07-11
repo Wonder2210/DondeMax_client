@@ -6,8 +6,8 @@ const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = (
   backgroundColor,
   icon,
   onClick,
-  width = "62px",
-  height = "35px",
+  width = ["3.5rem", "3.875rem"],
+  height = ["1.9rem", "2.188rem"],
   borders = ["35px", "35px"],
   margin = 1,
 }) => (

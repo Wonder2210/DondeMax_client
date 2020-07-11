@@ -17,12 +17,12 @@ const Button: React.FC<ButtonProps> = ({
       backgroundColor={backgroundColor ?? "black"}
       onClick={onClick}
       size={size ?? "md"}
-      width={width ?? ["65%", "250px"]}
+      width={width ?? ["65%", "15.625rem"]}
       height={height ?? ["8%", "77px"]}
       color={color ?? "white"}
       borderRadius="35px"
       fontWeight="bold"
-      fontSize={["12px", "18px"]}
+      fontSize={[".9rem", "1.125rem"]}
       _hover={{}}
       rightIcon={rightIcon}
     >

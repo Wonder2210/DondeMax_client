@@ -3,7 +3,7 @@ import React from "react";
 import { Link, LinkProps } from "@chakra-ui/core";
 
 const Links: React.FC<LinkProps> = React.forwardRef(
-  ({ as, color, isExternal, mx, fontSize = "md", children, href }, ref) => {
+  ({ as, color, isExternal, mx, fontSize = ["md", "md", "1.125rem"], children, href }, ref) => {
     return (
       <Link
         as={as}
