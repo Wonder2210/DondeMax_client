@@ -15,6 +15,8 @@ const InitialCard: React.FC<props> = ({ src, alt, children, href = "/" }) => {
       rounded="35px"
       position="relative"
       height={["9.375rem", "11.5em"]}
+      marginBottom="5vh"
+      marginLeft="1vw"
       width={["7.188rem", "10em"]}
       boxShadow=" 10px 10px 50px rgba(0, 0, 0, 0.5)"
     >

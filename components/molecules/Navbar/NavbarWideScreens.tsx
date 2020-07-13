@@ -6,8 +6,17 @@ import { ShoppingCart } from "../../atoms/Buttons";
 
 const Navbar = () => {
   return (
-    <Box zIndex={1} position="absolute" display="flex" width="100%" height="72px" top="0">
-      <Flex justify="space-evenly" top="10%" flexDirection="row" position="absolute" left="0" width="50%">
+    <Box
+      zIndex={1}
+      position="absolute"
+      justifyContent="space-between"
+      flexDirection="row"
+      display="flex"
+      width="100%"
+      height="72px"
+      top="0"
+    >
+      <Flex justify="space-evenly" marginTop="1vh" flexDirection="row" left="0" width="50%">
         <Link href="/" passHref>
           <StyleLink>Acerca de Nosotros </StyleLink>
         </Link>
@@ -19,10 +28,10 @@ const Navbar = () => {
         </Link>
       </Flex>
 
-      <Flex position="absolute" right="0" flexDirection="row" width="40%" justify="flex-end">
-        <Flex justify="flex-start" w="20%">
-          <ShoppingCart itemsCount={0} />
-        </Flex>
+      <Flex marginRight="1vw" flexDirection="row" w="20%" justify="flex-end">
+        <ShoppingCart itemsCount={0} />
+        {/* <Flex justify="flex-start" w="20%">
+        </Flex> */}
       </Flex>
     </Box>
   );

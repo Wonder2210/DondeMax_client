@@ -22,7 +22,11 @@ const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = (
     height={height}
     icon={icon}
     margin={margin}
-    _hover={{}}
+    _hover={{
+      transform: "scale(1.1,1.1)",
+    }}
+    _focus={{}}
+    _active={{}}
   />
 );
 

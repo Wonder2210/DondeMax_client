@@ -1,12 +1,10 @@
-const path = require('path');
+const path = require("path");
 module.exports = {
-    stories: ['../components/**/**/*.stories.tsx'],
-    addons: ['storybook-addon-designs','@storybook/addon-viewport/register'],
-        
-        };
+  stories: ["../components/**/**/*.stories.tsx"],
+  addons: ["storybook-addon-designs", "@storybook/addon-viewport/register", "@storybook/addon-actions/register"],
+};
 
-
-        /*webpackFinal: async config => {
+/*webpackFinal: async config => {
           config.module.rules.push({
             test: /\.(ts|tsx)$/,
             use: [

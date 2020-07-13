@@ -19,7 +19,6 @@ const Dropdown: React.FC<props> = ({ show, children }) => {
           .dropdown {
             width: 100%;
             background-color: white;
-            border-radius: 0 0 35px 35px;
           }
 
           .dropdown-enter {
@@ -27,7 +26,6 @@ const Dropdown: React.FC<props> = ({ show, children }) => {
           }
           .dropdown-enter-active {
             transform: translateX(0%);
-            border-radius: 0 0 35px 35px;
 
             transition: all 0.5s ease;
           }
