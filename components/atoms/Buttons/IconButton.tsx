@@ -10,6 +10,10 @@ const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = (
   height = ["1.9rem", "2.188rem"],
   borders = ["35px", "35px"],
   margin = 1,
+  _hover = {
+    transform: "scale(1.1,1.1)",
+  },
+  borderColor = "",
 }) => (
   <IconBtn
     aria-label="Icon"
@@ -17,14 +21,14 @@ const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = (
     roundedLeft={borders[0]}
     roundedRight={borders[1]}
     color={color}
+    borderColor={borderColor}
+    borderWidth="1px"
     backgroundColor={backgroundColor}
     width={width}
     height={height}
     icon={icon}
     margin={margin}
-    _hover={{
-      transform: "scale(1.1,1.1)",
-    }}
+    _hover={_hover}
     _focus={{}}
     _active={{}}
   />

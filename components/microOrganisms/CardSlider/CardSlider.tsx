@@ -2,8 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import { Box } from "@chakra-ui/core";
 import { ArrowsGroup } from "../../molecules/ArrowsGroup";
-import InitialCard from "../../molecules/Cards/InitialCard";
-import "react-multi-carousel/lib/styles.css";
+import { useMediaQuery } from "react-responsive";
 
 const responsive = {
   desktop: {
@@ -13,34 +12,24 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 3,
     slidesToSlide: 2, // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 2,
     slidesToSlide: 1, // optional, default to 1.
   },
 };
 
 const CardSlider = (props) => {
+  const isPhoneOrTablet = useMediaQuery({
+    minDeviceWidth: 860,
+  });
   return (
-    <Box width="60%" height="22vh" display="relative">
-      <style jsx>
-        {`
-          .container {
-            padding-bottom: 5%;
-          }
-          .custom-dots button:hover:active {
-            background: #e91e63;
-          }
-          .react-multi-carousel-dot--active button {
-            background: #e91e63;
-          }
-        `}
-      </style>
+    <Box width="100%" display="relative">
       <Carousel
-        swipeable={false}
+        swipeable
         draggable={false}
         showDots
         responsive={responsive}
@@ -52,7 +41,7 @@ const CardSlider = (props) => {
         arrows={false}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         deviceType={props.deviceType}
-        customButtonGroup={<ArrowsGroup />}
+        customButtonGroup={isPhoneOrTablet && <ArrowsGroup next={props.next} previous={props.previous} />}
       >
         {props.children}
       </Carousel>

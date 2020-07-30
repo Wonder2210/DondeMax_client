@@ -1,0 +1,10 @@
+.container {
+    padding-bottom: 5%;
+    margin-left: 2vw;
+  }
+  .custom-dots button:hover:active {
+    background: #e91e63;
+  }
+  .react-multi-carousel-dot--active button {
+    background: #e91e63;
+  }

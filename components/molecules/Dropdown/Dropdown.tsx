@@ -18,6 +18,7 @@ const Dropdown: React.FC<props> = ({ show, children }) => {
           }
           .dropdown {
             width: 100%;
+
             background-color: white;
           }
 

@@ -16,5 +16,5 @@ export const NavbarFull = () => {
 };
 
 export default {
-  title: "Molecules/Navbar",
+  title: "Organism/Navbar",
 };

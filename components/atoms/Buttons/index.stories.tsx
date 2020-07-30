@@ -37,5 +37,3 @@ export const iconbuttonShare = () => (
     icon={() => <Icon icon={share} width="1.563rem" height="1.5rem" />}
   />
 );
-
-//rafce

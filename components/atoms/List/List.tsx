@@ -6,13 +6,21 @@ type props = {
   borders?: [string, string];
   borderWidth?: string;
   padding?: number;
+  width?: string;
 };
 
-const List: React.FC<props> = ({ spacing, children, borders = ["35px", "35px"], borderWidth, padding }) => {
+const List: React.FC<props> = ({
+  spacing,
+  children,
+  borders = ["35px", "35px"],
+  borderWidth,
+  width = "100%",
+  padding,
+}) => {
   return (
     <Lst
       spacing={spacing}
-      width="100%"
+      width={width}
       borderWidth={borderWidth ?? "0px"}
       roundedTop={borders[0]}
       roundedBottom={borders[1]}

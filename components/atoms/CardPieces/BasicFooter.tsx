@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, BoxProps } from "@chakra-ui/core";
+import { Flex, FlexProps } from "@chakra-ui/core";
 
 const BasicFooter: React.FC<
-  BoxProps & {
+  FlexProps & {
     borders?: [string, string];
   }
 > = ({
@@ -19,7 +19,7 @@ const BasicFooter: React.FC<
   borders = ["35px", "35px"],
 }) => {
   return (
-    <Box
+    <Flex
       backgroundColor={backgroundColor}
       zIndex={zIndex ?? 0}
       pos={position}
@@ -29,14 +29,13 @@ const BasicFooter: React.FC<
       left={left}
       width={width}
       height={height ?? ""}
-      alignItems="center"
-      justifyContent="center"
+      align="center"
+      justify="center"
       roundedTop={borders[0]}
       roundedBottom={borders[1]}
-      display="flex"
     >
       {children}
-    </Box>
+    </Flex>
   );
 };
 

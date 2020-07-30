@@ -1,35 +1,52 @@
 import * as React from "react";
 import { Input, InputGroup, InputRightAddon, InputLeftAddon, InputProps } from "@chakra-ui/core";
 
-type props = InputProps & {
+type props = {
   left?: React.ReactNode | string;
   right?: React.ReactNode | string;
-  borders?: [string, string];
+  borderRadius?: string;
   readonly?: boolean;
   placeholder?: string;
+  margin?: string;
+  onChange?: () => void;
+  value?: string;
+  border?: string;
+  borderColor?: string;
 };
 
 const TextInput: React.FC<props> = ({
   onChange,
   value,
   readonly,
-  borders = ["35px", "35px"],
+  borderRadius = "35px",
+  border,
   left,
   right,
   placeholder,
+  borderColor,
+  margin,
 }) => {
   return (
     <InputGroup>
-      <InputLeftAddon>{left ?? ""}</InputLeftAddon>
+      <InputLeftAddon backgroundColor="rgba(0,0,0,0)" borderColor="rgba(0,0,0,0)" padding={0}>
+        {left ?? ""}
+      </InputLeftAddon>
       <Input
-        roundedLeft={borders[0]}
-        roundedRight={borders[1]}
+        backgroundColor="#FFF !important"
+        variant="filled"
+        borderColor={borderColor}
+        borderRadius={borderRadius}
+        border={border}
+        margin={margin}
         isReadOnly={readonly ?? false}
         onChange={onChange}
         placeholder={placeholder}
         value={value}
+        _focus={{ backgroundColor: "#FFF" }}
       />
-      <InputRightAddon>{right ?? ""}</InputRightAddon>
+      <InputRightAddon padding={0} width="auto" rounded="35px" borderColor="rgba(0,0,0,0)">
+        {right ?? ""}
+      </InputRightAddon>
     </InputGroup>
   );
 };

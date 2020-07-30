@@ -1,8 +1,17 @@
 import * as React from "react";
 import { Heading } from "@chakra-ui/core";
 
-const Header: React.FC<{ color?: string }> = ({ children, color }) => (
-  <Heading fontSize={["3.5rem", "4.75rem", "6rem", "6rem"]} color={color ?? "black"}>
+const Header: React.FC<{ color?: string; nested?: boolean; fontSize?: string | Array<string> }> = ({
+  children,
+  color,
+  nested = false,
+  fontSize,
+}) => (
+  <Heading
+    fontSize={fontSize ?? ["3.5rem", "4.75rem", "6rem", "6rem"]}
+    color={color ?? "black"}
+    display={nested ? "contents" : "block"}
+  >
     {children}
   </Heading>
 );

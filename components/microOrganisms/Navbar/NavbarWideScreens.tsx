@@ -16,22 +16,26 @@ const Navbar = () => {
       height="72px"
       top="0"
     >
-      <Flex justify="space-evenly" marginTop="1vh" flexDirection="row" left="0" width="50%">
-        <Link href="/" passHref>
-          <StyleLink>Acerca de Nosotros </StyleLink>
+      <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">
+        <Link href="/about">
+          <a>
+            <StyleLink>Acerca de Nosotros </StyleLink>
+          </a>
         </Link>
         <Link href="/" passHref>
-          <StyleLink href="/">Noticias</StyleLink>
+          <a>
+            <StyleLink href="/">Noticias</StyleLink>
+          </a>
         </Link>
         <Link href="/" passHref>
-          <StyleLink href="/">Pedidos</StyleLink>
+          <a>
+            <StyleLink href="/">Pedidos</StyleLink>
+          </a>
         </Link>
       </Flex>
 
-      <Flex marginRight="1vw" flexDirection="row" w="20%" justify="flex-end">
+      <Flex marginRight="1vw" marginTop="2vh" flexDirection="row" w="20%" justify="flex-end">
         <ShoppingCart itemsCount={0} />
-        {/* <Flex justify="flex-start" w="20%">
-        </Flex> */}
       </Flex>
     </Box>
   );

@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
+    "@iconify/icons-cib": "^1.0.3",
     "@iconify/icons-cil": "^1.0.3",
     "@iconify/icons-dashicons": "^1.0.10",
     "@storybook/addon-actions": "^5.3.19",

@@ -7,7 +7,9 @@ export const testDropdown = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <>
-      <button onClick={() => setOpen(!open)}>Open ANd close</button>
+      <button type="button" onClick={(): void => setOpen(!open)}>
+        Open ANd close
+      </button>
       <Dropdown show={open}>
         <Link href="/" passHref>
           <StyleLink>Acerca de Nosotros </StyleLink>

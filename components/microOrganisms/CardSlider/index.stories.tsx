@@ -1,6 +1,6 @@
 import React from "react";
 import Carrousel from "./CardSlider";
-import InitialCard from "../../molecules/Cards/InitialCard";
+import InitialCard from "../Cards/InitialCard";
 
 export const CardCarrousel = () => {
   return (
@@ -80,5 +80,5 @@ export const CardCarrousel = () => {
 };
 
 export default {
-  title: "Molecules/CardCarrousel",
+  title: "Organism/CardCarrousel",
 };

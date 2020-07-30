@@ -2,23 +2,29 @@ import React from "react";
 import Link from "next/link";
 import { Box } from "@chakra-ui/core";
 import { BasicFooter, ImageHeader } from "../../atoms/CardPieces";
+import { useMediaQuery } from "react-responsive";
 
 type props = {
   src: string;
   alt: string;
   href: string;
+  height?: string;
+  width?: string;
 };
 
-const InitialCard: React.FC<props> = ({ src, alt, children, href = "/" }) => {
+const InitialCard: React.FC<props> = ({ src, width, height, alt, children, href = "/" }) => {
+  const isPhone = useMediaQuery({
+    maxWidth: 560,
+  });
   return (
     <Box
       rounded="35px"
       position="relative"
-      height={["9.375rem", "11.5em"]}
+      height={height ?? ["9.375rem", "11.5em"]}
       marginBottom="5vh"
       marginLeft="1vw"
-      width={["7.188rem", "10em"]}
-      boxShadow=" 10px 10px 50px rgba(0, 0, 0, 0.5)"
+      width={width ?? ["7.188rem", "10em"]}
+      boxShadow={isPhone ? " 1px 1px 5px rgba(0, 0, 0, 0.5)" : " 10px 10px 50px rgba(0, 0, 0, 0.5)"}
     >
       <ImageHeader alt={alt} src={src} height="100%" width="100%" />
       <BasicFooter

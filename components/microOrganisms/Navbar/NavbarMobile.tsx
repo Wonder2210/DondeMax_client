@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import MenuIcon from "@iconify/icons-cil/hamburger-menu";
 import { Link as StyleLink } from "../../atoms/Links";
 import { ListItem } from "../../atoms/List";
-import { Dropdown } from "../Dropdown";
+import { Dropdown } from "../../molecules/Dropdown";
 import { IconButton } from "../../atoms/Buttons";
 
 const { useState } = React;
@@ -66,18 +66,24 @@ const NavbarMobile = () => {
       </Box>
       <Dropdown show={state.open}>
         <ListItem marginLeft={3}>
-          <Link href="/" passHref>
-            <StyleLink fontSize="xl2">Acerca de Nosotros </StyleLink>
+          <Link href="/about">
+            <a>
+              <StyleLink fontSize="xl2">Acerca de Nosotros </StyleLink>
+            </a>
           </Link>
         </ListItem>
         <ListItem marginLeft={3}>
           <Link href="/" passHref>
-            <StyleLink fontSize="xl2">Noticias</StyleLink>
+            <a>
+              <StyleLink fontSize="xl2">Noticias</StyleLink>
+            </a>
           </Link>
         </ListItem>
         <ListItem marginLeft={3}>
           <Link href="/" passHref>
-            <StyleLink fontSize="xl2">Pedidos</StyleLink>
+            <a>
+              <StyleLink fontSize="xl2">Pedidos</StyleLink>
+            </a>
           </Link>
         </ListItem>
       </Dropdown>

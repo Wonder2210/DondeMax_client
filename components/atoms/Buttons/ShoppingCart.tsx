@@ -7,9 +7,11 @@ import IconButton from "./IconButton";
 type props = {
   onClick?: () => void;
   itemsCount?: number;
+  color?: string;
+  backgroundColor?: string;
 };
 
-const ShoppingCart: React.FC<props> = ({ onClick, itemsCount = 0 }) => {
+const ShoppingCart: React.FC<props> = ({ onClick, color = "black", backgroundColor, itemsCount = 0 }) => {
   return (
     <>
       <style jsx>
@@ -25,7 +27,8 @@ const ShoppingCart: React.FC<props> = ({ onClick, itemsCount = 0 }) => {
         <IconButton
           aria-label="Shopping cart"
           onClick={onClick}
-          icon={() => <Icon icon={Cart} color="black" height="100%" width="100%" />}
+          backgroundColor={backgroundColor}
+          icon={() => <Icon icon={Cart} color={color} height="100%" width="100%" />}
         />
         <Badge variant="solid" borderRadius="50%" variantColor="red" position="absolute" bottom="5px" right="20%">
           {itemsCount}
