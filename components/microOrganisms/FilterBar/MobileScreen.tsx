@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import {
   useDisclosure,
   Flex,
@@ -15,20 +15,16 @@ import { Icon } from "@iconify/react";
 import Config from "@iconify/icons-cil/cog";
 import { IconButton, ShoppingCart } from "../../atoms/Buttons";
 import { SelectCustom, SelectOption } from "../../molecules/Select";
+import { props } from "./types";
 
-type props = {
-  show1: boolean;
-  value1: string;
-  toggle1: () => void;
-  onChange1: (event: FormEvent<any>) => void & ((value: string & number) => void);
-  show2: boolean;
-  value2: string;
-  toggle2: () => void;
-  onChange2: (event: FormEvent<any>) => void & ((value: string & number) => void);
-};
-
-const MobileScreen = ({ show1, show2, value1, value2, toggle1, onChange1, onChange2, toggle2 }) => {
+const MobileScreen = ({ preservations, types }: props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const PreservationsOptions = preservations.list.map((i) => {
+    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+  });
+  const TypesOptions = types.list.map((i) => {
+    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+  });
   return (
     <>
       <Flex
@@ -64,28 +60,24 @@ const MobileScreen = ({ show1, show2, value1, value2, toggle1, onChange1, onChan
             <Flex justify="space-between" height="100%" align="center" left="0" direction="column">
               <Flex>
                 <SelectCustom
-                  value={value1}
-                  onChange={onChange1}
-                  toggle={toggle1}
-                  placeholder="put here what you want"
-                  show={show1}
+                  value={preservations.value}
+                  onChange={preservations.onChange}
+                  toggle={preservations.toggle}
+                  placeholder="Preservacion"
+                  show={preservations.show}
                 >
-                  <SelectOption value="here">Here</SelectOption>
-                  <SelectOption value="option">There</SelectOption>
-                  <SelectOption value="last">everywhere</SelectOption>
+                  {PreservationsOptions}
                 </SelectCustom>
               </Flex>
               <Flex marginTop="5vh">
                 <SelectCustom
-                  value={value2}
-                  onChange={onChange2}
-                  toggle={toggle2}
-                  placeholder="put here what you want"
-                  show={show2}
+                  value={types.value}
+                  onChange={types.onChange}
+                  toggle={types.toggle}
+                  placeholder="Tipo"
+                  show={types.show}
                 >
-                  <SelectOption value="here">Here</SelectOption>
-                  <SelectOption value="option">There</SelectOption>
-                  <SelectOption value="last">everywhere</SelectOption>
+                  {TypesOptions}
                 </SelectCustom>
               </Flex>
             </Flex>

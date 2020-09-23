@@ -9,11 +9,12 @@ import { TextInput } from "../../atoms/Inputs";
 
 export const SelectOption = MenuItemOption;
 
+type stringOrNumber = number | string;
 const SelectCustom: React.FC<{
   show: boolean;
   placeholder: string;
   toggle: (e: boolean) => void;
-  onChange: (event: FormEvent<any>) => void & ((value: string & number) => void);
+  onChange: ((event: FormEvent<any>) => void) & ((value: stringOrNumber) => void);
   value: string;
   cart?: number;
 }> = ({ children, placeholder, value, toggle, show, onChange }) => {

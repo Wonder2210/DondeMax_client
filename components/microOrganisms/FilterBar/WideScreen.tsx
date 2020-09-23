@@ -1,21 +1,17 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import { Flex } from "@chakra-ui/core";
 import { ShoppingCart } from "../../atoms/Buttons";
 
 import { SelectCustom, SelectOption } from "../../molecules/Select";
+import { props } from "./types";
 
-type props = {
-  show1: boolean;
-  value1: string;
-  toggle1: () => void;
-  onChange1: (event: FormEvent<any>) => void & ((value: string & number) => void);
-  show2: boolean;
-  value2: string;
-  toggle2: () => void;
-  onChange2: (event: FormEvent<any>) => void & ((value: string & number) => void);
-};
-
-const WideScreen = ({ show1, show2, value1, value2, toggle1, onChange1, onChange2, toggle2 }) => {
+const WideScreen = ({ preservations, types }: props) => {
+  const PreservationsOptions = preservations.list.map((i) => {
+    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+  });
+  const TypesOptions = types.list.map((i) => {
+    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+  });
   return (
     <Flex
       zIndex={1}
@@ -28,26 +24,22 @@ const WideScreen = ({ show1, show2, value1, value2, toggle1, onChange1, onChange
     >
       <Flex justify="space-evenly" align="center" flexDirection="row" left="0" width="60%">
         <SelectCustom
-          value={value1}
-          onChange={onChange1}
-          toggle={toggle1}
-          placeholder="put here what you want"
-          show={show1}
+          value={preservations.value}
+          onChange={preservations.onChange}
+          toggle={preservations.toggle}
+          placeholder="Preservacion"
+          show={preservations.show}
         >
-          <SelectOption value="here">Here</SelectOption>
-          <SelectOption value="option">There</SelectOption>
-          <SelectOption value="last">everywhere</SelectOption>
+          {PreservationsOptions}
         </SelectCustom>
         <SelectCustom
-          value={value2}
-          onChange={onChange2}
-          toggle={toggle2}
-          placeholder="put here what you want"
-          show={show2}
+          value={types.value}
+          onChange={types.onChange}
+          toggle={types.toggle}
+          placeholder="Tipo"
+          show={types.show}
         >
-          <SelectOption value="here">Here</SelectOption>
-          <SelectOption value="option">There</SelectOption>
-          <SelectOption value="last">everywhere</SelectOption>
+          {TypesOptions}
         </SelectCustom>
       </Flex>
 

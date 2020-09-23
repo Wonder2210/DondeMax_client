@@ -20,7 +20,7 @@ const Footer = () => {
       backgroundColor="#3B3E4A"
       justify="space-evenly"
       padding="3em"
-      position="absolute"
+      position="relative"
       bottom="0"
     >
       <Flex justify="center" align="center">

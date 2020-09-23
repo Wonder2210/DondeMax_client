@@ -3,12 +3,14 @@ import Standard from "./Standard";
 
 export const testStandardLayout = () => {
   return (
-    <div>
-      <Standard />
-    </div>
+    <Standard>
+      <div>
+        <h1>here</h1>
+      </div>
+    </Standard>
   );
 };
 
 export default {
-  title: "layouts/Standar layout",
+  title: "layouts/Standard layout",
 };
