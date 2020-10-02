@@ -56,16 +56,10 @@ const index = () => {
         </Box>
         <Flex bg="#FFF" direction="column" align="center" w="100%" h="100%">
           <Box marginTop="15vh">
-            <Header>
-              <Header color="#E91E63" nested>
-                D
-              </Header>
-              onde
-              <Header color="#E91E63" nested>
-                M
-              </Header>
-              ax
-            </Header>
+            <Header color="#E91E63">D</Header>
+            <Header>onde</Header>
+            <Header color="#E91E63">M</Header>
+            <Header>ax</Header>
           </Box>
           <Box marginTop="5vh">
             <SubHeader>

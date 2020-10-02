@@ -12,7 +12,7 @@ import theme from "../utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ChakraProvider theme={extendTheme({ fonts: { heading: `"Poppins", sans-serif` } })}>
+    <ChakraProvider theme={theme}>
       <ApolloProvider client={Client}>
         <Component {...pageProps} />
       </ApolloProvider>
