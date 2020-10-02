@@ -1,21 +1,12 @@
 import React from "react";
-import { Box, Flex } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/core";
 import Link from "next/link";
 import { Link as StyleLink } from "../../atoms/Links";
 import { ShoppingCart } from "../../atoms/Buttons";
 
-const Navbar = () => {
+const NavbarWideScreen = () => {
   return (
-    <Box
-      zIndex={1}
-      position="absolute"
-      justifyContent="space-between"
-      flexDirection="row"
-      display="flex"
-      width="100%"
-      height="72px"
-      top="0"
-    >
+    <Flex zIndex={1} position="absolute" justifyContent="space-between" flexDirection="row" width="100%" height="72px">
       <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">
         <Link href="/about">
           <a>
@@ -34,11 +25,11 @@ const Navbar = () => {
         </Link>
       </Flex>
 
-      <Flex marginRight="1vw" marginTop="2vh" flexDirection="row" w="20%" justify="flex-end">
+      <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">
         <ShoppingCart itemsCount={0} />
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
-export default Navbar;
+export default NavbarWideScreen;

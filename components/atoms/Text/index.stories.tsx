@@ -6,7 +6,7 @@ import Parragraph from "./Parragraph";
 export const HeaderTest = () => {
   return (
     <Header>
-      <Header color="rose.600" nested>
+      <Header color="#E91E63" nested>
         D
       </Header>
       eader

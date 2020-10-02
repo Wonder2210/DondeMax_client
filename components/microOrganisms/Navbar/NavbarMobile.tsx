@@ -61,7 +61,7 @@ const NavbarMobile = () => {
           height="70%"
           margin={3}
           onClick={openDropDown}
-          icon={() => <Icon icon={MenuIcon} width="90%" height="90%" />}
+          icon={<Icon icon={MenuIcon} width="90%" height="90%" />}
         />
       </Box>
       <Dropdown show={state.open}>

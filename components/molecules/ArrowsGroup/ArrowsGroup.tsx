@@ -12,13 +12,13 @@ const ArrowsGroup = ({ next, previous }) => {
         aria-label="Left arrow"
         onClick={() => previous()}
         borders={["50%", "50%"]}
-        icon={() => <Icon icon={LeftArrow} height="100%" width="100%" />}
+        icon={<Icon icon={LeftArrow} height="100%" width="100%" />}
       />
       <IconButton
         aria-label="Right arrow"
         onClick={() => next()}
         borders={["50%", "50%"]}
-        icon={() => <Icon icon={RightArrow} height="100%" width="100%" />}
+        icon={<Icon icon={RightArrow} height="100%" width="100%" />}
       />
     </Flex>
   );

@@ -1,22 +1,21 @@
-import { theme } from "@chakra-ui/core";
+import { extendTheme as theme } from "@chakra-ui/core";
 
-const customTheme ={
-    ...theme,
-    colors:{
-        ...theme.colors,
-        rose:{
-            700:"#FB2C52",
-            600:"#E91E63",
-        },
-        blue_bg:{
-            600:"#2F4858"
-        }
+const colors = {
+  colors: {
+    rose: {
+      700: "#FB2C52",
+      600: "#E91E63",
     },
-    fonts:{
-        heading:'"Poppins", sans-serif',
-        body:'"Poppins",sans-serif',
-        mono:'"Poppins",sans-serif',
-    }
-}
-
-export default customTheme;
+    blue_bg: {
+      600: "#2F4858",
+    },
+  },
+};
+export default theme({
+  colors,
+  fonts: {
+    heading: `"Poppins", sans-serif`,
+    body: `"Poppins", sans-serif`,
+    mono: `"Poppins", sans-serif`,
+  },
+});

@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@chakra-ui/core";
 import { useMediaQuery } from "react-responsive";
 import NavbarWideScreen from "./NavbarWideScreens";
 import NavbarMobile from "./NavbarMobile";
@@ -12,10 +13,10 @@ const Navbar = () => {
   });
 
   return (
-    <>
+    <Box w="100%" height="min-content" top="0" position="absolute">
       {isTabletOrPc && <NavbarWideScreen />}
       {isMobile && <NavbarMobile />}
-    </>
+    </Box>
   );
 };
 

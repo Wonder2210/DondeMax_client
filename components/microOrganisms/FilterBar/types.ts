@@ -5,7 +5,7 @@ type PropType = {
   value: string;
   onChange: ((event: FormEvent<any>) => void) & ((value: string | number) => void);
   toggle: () => void;
-  list: Array<{ type: string }>;
+  list: Array<{ id: number; type: string }>;
 };
 export type props = {
   preservations: PropType;

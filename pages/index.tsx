@@ -24,9 +24,9 @@ const index = () => {
       <Split>
         <Box
           bg="rgb(255,0,0)"
-          w="100%"
-          h="100%"
-          backgroundImage="url('/images/cake-roses-stand.jpg.jpg')"
+          width="100%"
+          h="100vh"
+          backgroundImage="url('/images/cake-roses-stand.jpg')"
           backgroundPosition="left"
           backgroundSize="cover"
         >
@@ -44,25 +44,24 @@ const index = () => {
               aria-label="heart"
               backgroundColor="rgba(0,0,0,0)"
               color="black"
-              icon={() => <Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
+              icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
             />
             <IconButton
               aria-label="heart"
               backgroundColor="rgba(0,0,0,0)"
               color="black"
-              icon={() => <Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
+              icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
             />
           </Flex>
         </Box>
-
         <Flex bg="#FFF" direction="column" align="center" w="100%" h="100%">
           <Box marginTop="15vh">
             <Header>
-              <Header color="rose.600" nested>
+              <Header color="#E91E63" nested>
                 D
               </Header>
               onde
-              <Header color="rose.600" nested>
+              <Header color="#E91E63" nested>
                 M
               </Header>
               ax
@@ -77,7 +76,7 @@ const index = () => {
           <Box marginTop="5vh" height="auto">
             <Button
               backgroundColor="rose.600"
-              rightIcon={() => (
+              rightIcon={
                 <Icon
                   icon={chevronRight}
                   color="white"
@@ -85,7 +84,7 @@ const index = () => {
                   width="2.375rem"
                   style={{ marginLeft: "10%" }}
                 />
-              )}
+              }
             >
               Nuestras Tortas
             </Button>
@@ -171,13 +170,13 @@ const index = () => {
                   aria-label="heart"
                   backgroundColor="rgba(0,0,0,0)"
                   color="black"
-                  icon={() => <Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
+                  icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
                 />
                 <IconButton
                   aria-label="heart"
                   backgroundColor="rgba(0,0,0,0)"
                   color="black"
-                  icon={() => <Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
+                  icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
                 />
               </Flex>
             )}

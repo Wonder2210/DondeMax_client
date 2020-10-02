@@ -8,6 +8,7 @@ const Header: React.FC<{ color?: string; nested?: boolean; fontSize?: string | A
   fontSize,
 }) => (
   <Heading
+    as="h1"
     fontSize={fontSize ?? ["3.5rem", "4.75rem", "6rem", "6rem"]}
     color={color ?? "black"}
     display={nested ? "contents" : "block"}

@@ -28,9 +28,9 @@ const ShoppingCart: React.FC<props> = ({ onClick, color = "black", backgroundCol
           aria-label="Shopping cart"
           onClick={onClick}
           backgroundColor={backgroundColor}
-          icon={() => <Icon icon={Cart} color={color} height="100%" width="100%" />}
+          icon={<Icon icon={Cart} color={color} height="100%" width="100%" />}
         />
-        <Badge variant="solid" borderRadius="50%" variantColor="red" position="absolute" bottom="5px" right="20%">
+        <Badge variant="solid" borderRadius="50%" colorScheme="red" position="absolute" bottom="5px" right="20%">
           {itemsCount}
         </Badge>
       </div>

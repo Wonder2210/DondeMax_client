@@ -22,7 +22,7 @@ const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, is
       position="relative"
       height={height ?? ["18em", "21.5em"]}
       marginBottom="5vh"
-      marginLeft="1vw"
+      marginX="auto"
       width={width ?? ["15em", "18em"]}
       backgroundColor="#000"
       boxShadow={false ? " 1px 1px 5px rgba(0, 0, 0, 0.5)" : " 10px 10px 50px rgba(0, 0, 0, 0.5)"}
@@ -56,6 +56,7 @@ const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, is
           aria-label="cart"
           borderColor="rose.600"
           backgroundColor={isInCart ? "rose.600" : "#FFF"}
+          onClick={() => console.log("here")}
           color="white"
           icon={() => <Icon icon={Cart} color={isInCart ? "#fff" : "#E91E63"} />}
         />

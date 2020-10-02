@@ -2,6 +2,11 @@
     padding-bottom: 5%;
     margin-left: 2vw;
   }
+  .custom-dots{
+    width: min-content;
+    left: 50%;
+    transform: translateX(-50%);
+  }
   .custom-dots button:hover:active {
     background: #e91e63;
   }

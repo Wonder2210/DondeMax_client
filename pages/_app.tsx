@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { ChakraProvider, extendTheme } from "@chakra-ui/core";
 import { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
 import Client from "../utils/GraphqlClient";
@@ -11,12 +12,11 @@ import theme from "../utils/theme";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ThemeProvider theme={theme}>
-      <CSSReset />
+    <ChakraProvider theme={extendTheme({ fonts: { heading: `"Poppins", sans-serif` } })}>
       <ApolloProvider client={Client}>
         <Component {...pageProps} />
       </ApolloProvider>
-    </ThemeProvider>
+    </ChakraProvider>
   );
 };
 

@@ -19,11 +19,19 @@ import { props } from "./types";
 
 const MobileScreen = ({ preservations, types }: props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const PreservationsOptions = preservations.list.map((i) => {
-    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+  const PreservationsOptions = preservations.list.map((i, n) => {
+    return (
+      <SelectOption key={i.id} value={i.type}>
+        {i.type}
+      </SelectOption>
+    );
   });
   const TypesOptions = types.list.map((i) => {
-    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+    return (
+      <SelectOption key={i.id} value={i.type}>
+        {i.type}
+      </SelectOption>
+    );
   });
   return (
     <>
@@ -66,6 +74,7 @@ const MobileScreen = ({ preservations, types }: props) => {
                   placeholder="Preservacion"
                   show={preservations.show}
                 >
+                  <SelectOption value="">Todos</SelectOption>
                   {PreservationsOptions}
                 </SelectCustom>
               </Flex>
@@ -77,6 +86,7 @@ const MobileScreen = ({ preservations, types }: props) => {
                   placeholder="Tipo"
                   show={types.show}
                 >
+                  <SelectOption value="">Todos</SelectOption>
                   {TypesOptions}
                 </SelectCustom>
               </Flex>

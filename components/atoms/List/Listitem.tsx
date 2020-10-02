@@ -11,7 +11,8 @@ type props = {
 const Listitem: React.FC<props> = ({ marginLeft, icon, color, children, fontSize = "xl" }) => {
   return (
     <Lst fontSize={fontSize} marginLeft={marginLeft}>
-      {icon && <ListIcon icon={icon} color={color ?? "#FB2C52"} />}
+      {icon && <ListIcon as={icon} color={color ?? "#FB2C52"} />}
+
       {children}
     </Lst>
   );

@@ -6,12 +6,12 @@ import { useMediaQuery } from "react-responsive";
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3000, min: 960 },
     items: 3,
     slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
+    breakpoint: { max: 959, min: 464 },
     items: 3,
     slidesToSlide: 2, // optional, default to 1.
   },
@@ -24,7 +24,7 @@ const responsive = {
 
 const CardSlider = (props) => {
   const isPhoneOrTablet = useMediaQuery({
-    minDeviceWidth: 860,
+    minDeviceWidth: 960,
   });
   return (
     <Box width="100%" display="relative">

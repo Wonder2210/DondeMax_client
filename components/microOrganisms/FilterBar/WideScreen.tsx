@@ -7,10 +7,18 @@ import { props } from "./types";
 
 const WideScreen = ({ preservations, types }: props) => {
   const PreservationsOptions = preservations.list.map((i) => {
-    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+    return (
+      <SelectOption key={i.id} value={i.type}>
+        {i.type}
+      </SelectOption>
+    );
   });
   const TypesOptions = types.list.map((i) => {
-    return <SelectOption value={i.type}>{i.type}</SelectOption>;
+    return (
+      <SelectOption key={i.id} value={i.type}>
+        {i.type}
+      </SelectOption>
+    );
   });
   return (
     <Flex
@@ -30,6 +38,7 @@ const WideScreen = ({ preservations, types }: props) => {
           placeholder="Preservacion"
           show={preservations.show}
         >
+          <SelectOption value="">Todos</SelectOption>
           {PreservationsOptions}
         </SelectCustom>
         <SelectCustom
@@ -39,6 +48,7 @@ const WideScreen = ({ preservations, types }: props) => {
           placeholder="Tipo"
           show={types.show}
         >
+          <SelectOption value="">Todos</SelectOption>
           {TypesOptions}
         </SelectCustom>
       </Flex>

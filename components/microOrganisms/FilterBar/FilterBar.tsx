@@ -14,7 +14,7 @@ const FilterBar: React.FC<props> = ({ preservations, types }) => {
   });
 
   return (
-    <Box w="100%" position="sticky" top={0}>
+    <Box w="100%" position="sticky" zIndex={2} top={0}>
       {isTabletOrPc && <WideScreen preservations={preservations} types={types} />}
       {isMobile && <MobileScreen preservations={preservations} types={types} />}
     </Box>
