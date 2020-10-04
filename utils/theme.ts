@@ -2,7 +2,7 @@ import { extendTheme as theme } from "@chakra-ui/core";
 
 const colors = {
   colors: {
-    rose: {
+    brand: {
       700: "#FB2C52",
       600: "#E91E63",
     },
