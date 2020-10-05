@@ -1,8 +1,8 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
-import { Box } from "@chakra-ui/core";
-import { ArrowsGroup } from "../../molecules/ArrowsGroup";
 import { useMediaQuery } from "react-responsive";
+import { Box } from "@chakra-ui/core";
+import { ArrowsGroup } from "@/molecules/ArrowsGroup";
 
 const responsive = {
   desktop: {

@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { Box } from "@chakra-ui/core";
-import { BasicFooter, ImageHeader } from "../../atoms/CardPieces";
 import { useMediaQuery } from "react-responsive";
+import { BasicFooter, ImageHeader } from "@/atoms/CardPieces";
 
 type props = {
   src: string;

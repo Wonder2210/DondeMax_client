@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Heading } from "@chakra-ui/core";
 
-const Header: React.FC<{ color?: string; fontSize?: string | Array<string> }> = ({
+type props = { color?: string; fontSize?: string | Array<string> };
+
+const Header: React.FC<props> = ({
   children,
   color,
 

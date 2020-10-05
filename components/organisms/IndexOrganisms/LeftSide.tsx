@@ -3,8 +3,8 @@ import { Flex, Box } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import Whatsapp from "@iconify/icons-cib/whatsapp";
 import Instagram from "@iconify/icons-cib/instagram";
-import { IconButton } from "../../atoms/Buttons";
-import { SubHeader } from "../../atoms/Text";
+import { IconButton } from "@/atoms/Buttons";
+import { SubHeader } from "@/atoms/Text";
 
 const LeftSide = () => {
   return (

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, InputGroup, InputRightAddon, InputLeftAddon, InputProps } from "@chakra-ui/core";
+import { Input, InputGroup, InputRightAddon, InputLeftAddon } from "@chakra-ui/core";
 
 type props = {
   left?: React.ReactNode | string;

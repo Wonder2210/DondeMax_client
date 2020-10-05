@@ -1,7 +1,11 @@
 import * as React from "react";
 import { IconButton as IconBtn, IconButtonProps } from "@chakra-ui/core";
 
-const IconButton: React.FC<IconButtonProps & { borders?: [string, string] }> = ({
+interface props extends IconButtonProps {
+  borders?: [string, string];
+}
+
+const IconButton: React.FC<props> = ({
   color,
   backgroundColor,
   icon,

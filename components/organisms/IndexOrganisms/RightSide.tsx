@@ -7,10 +7,10 @@ import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
 import Whatsapp from "@iconify/icons-cib/whatsapp";
 import Instagram from "@iconify/icons-cib/instagram";
 import { Icon } from "@iconify/react";
-import { Header, SubHeader } from "../../atoms/Text";
-import { Button, IconButton } from "../../atoms/Buttons";
-import { CardSlider } from "../../microOrganisms/CardSlider";
-import InitialCard from "../../microOrganisms/Cards/InitialCard";
+import { Header, SubHeader } from "@/atoms/Text";
+import { Button, IconButton } from "@/atoms/Buttons";
+import { CardSlider } from "@/organisms/CardSlider";
+import { InitialCard } from "@/organisms/Cards";
 
 const RightSide = () => {
   const isPhone = useMediaQuery({

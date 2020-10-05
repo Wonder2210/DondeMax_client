@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Box } from "@chakra-ui/core";
 import { Header } from "../components/atoms/Text";
-import Standard from "../components/layouts/Standard/Standard";
+import { Standard } from "../components/layouts/Standard";
 
 const Info = () => {
   return (

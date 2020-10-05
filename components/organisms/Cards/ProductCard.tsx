@@ -2,8 +2,8 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import Cart from "@iconify/icons-cil/cart";
 import { Box, Badge } from "@chakra-ui/core";
-import { IconButton } from "../../atoms/Buttons";
-import { BasicFooter, ImageHeader } from "../../atoms/CardPieces";
+import { IconButton } from "@/atoms/Buttons";
+import { BasicFooter, ImageHeader } from "@/atoms/CardPieces";
 
 type props = {
   src: string;

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Button as Btn, ButtonProps } from "@chakra-ui/core";
-// import './styles.css';
 
 const Button: React.FC<ButtonProps> = ({
   width,

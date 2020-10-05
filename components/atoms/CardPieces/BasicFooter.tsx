@@ -1,11 +1,11 @@
 import React from "react";
 import { Flex, FlexProps } from "@chakra-ui/core";
 
-const BasicFooter: React.FC<
-  FlexProps & {
-    borders?: [string, string];
-  }
-> = ({
+interface props extends FlexProps {
+  borders?: [string, string];
+}
+
+const BasicFooter: React.FC<props> = ({
   children,
   position = "static",
   zIndex,

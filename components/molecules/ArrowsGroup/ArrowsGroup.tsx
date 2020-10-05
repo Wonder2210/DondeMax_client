@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import RightArrow from "@iconify/icons-cil/arrow-circle-right";
 import LeftArrow from "@iconify/icons-cil/arrow-circle-left";
-import { IconButton } from "../../atoms/Buttons";
+import { IconButton } from "@/atoms/Buttons";
 
 const ArrowsGroup = ({ next, previous }) => {
   return (

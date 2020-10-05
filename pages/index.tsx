@@ -2,8 +2,8 @@
 /* eslint-disable react/jsx-indent */
 import * as React from "react";
 import { Flex } from "@chakra-ui/core";
-import { Navbar } from "../components/microOrganisms/Navbar";
-import { RightSide, LeftSide } from "../components/microOrganisms/IndexOrganisms";
+import { Navbar } from "@/organisms/Navbar";
+import { RightSide, LeftSide } from "@/organisms/IndexOrganisms";
 
 const index = () => {
   return (

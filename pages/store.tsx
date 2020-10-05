@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Flex, Grid, Box } from "@chakra-ui/core";
 import { useQuery } from "@apollo/client";
-import Standard from "../components/layouts/Standard/Standard";
-import { Pagination } from "../components/molecules/Pagination";
-import { FilterBar } from "../components/microOrganisms/FilterBar";
-import ProductCard from "../components/microOrganisms/Cards/ProductCard";
-import { Header } from "../components/atoms/Text";
+import { Standard } from "@/layouts/Standard";
+import { Pagination } from "@/molecules/Pagination";
+import { FilterBar } from "@/organisms/FilterBar";
+import ProductCard from "@/organisms/Cards/ProductCard";
+import { Header } from "@/atoms/Text";
 import { GET_TYPES, GET_DATA } from "../utils/queries";
 
 type state = {
