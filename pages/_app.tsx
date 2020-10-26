@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
-import { ChakraProvider, extendTheme } from "@chakra-ui/core";
+import { ChakraProvider} from "@chakra-ui/core";
 import { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
 import Client from "../utils/GraphqlClient";

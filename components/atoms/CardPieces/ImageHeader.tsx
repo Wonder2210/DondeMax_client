@@ -5,11 +5,13 @@ type props = {
   src: string;
   alt: string;
   height?: string;
+  maxHeight?: string;
   width?: string;
+  objectFit?: string;
 };
 
-const ImageHeader: React.FC<props> = ({ src, alt, height, width }) => {
-  return <Image src={src} alt={alt} height={height ?? ""} width={width ?? ""} rounded="35px" />;
+const ImageHeader: React.FC<props> = ({ src, alt, height, width, maxHeight = "auto" }) => {
+  return <Image maxHeight={maxHeight} src={src} alt={alt} height={height ?? ""} width={width ?? ""} rounded="35px" />;
 };
 
 export default ImageHeader;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "@chakra-ui/core";
-import { ShoppingCart } from "@/atoms/Buttons";
+import { ShoppingCart } from "../../atoms/Buttons";
 
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";

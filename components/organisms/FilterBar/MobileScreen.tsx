@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import Config from "@iconify/icons-cil/cog";
-import { IconButton, ShoppingCart } from "@/atoms/Buttons";
-import { SelectCustom, SelectOption } from "@/molecules/Select";
+import { IconButton, ShoppingCart } from "../../atoms/Buttons";
+import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
 
 const MobileScreen = ({ preservations, types }: props) => {
@@ -49,18 +49,18 @@ const MobileScreen = ({ preservations, types }: props) => {
         <Flex w="20%" marginLeft="0.3em" h="100%" alignItems="center">
           <IconButton
             aria-label="filter-settings"
-            backgroundColor="rose.600"
+            backgroundColor="colors.rose.600"
             borders={["25px", "25px"]}
             onClick={onOpen}
-            icon={() => <Icon icon={Config} width="80%" height="80%" color="#fff" />}
+            icon={<Icon icon={Config} width="80%" height="80%" color="#fff" />}
           />
         </Flex>
         <Flex w="20%" h="100%" alignItems="center">
           <ShoppingCart itemsCount={0} color="#fff" />
         </Flex>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay w="100vw" height="100vh" />
         <ModalContent>
           <ModalHeader>Filtrar</ModalHeader>
           <ModalCloseButton />
@@ -95,7 +95,7 @@ const MobileScreen = ({ preservations, types }: props) => {
 
           <ModalFooter>
             <Button
-              backgroundColor="rose.600"
+              backgroundColor="color.rose.600"
               color="#FFF"
               mr={3}
               _hover={{ transform: "scale(1.1)" }}

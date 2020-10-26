@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Text } from "@chakra-ui/core";
 
-type props = { color?: string };
+type props = { color?: string; fontSize?: string };
 
-const Subheader: React.FC<props> = ({ children, color }) => {
+const Subheader: React.FC<props> = ({ children, color, fontSize }) => {
   return (
     <Text
-      fontSize={["1rem", "1rem", "xl", "xl"]}
+      fontSize={fontSize ?? ["1rem", "1rem", "xl", "xl"]}
       fontWeight="medium"
       d="flex"
       justifyItems="center"

@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { Standard } from "@/layouts/Standard";
 import { Pagination } from "@/molecules/Pagination";
 import { FilterBar } from "@/organisms/FilterBar";
-import ProductCard from "@/organisms/Cards/ProductCard";
+import ProductCard from "@/components/organisms/Cards/ProductCardShop";
 import { Header } from "@/atoms/Text";
 import { GET_TYPES, GET_DATA } from "../utils/queries";
 
@@ -36,7 +36,7 @@ const store = () => {
   const next = () => setState((last) => ({ ...last, page: last.page + 1 }));
   const last = () => setState((last) => ({ ...last, page: last.page - 1 }));
   const onClick = (e: number) => setState((last) => ({ ...last, page: e }));
-
+  let total = 1;
   if (error) {
     return <h1>Error papu</h1>;
   }
@@ -52,6 +52,7 @@ const store = () => {
     products = <h1>algo anda mal bro o</h1>;
   }
   if (ProductsData) {
+    total = ProductsData.products.total;
     products = ProductsData.products.results.map((i) => {
       return <ProductCard key={i.id} alt="image-test" src={i.image} price={i.price} name={i.name} isInCart />;
     });
@@ -97,16 +98,9 @@ const store = () => {
       >
         {products}
       </Grid>
-      <Box marginX="auto" height="min-content">
-        <Pagination
-          pageItems={12}
-          numberItems={data.total}
-          page={state.page}
-          next={next}
-          last={last}
-          onClick={onClick}
-        />
-      </Box>
+      <Flex align="center" justify="center" height="min-content">
+        <Pagination pageItems={12} numberItems={total} page={state.page} next={next} last={last} onClick={onClick} />
+      </Flex>
     </Standard>
   );
 };

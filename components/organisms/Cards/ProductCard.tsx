@@ -1,68 +1,46 @@
-import React from "react";
+import * as React from "react";
+import { Box } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
-import Cart from "@iconify/icons-cil/cart";
-import { Box, Badge } from "@chakra-ui/core";
-import { IconButton } from "@/atoms/Buttons";
-import { BasicFooter, ImageHeader } from "@/atoms/CardPieces";
+import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
+import { Button } from "../../atoms/Buttons";
+import { Header, SubHeader, Parragraph } from "../../atoms/Text";
+import { ImageHeader } from "../../atoms/CardPieces";
 
 type props = {
-  src: string;
-  alt: string;
-  price: string;
   name: string;
-  height?: string;
-  width?: string;
-  isInCart: boolean;
+  image: string;
+  info: string;
+  type: string;
+  action: (e: React.FormEvent) => void;
+  big: boolean;
 };
 
-const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, isInCart }) => {
+const ProductCard: React.FC<props> = ({ name, image, info, type, action, big }) => {
   return (
-    <Box
-      rounded="35px"
-      position="relative"
-      height={height ?? ["18em", "21.5em"]}
-      marginBottom="5vh"
-      marginX="auto"
-      width={width ?? ["15em", "18em"]}
-      backgroundColor="#000"
-      boxShadow={false ? " 1px 1px 5px rgba(0, 0, 0, 0.5)" : " 10px 10px 50px rgba(0, 0, 0, 0.5)"}
-    >
-      <ImageHeader alt={alt} src={src} height="100%" width="100%" />
-      <BasicFooter
-        borders={["0px", "35px"]}
-        height="25%"
-        position="absolute"
-        top="75%"
-        bottom="0"
-        zIndex={3}
-        backgroundColor="#FFFFFF"
-      >
-        <Badge
-          position="absolute"
-          width="60%"
-          rounded="25px"
-          textAlign="center"
-          color="white"
-          backgroundColor="#2F4858"
-          top="0"
-          left="50%"
-          zIndex={1}
-          transform="translate(-50%,-50%)"
-        >
-          {price}
-        </Badge>
-        <p style={{ width: "40%" }}>{name}</p>
-        <IconButton
-          aria-label="cart"
-          borderColor="rose.600"
-          backgroundColor={isInCart ? "rose.600" : "#FFF"}
-          onClick={() => console.log("here")}
-          color="white"
-          icon={() => <Icon icon={Cart} color={isInCart ? "#fff" : "#E91E63"} />}
-        />
-      </BasicFooter>
+    <Box gridColumn={big && "span 2"} margin="1em">
+      <ImageHeader maxHeight="50vh" alt={name} src={image} height="auto" width="100%" />
+      <Box margin="0 10%">
+        <Header type="h6" weight="semibold" fontSize="1.5em">
+          Here
+        </Header>
+        <SubHeader fontSize="1em">{type}</SubHeader>
+        <Parragraph fontSize="0.8em" textAlign="left">
+          {info}
+        </Parragraph>
+        <Box margin="0 0 0 auto" width="min-content">
+          <Button
+            backgroundColor="colors.rose.600"
+            onClick={action}
+            width="7em"
+            height="2.5em"
+            rightIcon={<Icon icon={chevronRight} />}
+          >
+            Comprar
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 };
 
-export default InitialCard;
+export default ProductCard;

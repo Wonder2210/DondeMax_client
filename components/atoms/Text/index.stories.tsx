@@ -5,12 +5,14 @@ import Parragraph from "./Parragraph";
 
 export const HeaderTest = () => {
   return (
-    <Header>
-      <Header color="#E91E63" nested>
-        D
+    <>
+      <Header color="colors.rose.600">D</Header>
+      <Header>eader</Header>
+      <br />
+      <Header type="h6" weight="semibold" fontSize="1.5em">
+        Here
       </Header>
-      eader
-    </Header>
+    </>
   );
 };
 export const SubHeaderTest = () => {

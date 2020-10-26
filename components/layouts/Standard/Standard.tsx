@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/core";
-import { Navbar } from "@/organisms/Navbar";
-import { Footer } from "@/organisms/Footer";
+import { Navbar } from "../../organisms/Navbar";
+import { Footer } from "../../organisms/Footer";
 
 const Standard = ({ children }) => {
   return (

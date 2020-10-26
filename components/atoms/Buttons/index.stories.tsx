@@ -12,10 +12,10 @@ export default {
 
 export const BasicUsage = () => (
   <Button
-    backgroundColor="rose.600"
-    rightIcon={() => (
+    backgroundColor="colors.rose.600"
+    rightIcon={
       <Icon icon={chevronRight} color="white" height="2.875rem" width="2.375rem" style={{ marginLeft: "10%" }} />
-    )}
+    }
   >
     Nuestras Tortas
   </Button>
@@ -26,7 +26,7 @@ export const iconbuttonHeart = () => (
     aria-label="heart"
     backgroundColor="#F42121"
     color="white"
-    icon={() => <Icon icon={heart} width="1.563rem" height="1.5rem" />}
+    icon={<Icon icon={heart} width="1.563rem" height="1.5rem" />}
   />
 );
 export const iconbuttonShare = () => (
@@ -34,6 +34,6 @@ export const iconbuttonShare = () => (
     aria-label="heart"
     backgroundColor="#3DBBE3"
     color="white"
-    icon={() => <Icon icon={share} width="1.563rem" height="1.5rem" />}
+    icon={<Icon icon={share} width="1.563rem" height="1.5rem" />}
   />
 );

@@ -14,7 +14,7 @@ import { InitialCard } from "@/organisms/Cards";
 
 const RightSide = () => {
   const isPhone = useMediaQuery({
-    query: "(min-width:62em;)",
+    query: "(max-width:62em)",
   });
   return (
     <Flex
@@ -22,7 +22,7 @@ const RightSide = () => {
       direction="column"
       align="center"
       position="relative"
-      width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
+      width={{ base: "100%", sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
       h="100vh"
     >
       <Box marginTop="15vh">
@@ -38,7 +38,7 @@ const RightSide = () => {
       </Box>
       <Box marginTop="5vh" height="auto">
         <Button
-          backgroundColor="rose.600"
+          backgroundColor="#E91E63"
           rightIcon={
             <Icon icon={chevronRight} color="white" height="2.875rem" width="2.375rem" style={{ marginLeft: "10%" }} />
           }

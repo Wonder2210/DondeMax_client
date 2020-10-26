@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input, InputGroup, InputRightAddon, InputLeftAddon } from "@chakra-ui/core";
+import { Input, InputGroup, InputRightAddon, InputLeftAddon, Text } from "@chakra-ui/core";
 
 type props = {
   left?: React.ReactNode | string;
@@ -8,10 +8,12 @@ type props = {
   readonly?: boolean;
   placeholder?: string;
   margin?: string;
-  onChange?: () => void;
+  onChange?: (e: React.FormEvent) => void;
   value?: string;
   border?: string;
   borderColor?: string;
+  variant?: "outline" | "unstyled" | "flushed" | "filled";
+  label?: string;
 };
 
 const TextInput: React.FC<props> = ({
@@ -23,31 +25,36 @@ const TextInput: React.FC<props> = ({
   left,
   right,
   placeholder,
-  borderColor,
+  borderColor = "#000",
   margin,
+  variant = "filled",
+  label,
 }) => {
   return (
-    <InputGroup>
-      <InputLeftAddon backgroundColor="rgba(0,0,0,0)" borderColor="rgba(0,0,0,0)" padding={0}>
-        {left ?? ""}
-      </InputLeftAddon>
-      <Input
-        backgroundColor="#FFF !important"
-        variant="filled"
-        borderColor={borderColor}
-        borderRadius={borderRadius}
-        border={border}
-        margin={margin}
-        isReadOnly={readonly ?? false}
-        onChange={onChange}
-        placeholder={placeholder}
-        value={value}
-        _focus={{ backgroundColor: "#FFF" }}
-      />
-      <InputRightAddon padding={0} width="auto" rounded="35px" borderColor="rgba(0,0,0,0)">
-        {right ?? ""}
-      </InputRightAddon>
-    </InputGroup>
+    <>
+      {label ?? <Text>{label}</Text>}
+      <InputGroup>
+        <InputLeftAddon backgroundColor="rgba(0,0,0,0)" borderColor="rgba(0,0,0,0)" padding={0}>
+          {left ?? ""}
+        </InputLeftAddon>
+        <Input
+          backgroundColor="#FFF !important"
+          variant={variant}
+          borderColor={borderColor}
+          borderRadius={borderRadius}
+          border={border}
+          margin={margin}
+          isReadOnly={readonly ?? false}
+          onChange={onChange}
+          placeholder={placeholder}
+          value={value}
+          _focus={{ backgroundColor: "#FFF" }}
+        />
+        <InputRightAddon padding={0} width="auto" rounded="35px" borderColor="rgba(0,0,0,0)">
+          {right ?? ""}
+        </InputRightAddon>
+      </InputGroup>
+    </>
   );
 };
 

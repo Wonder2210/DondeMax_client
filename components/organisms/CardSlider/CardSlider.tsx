@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import { useMediaQuery } from "react-responsive";
 import { Box } from "@chakra-ui/core";
-import { ArrowsGroup } from "@/molecules/ArrowsGroup";
+import { ArrowsGroup } from "../../molecules/ArrowsGroup";
 
 const responsive = {
   desktop: {
@@ -27,7 +27,7 @@ const CardSlider = (props) => {
     minDeviceWidth: 960,
   });
   return (
-    <Box width="100%" display="relative">
+    <Box width="100%" display="relative" height="auto">
       <Carousel
         swipeable
         draggable={false}
@@ -38,6 +38,7 @@ const CardSlider = (props) => {
         transitionDuration={500}
         containerClass="container"
         dotListClass="custom-dots"
+        itemClass="custom-item"
         arrows={false}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         deviceType={props.deviceType}

@@ -5,9 +5,9 @@ import { Icon } from "@iconify/react";
 import Instagram from "@iconify/icons-cib/instagram";
 import Whatsapp from "@iconify/icons-cib/whatsapp";
 import Link from "next/link";
-import { Header } from "@/atoms/Text";
-import { List, ListItem } from "@/atoms/List";
-import { Link as StyleLink } from "@/atoms/Links";
+import { Header } from "../../atoms/Text";
+import { List, ListItem } from "../../atoms/List";
+import { Link as StyleLink } from "../../atoms/Links";
 
 const Footer = () => {
   const isMobile = useMediaQuery({

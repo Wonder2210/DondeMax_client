@@ -25,3 +25,18 @@ export const GET_DATA = gql`
     }
   }
 `;
+
+export const GET_BASE_PRODUCTS = gql`
+  query GetProductsBase($size: Int! = 12, $cursor: Int! = 0, $type: String = "", $preservation: String = "") {
+    products(size:$size, cursor:$cursor, type:$type, preservation:$preservation ){
+    total
+    results{
+      id
+      name
+      image
+      info
+      type
+    }
+  }
+  }
+`;

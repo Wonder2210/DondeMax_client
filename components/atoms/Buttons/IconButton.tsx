@@ -10,14 +10,15 @@ const IconButton: React.FC<props> = ({
   backgroundColor,
   icon,
   onClick,
+  display,
   width = ["3.5rem", "3.875rem"],
   height = ["1.9rem", "2.188rem"],
-  borders = ["35px", "35px"],
+  borders = ["35px", "35px", "35px", "35px", "35px"],
   margin = 1,
   _hover = {
     transform: "scale(1.1,1.1)",
   },
-  borderColor = "",
+  borderColor = "transparent",
 }) => (
   <IconBtn
     aria-label="Icon"
@@ -31,6 +32,7 @@ const IconButton: React.FC<props> = ({
     width={width}
     height={height}
     icon={icon}
+    display={display}
     margin={margin}
     _hover={_hover}
     _focus={{}}

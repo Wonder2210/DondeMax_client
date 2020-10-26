@@ -1,7 +1,8 @@
 import React from "react";
 import { Flex, Box } from "@chakra-ui/core";
-import { Header } from "../components/atoms/Text";
-import { Standard } from "../components/layouts/Standard";
+import { Header, Parragraph } from "@/atoms/Text";
+import { Standard } from "@/layouts/Standard";
+import { ContactUs } from "@/organisms/Forms";
 
 const Info = () => {
   return (
@@ -10,16 +11,16 @@ const Info = () => {
         justify="center"
         width="100%"
         align="center"
-        height="75%"
+        height="85%"
         backgroundImage="url('/images/cupcakes-inline.jpg')"
         backgroundPosition="center"
         backgroundSize="cover"
       >
-        <Header>Catalogo</Header>
+        <Header color="#E91E63">¿Quienes somos?</Header>
       </Flex>
-      <Flex>
-        <Flex justify="center" align="center" width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} height="100vh">
-          <Header>Mision</Header>
+      <Flex >
+        <Flex justify="center" align="center" width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} height="100vh" bgColor="#EDB3C7">
+          <Header color="#E5E6E2">Mision</Header>
         </Flex>
         <Box
           bg="rgb(255,0,0)"
@@ -41,8 +42,33 @@ const Info = () => {
           backgroundPosition="center"
           backgroundSize="cover"
         />
-        <Flex justify="center" align="center" width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} height="100vh">
-          <Header>Vision</Header>
+        <Flex justify="center" align="center" width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} height="100vh" bgColor="#E7CFA4">
+          <Header color="#E5E6E2">Vision</Header>
+        </Flex>
+      </Flex>
+      <Flex direction={{ sm: "column", md: "column", lg: "row", xl: "row" }}>
+        <Flex width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} minHeight="70vh" align="center" justify="center">
+          <ContactUs />
+        </Flex>
+        <Flex
+          justify="flex-start"
+          align="center"
+          bgColor="#FC913C"
+          direction="column"
+          width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
+          height="100vh"
+          paddingTop="6em"
+        >
+          <Header color="#E5E6E2">Visitanos</Header>
+          <br />
+          <br />
+          <br />
+          <Parragraph color="#E5E6E2" height="auto">
+            Lunes - Sabados: 7am -7pm
+          </Parragraph>
+          <Parragraph color="#E5E6E2" height="auto">
+            Zorca , Sector el Bosque , Diagonal al preescolar Tarabay, Municipio Independecia
+          </Parragraph>
         </Flex>
       </Flex>
     </Standard>

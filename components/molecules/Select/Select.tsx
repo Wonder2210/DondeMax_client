@@ -31,19 +31,19 @@ const SelectCustom: React.FC<{
           right={
             <IconButton
               aria-label="dropdown=icon"
-              backgroundColor="rose.600"
+              backgroundColor="colors.rose.600"
               margin={0}
               _hover={{}}
               width="100%"
               height="110%"
-              borders={["0px", "35px"]}
-              icon={() => <Icon icon={show ? ChevronUp : ChevronBottom} color="#FFF" />}
+              borders={["0px", "35px", "35px", "35px"]}
+              icon={<Icon icon={show ? ChevronUp : ChevronBottom} color="#FFF" />}
               onClick={() => toggle(!show)}
             />
           }
         />
       </Box>
-      <Box position="relative" left="0" width="86%">
+      <Box position="absolute" left="0" width="86%">
         <Menu isOpen={show}>
           <MenuList borderWidth="0.75px" borderColor="rgb(209,209,209)" width="100%" roundedBottom="35px" borderTop="0">
             <MenuOptionGroup type="radio" onChange={onChange}>

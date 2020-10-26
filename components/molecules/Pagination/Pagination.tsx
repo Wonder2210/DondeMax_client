@@ -17,15 +17,16 @@ type props = {
 
 const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next, onClick }) => {
   const totalPages = Math.ceil(numberItems / pageItems);
+  console.log(totalPages, numberItems, pageItems);
 
-  const renderItems = [...new Array(totalPages)]
+  const renderItems = [...new Array(totalPages).fill(0)]
     .map((i, k) => k + 1)
     .map((i) => {
       if (page === i) {
         return (
           <Button
             key={i}
-            backgroundColor="rose.600"
+            backgroundColor="colors.rose.600"
             size="sm"
             width="1em"
             height="1.5em"
@@ -63,7 +64,7 @@ const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next,
         aria-label="heart"
         backgroundColor="#FFF"
         color="black"
-        icon={() => <Icon icon={chevronLeft} width="1.563rem" height="1.5rem" />}
+        icon={<Icon icon={chevronLeft} width="1.563rem" height="1.5rem" />}
         onClick={page <= 1 ? (e) => console.log("nothing") : last}
       />
 
@@ -72,7 +73,7 @@ const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next,
         aria-label="heart"
         backgroundColor="#FFF"
         color="black"
-        icon={() => <Icon icon={chevronRight} width="1.563rem" height="1.5rem" />}
+        icon={<Icon icon={chevronRight} width="1.563rem" height="1.5rem" />}
         onClick={page >= totalPages ? (e) => console.log("nothing") : next}
       />
     </Flex>

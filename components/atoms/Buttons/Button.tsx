@@ -2,6 +2,7 @@ import * as React from "react";
 import { Button as Btn, ButtonProps } from "@chakra-ui/core";
 
 const Button: React.FC<ButtonProps> = ({
+  type,
   width,
   height,
   size,
@@ -11,11 +12,13 @@ const Button: React.FC<ButtonProps> = ({
   rightIcon,
   borderRadius,
   children,
+  _hover,
 }) => {
   return (
     <Btn
       backgroundColor={backgroundColor ?? "black"}
       onClick={onClick}
+      type={type}
       size={size ?? "md"}
       width={width ?? ["95%", "15.625rem"]}
       height={height ?? ["8vh", "77px"]}
@@ -23,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
       borderRadius={borderRadius ?? "35px"}
       fontWeight="bold"
       fontSize={[".9rem", "1.125rem"]}
-      _hover={{}}
+      _hover={_hover ?? {}}
       rightIcon={rightIcon}
     >
       {children}

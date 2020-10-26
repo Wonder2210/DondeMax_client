@@ -7,7 +7,10 @@
         "plugin:react/recommended",
         "airbnb",
         "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:testing-library/recommended",
+        "plugin:jest-dom/recommended",
+        "plugin:jest/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -18,8 +21,11 @@
         "project": "./tsconfig.json"
     },
     "plugins": [
+        "jest",
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "testing-library",
+        "jest-dom"
     ],
     "rules": {
         "linebreak-style": ["error", "windows"],
@@ -36,7 +42,8 @@
 
             "endOfLine": "auto"
 
-        }]
+        }],
+        "import/prefer-default-export":false
 
     },
     "settings": {

@@ -1,15 +1,26 @@
 .container {
-    padding-bottom: 5%;
-    margin-left: 2vw;
+    padding-bottom: 1em;
+    margin:0 auto 4vh auto;
   }
   .custom-dots{
     width: min-content;
     left: 50%;
     transform: translateX(-50%);
   }
+  @media only screen and (max-width:62em){
+    .custom-dots{
+      margin-bottom: 1.3em;
+    }
+  }
   .custom-dots button:hover:active {
     background: #e91e63;
   }
   .react-multi-carousel-dot--active button {
     background: #e91e63;
+  }
+  .custom-item{
+    margin: 0 auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
   }
