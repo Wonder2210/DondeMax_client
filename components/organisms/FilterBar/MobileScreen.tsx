@@ -56,7 +56,7 @@ const MobileScreen = ({ preservations, types }: props) => {
           />
         </Flex>
         <Flex w="20%" h="100%" alignItems="center">
-          <ShoppingCart itemsCount={0} color="#fff" />
+          <ShoppingCart itemsCount={0} color="#fff" backgroundColor="rgba(1,1,1,0)" />
         </Flex>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -95,7 +95,7 @@ const MobileScreen = ({ preservations, types }: props) => {
 
           <ModalFooter>
             <Button
-              backgroundColor="color.rose.600"
+              backgroundColor="#E91E63"
               color="#FFF"
               mr={3}
               _hover={{ transform: "scale(1.1)" }}

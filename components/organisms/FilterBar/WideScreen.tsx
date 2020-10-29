@@ -54,7 +54,7 @@ const WideScreen = ({ preservations, types }: props) => {
       </Flex>
 
       <Flex marginRight="1vw" position="relative" align="center" flexDirection="row" w="20%" justify="flex-end">
-        <ShoppingCart itemsCount={0} color="#fff" />
+        <ShoppingCart itemsCount={0} color="#fff" backgroundColor="rgba(1,1,1,0)" />
       </Flex>
     </Flex>
   );

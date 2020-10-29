@@ -36,7 +36,7 @@ const SelectCustom: React.FC<{
               _hover={{}}
               width="100%"
               height="110%"
-              borders={["0px", "35px", "35px", "35px"]}
+              borderRadius="0 35px 35px 0"
               icon={<Icon icon={show ? ChevronUp : ChevronBottom} color="#FFF" />}
               onClick={() => toggle(!show)}
             />
