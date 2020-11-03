@@ -46,8 +46,11 @@ const products = () => {
       </Flex>
       <Tabs margin="1em auto" width={{ base: "80%", sm: "100%", md: "75%", lg: "70%" }}>
         <TabList>
-          <Tab>Aqui estamos</Tab>
-          <Tab>Y aqui</Tab>
+          <Tab>Todos</Tab>
+          <Tab>Tortas</Tab>
+          <Tab>Galletas</Tab>
+          <Tab>Dulces frios</Tab>
+          <Tab>Pasapalos</Tab>
         </TabList>
       </Tabs>
       <Products data={data.products.results} action={(e) => alert(e)} />

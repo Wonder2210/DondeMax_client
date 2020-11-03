@@ -1,6 +1,7 @@
 import React from "react";
 import TextInput from "./TextInput";
 import FormInput from "./FormInput";
+import SelectInput from "./SelectInput";
 
 export const SingleTextInput = () => {
   return (
@@ -28,8 +29,21 @@ export const FormInputEx = () => (
   />
 );
 
+export const SelectInputTest = () => (
+  <SelectInput
+    id="i"
+    errorMessage="nothing"
+    defaultValue={2}
+    placeholder="test"
+    variant="flushed"
+    label="test"
+    options={[
+      { id: 1, type: "here" },
+      { id: 2, type: "there" },
+    ]}
+  />
+);
+
 export default {
-  title: "Atoms/Inputs",
+  title: "Atoms/inputs",
 };
-
-

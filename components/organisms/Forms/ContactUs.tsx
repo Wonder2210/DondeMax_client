@@ -13,7 +13,7 @@ type MyFormValues = {
 };
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required(" Este campo es obligatorio"),
+  name: Yup.string().required("Este campo es obligatorio"),
   email: Yup.string().email("Email ivalido").required(),
   details: Yup.string().max(50, "Es muy largo este mensaje"),
 });

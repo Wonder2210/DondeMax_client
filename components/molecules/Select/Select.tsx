@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-wrap-multilines */
 import React, { FormEvent } from "react";
-import { Box, Menu, MenuOptionGroup, MenuItemOption, MenuList, Flex } from "@chakra-ui/core";
+import { Box, Menu, MenuOptionGroup, MenuItemOption, MenuList, MenuButton, Flex } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import ChevronBottom from "@iconify/icons-dashicons/arrow-down-alt2";
 import ChevronUp from "@iconify/icons-dashicons/arrow-up-alt2";
@@ -31,12 +31,12 @@ const SelectCustom: React.FC<{
           right={
             <IconButton
               aria-label="dropdown=icon"
-              backgroundColor="colors.rose.600"
+              backgroundColor="#E91E63"
               margin={0}
               _hover={{}}
               width="100%"
               height="110%"
-              borderRadius="0 35px 35px 0"
+              borders={["0", "35px"]}
               icon={<Icon icon={show ? ChevronUp : ChevronBottom} color="#FFF" />}
               onClick={() => toggle(!show)}
             />
@@ -44,7 +44,8 @@ const SelectCustom: React.FC<{
         />
       </Box>
       <Box position="absolute" left="0" width="86%">
-        <Menu isOpen={show}>
+        <Menu isOpen={show} position="relative" width="100%">
+          <MenuButton display="hidden" />
           <MenuList borderWidth="0.75px" borderColor="rgb(209,209,209)" width="100%" roundedBottom="35px" borderTop="0">
             <MenuOptionGroup type="radio" onChange={onChange}>
               {children}

@@ -25,9 +25,9 @@ const NavbarDashboard = ({ toggle }) => {
   let hour = date.getHours();
   let minutes = date.getMinutes();
   return (
-    <Flex width="100%" height="4em" paddingX="1em" alignItems="center">
+    <Flex width="100%" height="4em" paddingX="1em" alignItems="center" backgroundColor="white">
       <IconButton
-        aria-label="heart"
+        aria-label="toggle"
         backgroundColor="transparent"
         color="white"
         icon={<Icon icon={menuIcon} color="#000" height="100%" />}

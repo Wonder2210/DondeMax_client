@@ -1,8 +1,116 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
+import { useQuery, useMutation, gql } from "@apollo/client";
+import { Flex, useDisclosure } from "@chakra-ui/core";
+import { IconButton } from "@/atoms/Buttons";
+import { SubHeader } from "@/atoms/Text";
+import { Icon } from "@iconify/react";
+import { TableActions } from "@/molecules/ActionButtons";
+import { Table } from "@/organisms/Table";
+import Plus from "@iconify/icons-cil/plus";
+import { Provider } from "@/organisms/Forms";
+import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/utils/queries";
 
-function proveedores() {
-  return <Dashboard>here</Dashboard>;
-}
+const proveedores = () => {
+  const initialState = {
+    edit: false,
+    data: {
+      id: "",
+      name: "",
+      RIF: "",
+      phone: "",
+      direction: "",
+    },
+  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, loading } = useQuery(GET_PROVIDERS, { pollInterval: 500 });
+  const [createProvider] = useMutation(CREATE_PROVIDER, { onCompleted: onClose });
+  const [deleteProvider] = useMutation(DELETE_PROVIDER);
+  const [updateProvider] = useMutation(UPDATE_PROVIDER, {
+    onCompleted: () => {
+      onClose();
+      cleanState();
+    },
+  });
+  const [editData, setData] = React.useState({ ...initialState });
+
+  const cleanState = () => setData({ ...initialState });
+  const headers = React.useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: "id",
+      },
+      {
+        Header: "Nombre",
+        accessor: "name",
+      },
+      {
+        Header: "RIF",
+        accessor: "RIF",
+      },
+      {
+        Header: "Telefono",
+        accessor: "phone",
+      },
+      {
+        Header: "Direccion",
+        accessor: "direction",
+      },
+      {
+        Header: "Acciones",
+        Cell: ({ row }) => (
+          <TableActions
+            onDelete={() => deleteProvider({ variables: { id: row.original["id"] } })}
+            onUpdate={() => {
+              setData({ edit: true, data: { ...row.original } });
+              onOpen();
+            }}
+          />
+        ),
+      },
+    ],
+    [],
+  );
+  const onSubmit = (data) => {
+    createProvider({ variables: { ...data } });
+  };
+
+  const onCloseEdit = () => {
+    cleanState();
+    onClose();
+  };
+  const onEdit = (data) => {
+    updateProvider({ variables: { id: editData.data.id, ...data } });
+  };
+  return (
+    <Dashboard>
+      {loading ? (
+        <h1>Here</h1>
+      ) : (
+        <>
+          <Provider
+            isEditing={editData.edit}
+            onEdit={onEdit}
+            values={editData.data}
+            isOpen={isOpen}
+            onClose={onCloseEdit}
+            onSubmit={onSubmit}
+          />
+          <Flex height="5em" justifyContent="space-between" alignItems="center">
+            <SubHeader>Proveedores</SubHeader>
+            <IconButton
+              aria-label="add-more"
+              onClick={onOpen}
+              backgroundColor="colors.rose.600"
+              icon={<Icon icon={Plus} color="white" />}
+            />
+          </Flex>
+          <Table columns={headers} data={data.providers} />
+        </>
+      )}
+    </Dashboard>
+  );
+};
 
 export default proveedores;

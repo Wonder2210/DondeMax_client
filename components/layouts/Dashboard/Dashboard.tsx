@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Flex } from "@chakra-ui/core";
+import { Box, Flex, useMediaQuery } from "@chakra-ui/core";
 import { NavbarDashboard } from "../../organisms/Navbar";
 import { SidebarDashboard } from "../../molecules/Sidebar";
 
@@ -8,8 +8,9 @@ type props = {
 };
 
 const Dashboard = ({ children }) => {
+  const [isMobile] = useMediaQuery("(min-width: 48em)");
   const [state, setState] = React.useState<props>({
-    sidebar: true,
+    sidebar: isMobile,
   });
 
   const toggleSidebar = () => setState({ sidebar: !state.sidebar });
@@ -29,7 +30,7 @@ const Dashboard = ({ children }) => {
         transition=".5s linear"
       >
         <NavbarDashboard toggle={toggleSidebar} />
-        <Box margin="1em" backgroundColor="#FFF" borderRadius="48px">
+        <Box margin="1em" borderRadius="48px">
           {children}
         </Box>
       </Box>

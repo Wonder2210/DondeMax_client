@@ -51,7 +51,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
       </Flex>
 
       <Image src="/images/logo.jpg" width="50%" margin="1em auto" height="auto" />
-      <Flex justify="flex-end">
+      {/* <Flex justify="flex-end">
         <IconButton
           aria-label="dark"
           backgroundColor="transparent"
@@ -59,7 +59,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
           icon={<Icon icon={sun} height="100%" />}
           onClick={() => alert("dark mode not enable yet")}
         />
-      </Flex>
+      </Flex> */}
       <List spacing={5}>
         <ListItemDashboard selected={verifySelected("")} height="4em" icon={Home}>
           <a href="/admin/">Inicio</a>
@@ -71,10 +71,10 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
           Productos
         </ListItemDashboard>
         <ListItemDashboard selected={verifySelected("/proveedores")} icon={providers} height="4em">
-          Proveedores
+          <a href="/admin/proveedores">Proveedores</a>
         </ListItemDashboard>
         <ListItemDashboard icon={mercancia} selected={verifySelected("/mercancia")} height="4em">
-          Mercancia
+          <a href="/admin/mercancia">Mercancia</a>
         </ListItemDashboard>
         <ListItemDashboard icon={client} selected={verifySelected("/clientes")} height="4em">
           Clientes
