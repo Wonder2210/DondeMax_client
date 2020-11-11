@@ -1,8 +1,9 @@
 import React from "react";
-import { Flex } from "@chakra-ui/core";
+import { Flex, Divider } from "@chakra-ui/core";
 import Link from "next/link";
 import { Link as StyleLink } from "../../atoms/Links";
 import { ShoppingCart } from "../../atoms/Buttons";
+import { UserDropdown } from "../../molecules/Dropdown";
 
 const NavbarWideScreen = () => {
   return (
@@ -27,6 +28,8 @@ const NavbarWideScreen = () => {
 
       <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">
         <ShoppingCart itemsCount={0} />
+        <Divider borderColor="#222" orientation="vertical" height="3em" />
+        <UserDropdown image="https://randomuser.me/api/portraits/men/23.jpg" imageAlt="Jhon Doe" userName="Jhon Doe" />
       </Flex>
     </Flex>
   );

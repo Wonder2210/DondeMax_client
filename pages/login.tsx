@@ -1,8 +1,46 @@
 import * as React from "react";
+import { useMutation, gql } from "@apollo/client";
 import { Flex, Box } from "@chakra-ui/core";
 import { Login } from "@/organisms/Forms";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+
+const loginUserQuery = gql`
+  mutation LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password)
+  }
+`;
+
+const loginClientQuery = gql`
+  mutation LoginUser($cedula: String!) {
+    loginClient(cedula: $cedula)
+  }
+`;
 
 const login = () => {
+  const { push } = useRouter();
+  const [loginUser, { data, error }] = useMutation(loginUserQuery);
+  const [logClient, { data: dataClient, error: errorClient }] = useMutation(loginClientQuery);
+  const onSubmit = (data) => {
+    loginUser({ variables: { ...data } });
+  };
+  const onSubmitClient = (data) => {
+    logClient({ variables: { ...data } });
+  };
+  if (data) {
+    Cookies.set("auth", data.loginUser, { expires: 1 });
+    push("/admin", "/admin", { shallow: true });
+  }
+  if (dataClient) {
+    Cookies.set("auth", dataClient.loginClient, { expires: 1 });
+    push("/client", "/client", { shallow: true });
+  }
+  if (errorClient) {
+    console.log(JSON.stringify(errorClient.networkError, null, 2));
+  }
+  if (error) {
+    console.log(JSON.stringify(error.networkError, null, 2));
+  }
   return (
     <Flex width="100%" height="100vh">
       <Box
@@ -13,7 +51,8 @@ const login = () => {
         height="100vh"
       />
       <Flex width={{ base: "100%", sm: "100%", md: "70%", lg: "70%", xl: "70%" }} align="center" justify="center">
-        <Login />
+        <Login onSubmit={onSubmit} onSubmitClient={onSubmitClient} />
+        {error ? "Mal login bro" : ""}
       </Flex>
     </Flex>
   );

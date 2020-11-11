@@ -16,13 +16,15 @@ const Dashboard = ({ children }) => {
   const toggleSidebar = () => setState({ sidebar: !state.sidebar });
   const close = () => setState({ sidebar: false });
   return (
-    <Flex w="100%" h="100vh" backgroundColor="white">
+    <Flex w="100%" h="100vh" backgroundColor="white" position="fixed">
       <SidebarDashboard open={state.sidebar} close={close} />
       <Box
+        overflowY="scroll"
         flexGrow={{ base: 0, sm: 0, md: 1, lg: 1, xl: 1 }}
         width={{
           base: "100%",
           sm: "100%",
+
           md: "calc(100vw - 18.5em)",
           lg: "calc(100vw - 18.5em)",
           xl: "calc(100vw - 18.5em)",

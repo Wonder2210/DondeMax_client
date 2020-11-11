@@ -1,3 +1,4 @@
 import Navbar from "./Navbar";
 import NavbarDashboard from "./NavbarDashboard";
-export { Navbar, NavbarDashboard };
+import NavbarClient from "./NavbarClient";
+export { Navbar, NavbarDashboard, NavbarClient };

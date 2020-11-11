@@ -33,6 +33,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
       h="100vh"
       transition=".25s ease-in"
       backgroundColor="white"
+      overflowY="scroll"
       zIndex={1}
       marginLeft={open ? 0 : { base: "-100%", sm: "-100%", md: "-19.5em", lg: "-19.5em", xl: "-19.5em" }}
     >
@@ -68,7 +69,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
           <a href="/admin/pedidos">Pedidos</a>
         </ListItemDashboard>
         <ListItemDashboard height="4em" icon={cake} selected={verifySelected("/productos")}>
-          Productos
+          <a href="/admin/productos">Productos</a>
         </ListItemDashboard>
         <ListItemDashboard selected={verifySelected("/proveedores")} icon={providers} height="4em">
           <a href="/admin/proveedores">Proveedores</a>

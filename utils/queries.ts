@@ -81,6 +81,10 @@ export const GET_MERCANCIA = gql`
     materials {
       id
       nombre
+      onStock{
+        uniteds
+        weight
+      }
       type {
         id
         name

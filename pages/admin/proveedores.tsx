@@ -11,17 +11,18 @@ import Plus from "@iconify/icons-cil/plus";
 import { Provider } from "@/organisms/Forms";
 import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/utils/queries";
 
+const initialState = {
+  edit: false,
+  data: {
+    id: "",
+    name: "",
+    RIF: "",
+    phone: "",
+    direction: "",
+  },
+};
+
 const proveedores = () => {
-  const initialState = {
-    edit: false,
-    data: {
-      id: "",
-      name: "",
-      RIF: "",
-      phone: "",
-      direction: "",
-    },
-  };
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, loading } = useQuery(GET_PROVIDERS, { pollInterval: 500 });
   const [createProvider] = useMutation(CREATE_PROVIDER, { onCompleted: onClose });

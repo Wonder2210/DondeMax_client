@@ -2,6 +2,9 @@ import React from "react";
 import TextInput from "./TextInput";
 import FormInput from "./FormInput";
 import SelectInput from "./SelectInput";
+import NumberInput from "./NumberInput";
+import Dynamic from "./DynamicType";
+import DropImage from "./DropImage";
 
 export const SingleTextInput = () => {
   return (
@@ -43,6 +46,34 @@ export const SelectInputTest = () => (
     ]}
   />
 );
+
+export const NumberInputTest = () => {
+  return <NumberInput field={{}} label="number" id="number" />;
+};
+
+export const DYnamicTest = () => {
+  return (
+    <Dynamic
+      options={[
+        { id: 1, type: "here" },
+        { id: 2, type: "there" },
+      ]}
+      focusBorderColor="colors.rose.600"
+      variant="flushed"
+      placeholder="Dynamic"
+      add={(e) => console.log(e)}
+    />
+  );
+};
+
+export const DropImageTest = () => {
+  const onChange = (e) => console.log(e);
+  return (
+    <div style={{ height: "20em", width: "20em" }}>
+      <DropImage onChange={onChange} />
+    </div>
+  );
+};
 
 export default {
   title: "Atoms/inputs",

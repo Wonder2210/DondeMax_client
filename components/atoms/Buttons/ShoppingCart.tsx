@@ -17,7 +17,7 @@ const ShoppingCart: React.FC<props> = ({ onClick, color = "black", backgroundCol
       <style jsx>
         {`
           .btnShooppingContainer {
-            position: absolute;
+            position: relative;
             height: 68%;
             width: 76px;
           }

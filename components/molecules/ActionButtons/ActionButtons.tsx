@@ -14,7 +14,7 @@ const ActionButtons: React.FC<props> = ({ onDelete, onUpdate }) => {
   return (
     <Flex justifyContent="center">
       <IconButton aria-label="delete" icon={<Icon icon={x} color="rgb(205,4,4)" />} onClick={onDelete} />
-      <IconButton aria-label="delete" icon={<Icon icon={update} color="#000" />} onClick={onUpdate} />
+      <IconButton aria-label="update" icon={<Icon icon={update} color="#000" />} onClick={onUpdate} />
     </Flex>
   );
 };

@@ -1,43 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
 import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage } from "@chakra-ui/core";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import { format } from "date-fns";
+import "react-day-picker/lib/style.css";
 
 type props = {
   id: string;
-  type: "email" | "number" | "text" | "password";
   helper?: string;
   label: string;
-  placeHolder: string;
-  variant?: "outline" | "unstyled" | "flushed" | "filled";
-  borders?: string;
-  focusBorderColor?: string;
-  field?: {};
+  field?: object;
+  form?: object;
   isInvalid?: boolean;
   errorMessage: string;
 };
-const FormInput: React.FC<props> = ({
-  id,
-  type,
-  helper,
-  label,
-  variant,
-  placeHolder,
-  borders,
-  focusBorderColor,
-  field,
-  isInvalid,
-  errorMessage,
-}) => {
+const FormInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form, errorMessage }) => {
   return (
     <FormControl isInvalid={isInvalid}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
-      <Input
-        {...field}
-        type={type}
-        placeholder={placeHolder}
-        variant={variant}
-        border={borders}
-        focusBorderColor={focusBorderColor}
+      <DayPickerInput
+        format="dd/mm/yyyy"
+        onDayChange={(val) => form.setFieldValue(field.name, format(val, "dd/MM/yyyy"))}
       />
       <FormHelperText>{helper}</FormHelperText>
       <FormErrorMessage>{errorMessage}</FormErrorMessage>
