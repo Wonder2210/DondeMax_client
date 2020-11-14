@@ -250,6 +250,8 @@ const mercancia = () => {
             ) : (
               <>
                 <Storage
+                  onEdit={(e) => alert("nada bro")}
+                  isEditing={false}
                   values={{}}
                   onClose={onCloseStore}
                   isOpen={isOpenStore}

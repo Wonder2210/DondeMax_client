@@ -30,7 +30,7 @@ const UserDashboard: React.FC<props> = ({ image, imageAlt, userName }) => {
         </MenuButton>
         <MenuList>
           <MenuItem minH="48px">
-            <span>Fluffybuns the Destroyer</span>
+            <span>Admin</span>
           </MenuItem>
           <MenuItem minH="40px">
             <Icon icon={exit} width="2em" />

@@ -1,22 +1,16 @@
 import * as React from "react";
 import { Flex, Divider } from "@chakra-ui/core";
 import { useQuery, gql } from "@apollo/client";
-import { Icon } from "@iconify/react";
-import menuIcon from "@iconify/icons-cil/hamburger-menu";
-import { IconButton } from "../../atoms/Buttons";
 import { Parragraph } from "../../atoms/Text";
 import { UserDropdown } from "../../molecules/Dropdown";
 
-type props = {
-  toggle: (e: React.FormEvent) => void;
-};
 const user = gql`
   query SessionUser {
     sessionUser
   }
 `;
 
-const NavbarClient: React.FC<props> = ({ toggle }) => {
+const NavbarClient: React.FC = () => {
   const { data, error, loading } = useQuery(user);
   const [date, setDate] = React.useState(new Date());
   React.useEffect(() => {
