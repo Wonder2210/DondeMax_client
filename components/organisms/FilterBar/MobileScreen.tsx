@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import Config from "@iconify/icons-cil/cog";
-import { IconButton, ShoppingCart } from "../../atoms/Buttons";
+import { IconButton, ShoppingCart, Button as CustomButton } from "../../atoms/Buttons";
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
 

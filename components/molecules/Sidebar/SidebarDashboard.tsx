@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { List, ListItemDashboard } from "../../atoms/List";
 import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
+import { useAppContext } from "../../../utils/AppContext";
 import Home from "@iconify/icons-cil/home";
 import ListIcon from "@iconify/icons-cil/list-rich";
 import cake from "@iconify/icons-cil/birthday-cake";
@@ -21,7 +22,7 @@ type props = {
 
 const SidebarDashboard: React.FC<props> = ({ open, close }) => {
   const { pathname } = useRouter();
-
+  const { state } = useAppContext();
   const verifySelected = (name) => {
     const toCompare = `/admin${name}`;
     return pathname === toCompare;
@@ -83,6 +84,11 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
         <ListItemDashboard height="4em" icon={user} selected={verifySelected("/clientes")}>
           Usuarios
         </ListItemDashboard>
+        {state.admin && (
+          <ListItemDashboard height="4em" icon={user} selected={verifySelected("/clientes")}>
+            Usuarios
+          </ListItemDashboard>
+        )}
       </List>
     </Box>
   );

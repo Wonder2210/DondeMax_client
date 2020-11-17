@@ -1,8 +1,28 @@
-import { Menu, MenuButton, Image, Button, MenuList, MenuItem } from "@chakra-ui/core";
+import React from "react";
+import {
+  Menu,
+  MenuButton,
+  Image,
+  MenuList,
+  MenuItem,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Button,
+} from "@chakra-ui/core";
+import { useAppContext } from "../../../utils/AppContext";
 import { Icon } from "@iconify/react";
 import exit from "@iconify/icons-cil/exit-to-app";
+import locked from "@iconify/icons-cil/lock-locked";
+import unlocked from "@iconify/icons-cil/lock-unlocked";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
-import React from "react";
+import { Button as CustomButton } from "../../atoms/Buttons";
+import { FormInput } from "../../atoms/Inputs";
 
 type props = {
   image: string;
@@ -10,7 +30,31 @@ type props = {
   userName: string;
 };
 
-const UserDashboard: React.FC<props> = ({ image, imageAlt, userName }) => {
+const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { state, setState } = useAppContext();
+  const [password, setPassword] = React.useState({
+    value: "",
+    error: false,
+  });
+  const onChange = (e) => {
+    setPassword({ ...password, error: false, value: e.target.value });
+  };
+  const onUnlock = () => {
+    console.log(password.value);
+    if (Number(password.value) === state.adminPassword) {
+      setState({ ...state, admin: true });
+      closeModal();
+    }
+    setPassword({ ...password, error: true });
+  };
+  const closeModal = () => {
+    onClose();
+    setPassword({ error: false, value: "" });
+  };
+  const dropAdminMode = () => {
+    setState({ ...state, admin: false });
+  };
   return (
     <>
       <style jsx>{`
@@ -29,8 +73,9 @@ const UserDashboard: React.FC<props> = ({ image, imageAlt, userName }) => {
           {userName}
         </MenuButton>
         <MenuList>
-          <MenuItem minH="48px">
-            <span>Admin</span>
+          <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
+            <Icon icon={state.admin ? unlocked : locked} width="2em" />
+            <span className="margin-span">Admin</span>
           </MenuItem>
           <MenuItem minH="40px">
             <Icon icon={exit} width="2em" />
@@ -38,8 +83,34 @@ const UserDashboard: React.FC<props> = ({ image, imageAlt, userName }) => {
           </MenuItem>
         </MenuList>
       </Menu>
+      <Modal isOpen={isOpen} onClose={closeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Clave de Administrador </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormInput
+              errorMessage="Clave erronea"
+              placeHolder="Clave de admin"
+              id="key"
+              label="Clave:"
+              type="password"
+              variant="flushed"
+              field={{
+                onChange: onChange,
+                value: password.value,
+              }}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <CustomButton width="100%" height="2.5em" onClick={onUnlock} backgroundColor="colors.rose.600">
+              Ingresar
+            </CustomButton>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
 
-export default UserDashboard;
+export default UserDropdown;
