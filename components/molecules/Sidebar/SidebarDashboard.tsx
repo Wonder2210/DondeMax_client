@@ -13,6 +13,7 @@ import client from "@iconify/icons-cil/contact";
 import providers from "@iconify/icons-cil/group";
 import user from "@iconify/icons-cil/user";
 import mercancia from "@iconify/icons-cil/storage";
+import findInPage from "@iconify/icons-cil/find-in-page";
 import sun from "@iconify/icons-emojione/crescent-moon";
 
 type props = {
@@ -85,8 +86,8 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
           Usuarios
         </ListItemDashboard>
         {state.admin && (
-          <ListItemDashboard height="4em" icon={user} selected={verifySelected("/clientes")}>
-            Usuarios
+          <ListItemDashboard height="4em" icon={findInPage} selected={verifySelected("/clientes")}>
+            <a href="/admin/auditorias">Auditorias</a>
           </ListItemDashboard>
         )}
       </List>

@@ -10,6 +10,8 @@ import { Table } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
 import { Mercancia, Storage } from "@/organisms/Forms";
 import { CREATE_MATERIAL, DELETE_MATERIAL, GET_MERCANCIA, UPDATE_MATERIAL } from "@/utils/queries";
+import dynamic from "next/dynamic";
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 const GET_INVENTARIO = gql`
   query GetStorage {
@@ -155,13 +157,11 @@ const mercancia = () => {
         },
         {
           Header: "Tipo",
-          accessor: "material",
-          Cell: ({ value }) => String(value.type.name),
+          accessor: "material.type.name",
         },
         {
           Header: "Proveedor",
-          accessor: "provider",
-          Cell: ({ value }) => String(value.name),
+          accessor: "provider.name",
         },
         {
           Header: "Fecha de Vencimiento",
@@ -233,19 +233,27 @@ const mercancia = () => {
                 />
                 <Flex height="5em" justifyContent="space-between" alignItems="center">
                   <SubHeader>Mercancia</SubHeader>
-                  <IconButton
-                    aria-label="add-more"
-                    onClick={onOpen}
-                    backgroundColor="colors.rose.600"
-                    icon={<Icon icon={Plus} color="white" />}
-                  />
+                  <Flex width="10em" justifyContent="space-between" alignItems="center">
+                    <GeneratePDF
+                      tableId="#materials"
+                      columns={columns[0]
+                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
+                        .filter((i) => i.header !== "Acciones")}
+                    />
+                    <IconButton
+                      aria-label="add-more"
+                      onClick={onOpen}
+                      backgroundColor="colors.rose.600"
+                      icon={<Icon icon={Plus} color="white" />}
+                    />
+                  </Flex>
                 </Flex>
-                <Table columns={columns[0]} data={data.materials} />
+                <Table columns={columns[0]} id="materials" data={data.materials} />
               </>
             )}
           </TabPanel>
           <TabPanel>
-            {loading && loadingInv && !data ? (
+            {loadingInv ? (
               <h1>Loading hold on</h1>
             ) : (
               <>
@@ -261,14 +269,22 @@ const mercancia = () => {
                 />
                 <Flex height="5em" justifyContent="space-between" alignItems="center">
                   <SubHeader> Inventario </SubHeader>
-                  <IconButton
-                    aria-label="add-more"
-                    backgroundColor="colors.rose.600"
-                    onClick={onOpenStore}
-                    icon={<Icon icon={Plus} color="white" />}
-                  />
+                  <Flex width="10em" justifyContent="space-between" alignItems="center">
+                    <GeneratePDF
+                      tableId="#inventario"
+                      columns={columns[1]
+                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
+                        .filter((i) => i.header !== "Acciones")}
+                    />
+                    <IconButton
+                      aria-label="add-more"
+                      onClick={onOpen}
+                      backgroundColor="colors.rose.600"
+                      icon={<Icon icon={Plus} color="white" />}
+                    />
+                  </Flex>
                 </Flex>
-                <Table columns={columns[1]} data={inventario.storage} />
+                <Table columns={columns[1]} id="inventario" data={inventario.storage} />
               </>
             )}
           </TabPanel>

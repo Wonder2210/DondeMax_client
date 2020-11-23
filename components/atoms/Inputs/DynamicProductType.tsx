@@ -1,22 +1,36 @@
 import * as React from "react";
-import { Flex, Select, NumberInput, NumberInputField, FormLabel } from "@chakra-ui/core";
+import {
+  Flex,
+  Select,
+  NumberInput,
+  NumberInputField,
+  FormLabel,
+  Stat,
+  StatNumber,
+  NumberInputStepper,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+} from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
 import { IconButton } from "../Buttons";
 
 type props = {
-  options: Array<{ id: number; type: string }>;
+  options: Array<{ id: number; type: string; price: number }>;
   placeholder: string;
   variant?: string;
+
   focusBorderColor?: string;
-  add?: (e: { id: string; quantity: string }) => void;
+  add?: (e: { id: number; name: string; quantity: number; price: number; total: number }) => void;
 };
 
 const DynamicType: React.FC<props> = ({ options, focusBorderColor, add, placeholder, variant }) => {
   const baseState = {
     name: null,
     id: null,
-    quantity: null,
+    quantity: 1,
+    price: null,
+    total: 0,
   };
   const [state, setState] = React.useState({ ...baseState });
 
@@ -32,13 +46,21 @@ const DynamicType: React.FC<props> = ({ options, focusBorderColor, add, placehol
       </option>
     );
   });
-
-  const onChangeSelect = (e) => {
-    const { value } = e.target;
+  const currentProduct = options.find((i) => i.id === state.id);
+  const onChangeNumber = (e) =>
     setState((lstState) => ({
       ...lstState,
-      name: options.find((i) => String(i.id) == value).type,
+      quantity: e,
+      total: e * lstState.price,
+    }));
+  const onChangeSelect = (e) => {
+    const { value } = e.currentTarget;
+    setState((lstState) => ({
+      ...lstState,
+      name: options.find((i) => i.id == Number(value)).type,
       id: value,
+      price: options.find((i) => String(i.id) == value).price,
+      total: Number(options.find((i) => String(i.id) == value).price) * lstState.quantity,
     }));
   };
 
@@ -57,14 +79,23 @@ const DynamicType: React.FC<props> = ({ options, focusBorderColor, add, placehol
           {optionsRender}
         </Select>
         <NumberInput
+          maxW="3em"
+          min={1}
+          defaultValue={1}
           value={state.quantity ?? 0}
-          size="sm"
           variant={variant}
           focusBorderColor={focusBorderColor}
-          onChange={(e) => setState((lstState) => ({ ...lstState, quantity: e }))}
+          onChange={onChangeNumber}
         >
           <NumberInputField />
+          <NumberInputStepper>
+            <NumberIncrementStepper />
+            <NumberDecrementStepper />
+          </NumberInputStepper>
         </NumberInput>
+        <Stat marginX="0.5em">
+          <StatNumber>{state.total}$</StatNumber>
+        </Stat>
         <IconButton
           aria-label="add-more"
           backgroundColor="#FC913C"

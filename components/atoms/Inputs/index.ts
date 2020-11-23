@@ -5,6 +5,7 @@ import NumberInput from "./NumberInput";
 import DateInput from "./DateInput";
 import DropImage from "./DropImage";
 import DynamicInput from "./DynamicType";
+import DynamicProductType from "./DynamicProductType";
 
 
-export { TextInput, FormInput, SelectInput, NumberInput, DateInput, DropImage, DynamicInput };
+export { TextInput, FormInput, SelectInput, NumberInput, DateInput, DropImage, DynamicInput, DynamicProductType };

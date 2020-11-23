@@ -6,9 +6,11 @@ type props = {
   columns: Array<object>;
   data: Array<object>;
   width?: string;
+  ref?: React.Ref<HTMLDivElement>;
+  id?: string;
 };
 
-const Table: React.FC<props> = ({ columns, data, width }) => {
+const Table: React.FC<props> = ({ columns, data, width, ref, id = "table" }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   return (
@@ -18,7 +20,7 @@ const Table: React.FC<props> = ({ columns, data, width }) => {
       margin="1em auto"
       overflowX={{ base: "auto", sm: "auto", md: "hidden", lg: "hidden", xl: "hidden" }}
     >
-      <table {...getTableProps()} style={{ width: "100%" }}>
+      <table {...getTableProps()} style={{ width: "100%" }} id={id}>
         <thead>
           {headerGroups.map((headerGroup, index) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

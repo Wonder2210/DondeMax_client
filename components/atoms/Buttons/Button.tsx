@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   rightIcon,
   borderRadius,
   children,
-  _hover,
+  _hover = {},
 }) => {
   return (
     <Btn
@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
       borderRadius={borderRadius ?? "35px"}
       fontWeight="bold"
       fontSize={[".9rem", "1.125rem"]}
-      _hover={_hover ?? {}}
+      _hover={_hover}
       rightIcon={rightIcon}
     >
       {children}

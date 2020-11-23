@@ -23,6 +23,8 @@ type props = {
   id: string;
   form: object;
   variant: string;
+  isRequired?: boolean;
+  onChange?: (e: number | string) => void;
 };
 
 const NumberInput: React.FC<props> = ({
@@ -35,19 +37,15 @@ const NumberInput: React.FC<props> = ({
   errorMessage,
   isInvalid,
   variant,
+  isRequired,
+  onChange,
   form,
   id,
 }) => {
   return (
-    <FormControl id={id} isRequired isInvalid={isInvalid}>
+    <FormControl id={id} isRequired={isRequired} isInvalid={isInvalid}>
       <FormLabel>{label}</FormLabel>
-      <NmbrInput
-        defaultValue={defaultValue}
-        onChange={(val) => form.setFieldValue(field.name, val)}
-        min={min}
-        max={max}
-        variant={variant}
-      >
+      <NmbrInput defaultValue={defaultValue} onChange={onChange} min={min} max={max} variant={variant}>
         <NumberInputField />
         <NumberInputStepper>
           <NumberIncrementStepper />

@@ -42,7 +42,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   };
   const onUnlock = () => {
     console.log(password.value);
-    if (Number(password.value) === state.adminPassword) {
+    if (Number(password.value) === Number(state.adminPassword)) {
       setState({ ...state, admin: true });
       closeModal();
     }
@@ -74,7 +74,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
         </MenuButton>
         <MenuList>
           <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
-            <Icon icon={state.admin ? unlocked : locked} width="2em" />
+            <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
             <span className="margin-span">Admin</span>
           </MenuItem>
           <MenuItem minH="40px">

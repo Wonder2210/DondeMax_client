@@ -6,10 +6,12 @@ import { IconButton } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
-import { Table } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
 import { Provider } from "@/organisms/Forms";
 import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/utils/queries";
+import { Table } from "@/organisms/Table";
+import dynamic from "next/dynamic";
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 const initialState = {
   edit: false,
@@ -24,7 +26,8 @@ const initialState = {
 
 const proveedores = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, loading } = useQuery(GET_PROVIDERS, { pollInterval: 500 });
+  const ref = React.useRef();
+  const { data, loading } = useQuery(GET_PROVIDERS);
   const [createProvider] = useMutation(CREATE_PROVIDER, { onCompleted: onClose });
   const [deleteProvider] = useMutation(DELETE_PROVIDER);
   const [updateProvider] = useMutation(UPDATE_PROVIDER, {
@@ -100,14 +103,22 @@ const proveedores = () => {
           />
           <Flex height="5em" justifyContent="space-between" alignItems="center">
             <SubHeader>Proveedores</SubHeader>
-            <IconButton
-              aria-label="add-more"
-              onClick={onOpen}
-              backgroundColor="colors.rose.600"
-              icon={<Icon icon={Plus} color="white" />}
-            />
+
+            <Flex width="10em" justifyContent="space-between" alignItems="center">
+              <GeneratePDF
+                columns={headers
+                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
+                  .filter((i) => i.header !== "Acciones")}
+              />
+              <IconButton
+                aria-label="add-more"
+                onClick={onOpen}
+                backgroundColor="colors.rose.600"
+                icon={<Icon icon={Plus} color="white" />}
+              />
+            </Flex>
           </Flex>
-          <Table columns={headers} data={data.providers} />
+          <Table ref={ref} columns={headers} data={data.providers} />
         </>
       )}
     </Dashboard>

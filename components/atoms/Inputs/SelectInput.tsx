@@ -13,7 +13,7 @@ type props = {
   field?: {};
   isInvalid?: boolean;
   errorMessage: string;
-  options: Array<{ id: number; type: String }>;
+  options: Array<{ id: number | string; type: String }>;
 };
 const SelectInput: React.FC<props> = ({
   id,

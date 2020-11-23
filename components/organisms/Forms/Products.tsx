@@ -87,7 +87,7 @@ const Products: React.FC<props> = ({
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{isEditing ? `Editando ${values.name}` : "Agrega nuevo Proveedor"}</ModalHeader>
+        <ModalHeader>{isEditing ? `Editando ` : "Agrega nuevo Producto"}</ModalHeader>
         <ModalCloseButton />
         <Formik
           initialValues={{
