@@ -2,7 +2,7 @@ import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/core";
-import { IconButton } from "@/atoms/Buttons";
+import { IconButton, Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
@@ -67,6 +67,9 @@ const ADD_TO_STORAGE = gql`
 `;
 
 const mercancia = () => {
+  const deleteMaterial = (e) => {
+    console.log(e);
+  };
   const defaultState = {
     edit: false,
     data: {

@@ -11,7 +11,12 @@ type props = {
   backgroundColor?: string;
 };
 
-const ShoppingCart: React.FC<props> = ({ onClick, color = "black", backgroundColor, itemsCount = 0 }) => {
+const ShoppingCart: React.FC<props> = ({
+  onClick,
+  color = "black",
+  backgroundColor = "transparent",
+  itemsCount = 0,
+}) => {
   return (
     <>
       <style jsx>

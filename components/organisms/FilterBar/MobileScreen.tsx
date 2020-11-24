@@ -13,9 +13,10 @@ import {
 } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import Config from "@iconify/icons-cil/cog";
-import { IconButton, ShoppingCart, Button as CustomButton } from "../../atoms/Buttons";
+import { IconButton, Button as CustomButton } from "../../atoms/Buttons";
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
+import { CartList } from "../../molecules/CartList";
 
 const MobileScreen = ({ preservations, types }: props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,7 +57,7 @@ const MobileScreen = ({ preservations, types }: props) => {
           />
         </Flex>
         <Flex w="20%" h="100%" alignItems="center">
-          <ShoppingCart itemsCount={0} color="#fff" backgroundColor="rgba(1,1,1,0)" />
+          <CartList />
         </Flex>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>

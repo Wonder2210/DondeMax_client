@@ -65,10 +65,9 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
       <Menu>
         <MenuButton
           as={Button}
-          leftIcon={
-            <Image boxSize="2rem" borderRadius="full" src={image} alt={imageAlt} bgColor="colors.transparent" />
-          }
+          leftIcon={<Image boxSize="2rem" borderRadius="full" src={image} alt={imageAlt} bgColor="#223" />}
           rightIcon={<Icon icon={downChevron} width="1em" height="auto" />}
+          bgColor="transparent"
         >
           {userName}
         </MenuButton>

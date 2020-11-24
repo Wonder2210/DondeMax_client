@@ -1,8 +1,9 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import Cart from "@iconify/icons-cil/cart";
-import { Box, Badge } from "@chakra-ui/core";
+import { Box, Badge, Flex } from "@chakra-ui/core";
 import { IconButton } from "../../atoms/Buttons";
+import { SubHeader } from "../../atoms/Text";
 import { BasicFooter, ImageHeader } from "../../atoms/CardPieces";
 
 type props = {
@@ -13,9 +14,10 @@ type props = {
   height?: string;
   width?: string;
   isInCart: boolean;
+  onClick: (e) => void;
 };
 
-const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, isInCart }) => {
+const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, isInCart, onClick }) => {
   return (
     <Box
       rounded="35px"
@@ -46,20 +48,24 @@ const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, is
           backgroundColor="#2F4858"
           top="0"
           left="50%"
+          height="1.5em"
           zIndex={1}
+          fontSize="1.1em"
           transform="translate(-50%,-50%)"
         >
           {price}
         </Badge>
-        <p style={{ width: "40%" }}>{name}</p>
-        <IconButton
-          aria-label="cart"
-          borderColor="colors.rose.600"
-          backgroundColor={isInCart ? "colors.rose.600" : "#FFF"}
-          onClick={() => console.log("here")}
-          color="white"
-          icon={<Icon icon={Cart} color={isInCart ? "#fff" : "#E91E63"} />}
-        />
+        <Flex justify="space-between" width="80%">
+          <SubHeader>{name}</SubHeader>
+          <IconButton
+            aria-label="cart"
+            borderColor="colors.rose.600"
+            backgroundColor={isInCart ? "colors.rose.600" : "#FFF"}
+            onClick={onClick}
+            color="white"
+            icon={<Icon icon={Cart} color={isInCart ? "#fff" : "#E91E63"} />}
+          />
+        </Flex>
       </BasicFooter>
     </Box>
   );

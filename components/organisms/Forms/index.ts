@@ -5,5 +5,6 @@ import Mercancia from "./Material";
 import Storage from "./Storage";
 import Products from "./Products";
 import Order from "./Order";
+import OrderClient from "./OrderClient";
 
-export { ContactUs, Login, Provider, Mercancia, Storage, Products, Order };
+export { ContactUs, Login, Provider, Mercancia, Storage, Products, Order, OrderClient };

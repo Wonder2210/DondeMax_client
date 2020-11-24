@@ -21,6 +21,7 @@ export const GET_DATA = gql`
         id
         name
         image
+        precio
       }
     }
   }

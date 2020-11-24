@@ -134,6 +134,8 @@ const pedidos = () => {
             backgroundColor="transparent"
             color="black"
             _hover={{
+               bgColor: "rgb(0,255,100)",
+              color: "transparent",
               _after: {
                 content: '"Producir"',
                 width: "100%",

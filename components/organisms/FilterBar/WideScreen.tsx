@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "@chakra-ui/core";
-import { ShoppingCart } from "../../atoms/Buttons";
+import { CartList } from "../../molecules/CartList";
 
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
@@ -54,7 +54,7 @@ const WideScreen = ({ preservations, types }: props) => {
       </Flex>
 
       <Flex marginRight="1vw" position="relative" align="center" flexDirection="row" w="20%" justify="flex-end">
-        <ShoppingCart itemsCount={0} color="#fff" backgroundColor="rgba(1,1,1,0)" />
+        <CartList />
       </Flex>
     </Flex>
   );
