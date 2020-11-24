@@ -46,7 +46,7 @@ const RightSide = () => {
           Nuestras Tortas
         </Button>
       </Box>
-      <Box width="100%" alignItems="center" marginTop="5vh">
+      <Box width="100%" alignItems="center" marginTop="auto" marginBottom="1em">
         <CardSlider>
           <InitialCard
             alt="image of test"
@@ -63,7 +63,6 @@ const RightSide = () => {
           >
             Here we are
           </InitialCard>
-
           <InitialCard
             alt="image of test"
             href="/"
@@ -71,7 +70,6 @@ const RightSide = () => {
           >
             Here we are
           </InitialCard>
-
           <InitialCard
             alt="image of test"
             href="/"
@@ -79,7 +77,6 @@ const RightSide = () => {
           >
             Here we are
           </InitialCard>
-
           <InitialCard
             alt="image of test"
             href="/"
@@ -87,23 +84,6 @@ const RightSide = () => {
           >
             Here we are
           </InitialCard>
-
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
-          </InitialCard>
-
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
-          </InitialCard>
-
           <InitialCard
             alt="image of test"
             href="/"

@@ -4,6 +4,7 @@ import GraphqlProvider from "@/utils/GraphqlClient";
 import "react-multi-carousel/lib/styles.css";
 import theme from "../utils/theme";
 import { AppProvider } from "@/utils/AppContext";
+import "./index.css";
 
 import { ChakraProvider } from "@chakra-ui/core";
 

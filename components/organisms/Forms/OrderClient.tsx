@@ -28,7 +28,7 @@ type props = {
   onClose: () => void;
   onSubmit: (data: Object) => void;
   total: number;
-  productsList: Array<{ id: number; name: string; precio: number; uniteds: number; total: number }>;
+  productsList: Array<{ id: number; name: string; precio: number; quantity: number; total: number }>;
 };
 
 const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";

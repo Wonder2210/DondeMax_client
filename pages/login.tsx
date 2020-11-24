@@ -28,7 +28,7 @@ const login = () => {
     logClient({ variables: { ...data } });
   };
   if (data) {
-    Cookies.set("auth", data.loginUser, { expires: 1 });
+    Cookies.set("auth", data.loginUser, { expires: 12 });
     push("/admin", "/admin", { shallow: true });
   }
   if (dataClient) {

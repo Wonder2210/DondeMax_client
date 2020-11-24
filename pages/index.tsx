@@ -7,7 +7,7 @@ const index = () => {
   return (
     <>
       <Navbar />
-      <Flex>
+      <Flex position="fixed" width="100%" height="100vh">
         <LeftSide />
         <RightSide />
       </Flex>

@@ -7,6 +7,7 @@ import {
   DrawerContent,
   DrawerOverlay,
   DrawerFooter,
+  DrawerCloseButton,
   Flex,
   Stat,
   StatLabel,
@@ -15,12 +16,47 @@ import {
 import ProductCard from "./ProductCard";
 import { ShoppingCart, Button } from "../../atoms/Buttons";
 import { useAppContext } from "../../../utils/AppContext";
+import { useAuth } from "../../../utils/AuthHook";
 import { Icon } from "@iconify/react";
 import shop from "@iconify/icons-cil/cart";
 import { OrderClient } from "../../organisms/Forms";
+import { useMutation, gql } from "@apollo/client";
+import Cookie from "js-cookie";
+
+const take_order = gql`
+  mutation TakeOrderClient(
+    $client: Int!
+    $deliveryDate: String!
+    $payMethod: PayMethod!
+    $note: String!
+    $total: Float!
+    $monto: Float!
+    $orderProducts: [ProductOrderInput!]!
+  ) {
+    takeOrderClient(
+      order: {
+        client: $client
+        deliveryDate: $deliveryDate
+        payMethod: $payMethod
+        note: $note
+        deliveryStatus: true
+        stageStatus: false
+        productionStatus: false
+        abono: 0
+        total: $total
+        monto: $monto
+        orderProducts: $orderProducts
+      }
+    ) {
+      id
+    }
+  }
+`;
 
 const CartList = () => {
   const { onClose, onOpen, isOpen } = useDisclosure();
+  const { user } = useAuth();
+  const [takeOrder, { error }] = useMutation(take_order);
   const { onClose: onCloseModal, onOpen: onOpenModal, isOpen: isOpenModal } = useDisclosure();
   const { state: context, setState: setContext } = useAppContext();
   const [state, setState] = React.useState<{
@@ -34,7 +70,13 @@ const CartList = () => {
     }>;
     total: number;
   }>({ products: [], total: 0 });
-
+  const buyButton = () => {
+    if (user.role !== "CLIENT") {
+      alert("debes iniciar sesion primero");
+      return;
+    }
+    onOpenModal();
+  };
   React.useEffect(() => {
     if (state.products.length == 0 || context.productsCart.length != state.products) {
       setState({ ...state, products: [...context.productsCart.map((i) => ({ ...i, total: i.precio, quantity: 1 }))] });
@@ -57,6 +99,24 @@ const CartList = () => {
         return i;
       }),
     });
+  const onSubmit = (data) => {
+    takeOrder({
+      variables: {
+        ...data,
+        client: Number(user.id),
+        orderProducts: state.products.map((i) => ({ id: Number(i.id), quantity: Number(i.quantity) })),
+        total: state.total,
+        monto: state.total,
+      },
+    });
+    alert("pedido tomado con exito");
+    setContext((lastState) => ({ ...lastState, productsCart: [] }));
+    onClose();
+  };
+  if (error) {
+    console.log(JSON.stringify(error.networkError, null, 2));
+    console.log(error.graphQLErrors);
+  }
   const productsList = state.products.map((i) => {
     return (
       <ProductCard
@@ -78,13 +138,14 @@ const CartList = () => {
         values={{}}
         onClose={onCloseModal}
         isOpen={isOpenModal}
-        onSubmit={(data) => console.log(data)}
+        onSubmit={onSubmit}
         productsList={state.products}
         total={state.total}
       />
       <Drawer placement="right" onClose={onClose} isOpen={isOpen} size="sm">
         <DrawerOverlay>
           <DrawerContent>
+            <DrawerCloseButton />
             <DrawerHeader borderBottomWidth="1px">Compras</DrawerHeader>
             <DrawerBody>{productsList}</DrawerBody>
             <DrawerFooter>
@@ -98,7 +159,7 @@ const CartList = () => {
                   size="sm"
                   width="10em"
                   height="2.5em"
-                  onClick={onOpenModal}
+                  onClick={buyButton}
                   rightIcon={<Icon icon={shop} width="1.7em" height="auto" />}
                 >
                   comprar
