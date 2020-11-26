@@ -39,7 +39,7 @@ const take_order = gql`
         deliveryDate: $deliveryDate
         payMethod: $payMethod
         note: $note
-        deliveryStatus: true
+        deliveryStatus: false
         stageStatus: false
         productionStatus: false
         abono: 0

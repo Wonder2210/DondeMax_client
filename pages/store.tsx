@@ -56,7 +56,7 @@ const store = () => {
   };
   React.useEffect(() => {
     if (ProductsData) setState({ ...state, products: { ...ProductsData.products, onCart: false } });
-  }, [ProductsData]);
+  }, [ProductsData, context.productsCart]);
   const onChangeTypes = (e) => setState((lastState) => ({ ...lastState, types: e }));
   const toggleTypes = () => setState((lastState) => ({ ...lastState, showTypes: !lastState.showTypes }));
   const togglePreservations = () =>

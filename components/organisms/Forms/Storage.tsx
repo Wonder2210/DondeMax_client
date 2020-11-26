@@ -30,6 +30,7 @@ const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";
 
 const validationSchema = Yup.object().shape({
   uniteds: Yup.number().required(VALIDATION_MESSAGE),
+  united_weight: Yup.number().required(VALIDATION_MESSAGE),
   weight: Yup.number().required(VALIDATION_MESSAGE),
   brand: Yup.string().required(VALIDATION_MESSAGE),
   expirationDate: Yup.string().required(VALIDATION_MESSAGE),
@@ -65,6 +66,7 @@ const Storage: React.FC<props> = ({
                     label="Unidades:"
                     field={field}
                     variant="flushed"
+                    onChange={(e) => form.setFieldValue(field.name, e)}
                     errorMessage={form.errors.uniteds}
                   />
                 )}
@@ -80,6 +82,20 @@ const Storage: React.FC<props> = ({
                     placeHolder="peso en KG"
                     variant="flushed"
                     errorMessage={form.errors.weight}
+                  />
+                )}
+              </Field>
+              <Field name="united_weight">
+                {({ field, form }) => (
+                  <FormInput
+                    id="united_weight"
+                    isInvalid={form.errors.weight && form.touched.united_weight}
+                    label="Peso por unidad:"
+                    type="number"
+                    field={field}
+                    placeHolder="peso en KG"
+                    variant="flushed"
+                    errorMessage={form.errors.united_weight}
                   />
                 )}
               </Field>

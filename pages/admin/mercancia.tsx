@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
 import { Table } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
+import input from "@iconify/icons-cil/input";
 import { Mercancia, Storage } from "@/organisms/Forms";
 import { CREATE_MATERIAL, DELETE_MATERIAL, GET_MERCANCIA, UPDATE_MATERIAL } from "@/utils/queries";
 import dynamic from "next/dynamic";
@@ -21,6 +22,7 @@ const GET_INVENTARIO = gql`
       brand
       uniteds
       weight
+      united_weight
       material {
         id
         nombre
@@ -35,9 +37,31 @@ const GET_INVENTARIO = gql`
         direction
       }
     }
+    materialsStage {
+      id
+      name
+      uniteds
+      weight
+    }
     providers {
       name
       id
+    }
+    materials {
+      id
+      nombre
+      onStock {
+        uniteds
+        weight
+      }
+      type {
+        id
+        name
+      }
+    }
+    materialTypes {
+      id
+      type: name
     }
   }
 `;
@@ -50,12 +74,14 @@ const ADD_TO_STORAGE = gql`
     $expirationDate: String!
     $brand: String!
     $weight: Float!
+    $united_weight: Float!
   ) {
     addToStore(
       store: {
         materialsId: $materialId
         providerId: $providerId
         uniteds: $uniteds
+        united_weight: $united_weight
         expirationDate: $expirationDate
         brand: $brand
         weight: $weight
@@ -67,6 +93,7 @@ const ADD_TO_STORAGE = gql`
 `;
 
 const mercancia = () => {
+  const { data, loading } = useQuery(GET_INVENTARIO, { pollInterval: 500 });
   const deleteMaterial = (e) => {
     console.log(e);
   };
@@ -78,18 +105,8 @@ const mercancia = () => {
       nombre: "",
     },
   };
-  const defaultStateStorage = {
-    edit: false,
-    data: {
-      id: 0,
-      type: 0,
-      nombre: "",
-    },
-  };
 
   const [editData, setEditData] = React.useState(defaultState);
-  const [editStorage, setEditStorage] = React.useState(defaultState);
-
   const columns = React.useMemo(
     () => [
       [
@@ -176,9 +193,20 @@ const mercancia = () => {
             const month = date.getMonth();
             const year = date.getFullYear();
 
-            console.log(year);
             return day + "-" + month + "-" + year;
           },
+        },
+      ],
+      [
+        {
+          Header: "tipo",
+          accessor: "name",
+        },
+
+        {
+          Header: "Peso",
+          accessor: "weight",
+          Cell: ({ value }) => `${value}Kg`,
         },
       ],
     ],
@@ -186,9 +214,8 @@ const mercancia = () => {
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenStore, onOpen: onOpenStore, onClose: onCloseStore } = useDisclosure();
-  const { data, loading } = useQuery(GET_MERCANCIA, { pollInterval: 500 });
-  const { data: inventario, loading: loadingInv } = useQuery(GET_INVENTARIO, { pollInterval: 500 });
-  const [createMaterial] = useMutation(CREATE_MATERIAL, { onCompleted: onClose });
+
+  const [createMaterial, { error }] = useMutation(CREATE_MATERIAL, { onCompleted: onClose });
   const [addToStore] = useMutation(ADD_TO_STORAGE, { onCompleted: onCloseStore });
   const onSubmit = ({ nombre, type }) => {
     createMaterial({ variables: { nombre: nombre, type: Number(type) } });
@@ -209,15 +236,22 @@ const mercancia = () => {
         materialId: parseInt(data.materialId),
         uniteds: parseInt(data.uniteds),
         weight: parseFloat(data.weight),
+        united_weight: parseFloat(data.united_weight),
       },
     });
+
+  if (error) {
+    console.log(JSON.stringify(error.networkError, null, 2));
+    console.log(error.graphQLErrors);
+  }
 
   return (
     <Dashboard>
       <Tabs>
         <TabList>
           <Tab>Materiales</Tab>
-          <Tab>Inventario</Tab>
+          <Tab>Ingresos a inventario</Tab>
+          <Tab>Materiales disponible</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -256,7 +290,7 @@ const mercancia = () => {
             )}
           </TabPanel>
           <TabPanel>
-            {loadingInv ? (
+            {loading ? (
               <h1>Loading hold on</h1>
             ) : (
               <>
@@ -267,7 +301,7 @@ const mercancia = () => {
                   onClose={onCloseStore}
                   isOpen={isOpenStore}
                   onSubmit={submitStore}
-                  providersList={inventario.providers.map((i) => ({ id: i.id, type: i.name }))}
+                  providersList={data.providers.map((i) => ({ id: i.id, type: i.name }))}
                   materialList={data.materials.map((i) => ({ id: i.id, type: i.nombre }))}
                 />
                 <Flex height="5em" justifyContent="space-between" alignItems="center">
@@ -281,13 +315,33 @@ const mercancia = () => {
                     />
                     <IconButton
                       aria-label="add-more"
-                      onClick={onOpen}
+                      onClick={onOpenStore}
                       backgroundColor="colors.rose.600"
                       icon={<Icon icon={Plus} color="white" />}
                     />
                   </Flex>
                 </Flex>
-                <Table columns={columns[1]} id="inventario" data={inventario.storage} />
+                <Table columns={columns[1]} id="inventario" data={data.storage} />
+              </>
+            )}
+          </TabPanel>
+          <TabPanel>
+            {loading ? (
+              <h1>Loading hold on</h1>
+            ) : (
+              <>
+                <Flex height="5em" justifyContent="space-between" alignItems="center">
+                  <SubHeader> Materia disponible </SubHeader>
+                  <Flex width="10em" justifyContent="space-between" alignItems="center">
+                    <GeneratePDF
+                      tableId="#disponible"
+                      columns={columns[2]
+                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
+                        .filter((i) => i.header !== "Acciones")}
+                    />
+                  </Flex>
+                </Flex>
+                <Table columns={columns[2]} id="inventario" data={data.materialsStage} />
               </>
             )}
           </TabPanel>

@@ -1,7 +1,17 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Badge, useDisclosure } from "@chakra-ui/core";
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Flex,
+  Badge,
+  useDisclosure,
+  createStandaloneToast,
+} from "@chakra-ui/core";
 import { SubHeader } from "@/atoms/Text";
 import { Table } from "@/organisms/Table";
 import { IconButton, Button } from "@/atoms/Buttons";
@@ -21,6 +31,13 @@ const GET_DATA = gql`
       id
       type: name
       price: precio
+    }
+
+    materialsStage {
+      id
+      name
+      uniteds
+      weight
     }
     orders {
       id
@@ -44,6 +61,11 @@ const GET_DATA = gql`
         quantity
         product {
           name
+        }
+        materials {
+          id
+          material_name
+          quantity
         }
       }
     }
@@ -80,8 +102,79 @@ const takeOrder = gql`
     }
   }
 `;
+
+const updateOrder = gql`
+  mutation update($id: Int!, $status: UpdateOrder!) {
+    updatStateOrder(id: $id, state: $status) {
+      id
+    }
+  }
+`;
 const pedidos = () => {
+  const defaultState = { order_id: null, orderMaterials: null, materials: null };
+  const toast = createStandaloneToast();
   const { data, loading } = useQuery(GET_DATA, { pollInterval: 500 });
+  const [executeOrder, { error: execute }] = useMutation(updateOrder);
+
+  // const [state, setState] = React.useState<{
+  //   order_id?: number;
+  //   orderMaterials?: Array<any>;
+  //   materials?: Array<any>;
+  // }>(defaultState);
+  // React.useEffect(() => {
+  //   if (data) {
+  //     const materials = data.materialsStage;
+  //     setState({ ...state, materials });
+  //   }
+  // }, [data]);
+  // React.useEffect(() => {
+  //   if (data && state.order_id) {
+  //     const products = data.orders.find((i) => i.id == state.order_id).products;
+  //     const materials = products.map((i) => i.materials).flat();
+  //     const list = state.materials.map((item) => {
+  //       const same = materials.filter((i) => i.id == item.id);
+  //       const result = same.reduce(
+  //         (prev, actual) => {
+  //           return {
+  //             ...actual,
+  //             quantity: actual.quantity + prev.quantity,
+  //           };
+  //         },
+  //         { quantity: 0 },
+  //       );
+  //       return result;
+  //     });
+
+  //     setState((last) => ({ ...last, orderMaterials: list }));
+  //   }
+  // }, [state.order_id]);
+
+  // React.useEffect(() => {
+  //   if (state.orderMaterials) {
+  //     let errors = [];
+  //     const data = state.materials.map((i) => {
+  //       const materialProduct = state.orderMaterials.find((item) => i.material_id == item.material_id);
+  //       if (i.weight < materialProduct.quantity) {
+  //         errors.concat(`Hacen falta ${materialProduct.weight - i.quantity}Kg de ${i.material_name}`);
+  //         return false;
+  //       }
+  //       return {
+  //         ...i,
+  //         weight: Number(i.weight) - Number(materialProduct.quantity),
+  //       };
+  //     });
+  //     if (errors.length > 0) {
+  //       console.log(data);
+  //       console.log(errors);
+
+  //       errors = [];
+  //       alert("ups no hay mercancia suficiente");
+  //       return () => {};
+  //     }
+  //     console.log(data);
+  //   }
+  // }, [state.orderMaterials]);
+
   const [takeOrderMutate, { error }] = useMutation(takeOrder);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const onSubmit = (data) => {
@@ -93,9 +186,9 @@ const pedidos = () => {
       },
     });
   };
-  if (error) {
-    console.log(JSON.stringify(error.networkError, null, 2));
-    console.log(error.graphQLErrors);
+  if (execute) {
+    console.log(JSON.stringify(execute.networkError, null, 2));
+    console.log(execute.graphQLErrors);
   }
   const columns = React.useMemo(
     () => [
@@ -119,36 +212,113 @@ const pedidos = () => {
       {
         Header: "Entregado",
         accessor: "delivery_status",
-        Cell: ({ value }) => (value ? "Listo" : "Todavia"),
+        Cell: ({
+          value,
+          row: {
+            original: { id },
+          },
+        }) => (
+          <Button
+            width="6em"
+            backgroundColor="transparent"
+            color="black"
+            _hover={{
+              bgColor: "black",
+              color: "black",
+              _after: {
+                content: '"Entregar"',
+                width: "100%",
+                position: "absolute",
+                zIndex: 1,
+                color: "white",
+                bgColor: "black",
+              },
+            }}
+            onClick={() => {
+              executeOrder({
+                variables: {
+                  id: id,
+                  status: {
+                    delivery_status: true,
+                  },
+                },
+              });
+              return;
+            }}
+          >
+            {value ? "listo" : "Todavia"}
+          </Button>
+        ),
       },
       {
         Header: "Listo para entregar",
         accessor: "stage_status",
-        Cell: ({ value }) => (value ? "Listo" : "Todavia"),
+        Cell: ({ value, row }) => (
+          <Button
+            width="6em"
+            backgroundColor="transparent"
+            color="black"
+            _hover={{
+              bgColor: "black",
+              color: "black",
+              _after: {
+                content: '"Listo"',
+                width: "100%",
+                position: "absolute",
+                zIndex: 1,
+                color: "white",
+                bgColor: "black",
+              },
+            }}
+            onClick={() => {
+              executeOrder({
+                variables: {
+                  id: row.original.id,
+                  status: {
+                    stage_status: true,
+                  },
+                },
+              });
+              return;
+            }}
+          >
+            {value ? "listo" : "Aun no"}
+          </Button>
+        ),
       },
       {
         Header: "Producido",
         accessor: "production_status",
-        Cell: ({ value }) => (
+        Cell: ({ value, row }) => (
           <Button
+            width="6em"
             backgroundColor="transparent"
             color="black"
             _hover={{
-               bgColor: "rgb(0,255,100)",
-              color: "transparent",
+              bgColor: "black",
+              color: "black",
               _after: {
                 content: '"Producir"',
                 width: "100%",
                 position: "absolute",
                 zIndex: 1,
-                color: "black",
-                bgColor: "rgb(0,255,100)",
+                color: "white",
+                bgColor: "black",
               },
-              bgColor: "rgb(0,255,100)",
-              color: "transparent",
+            }}
+            onClick={() => {
+              executeOrder({
+                variables: {
+                  id: row.original.id,
+                  status: {
+                    production_status: true,
+                  },
+                },
+              });
+              return;
             }}
           >
-            Aun no
+            {value ? "listo" : "Aun no"}
           </Button>
         ),
       },
