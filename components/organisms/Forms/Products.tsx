@@ -21,7 +21,9 @@ import { FormInput, DropImage, DynamicInput, SelectInput } from "@/atoms/Inputs"
 import { Table } from "../Table";
 
 type props = {
-  values: {};
+  values: {
+    materials?: array;
+  };
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: Object) => void;
@@ -40,6 +42,7 @@ const validationSchema = Yup.object().shape({
       .shape({
         id: Yup.number().required(),
         quantity: Yup.number().required(),
+        name: Yup.string(),
       })
       .required(),
   ),
@@ -60,6 +63,20 @@ const Products: React.FC<props> = ({
   };
   const [state, setState] = React.useState(defaultState);
 
+  React.useEffect(() => {
+    if (isEditing) {
+      setState({
+        data: state.data.filter((i) => {
+          let val = values.materials.find((item) => Number(item.id) == Number(i.id));
+          console.log(val);
+          if (val) {
+            return false;
+          }
+          return true;
+        }),
+      });
+    }
+  }, [isEditing]);
   const AddToList = (set, value, last) => {
     setState((lastState) => ({
       data: lastState.data.filter((i) => Number(i.id) !== Number(value.id)),
@@ -90,9 +107,7 @@ const Products: React.FC<props> = ({
         <ModalHeader>{isEditing ? `Editando ` : "Agrega nuevo Producto"}</ModalHeader>
         <ModalCloseButton />
         <Formik
-          initialValues={{
-            materials: [],
-          }}
+          initialValues={values}
           validationSchema={validationSchema}
           onSubmit={(data) => {
             setState({ ...defaultState });

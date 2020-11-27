@@ -80,13 +80,13 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
           <a href="/admin/mercancia">Mercancia</a>
         </ListItemDashboard>
         <ListItemDashboard icon={client} selected={verifySelected("/clientes")} height="4em">
-          Clientes
+          <a href="/admin/clientes">Clientes</a>
         </ListItemDashboard>
-        <ListItemDashboard height="4em" icon={user} selected={verifySelected("/clientes")}>
-          Usuarios
+        <ListItemDashboard height="4em" icon={user} selected={verifySelected("/usuarios")}>
+          <a href="/admin/usuarios">Usuarios</a>
         </ListItemDashboard>
         {state.admin && (
-          <ListItemDashboard height="4em" icon={findInPage} selected={verifySelected("/clientes")}>
+          <ListItemDashboard height="4em" icon={findInPage} selected={verifySelected("/auditorias")}>
             <a href="/admin/auditorias">Auditorias</a>
           </ListItemDashboard>
         )}

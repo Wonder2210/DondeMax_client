@@ -7,7 +7,7 @@ import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
-import { Provider } from "@/organisms/Forms";
+import { CreateClient as Client } from "@/organisms/Forms";
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
@@ -24,9 +24,77 @@ const GET_CLIENTS = gql`
   }
 `;
 
+const CREATE_CLIENT = gql`
+  mutation CreateClient($nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
+    createClient(client: { name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
+      id
+      name
+    }
+  }
+`;
+
+const UPDATE_CLIENT = gql`
+  mutation updateClient($id: Int!, $nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
+    editClient(client: { id: $id, name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
+      id
+      name
+    }
+  }
+`;
+
+const DELETE_CLIENT = gql`
+  mutation DeleteClient($id: Int!) {
+    deleteClient(id: $id)
+  }
+`;
+
 function clientes() {
-  const { data, loading, error } = useQuery(GET_CLIENTS, { pollInterval: 500 });
+  const defaultState = {
+    edit: false,
+    data: {
+      id: null,
+      name: "",
+      nationality: "",
+      cedula: "",
+
+      phone: "",
+    },
+  };
+  const [state, setState] = React.useState<{
+    edit: boolean;
+    data: {
+      id?: number;
+      name?: string;
+      nationality?: string;
+      cedula?: string;
+
+      phone?: string;
+    };
+  }>(defaultState);
+  const { data, loading } = useQuery(GET_CLIENTS, { pollInterval: 500 });
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [createClient] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
+  const [updateClient] = useMutation(UPDATE_CLIENT, { onCompleted: onClose });
+  const [deleteClient] = useMutation(DELETE_CLIENT, { onCompleted: onClose });
+
+  const setEdit = (data) => {
+    setState({ edit: true, data: { ...data } });
+    onOpen();
+  };
+  const onDelete = (id) => {
+    deleteClient({ variables: { id: parseInt(id) } });
+  };
+  const onUpdateClient = (data) => {
+    updateClient({ variables: { id: state.data.id, ...data } });
+  };
+  const onSubmit = (data) => {
+    createClient({ variables: { ...data } });
+    setState({ ...defaultState });
+  };
+  const closeModal = () => {
+    setState({ ...defaultState });
+    onClose();
+  };
   const headers = React.useMemo(
     () => [
       {
@@ -49,6 +117,17 @@ function clientes() {
         Header: "Telefono",
         accessor: "phone",
       },
+      {
+        Header: "Acciones",
+        Cell: ({ row }) => (
+          <TableActions
+            onDelete={() => onDelete(row.original.id)}
+            onUpdate={() => {
+              setEdit(row.original);
+            }}
+          />
+        ),
+      },
     ],
     [],
   );
@@ -58,6 +137,14 @@ function clientes() {
         "Cargando"
       ) : (
         <>
+          <Client
+            isEditing={state.edit}
+            isOpen={isOpen}
+            onClose={closeModal}
+            onSubmit={onSubmit}
+            onEdit={onUpdateClient}
+            values={{ ...state.data }}
+          />
           <Flex height="5em" justifyContent="space-between" alignItems="center">
             <SubHeader>Proveedores</SubHeader>
 

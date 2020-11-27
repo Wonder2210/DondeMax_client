@@ -23,6 +23,9 @@ import unlocked from "@iconify/icons-cil/lock-unlocked";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
 import { Button as CustomButton } from "../../atoms/Buttons";
 import { FormInput } from "../../atoms/Inputs";
+import { useAuth } from "../../../utils/AuthHook";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 type props = {
   image: string;
@@ -31,8 +34,10 @@ type props = {
 };
 
 const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { state, setState } = useAppContext();
+  const { user } = useAuth();
   const [password, setPassword] = React.useState({
     value: "",
     error: false,
@@ -55,6 +60,10 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   const dropAdminMode = () => {
     setState({ ...state, admin: false });
   };
+  const CloseSession = () => {
+    Cookies.remove("auth");
+    router.push("/");
+  };
   return (
     <>
       <style jsx>{`
@@ -62,26 +71,48 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
           margin-left: 1.5em;
         }
       `}</style>
-      <Menu>
-        <MenuButton
-          as={Button}
-          leftIcon={<Image boxSize="2rem" borderRadius="full" src={image} alt={imageAlt} bgColor="#223" />}
-          rightIcon={<Icon icon={downChevron} width="1em" height="auto" />}
-          bgColor="transparent"
+
+      {user ? (
+        <Menu>
+          <MenuButton
+            as={Button}
+            leftIcon={
+              <Image
+                boxSize="2rem"
+                borderRadius="full"
+                src={`https://ui-avatars.com/api/?background=random&name=${user.name}`}
+                alt={imageAlt}
+                bgColor="#223"
+              />
+            }
+            rightIcon={<Icon icon={downChevron} width="1em" height="auto" />}
+            bgColor="transparent"
+          >
+            {user.name}
+          </MenuButton>
+          <MenuList>
+            <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
+              <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
+              <span className="margin-span">Admin</span>
+            </MenuItem>
+            <MenuItem minH="40px" onClick={CloseSession}>
+              <Icon icon={exit} width="2em" />
+              <span className="margin-span">Salir</span>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      ) : (
+        <CustomButton
+          color="black"
+          onClick={() => router.push("/login")}
+          width="5em"
+          height="2.5em"
+          backgroundColor="transparent"
         >
-          {userName}
-        </MenuButton>
-        <MenuList>
-          <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
-            <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
-            <span className="margin-span">Admin</span>
-          </MenuItem>
-          <MenuItem minH="40px">
-            <Icon icon={exit} width="2em" />
-            <span className="margin-span">Salir</span>
-          </MenuItem>
-        </MenuList>
-      </Menu>
+          Ingresar
+        </CustomButton>
+      )}
+
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
         <ModalContent>

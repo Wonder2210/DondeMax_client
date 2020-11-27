@@ -12,7 +12,7 @@ type props = {
 
 const DropImage = ({ onChange, image }) => {
   const [state, setState] = React.useState({
-    image: null,
+    image: image,
   });
 
   const onDrop = React.useCallback((acceptedFiles) => {

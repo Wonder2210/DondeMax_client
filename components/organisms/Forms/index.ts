@@ -7,5 +7,7 @@ import Products from "./Products";
 import Order from "./Order";
 import Discount from "./Discount";
 import OrderClient from "./OrderClient";
+import CreateUser from "./CreateUser"
+import CreateClient from "./CreateClient"
 
-export { ContactUs, Login, Provider, Mercancia, Storage, Products, Order, OrderClient,Discount };
+export { ContactUs, Login, Provider, Mercancia, Storage, Products, Order, OrderClient,Discount, CreateClient, CreateUser };

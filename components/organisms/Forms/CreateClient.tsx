@@ -22,24 +22,23 @@ type props = {
   onSubmit: (data: Object) => void;
   onEdit: (data: Object) => void;
   isEditing: Boolean;
-  typeList: Array<{ id: number; type: string }>;
 };
 
 const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";
 
 const validationSchema = Yup.object().shape({
-  nombre: Yup.string().required(VALIDATION_MESSAGE),
+  name: Yup.string().required(VALIDATION_MESSAGE),
   cedula: Yup.string().required(VALIDATION_MESSAGE),
-  nacionalidad: Yup.string().required(VALIDATION_MESSAGE),
-  telefono: Yup.string().required(VALIDATION_MESSAGE),
+  nationality: Yup.string().required(VALIDATION_MESSAGE),
+  phone: Yup.string().required(VALIDATION_MESSAGE),
 });
 
-const Material: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing, onEdit, typeList }) => {
+const CreateClient: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing, onEdit }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{isEditing ? `Editando ${values.nombre}` : "Agrega nuevo Material"}</ModalHeader>
+        <ModalHeader>{isEditing ? `Editando cliente` : "Agrega nuevo CreateClient"}</ModalHeader>
         <ModalCloseButton />
         <Formik
           initialValues={values}
@@ -48,7 +47,7 @@ const Material: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditin
         >
           <Form>
             <ModalBody>
-              <Field name="nombre">
+              <Field name="name">
                 {({ field, form }) => (
                   <FormInput
                     id="nombre"
@@ -65,42 +64,42 @@ const Material: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditin
               <Field name="cedula">
                 {({ field, form }) => (
                   <FormInput
-                    id="nombre"
-                    isInvalid={form.errors.name && form.touched.name}
-                    label="Nombre:"
+                    id="cedula"
+                    isInvalid={form.errors.cedula && form.touched.cedula}
+                    label="Cedula:"
                     type="text"
                     field={field}
-                    placeHolder="nombre"
+                    placeHolder="cedula"
                     variant="flushed"
-                    errorMessage={form.errors.name}
+                    errorMessage={form.errors.cedula}
                   />
                 )}
               </Field>
-              <Field name="telefono">
+              <Field name="phone">
                 {({ field, form }) => (
                   <FormInput
-                    id="nombre"
-                    isInvalid={form.errors.name && form.touched.name}
-                    label="Nombre:"
+                    id="phone"
+                    isInvalid={form.errors.phone && form.touched.phone}
+                    label="Telefono:"
                     type="text"
                     field={field}
-                    placeHolder="nombre"
+                    placeHolder="Telefono"
                     variant="flushed"
-                    errorMessage={form.errors.name}
+                    errorMessage={form.errors.phone}
                   />
                 )}
               </Field>
-              <Field name="nacionalidad">
+              <Field name="nationality">
                 {({ field, form }) => (
                   <FormInput
-                    id="nombre"
-                    isInvalid={form.errors.name && form.touched.name}
-                    label="Nombre:"
+                    id="nationality"
+                    isInvalid={form.errors.nationality && form.touched.nationality}
+                    label="Nacionalidad:"
                     type="text"
                     field={field}
-                    placeHolder="nombre"
+                    placeHolder="nacionalidad ej Venezolano , colombiano"
                     variant="flushed"
-                    errorMessage={form.errors.name}
+                    errorMessage={form.errors.nationality}
                   />
                 )}
               </Field>
@@ -121,4 +120,4 @@ const Material: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditin
   );
 };
 
-export default Material;
+export default CreateClient;
