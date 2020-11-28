@@ -134,6 +134,7 @@ const productos = () => {
     };
     update({ variables: { ...data } });
     setState({ ...defaultState });
+    onClose();
   };
 
   const setUpdate = ({ id, name, price, image, type, info, materials }) => {
