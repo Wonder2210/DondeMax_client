@@ -8,6 +8,7 @@ import ProductCard from "@/components/organisms/Cards/ProductCardShop";
 import { Header } from "@/atoms/Text";
 import { useAppContext } from "@/utils/AppContext";
 import { GET_TYPES, GET_DATA } from "../utils/queries";
+import  Head from "next/head";
 
 type state = {
   types: string;
@@ -114,6 +115,9 @@ const store = () => {
 
   return (
     <Standard>
+        <Head>
+            <title>Pedidos</title>
+            </Head>
       <Flex
         justify="center"
         align="center"

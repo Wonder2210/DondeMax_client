@@ -8,6 +8,7 @@ import Plus from "@iconify/icons-cil/plus";
 import { ProductCardAdmin as Product } from "@/organisms/Cards";
 import { Dashboard } from "@/layouts/Dashboard";
 import { Products } from "@/organisms/Forms";
+import Head from "next/head";
 
 const GET = gql`
   query GetProducts {
@@ -147,6 +148,9 @@ const productos = () => {
 
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Productos</title>
+            </Head>
       {loading ? (
         <h1>Wait bro</h1>
       ) : (

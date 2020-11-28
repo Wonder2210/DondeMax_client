@@ -8,6 +8,7 @@ import { Button } from "@/atoms/Buttons";
 import { Icon } from "@iconify/react";
 import sign from "@iconify/icons-cil/group";
 import { CreateClient as Client } from "@/organisms/Forms";
+import  Head from "next/head";
 
 const loginUserQuery = gql`
   mutation LoginUser($email: String!, $password: String!) {
@@ -49,6 +50,10 @@ const login = () => {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);
   }
+  if (errorClient) {
+    console.log(JSON.stringify(errorClient.networkError, null, 2));
+    console.log(errorClient.graphQLErrors);
+  }
   if (data) {
     Cookies.set("auth", data.loginUser, { expires: 12 });
     push("/admin", "/admin", { shallow: true });
@@ -65,6 +70,9 @@ const login = () => {
   }
   return (
     <Flex width="100%" height="100vh">
+           <Head>
+            <title>Inicia sesion</title>
+            </Head>
       <Client
         isEditing={false}
         isOpen={isOpen}
@@ -93,7 +101,7 @@ const login = () => {
           </Button>
         </Box>
         <Login onSubmit={onSubmit} onSubmitClient={onSubmitClient} />
-        {error ? "Mal login bro" : ""}
+        {error || errorClient ? "Cedula incorrecta" : ""}
       </Flex>
     </Flex>
   );

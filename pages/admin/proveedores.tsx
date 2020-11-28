@@ -12,6 +12,7 @@ import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
+import Head from "next/head";
 
 const initialState = {
   edit: false,
@@ -89,6 +90,9 @@ const proveedores = () => {
   };
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Proveedores</title>
+            </Head>
       {loading ? (
         <h1>Here</h1>
       ) : (

@@ -5,7 +5,7 @@ import { Footer } from "../../organisms/Footer";
 
 const Standard = ({ children }) => {
   return (
-    <Box w="100%" h="100vh">
+    <Box w="100%" h="100vh" overflowY="auto" position="fixed">
       <Navbar />
       {children}
       <Footer />

@@ -3,10 +3,14 @@ import { Flex, Box } from "@chakra-ui/core";
 import { Header, Parragraph } from "@/atoms/Text";
 import { Standard } from "@/layouts/Standard";
 import { ContactUs } from "@/organisms/Forms";
+import Head from "next/head";
 
 const Info = () => {
   return (
     <Standard>
+         <Head>
+            <title>Acerca de nosotros</title>
+            </Head>
       <Flex
         justify="center"
         width="100%"
@@ -77,7 +81,9 @@ const Info = () => {
         </Flex>
       </Flex>
       <Flex direction={{ sm: "column", md: "column", lg: "row", xl: "row" }}>
-        <Flex width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} minHeight="70vh" align="center" justify="center">
+        <Flex width={{ base:"0%", sm: "0%", md: "100%", lg: "50%", xl: "50%" }}
+        left={{ base:"-100%", sm: "-100%", md: "0", lg: "0", xl: "0" }}
+        position={{ base:"absolute", sm: "absolute", md: "relative", lg: "relative", xl: "relative" }}  minHeight="70vh" align="center" justify="center">
           <ContactUs />
         </Flex>
         <Flex

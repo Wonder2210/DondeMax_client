@@ -6,6 +6,7 @@ import { Header } from "@/atoms/Text";
 import { Products } from "@/organisms/CardsContainer";
 import { GET_BASE_PRODUCTS } from "../utils/queries";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 type state = {
   types: string;
@@ -30,6 +31,9 @@ const products = () => {
 
   return (
     <Standard>
+         <Head>
+            <title>Donde Max - productos</title>
+            </Head>
       <Flex
         justify="center"
         width="100%"

@@ -9,7 +9,7 @@ import { SubHeader } from "@/atoms/Text";
 const LeftSide = () => {
   return (
     <Box
-      bg="rgb(255,0,0)"
+      bg="#FDE7DC"
       width="100%"
       h="100vh"
       backgroundImage="url('/images/cake-roses-stand.jpg')"

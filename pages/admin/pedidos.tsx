@@ -21,6 +21,7 @@ import trash from "@iconify/icons-cil/trash";
 import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
+import Head from "next/head";
 
 const GET_DATA = gql`
   query GetOrders {
@@ -387,6 +388,9 @@ const pedidos = () => {
   );
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Pedidos</title>
+            </Head>
       <Tabs>
         <TabList>
           <Tab>Pedidos Activos</Tab>

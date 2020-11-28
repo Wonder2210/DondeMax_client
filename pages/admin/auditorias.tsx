@@ -6,6 +6,7 @@ import { Table } from "@/organisms/Table";
 import { Dashboard } from "@/layouts/Dashboard";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
+import Head from "next/head";
 
 const GET_DATA = gql`
   query Logs {
@@ -180,6 +181,9 @@ function clientes() {
   }
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Auditorias</title>
+            </Head>
       <Tabs>
         <TabList>
           <Tab>Pedidos</Tab>

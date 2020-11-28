@@ -40,14 +40,7 @@ const NavbarClient: React.FC = () => {
       <Parragraph width="13em" height="min-content">
         {loading ? "Cargando ..." : JSON.parse(data.sessionUser).name}
       </Parragraph>
-      <a href="/" onClick={() => router.push("/")}>
-        Inicio
-      </a>
-      <span></span>
-      <span></span>
-      <a href="#" style={{ marginLeft: "1em" }} onClick={() => router.push("/store")}>
-        Pedidos
-      </a>
+      
       <Flex flexGrow={1} align="center" justify="flex-end" justifySelf="flex-end" bgColor="#FFF">
         <Parragraph width="13em" height="min-content">
           {hour < 12 ? hour : hour - 12}&#58;{minutes < 10 ? `0${minutes}` : minutes} {hour >= 12 ? "PM" : "AM"}

@@ -11,6 +11,7 @@ import { CreateClient as Client } from "@/organisms/Forms";
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
+import Head from "next/head";
 
 const GET_CLIENTS = gql`
   query GetClients {
@@ -137,6 +138,9 @@ function clientes() {
   );
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Clientes</title>
+            </Head>
       {loading ? (
         "Cargando"
       ) : (

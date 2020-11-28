@@ -38,15 +38,7 @@ const Footer = () => {
             </a>
           </Link>
         </ListItem>
-        <ListItem marginLeft={3}>
-          <Link href="/" passHref>
-            <a>
-              <StyleLink _hover={{ color: "rose.600", transform: "scale(1.1)" }} color="white" fontSize="xl2">
-                Noticias
-              </StyleLink>
-            </a>
-          </Link>
-        </ListItem>
+       
         <ListItem marginLeft={3}>
           <Link href="/" passHref>
             <a>

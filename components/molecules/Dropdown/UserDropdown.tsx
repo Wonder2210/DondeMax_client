@@ -19,6 +19,8 @@ import { useAppContext } from "../../../utils/AppContext";
 import { Icon } from "@iconify/react";
 import exit from "@iconify/icons-cil/exit-to-app";
 import locked from "@iconify/icons-cil/lock-locked";
+import home from "@iconify/icons-cil/home";
+import list from "@iconify/icons-cil/list";
 import unlocked from "@iconify/icons-cil/lock-unlocked";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
 import { Button as CustomButton } from "../../atoms/Buttons";
@@ -96,6 +98,18 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
                 <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
                 <span className="margin-span">Admin</span>
               </MenuItem>
+            )}
+            {user.role == "CLIENT" && (
+             <>
+              <MenuItem minH="48px" onClick={()=> router.push("/")}>
+                <Icon icon={home} width="2em" />
+                <span className="margin-span">Inicio</span>
+              </MenuItem>
+              <MenuItem minH="48px" onClick={()=> router.push("/client")}>
+                <Icon icon={list} width="2em" />
+                <span className="margin-span">Pedidos</span>
+              </MenuItem>
+             </>
             )}
             <MenuItem minH="40px" onClick={CloseSession}>
               <Icon icon={exit} width="2em" />

@@ -14,7 +14,7 @@ import { Mercancia, Storage } from "@/organisms/Forms";
 import { CREATE_MATERIAL, DELETE_MATERIAL, GET_MERCANCIA, UPDATE_MATERIAL } from "@/utils/queries";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
-
+import Head from "next/head";
 const GET_INVENTARIO = gql`
   query GetStorage {
     storage {
@@ -248,6 +248,9 @@ const mercancia = () => {
 
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Mercancia</title>
+            </Head>
       <Tabs>
         <TabList>
           <Tab>Materiales</Tab>

@@ -12,7 +12,7 @@ import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 import { useAuth } from "@/utils/AuthHook";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
-
+import Head from "next/head";
 const GET_USERS = gql`
   query GetUsers {
     users {
@@ -128,6 +128,9 @@ function usuarios() {
   );
   return (
     <Dashboard>
+         <Head>
+            <title>Admin - Usuarios</title>
+            </Head>
       {loading ? (
         "Cargando"
       ) : (
