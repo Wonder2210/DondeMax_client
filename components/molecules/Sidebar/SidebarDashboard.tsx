@@ -12,7 +12,7 @@ import cake from "@iconify/icons-cil/birthday-cake";
 import closeIcon from "@iconify/icons-cil/x";
 import client from "@iconify/icons-cil/contact";
 import providers from "@iconify/icons-cil/group";
-import user from "@iconify/icons-cil/user";
+import userIcon from "@iconify/icons-cil/user";
 import mercancia from "@iconify/icons-cil/storage";
 import findInPage from "@iconify/icons-cil/find-in-page";
 import sun from "@iconify/icons-emojione/crescent-moon";
@@ -84,7 +84,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
         <ListItemDashboard icon={client} selected={verifySelected("/clientes")} height="4em">
           <a href="/admin/clientes">Clientes</a>
         </ListItemDashboard>
-        <ListItemDashboard height="4em" icon={user} selected={verifySelected("/usuarios")}>
+        <ListItemDashboard height="4em" icon={userIcon} selected={verifySelected("/usuarios")}>
           <a href="/admin/usuarios">Usuarios</a>
         </ListItemDashboard>
         {(state.admin && user.role=="ADMINISTRADOR") && (
