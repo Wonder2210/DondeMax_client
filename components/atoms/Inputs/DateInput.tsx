@@ -9,7 +9,7 @@ type props = {
   id: string;
   helper?: string;
   label: string;
-  field?: object;
+  field?: {name:string};
   form?: {
     setFieldValue: (e: string, ee: string) => void;
   };

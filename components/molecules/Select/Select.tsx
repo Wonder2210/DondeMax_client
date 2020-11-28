@@ -44,7 +44,7 @@ const SelectCustom: React.FC<{
         />
       </Box>
       <Box position="relative" left="0" width="86%">
-        <Menu isOpen={show} width="100%">
+        <Menu isOpen={show} >
           <MenuButton display="none" />
           <MenuList
             borderWidth="0.75px"
@@ -54,7 +54,7 @@ const SelectCustom: React.FC<{
             roundedBottom="35px"
             borderTop="0"
           >
-            <MenuOptionGroup type="radio" onChange={onChange}>
+            <MenuOptionGroup type="radio">
               {children}
             </MenuOptionGroup>
           </MenuList>

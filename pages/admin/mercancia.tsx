@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation, gql } from "@apollo/client";

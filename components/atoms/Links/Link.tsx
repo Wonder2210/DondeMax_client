@@ -13,7 +13,7 @@ const Links: React.FC<LinkProps> = React.forwardRef(
         textDecoration="none"
         fontSize={fontSize}
         mx={mx}
-        ref={ref}
+        
         _hover={_hover}
       >
         {children}

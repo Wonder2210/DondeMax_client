@@ -6,7 +6,7 @@ type props = {
   height?: string;
   color?: string;
   fontSize?: { sm: string; md: string; lg: string; xl: string } | string;
-  textAlign?: "center" | "left" | ResponsiveValue<Object>;
+  textAlign?: any;
 };
 
 const Parragraph: React.FC<props> = ({

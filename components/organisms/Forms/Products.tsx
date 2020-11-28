@@ -22,7 +22,9 @@ import { Table } from "../Table";
 
 type props = {
   values: {
-    materials?: array;
+    materials?: Array<{
+        id:number| string;
+    }>;
   };
   isOpen: boolean;
   onClose: () => void;
