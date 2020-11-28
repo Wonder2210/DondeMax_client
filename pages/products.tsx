@@ -5,6 +5,7 @@ import { Standard } from "@/layouts/Standard";
 import { Header } from "@/atoms/Text";
 import { Products } from "@/organisms/CardsContainer";
 import { GET_BASE_PRODUCTS } from "../utils/queries";
+import { useRouter } from "next/router";
 
 type state = {
   types: string;
@@ -15,6 +16,7 @@ type state = {
 };
 
 const products = () => {
+  const router = useRouter();
   const [state, setState] = React.useState<state>({
     types: "",
     preservations: "",
@@ -26,9 +28,6 @@ const products = () => {
     variables: { preservation: state.preservations, type: state.types, cursor: state.page - 1 },
   });
 
-  if (loading) {
-    return "loading bro";
-  }
   return (
     <Standard>
       <Flex
@@ -44,16 +43,34 @@ const products = () => {
         <br />
         <Header color="#E91E63">Productos</Header>
       </Flex>
-      <Tabs margin="1em auto" width={{ base: "80%", sm: "100%", md: "75%", lg: "70%" }}>
+      <Tabs
+        margin="1em auto"
+        width={{ base: "80%", sm: "100%", md: "75%", lg: "70%" }}
+        onChange={(index) => {
+          switch (index) {
+            case 0:
+              setState((last) => ({ ...last, types: "" }));
+              break;
+            case 1:
+              setState((last) => ({ ...last, types: "Tortas" }));
+              break;
+            case 2:
+              setState((last) => ({ ...last, types: "Porcion de torta" }));
+              break;
+            case 3:
+              setState((last) => ({ ...last, types: "Galleta" }));
+              break;
+          }
+        }}
+      >
         <TabList>
           <Tab>Todos</Tab>
           <Tab>Tortas</Tab>
+          <Tab>Porciones de torta</Tab>
           <Tab>Galletas</Tab>
-          <Tab>Dulces frios</Tab>
-          <Tab>Pasapalos</Tab>
         </TabList>
       </Tabs>
-      <Products data={data.products.results} action={(e) => alert(e)} />
+      {loading ? "Cargando" : <Products data={data.products.results} action={(e) => router.push("/store")} />}
     </Standard>
   );
 };

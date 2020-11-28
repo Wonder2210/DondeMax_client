@@ -31,6 +31,12 @@ const GET_DATA = gql`
       action_name
       date
     }
+    sessionLog {
+      id_user
+      username
+      date
+      action_name
+    }
   }
 `;
 
@@ -140,6 +146,34 @@ function clientes() {
             return day + "-" + month + "-" + year;
           },
         },
+        {
+          Header: "accion",
+          accessor: "action_name",
+        },
+      ],
+      [
+        {
+          Header: "ID usuario",
+          accessor: "id_user",
+        },
+        {
+          Header: "Nombre",
+          accessor: "username",
+        },
+        {
+          Header: "Fecha",
+          accessor: "date",
+          Cell: ({ value }) => {
+            const date = new Date(Number(value));
+
+            const day = date.getDay();
+            const month = date.getMonth();
+            const year = date.getFullYear();
+
+            console.log(year);
+            return day + "-" + month + "-" + year;
+          },
+        },
       ],
     ],
     [],
@@ -158,7 +192,7 @@ function clientes() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex height="5em" justifyContent="space-between" alignItems="center">
+            <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
               <SubHeader>Pedidos</SubHeader>
               <GeneratePDF
                 tableId="#orders"
@@ -170,7 +204,7 @@ function clientes() {
             {loading ? <h1>Cargando...</h1> : <Table id="orders" columns={columns[0]} data={data.ordersLog} />}
           </TabPanel>
           <TabPanel>
-            <Flex height="5em" justifyContent="space-between" alignItems="center">
+            <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
               <SubHeader>Productos</SubHeader>
               <GeneratePDF
                 tableId="#products"
@@ -182,7 +216,7 @@ function clientes() {
             {loading ? <h1>Cargando...</h1> : <Table id="products" columns={columns[2]} data={data.productsLog} />}
           </TabPanel>
           <TabPanel>
-            <Flex height="5em" justifyContent="space-between" alignItems="center">
+            <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
               <SubHeader>Inventario</SubHeader>
               <GeneratePDF
                 tableId="#inventario"
@@ -192,6 +226,18 @@ function clientes() {
               />
             </Flex>
             {loading ? <h1>Cargando...</h1> : <Table id="inventario" columns={columns[1]} data={data.storageLog} />}
+          </TabPanel>
+          <TabPanel>
+            <Flex height="5em" justifyContent="space-between" alignItems="center">
+              <SubHeader>Sesion</SubHeader>
+              <GeneratePDF
+                tableId="#sesion"
+                columns={columns[0]
+                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
+                  .filter((i) => i.header !== "Acciones")}
+              />
+            </Flex>
+            {loading ? <h1>Cargando...</h1> : <Table id="sesion" columns={columns[1]} data={data.sessionLog} />}
           </TabPanel>
         </TabPanels>
       </Tabs>

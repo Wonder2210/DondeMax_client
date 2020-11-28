@@ -153,7 +153,7 @@ function usuarios() {
           <Flex height="5em" justifyContent="space-between" alignItems="center">
             <SubHeader>Usuarios</SubHeader>
 
-            <Flex width="10em" justifyContent="space-between" alignItems="center">
+            <Flex width="10em" paddingX="3em" justifyContent="space-between" alignItems="center">
               <GeneratePDF
                 columns={headers
                   .map((i) => ({ header: i.Header, dataKey: i.accessor }))

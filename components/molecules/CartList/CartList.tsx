@@ -53,7 +53,7 @@ const take_order = gql`
   }
 `;
 
-const CartList = () => {
+const CartList: React.FC<{ color?: string }> = ({ color }) => {
   const { onClose, onOpen, isOpen } = useDisclosure();
   const { user } = useAuth();
   const [takeOrder, { error }] = useMutation(take_order);
@@ -133,7 +133,7 @@ const CartList = () => {
   });
   return (
     <>
-      <ShoppingCart itemsCount={0} onClick={onOpen} />
+      <ShoppingCart itemsCount={state.products.length} color={color ?? "black"} onClick={onOpen} />
       <OrderClient
         values={{}}
         onClose={onCloseModal}

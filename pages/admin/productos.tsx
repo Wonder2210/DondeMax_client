@@ -161,7 +161,7 @@ const productos = () => {
             onSubmit={onSubmit}
             typeList={data.productTypes}
           />
-          <Flex height="5em" justifyContent="space-between" alignItems="center">
+          <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
             <SubHeader>Productos</SubHeader>
             <IconButton
               aria-label="add-more"
@@ -182,7 +182,7 @@ const productos = () => {
                 available={available}
                 price={precio}
                 onStatus={() => update({ variables: { id: id, available: !available } })}
-                onDelete={() => deleteP({ variables:{id:id}})}
+                onDelete={() => deleteP({ variables: { id: id } })}
                 onUpdate={() =>
                   setUpdate({
                     id,

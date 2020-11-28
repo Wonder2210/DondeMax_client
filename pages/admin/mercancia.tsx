@@ -268,7 +268,7 @@ const mercancia = () => {
                   onEdit={onEdit}
                   values={editData.data}
                 />
-                <Flex height="5em" justifyContent="space-between" alignItems="center">
+                <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
                   <SubHeader>Mercancia</SubHeader>
                   <Flex width="10em" justifyContent="space-between" alignItems="center">
                     <GeneratePDF
@@ -304,7 +304,7 @@ const mercancia = () => {
                   providersList={data.providers.map((i) => ({ id: i.id, type: i.name }))}
                   materialList={data.materials.map((i) => ({ id: i.id, type: i.nombre }))}
                 />
-                <Flex height="5em" justifyContent="space-between" alignItems="center">
+                <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
                   <SubHeader> Inventario </SubHeader>
                   <Flex width="10em" justifyContent="space-between" alignItems="center">
                     <GeneratePDF

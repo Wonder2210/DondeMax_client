@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box, Flex } from "@chakra-ui/core";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import MenuIcon from "@iconify/icons-cil/hamburger-menu";
@@ -7,6 +7,8 @@ import { Link as StyleLink } from "../../atoms/Links";
 import { ListItem } from "../../atoms/List";
 import { Dropdown } from "../../molecules/Dropdown";
 import { IconButton } from "../../atoms/Buttons";
+import { CartList } from "../../molecules/CartList";
+import { UserDropdown } from "../../molecules/Dropdown";
 
 const { useState } = React;
 
@@ -85,6 +87,12 @@ const NavbarMobile = () => {
               <StyleLink fontSize="xl2">Pedidos</StyleLink>
             </a>
           </Link>
+        </ListItem>
+        <ListItem marginLeft={3}>
+          <Flex alignItems="center" justifyContent="space-between">
+            <UserDropdown />
+            <CartList />
+          </Flex>
         </ListItem>
       </Dropdown>
     </Box>

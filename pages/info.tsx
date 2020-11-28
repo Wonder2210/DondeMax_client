@@ -18,9 +18,24 @@ const Info = () => {
       >
         <Header color="#E91E63">¿Quienes somos?</Header>
       </Flex>
-      <Flex >
-        <Flex justify="center" align="center" width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} height="100vh" bgColor="#EDB3C7">
+      <Flex>
+        <Flex
+          justify="flex-start"
+          align="center"
+          direction="column"
+          width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
+          height="100vh"
+          paddingTop="6em"
+          bgColor="#EDB3C7"
+        >
           <Header color="#E5E6E2">Mision</Header>
+          <br />
+          <br />
+          <br />
+          <br />
+          <Parragraph color="#E5E6E2" height="auto">
+            Entregar a los compradores una grata atencion y productos de gran calidad a un precio accesible
+          </Parragraph>
         </Flex>
         <Box
           bg="rgb(255,0,0)"
@@ -42,8 +57,23 @@ const Info = () => {
           backgroundPosition="center"
           backgroundSize="cover"
         />
-        <Flex justify="center" align="center" width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }} height="100vh" bgColor="#E7CFA4">
+        <Flex
+          justify="flex-start"
+          align="center"
+          direction="column"
+          width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
+          height="100vh"
+          paddingTop="6em"
+          bgColor="#E7CFA4"
+        >
           <Header color="#E5E6E2">Vision</Header>
+          <br />
+          <br />
+          <br />
+          <br />
+          <Parragraph color="#E5E6E2" height="auto">
+            LLegar a mas clientes que puedan disfrutar de nuestros productos y la calidad del servicio
+          </Parragraph>
         </Flex>
       </Flex>
       <Flex direction={{ sm: "column", md: "column", lg: "row", xl: "row" }}>
@@ -51,9 +81,9 @@ const Info = () => {
           <ContactUs />
         </Flex>
         <Flex
+          bgColor="#FC913C"
           justify="flex-start"
           align="center"
-          bgColor="#FC913C"
           direction="column"
           width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
           height="100vh"

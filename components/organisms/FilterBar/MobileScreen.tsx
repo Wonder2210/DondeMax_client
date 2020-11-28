@@ -47,17 +47,9 @@ const MobileScreen = ({ preservations, types }: props) => {
         h="3em"
         w="100%"
       >
-        <Flex w="20%" marginLeft="0.3em" h="100%" alignItems="center">
-          <IconButton
-            aria-label="filter-settings"
-            backgroundColor="colors.rose.600"
-            borders={["25px", "25px"]}
-            onClick={onOpen}
-            icon={<Icon icon={Config} width="80%" height="80%" color="#fff" />}
-          />
-        </Flex>
+        <Flex w="20%" marginLeft="0.3em" h="100%" alignItems="center"></Flex>
         <Flex w="20%" h="100%" alignItems="center">
-          <CartList />
+          <CartList color="white" />
         </Flex>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>

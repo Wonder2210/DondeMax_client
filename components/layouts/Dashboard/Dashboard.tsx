@@ -2,16 +2,27 @@ import * as React from "react";
 import { Box, Flex, useMediaQuery } from "@chakra-ui/core";
 import { NavbarDashboard } from "../../organisms/Navbar";
 import { SidebarDashboard } from "../../molecules/Sidebar";
+import { useRouter } from "next/router";
+import { useAuth } from "../../../utils/AuthHook";
 
 type props = {
   sidebar: boolean;
 };
 
 const Dashboard = ({ children }) => {
+  const { user } = useAuth();
+  const router = useRouter();
   const [isMobile] = useMediaQuery("(min-width: 48em)");
   const [state, setState] = React.useState<props>({
     sidebar: isMobile,
   });
+
+  React.useEffect(() => {
+    if (user.role == "CLIENT") {
+      router.push("/");
+      alert("no tienes permiso de estar aqui");
+    }
+  }, [user]);
 
   const toggleSidebar = () => setState({ sidebar: !state.sidebar });
   const close = () => setState({ sidebar: false });

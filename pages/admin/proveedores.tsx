@@ -101,7 +101,7 @@ const proveedores = () => {
             onClose={onCloseEdit}
             onSubmit={onSubmit}
           />
-          <Flex height="5em" justifyContent="space-between" alignItems="center">
+          <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
             <SubHeader>Proveedores</SubHeader>
 
             <Flex width="10em" justifyContent="space-between" alignItems="center">

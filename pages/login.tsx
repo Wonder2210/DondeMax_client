@@ -1,13 +1,25 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
-import { Flex, Box } from "@chakra-ui/core";
+import { Flex, Box, useDisclosure } from "@chakra-ui/core";
 import { Login } from "@/organisms/Forms";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { Button } from "@/atoms/Buttons";
+import { Icon } from "@iconify/react";
+import sign from "@iconify/icons-cil/group";
+import { CreateClient as Client } from "@/organisms/Forms";
 
 const loginUserQuery = gql`
   mutation LoginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password)
+  }
+`;
+const CREATE_CLIENT = gql`
+  mutation CreateClient($nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
+    createClient(client: { name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
+      id
+      name
+    }
   }
 `;
 
@@ -19,14 +31,24 @@ const loginClientQuery = gql`
 
 const login = () => {
   const { push } = useRouter();
-  const [loginUser, { data, error }] = useMutation(loginUserQuery);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [createClient, { error }] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
+  const [loginUser, { data }] = useMutation(loginUserQuery);
   const [logClient, { data: dataClient, error: errorClient }] = useMutation(loginClientQuery);
   const onSubmit = (data) => {
     loginUser({ variables: { ...data } });
   };
+  const onSubmitClientSign = (data) => {
+    createClient({ variables: { ...data } });
+    alert("registrado con exito");
+  };
   const onSubmitClient = (data) => {
     logClient({ variables: { ...data } });
   };
+  if (error) {
+    console.log(JSON.stringify(error.networkError, null, 2));
+    console.log(error.graphQLErrors);
+  }
   if (data) {
     Cookies.set("auth", data.loginUser, { expires: 12 });
     push("/admin", "/admin", { shallow: true });
@@ -43,6 +65,14 @@ const login = () => {
   }
   return (
     <Flex width="100%" height="100vh">
+      <Client
+        isEditing={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        onSubmit={onSubmitClientSign}
+        onEdit={() => console.log("nada")}
+        values={{}}
+      />
       <Box
         bgImage="url('/images/login.jpg')"
         bgPosition="center"
@@ -50,7 +80,18 @@ const login = () => {
         width={{ base: "0", sm: "0", md: "30%", lg: "30%", xl: "30%" }}
         height="100vh"
       />
+
       <Flex width={{ base: "100%", sm: "100%", md: "70%", lg: "70%", xl: "70%" }} align="center" justify="center">
+        <Box position="absolute" top="1em" right="1em">
+          <Button
+            leftIcon={<Icon icon={sign} color="black" />}
+            color="black"
+            backgroundColor="#E5E6E2"
+            onClick={onOpen}
+          >
+            Registrarse Cliente
+          </Button>
+        </Box>
         <Login onSubmit={onSubmit} onSubmitClient={onSubmitClient} />
         {error ? "Mal login bro" : ""}
       </Flex>

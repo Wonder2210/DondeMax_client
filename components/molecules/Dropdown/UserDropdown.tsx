@@ -28,9 +28,9 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
 type props = {
-  image: string;
-  imageAlt: string;
-  userName: string;
+  image?: string;
+  imageAlt?: string;
+  userName?: string;
 };
 
 const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {

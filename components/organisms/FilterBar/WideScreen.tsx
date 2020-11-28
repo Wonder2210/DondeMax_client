@@ -30,7 +30,7 @@ const WideScreen = ({ preservations, types }: props) => {
       top="0"
       backgroundColor="#2F4858"
     >
-      <Flex justify="space-evenly" align="center" flexDirection="row" left="0" width="60%">
+      <Flex justify="space-evenly" alignItems="center" flexDirection="row" left="0" width="60%">
         <SelectCustom
           value={preservations.value}
           onChange={preservations.onChange}

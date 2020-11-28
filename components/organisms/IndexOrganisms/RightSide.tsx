@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Flex, Box } from "@chakra-ui/core";
-
+import { useRouter } from "next/router";
 import { useMediaQuery } from "react-responsive";
 import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
 import Whatsapp from "@iconify/icons-cib/whatsapp";
@@ -13,6 +13,7 @@ import { CardSlider } from "@/organisms/CardSlider";
 import { InitialCard } from "@/organisms/Cards";
 
 const RightSide = () => {
+  const router = useRouter();
   const isPhone = useMediaQuery({
     query: "(max-width:62em)",
   });
@@ -39,6 +40,7 @@ const RightSide = () => {
       <Box marginTop="5vh" height="auto">
         <Button
           backgroundColor="#E91E63"
+          onClick={() => router.push("/products")}
           rightIcon={
             <Icon icon={chevronRight} color="white" height="2.875rem" width="2.375rem" style={{ marginLeft: "10%" }} />
           }
@@ -48,48 +50,17 @@ const RightSide = () => {
       </Box>
       <Box width="100%" alignItems="center" marginTop="auto" marginBottom="1em">
         <CardSlider>
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
+          <InitialCard alt="image of test" href="/products" src="/images/tortas.jpg">
+            Tortas
           </InitialCard>
-
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
+          <InitialCard alt="image of test" href="/products" src="/images/dulces_frios.jpg">
+            Dulces frios
           </InitialCard>
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
+          <InitialCard alt="image of test" href="/products" src="/images/galletas.jpg">
+            Galletas
           </InitialCard>
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
-          </InitialCard>
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
-          </InitialCard>
-          <InitialCard
-            alt="image of test"
-            href="/"
-            src="http://t1.gstatic.com/images?q=tbn:ANd9GcQi47DaoMOT1DeSAaahfQDaxs6AS5HZRMcMTLW_kh_M8dD9_P2yuaWkOdc90e4xcd35zEyyT1dN5o_wWBT1blQ"
-          >
-            Here we are
+          <InitialCard alt="image of test" href="/products" src="/images/pasapalos_dulces.jpg">
+            Pasapalos dulces
           </InitialCard>
         </CardSlider>
       </Box>

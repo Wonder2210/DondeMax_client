@@ -1,5 +1,5 @@
 .container {
-    padding-bottom: 1em;
+    padding-bottom: 2em;
     margin:0 auto 4vh auto;
   }
   .custom-dots{
@@ -9,7 +9,7 @@
   }
   @media only screen and (max-width:62em){
     .custom-dots{
-      margin-bottom: 1.3em;
+      margin-bottom: 1.9em;
     }
   }
   .custom-dots button:hover:active {

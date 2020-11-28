@@ -73,10 +73,14 @@ function clientes() {
   }>(defaultState);
   const { data, loading } = useQuery(GET_CLIENTS, { pollInterval: 500 });
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [createClient] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
+  const [createClient, { error }] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
   const [updateClient] = useMutation(UPDATE_CLIENT, { onCompleted: onClose });
   const [deleteClient] = useMutation(DELETE_CLIENT, { onCompleted: onClose });
 
+  if (error) {
+    console.log(JSON.stringify(error.networkError, null, 2));
+    console.log(error.graphQLErrors);
+  }
   const setEdit = (data) => {
     setState({ edit: true, data: { ...data } });
     onOpen();
@@ -145,7 +149,7 @@ function clientes() {
             onEdit={onUpdateClient}
             values={{ ...state.data }}
           />
-          <Flex height="5em" justifyContent="space-between" alignItems="center">
+          <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
             <SubHeader>Proveedores</SubHeader>
 
             <Flex width="10em" justifyContent="space-between" alignItems="center">

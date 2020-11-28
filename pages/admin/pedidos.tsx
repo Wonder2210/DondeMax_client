@@ -17,6 +17,7 @@ import { Table } from "@/organisms/Table";
 import { IconButton, Button } from "@/atoms/Buttons";
 import { Order } from "@/organisms/Forms";
 import Plus from "@iconify/icons-cil/plus";
+import trash from "@iconify/icons-cil/trash";
 import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
@@ -110,11 +111,18 @@ const updateOrder = gql`
     }
   }
 `;
+
+const deleteOrderq = gql`
+  mutation DeleteOrder($id: Int!) {
+    deleteOrder(id: $id)
+  }
+`;
 const pedidos = () => {
   const defaultState = { order_id: null, orderMaterials: null, materials: null };
   const toast = createStandaloneToast();
   const { data, loading } = useQuery(GET_DATA, { pollInterval: 500 });
   const [executeOrder, { error: execute }] = useMutation(updateOrder);
+  const [deleteOrder] = useMutation(deleteOrderq);
 
   // const [state, setState] = React.useState<{
   //   order_id?: number;
@@ -215,11 +223,12 @@ const pedidos = () => {
         Cell: ({
           value,
           row: {
-            original: { id },
+            original: { id, delivery_status, production_status, stage_status },
           },
         }) => (
           <Button
             width="6em"
+            isDisabled={value || (production_status && stage_status)}
             backgroundColor="transparent"
             color="black"
             _hover={{
@@ -256,6 +265,7 @@ const pedidos = () => {
         Cell: ({ value, row }) => (
           <Button
             width="6em"
+            isDisabled={!row.original.production_status || (row.original.production_status && value)}
             backgroundColor="transparent"
             color="black"
             _hover={{
@@ -294,6 +304,7 @@ const pedidos = () => {
             width="6em"
             backgroundColor="transparent"
             color="black"
+            isDisabled={value}
             _hover={{
               bgColor: "black",
               color: "black",
@@ -320,6 +331,20 @@ const pedidos = () => {
           >
             {value ? "listo" : "Aun no"}
           </Button>
+        ),
+      },
+      {
+        Header: "cancelar",
+        Cell: ({ row }) => (
+          <IconButton
+            backgroundColor="rgb(255,20,20)"
+            aria-label="eliminar-cancelar"
+            icon={<Icon icon={trash} color="white" />}
+            onClick={() => {
+              const verify = confirm("Seguro de cancelar este pedido?");
+              return verify ? deleteOrder({ variables: { id: row.original.id } }) : null;
+            }}
+          />
         ),
       },
       { Header: "Abono", accessor: "abono", Cell: ({ value }) => `${value}$` },
