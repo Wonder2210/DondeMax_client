@@ -27,7 +27,7 @@ const initialState = {
 const proveedores = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const ref = React.useRef();
-  const { data, loading } = useQuery(GET_PROVIDERS);
+  const { data, loading } = useQuery(GET_PROVIDERS, { pollInterval: 500 });
   const [createProvider] = useMutation(CREATE_PROVIDER, { onCompleted: onClose });
   const [deleteProvider] = useMutation(DELETE_PROVIDER);
   const [updateProvider] = useMutation(UPDATE_PROVIDER, {

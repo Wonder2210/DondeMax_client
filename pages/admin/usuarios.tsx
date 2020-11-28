@@ -176,7 +176,11 @@ function usuarios() {
                       Header: "Acciones",
                       Cell: ({ row }) => (
                         <TableActions
-                          onDelete={() => onDelete(row.original.id)}
+                          onDelete={() =>
+                            user.id != row.original.id
+                              ? onDelete(row.original.id)
+                              : alert("no puedes borrarte a ti mismo")
+                          }
                           onUpdate={() => {
                             setEdit(row.original);
                           }}

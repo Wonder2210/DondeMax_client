@@ -27,7 +27,7 @@ export const AppProvider: React.FC = ({ children }) => {
     productsCart?: [ProductsCart];
   }>(() => {
     const admin = Boolean(Cookies.get("admin")) ?? false;
-    const adminPassword = Number(Cookies.get("adminPassword")) ?? 221099;
+    const adminPassword = 221099;
     const productsCart = Cookies.getJSON("productsCart") ?? [];
 
     return {

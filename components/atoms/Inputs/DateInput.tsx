@@ -9,7 +9,7 @@ type props = {
   id: string;
   helper?: string;
   label: string;
-  field?: {name:string};
+  field?: { name: string };
   form?: {
     setFieldValue: (e: string, ee: string) => void;
   };
@@ -23,7 +23,7 @@ const FormInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form,
       <DayPickerInput
         format="dd/mm/yyyy"
         dayPickerProps={{ disabledDays: { before: new Date() } }}
-        onDayChange={(val) => form.setFieldValue(field.name, format(val, "dd/MM/yyyy"))}
+        onDayChange={(val) => form.setFieldValue(field.name, format(val, "MM/dd/yyyy"))}
       />
       <FormHelperText>{helper}</FormHelperText>
       <FormErrorMessage>{errorMessage}</FormErrorMessage>

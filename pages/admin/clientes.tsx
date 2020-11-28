@@ -150,7 +150,7 @@ function clientes() {
             values={{ ...state.data }}
           />
           <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-            <SubHeader>Proveedores</SubHeader>
+            <SubHeader>Clientes</SubHeader>
 
             <Flex width="10em" justifyContent="space-between" alignItems="center">
               <GeneratePDF

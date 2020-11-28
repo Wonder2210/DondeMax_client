@@ -8,10 +8,12 @@ import { Icon } from "@iconify/react";
 type props = {
   tableId?: string;
   columns?: Array<{ header: string; dataKey: string }>;
+  orientation?: string;
 };
-const GeneratePdf: React.FC<props> = ({ tableId = "#table", columns }) => {
+const GeneratePdf: React.FC<props> = ({ tableId = "#table", columns, orientation = "p" }) => {
   const generatePdf = () => {
-    const doc = new jsPDF();
+    const doc = new jsPDF(orientation);
+
     autoTable(doc, { html: tableId, columns: columns });
 
     doc.output("dataurlnewwindow");

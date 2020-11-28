@@ -231,18 +231,22 @@ const pedidos = () => {
             isDisabled={value || (production_status && stage_status)}
             backgroundColor="transparent"
             color="black"
-            _hover={{
-              bgColor: "black",
-              color: "black",
-              _after: {
-                content: '"Entregar"',
-                width: "100%",
-                position: "absolute",
-                zIndex: 1,
-                color: "white",
-                bgColor: "black",
-              },
-            }}
+            _hover={
+              value
+                ? {}
+                : {
+                    bgColor: "black",
+                    color: "black",
+                    _after: {
+                      content: '"Entregar"',
+                      width: "100%",
+                      position: "absolute",
+                      zIndex: 1,
+                      color: "white",
+                      bgColor: "black",
+                    },
+                  }
+            }
             onClick={() => {
               executeOrder({
                 variables: {
@@ -268,18 +272,22 @@ const pedidos = () => {
             isDisabled={!row.original.production_status || (row.original.production_status && value)}
             backgroundColor="transparent"
             color="black"
-            _hover={{
-              bgColor: "black",
-              color: "black",
-              _after: {
-                content: '"Listo"',
-                width: "100%",
-                position: "absolute",
-                zIndex: 1,
-                color: "white",
-                bgColor: "black",
-              },
-            }}
+            _hover={
+              value
+                ? {}
+                : {
+                    bgColor: "black",
+                    color: "black",
+                    _after: {
+                      content: '"Listo"',
+                      width: "100%",
+                      position: "absolute",
+                      zIndex: 1,
+                      color: "white",
+                      bgColor: "black",
+                    },
+                  }
+            }
             onClick={() => {
               executeOrder({
                 variables: {
@@ -305,18 +313,22 @@ const pedidos = () => {
             backgroundColor="transparent"
             color="black"
             isDisabled={value}
-            _hover={{
-              bgColor: "black",
-              color: "black",
-              _after: {
-                content: '"Producir"',
-                width: "100%",
-                position: "absolute",
-                zIndex: 1,
-                color: "white",
-                bgColor: "black",
-              },
-            }}
+            _hover={
+              true
+                ? {}
+                : {
+                    bgColor: "black",
+                    color: "black",
+                    _after: {
+                      content: '"Producir"',
+                      width: "100%",
+                      position: "absolute",
+                      zIndex: 1,
+                      color: "white",
+                      bgColor: "black",
+                    },
+                  }
+            }
             onClick={() => {
               executeOrder({
                 variables: {
@@ -401,6 +413,7 @@ const pedidos = () => {
                   <SubHeader>Pedidos activos</SubHeader>
                   <Flex width="10em" justifyContent="space-between" alignItems="center">
                     <GeneratePDF
+                      orientation="landscape"
                       columns={columns
                         .map((i) => ({ header: i.Header, dataKey: i.accessor }))
                         .filter((i) => i.header !== "Acciones")}
@@ -426,6 +439,7 @@ const pedidos = () => {
                   <SubHeader>Pedidos Pasados</SubHeader>
                   <Flex width="10em" justifyContent="space-between" alignItems="center">
                     <GeneratePDF
+                      orientation="landscape"
                       tableId="#released-orders"
                       columns={columns
                         .map((i) => ({ header: i.Header, dataKey: i.accessor }))

@@ -146,10 +146,6 @@ function clientes() {
             return day + "-" + month + "-" + year;
           },
         },
-        {
-          Header: "accion",
-          accessor: "action_name",
-        },
       ],
       [
         {
@@ -189,6 +185,7 @@ function clientes() {
           <Tab>Pedidos</Tab>
           <Tab>Productos</Tab>
           <Tab>Inventario</Tab>
+          <Tab>Sesion</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -208,7 +205,7 @@ function clientes() {
               <SubHeader>Productos</SubHeader>
               <GeneratePDF
                 tableId="#products"
-                columns={columns[0]
+                columns={columns[1]
                   .map((i) => ({ header: i.Header, dataKey: i.accessor }))
                   .filter((i) => i.header !== "Acciones")}
               />
@@ -220,7 +217,7 @@ function clientes() {
               <SubHeader>Inventario</SubHeader>
               <GeneratePDF
                 tableId="#inventario"
-                columns={columns[0]
+                columns={columns[2]
                   .map((i) => ({ header: i.Header, dataKey: i.accessor }))
                   .filter((i) => i.header !== "Acciones")}
               />
@@ -232,7 +229,7 @@ function clientes() {
               <SubHeader>Sesion</SubHeader>
               <GeneratePDF
                 tableId="#sesion"
-                columns={columns[0]
+                columns={columns[3]
                   .map((i) => ({ header: i.Header, dataKey: i.accessor }))
                   .filter((i) => i.header !== "Acciones")}
               />

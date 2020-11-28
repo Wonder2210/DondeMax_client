@@ -15,9 +15,9 @@ const DropImage = ({ onChange, image }) => {
     image: image,
   });
 
-  const onDrop = React.useCallback((acceptedFiles) => {
-    setState({ image: URL.createObjectURL(acceptedFiles[0]) });
-    onChange(acceptedFiles[0]);
+  const onDrop = React.useCallback((acceptedFiles, allFiles) => {
+    setState({ image: URL.createObjectURL(allFiles[0].file) });
+    onChange(allFiles[0].file);
   }, []);
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({ onDrop, accept: ".jpeg,.png" });
 
@@ -50,7 +50,7 @@ const DropImage = ({ onChange, image }) => {
         <input {...getInputProps()} />
         {isDragActive ? (
           <Icon icon={Upload} height="min(100%,4em)" />
-        ) : !state.image || !image ? (
+        ) : !state.image ? (
           <>
             <Icon icon={ImageIcon} height="min(100%,4em)" />
 

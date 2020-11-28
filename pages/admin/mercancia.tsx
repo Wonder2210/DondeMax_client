@@ -342,7 +342,7 @@ const mercancia = () => {
                     />
                   </Flex>
                 </Flex>
-                <Table columns={columns[2]} id="inventario" data={data.materialsStage} />
+                <Table columns={columns[2]} id="disponible" data={data.materialsStage} />
               </>
             )}
           </TabPanel>

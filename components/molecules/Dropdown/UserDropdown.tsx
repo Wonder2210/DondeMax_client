@@ -90,11 +90,13 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
           >
             {user.name}
           </MenuButton>
-          <MenuList zIndex={4}>
-            <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
-              <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
-              <span className="margin-span">Admin</span>
-            </MenuItem>
+          <MenuList>
+            {user.role == "ADMINISTRADOR" && (
+              <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
+                <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
+                <span className="margin-span">Admin</span>
+              </MenuItem>
+            )}
             <MenuItem minH="40px" onClick={CloseSession}>
               <Icon icon={exit} width="2em" />
               <span className="margin-span">Salir</span>

@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-wrap-multilines */
+// @ts-nocheck
 import React, { FormEvent } from "react";
 import { Box, Menu, MenuOptionGroup, MenuItemOption, MenuList, MenuButton, Flex } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
@@ -19,7 +19,7 @@ const SelectCustom: React.FC<{
   cart?: number;
 }> = ({ children, placeholder, value, toggle, show, onChange }) => {
   return (
-    <Box position="relative" marginTop="em" overflow="hidden hidden visible hidden" width="300px">
+    <Box position="relative" overflow="hidden hidden visible hidden" width="300px">
       <Box position="relative">
         <TextInput
           border="0.75px rgb(209,209,209) solid"
@@ -44,17 +44,10 @@ const SelectCustom: React.FC<{
         />
       </Box>
       <Box position="relative" left="0" width="86%">
-        <Menu isOpen={show} >
-          <MenuButton display="none" />
-          <MenuList
-            borderWidth="0.75px"
-            zIndex={3}
-            borderColor="rgb(209,209,209)"
-            width="100%"
-            roundedBottom="35px"
-            borderTop="0"
-          >
-            <MenuOptionGroup type="radio">
+        <Menu isOpen={show} width="100%">
+          <MenuButton display="hidden" />
+          <MenuList borderWidth="0.75px" borderColor="rgb(209,209,209)" width="100%" roundedBottom="35px" borderTop="0">
+            <MenuOptionGroup type="radio" onChange={onChange}>
               {children}
             </MenuOptionGroup>
           </MenuList>

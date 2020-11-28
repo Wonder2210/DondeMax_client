@@ -156,7 +156,10 @@ const productos = () => {
             onEdit={onUpdate}
             isEditing={state.edit}
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={() => {
+              onClose();
+              setState({ ...defaultState });
+            }}
             materialList={data.materials}
             onSubmit={onSubmit}
             typeList={data.productTypes}
