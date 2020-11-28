@@ -38,7 +38,7 @@ const ProductCard: React.FC<props> = ({
       <ImageHeader maxHeight="50vh" alt={name} src={image} height="auto" width="100%" />
       <Box margin="0 10%">
         <Header type="h6" weight="semibold" fontSize="1.5em">
-          Here
+          {name}
         </Header>
         <SubHeader fontSize="1em">{type}</SubHeader>
         <Parragraph fontSize="0.8em" textAlign="left">
@@ -50,21 +50,7 @@ const ProductCard: React.FC<props> = ({
             <StatNumber>{price}$</StatNumber>
           </Stat>
           <TableActions onUpdate={onUpdate} onDelete={onDelete} />
-          {available ? (
-            <IconButton
-              aria-label="disponible"
-              onClick={onStatus}
-              icon={<Icon color="black" icon={check} />}
-              backgroundColor="lime"
-            />
-          ) : (
-            <IconButton
-              aria-label="disponible"
-              onClick={onStatus}
-              icon={<Icon color="black" icon={x} />}
-              backgroundColor="rgb(255,10,10)"
-            />
-          )}
+        
         </Flex>
       </Box>
     </Box>

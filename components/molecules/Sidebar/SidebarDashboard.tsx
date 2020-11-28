@@ -5,6 +5,7 @@ import { List, ListItemDashboard } from "../../atoms/List";
 import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { useAppContext } from "../../../utils/AppContext";
+import {useAuth} from "../../../utils/AuthHook";
 import Home from "@iconify/icons-cil/home";
 import ListIcon from "@iconify/icons-cil/list-rich";
 import cake from "@iconify/icons-cil/birthday-cake";
@@ -22,6 +23,7 @@ type props = {
 };
 
 const SidebarDashboard: React.FC<props> = ({ open, close }) => {
+    const { user } = useAuth();
   const { pathname } = useRouter();
   const { state } = useAppContext();
   const verifySelected = (name) => {
@@ -85,7 +87,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
         <ListItemDashboard height="4em" icon={user} selected={verifySelected("/usuarios")}>
           <a href="/admin/usuarios">Usuarios</a>
         </ListItemDashboard>
-        {state.admin && (
+        {(state.admin && user.role=="ADMINISTRADOR") && (
           <ListItemDashboard height="4em" icon={findInPage} selected={verifySelected("/auditorias")}>
             <a href="/admin/auditorias">Auditorias</a>
           </ListItemDashboard>
