@@ -34,6 +34,7 @@ const NavbarClient: React.FC = () => {
       paddingX="1em"
       alignItems="center"
       position="sticky"
+      zIndex="3"
       top={0}
       backgroundColor="white"
     >
