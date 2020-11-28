@@ -238,7 +238,7 @@ function clientes() {
                   .filter((i) => i.header !== "Acciones")}
               />
             </Flex>
-            {loading ? <h1>Cargando...</h1> : <Table id="sesion" columns={columns[1]} data={data.sessionLog} />}
+            {loading ? <h1>Cargando...</h1> : <Table id="sesion" columns={columns[3]} data={data.sessionLog} />}
           </TabPanel>
         </TabPanels>
       </Tabs>
