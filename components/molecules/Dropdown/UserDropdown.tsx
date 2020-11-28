@@ -92,7 +92,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
           >
             {user.name}
           </MenuButton>
-          <MenuList>
+          <MenuList zIndex={5}>
             {user.role == "ADMINISTRADOR" && (
               <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
                 <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
