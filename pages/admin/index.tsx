@@ -31,7 +31,7 @@ const index = () => {
   const { data, error, loading } = useQuery(GET_BASE_PRODUCTS, { variables: { cursor: 0 } });
 
   if (loading) {
-    return <h1>Loading bro</h1>;
+    return <h1>Cargando ... </h1>;
   }
 
   return (

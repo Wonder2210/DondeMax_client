@@ -132,7 +132,7 @@ function usuarios() {
             <title>Admin - Usuarios</title>
             </Head>
       {loading ? (
-        "Cargando"
+        "Cargando..."
       ) : (
         <>
           <User

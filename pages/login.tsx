@@ -101,7 +101,7 @@ const login = () => {
           </Button>
         </Box>
         <Login onSubmit={onSubmit} onSubmitClient={onSubmitClient} />
-        {error || errorClient ? "Cedula incorrecta" : ""}
+        <div>{error || errorClient ? "Datos incorrectos" : ""}</div>
       </Flex>
     </Flex>
   );

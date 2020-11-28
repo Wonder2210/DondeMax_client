@@ -90,10 +90,10 @@ const store = () => {
   };
   let total = state.products.total;
   if (error) {
-    return <h1>Error papu</h1>;
+    return <h1>Error </h1>;
   }
   if (loading) {
-    return <h1>Cargando papu awanta</h1>;
+    return <h1>Cargando ...</h1>;
   }
   console.log(context.productsCart);
   const products = state.products.results.map((i) => {

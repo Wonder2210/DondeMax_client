@@ -295,7 +295,7 @@ const mercancia = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <h1>Loading hold on</h1>
+              <h1>Cargando ...</h1>
             ) : (
               <>
                 <Storage
@@ -331,7 +331,7 @@ const mercancia = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <h1>Loading hold on</h1>
+              <h1>Cargando ...</h1>
             ) : (
               <>
                 <Flex height="5em" justifyContent="space-between" alignItems="center">

@@ -152,7 +152,7 @@ const productos = () => {
             <title>Admin - Productos</title>
             </Head>
       {loading ? (
-        <h1>Wait bro</h1>
+        <h1>Cargando ...</h1>
       ) : (
         <>
           <Products

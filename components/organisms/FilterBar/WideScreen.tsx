@@ -30,28 +30,7 @@ const WideScreen = ({ preservations, types }: props) => {
       top="0"
       backgroundColor="#2F4858"
     >
-      <Flex justify="space-evenly" alignItems="center" flexDirection="row" left="0" width="60%">
-        <SelectCustom
-          value={preservations.value}
-          onChange={preservations.onChange}
-          toggle={preservations.toggle}
-          placeholder="Preservacion"
-          show={preservations.show}
-        >
-          <SelectOption value="">Todos</SelectOption>
-          {PreservationsOptions}
-        </SelectCustom>
-        <SelectCustom
-          value={types.value}
-          onChange={types.onChange}
-          toggle={types.toggle}
-          placeholder="Tipo"
-          show={types.show}
-        >
-          <SelectOption value="">Todos</SelectOption>
-          {TypesOptions}
-        </SelectCustom>
-      </Flex>
+      
 
       <Flex marginRight="1vw" position="relative" align="center" flexDirection="row" w="20%" justify="flex-end">
         <CartList />

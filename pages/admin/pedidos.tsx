@@ -400,7 +400,7 @@ const pedidos = () => {
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <h1>Loading bro</h1>
+              <h1>Cargando ... </h1>
             ) : (
               <>
                 <Order
@@ -436,7 +436,7 @@ const pedidos = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <h1>Loading bro</h1>
+              <h1>Cargando ...</h1>
             ) : (
               <>
                 <Flex height="5em" justifyContent="space-between" alignItems="center">

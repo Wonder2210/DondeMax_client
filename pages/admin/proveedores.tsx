@@ -94,7 +94,7 @@ const proveedores = () => {
             <title>Admin - Proveedores</title>
             </Head>
       {loading ? (
-        <h1>Here</h1>
+        <h1>Cargando ... </h1>
       ) : (
         <>
           <Provider

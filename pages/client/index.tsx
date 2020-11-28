@@ -100,11 +100,11 @@ const index = () => {
       <NavbarClient />
       <Flex display="row" align="flex-start">
         <Parragraph>Pedidos Pendientes</Parragraph>
-        {loading ? <h1>Cargando bro</h1> : <Table columns={rows} data={data.clientOrders.pending} />}
+        {loading ? <h1>Cargando ...</h1> : <Table columns={rows} data={data.clientOrders.pending} />}
       </Flex>
       <Flex display="row" align="flex-start">
         <Parragraph>Pedidos Entregados</Parragraph>
-        {loading ? <h1>Cargando bro</h1> : <Table columns={rows} data={data.clientOrders.delivered} />}
+        {loading ? <h1>Cargando ...</h1> : <Table columns={rows} data={data.clientOrders.delivered} />}
   <Parragraph>para cancelar el pedido ponerse en contacto con nosotros al numero 0416979861</Parragraph>
         
       </Flex>

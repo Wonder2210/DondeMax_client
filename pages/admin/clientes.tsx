@@ -142,7 +142,7 @@ function clientes() {
             <title>Admin - Clientes</title>
             </Head>
       {loading ? (
-        "Cargando"
+        "Cargando..."
       ) : (
         <>
           <Client
