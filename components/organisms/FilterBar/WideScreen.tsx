@@ -23,7 +23,7 @@ const WideScreen = ({ preservations, types }: props) => {
   return (
     <Flex
       zIndex={1}
-      justifyContent="space-between"
+      justifyContent="flex-end"
       flexDirection="row"
       width="100%"
       height="62px"
@@ -33,7 +33,7 @@ const WideScreen = ({ preservations, types }: props) => {
       
 
       <Flex marginRight="1vw" position="relative" align="center" flexDirection="row" w="20%" justify="flex-end">
-        <CartList />
+        <CartList color="white" />
       </Flex>
     </Flex>
   );
