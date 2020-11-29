@@ -8,7 +8,7 @@ import { Button } from "@/atoms/Buttons";
 import { Icon } from "@iconify/react";
 import sign from "@iconify/icons-cil/group";
 import { CreateClient as Client } from "@/organisms/Forms";
-import  Head from "next/head";
+import Head from "next/head";
 
 const loginUserQuery = gql`
   mutation LoginUser($email: String!, $password: String!) {
@@ -33,27 +33,37 @@ const loginClientQuery = gql`
 const login = () => {
   const { push } = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [createClient, { error }] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
-  const [loginUser, { data }] = useMutation(loginUserQuery);
-  const [logClient, { data: dataClient, error: errorClient }] = useMutation(loginClientQuery);
+  const [createClient] = useMutation(CREATE_CLIENT, {
+    onError: () => alert("datos invalidos verifica y intenta de nuevo"),
+    onCompleted: () => {
+      onClose();
+      alert("usuario Exitosamente registrado");
+    },
+  });
+  const [loginUser, { data, error }] = useMutation(loginUserQuery, {
+    onError: () => alert("datos invalidos verifica y intenta de nuevo"),
+    onCompleted: () => {
+      onClose();
+      alert("usuario Exitosamente registrado");
+    },
+  });
+  const [logClient, { data: dataClient, error: errorClient }] = useMutation(loginClientQuery, {
+    onError: () => alert("datos invalidos verifica y intenta de nuevo"),
+    onCompleted: () => {
+      onClose();
+      alert("usuario Exitosamente registrado");
+    },
+  });
   const onSubmit = (data) => {
     loginUser({ variables: { ...data } });
   };
   const onSubmitClientSign = (data) => {
     createClient({ variables: { ...data } });
-    alert("registrado con exito");
   };
   const onSubmitClient = (data) => {
     logClient({ variables: { ...data } });
   };
-  if (error) {
-    console.log(JSON.stringify(error.networkError, null, 2));
-    console.log(error.graphQLErrors);
-  }
-  if (errorClient) {
-    console.log(JSON.stringify(errorClient.networkError, null, 2));
-    console.log(errorClient.graphQLErrors);
-  }
+
   if (data) {
     Cookies.set("auth", data.loginUser, { expires: 12 });
     push("/admin", "/admin", { shallow: true });
@@ -62,17 +72,12 @@ const login = () => {
     Cookies.set("auth", dataClient.loginClient, { expires: 1 });
     push("/client", "/client", { shallow: true });
   }
-  if (errorClient) {
-    console.log(JSON.stringify(errorClient.networkError, null, 2));
-  }
-  if (error) {
-    console.log(JSON.stringify(error.networkError, null, 2));
-  }
+
   return (
     <Flex width="100%" height="100vh">
-           <Head>
-            <title>Inicia sesion</title>
-            </Head>
+      <Head>
+        <title>Inicia sesion</title>
+      </Head>
       <Client
         isEditing={false}
         isOpen={isOpen}
@@ -94,14 +99,14 @@ const login = () => {
           <Button
             leftIcon={<Icon icon={sign} color="black" />}
             color="black"
-            backgroundColor="#E5E6E2"
+            height="3em"
+            backgroundColor="transparent"
             onClick={onOpen}
           >
             Registrarse Cliente
           </Button>
         </Box>
         <Login onSubmit={onSubmit} onSubmitClient={onSubmitClient} />
-        <div>{error || errorClient ? "Datos incorrectos" : ""}</div>
       </Flex>
     </Flex>
   );

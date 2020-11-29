@@ -30,6 +30,7 @@ const BasicFooter: React.FC<props> = ({
       width={width}
       height={height ?? ""}
       align="center"
+      textAlign="center"
       justify="center"
       roundedTop={borders[0]}
       roundedBottom={borders[1]}

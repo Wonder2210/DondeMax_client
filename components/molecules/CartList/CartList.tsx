@@ -85,6 +85,8 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
   React.useEffect(() => {
     if (state.products.length > 0) {
       setState({ ...state, total: state.products.reduce((prev, current) => prev + current.total, 0) });
+    } else {
+      setState({ ...state, total: 0 });
     }
   }, [state.products]);
   const deleteFromCart = (id) => () =>
@@ -100,6 +102,10 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
       }),
     });
   const onSubmit = (data) => {
+    if (state.products.length == 0) {
+      alert("debes de agregar productos primero");
+      return;
+    }
     takeOrder({
       variables: {
         ...data,

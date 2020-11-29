@@ -36,7 +36,7 @@ const InitialCard: React.FC<props> = ({ src, width, height, alt, children, href 
         zIndex={3}
         backgroundColor="#FFFFFF"
       >
-        <Link href={href}>{children}</Link>
+        {children}
       </BasicFooter>
     </Box>
   );

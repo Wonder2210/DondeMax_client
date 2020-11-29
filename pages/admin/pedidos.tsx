@@ -240,11 +240,10 @@ const pedidos = () => {
                     color: "black",
                     _after: {
                       content: '"Entregar"',
-                      width: "100%",
+
                       position: "absolute",
                       zIndex: 1,
                       color: "white",
-                      bgColor: "black",
                     },
                   }
             }
@@ -281,11 +280,10 @@ const pedidos = () => {
                     color: "black",
                     _after: {
                       content: '"Listo"',
-                      width: "100%",
+
                       position: "absolute",
                       zIndex: 1,
                       color: "white",
-                      bgColor: "black",
                     },
                   }
             }
@@ -315,18 +313,17 @@ const pedidos = () => {
             color="black"
             isDisabled={value}
             _hover={
-              true
+              value
                 ? {}
                 : {
                     bgColor: "black",
                     color: "black",
                     _after: {
                       content: '"Producir"',
-                      width: "100%",
+
                       position: "absolute",
                       zIndex: 1,
                       color: "white",
-                      bgColor: "black",
                     },
                   }
             }
@@ -388,9 +385,9 @@ const pedidos = () => {
   );
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Pedidos</title>
-            </Head>
+      <Head>
+        <title>Admin - Pedidos</title>
+      </Head>
       <Tabs>
         <TabList>
           <Tab>Pedidos Activos</Tab>

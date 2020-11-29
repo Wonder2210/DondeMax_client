@@ -8,7 +8,7 @@ import ProductCard from "@/components/organisms/Cards/ProductCardShop";
 import { Header } from "@/atoms/Text";
 import { useAppContext } from "@/utils/AppContext";
 import { GET_TYPES, GET_DATA } from "../utils/queries";
-import  Head from "next/head";
+import Head from "next/head";
 
 type state = {
   types: string;
@@ -95,10 +95,10 @@ const store = () => {
   if (loading) {
     return <h1>Cargando ...</h1>;
   }
-  console.log(context.productsCart);
+
   const products = state.products.results.map((i) => {
     const isInCart = context.productsCart.find((item) => i.id === item.id);
-    console.log(isInCart);
+
     return (
       <ProductCard
         key={i.id}
@@ -115,9 +115,9 @@ const store = () => {
 
   return (
     <Standard>
-        <Head>
-            <title>Pedidos</title>
-            </Head>
+      <Head>
+        <title>Pedidos</title>
+      </Head>
       <Flex
         justify="center"
         align="center"
@@ -127,7 +127,11 @@ const store = () => {
         bgPos="center"
         bgImage="url('/images/header-2.png')"
       >
-        <Header>Catalogo</Header>
+        <Header>Pe</Header>
+        <Header color="colors.rose.600">d</Header>
+        <Header>i</Header>
+        <Header color="colors.rose.600">d</Header>
+        <Header>os</Header>
       </Flex>
       <FilterBar
         preservations={{

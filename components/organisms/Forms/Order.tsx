@@ -40,15 +40,17 @@ const validationSchema = Yup.object().shape({
   client: Yup.number().required(VALIDATION_MESSAGE),
   payMethod: Yup.string().required(VALIDATION_MESSAGE),
   note: Yup.string(),
-  products: Yup.array().of(
-    Yup.object().shape({
-      id: Yup.number(),
-      name: Yup.string(),
-      price: Yup.number(),
-      quantity: Yup.number(),
-      total: Yup.number(),
-    }),
-  ),
+  products: Yup.array()
+    .min(1)
+    .of(
+      Yup.object().shape({
+        id: Yup.number(),
+        name: Yup.string(),
+        price: Yup.number(),
+        quantity: Yup.number(),
+        total: Yup.number(),
+      }),
+    ),
 });
 
 const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing, onEdit, clientList, productList }) => {
@@ -139,7 +141,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
               <Field name="client">
                 {({ field, form }) => (
                   <SelectInput
-                    placeholder="Tipo"
+                    placeholder="Cliente"
                     options={clientList}
                     id="client"
                     field={field}
@@ -164,7 +166,14 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
                   />
                 )}
               </Field>
-              <Field name="note">{({ field, form }) => <Textarea variant="flushed" size="sm" {...field} />}</Field>
+              <Field name="note">
+                {({ field, form }) => (
+                  <>
+                    <label htmlFor="text">Nota</label>
+                    <Textarea id="text" variant="flushed" size="sm" {...field} />
+                  </>
+                )}
+              </Field>
               <Field name="products">
                 {({ field, form }) => (
                   <>

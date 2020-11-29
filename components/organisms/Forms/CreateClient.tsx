@@ -27,10 +27,17 @@ type props = {
 const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required(VALIDATION_MESSAGE),
-  cedula: Yup.string().required(VALIDATION_MESSAGE),
+  name: Yup.string().trim().required(VALIDATION_MESSAGE),
+  cedula: Yup.string()
+    .trim()
+    .required(VALIDATION_MESSAGE)
+    .typeError("Dato invalido")
+    .transform((value, originalValue) => (/\s/.test(originalValue) ? NaN : value)),
   nationality: Yup.string().required(VALIDATION_MESSAGE),
-  phone: Yup.string().required(VALIDATION_MESSAGE),
+  phone: Yup.number()
+    .required(VALIDATION_MESSAGE)
+    .typeError("Dato invalido")
+    .transform((value, originalValue) => (/\s/.test(originalValue) ? NaN : value)),
 });
 
 const CreateClient: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing, onEdit }) => {

@@ -25,7 +25,8 @@ const GET = gql`
         materials {
           quantity
           id
-          name: material {
+          material {
+            id
             nombre
           }
         }
@@ -68,6 +69,7 @@ const UPDATE_PRODUCT = gql`
     $info: String
     $materials: [MaterialProductInput]
     $available: Boolean
+    $image: Upload
   ) {
     updateProduct(
       product: {
@@ -78,6 +80,7 @@ const UPDATE_PRODUCT = gql`
         info: $info
         materials: $materials
         available: $available
+        image: $image
       }
     ) {
       id
@@ -149,9 +152,9 @@ const productos = () => {
 
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Productos</title>
-            </Head>
+      <Head>
+        <title>Admin - Productos</title>
+      </Head>
       {loading ? (
         <h1>Cargando ...</h1>
       ) : (
@@ -199,7 +202,11 @@ const productos = () => {
                     price: precio,
                     type,
                     info,
-                    materials: materials.map((i) => ({ name: i.name.nombre, id: i.id, quantity: i.quantity })),
+                    materials: materials.map((i) => ({
+                      name: i.material.nombre,
+                      id: i.material.id,
+                      quantity: i.quantity,
+                    })),
                   })
                 }
               />

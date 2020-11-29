@@ -27,7 +27,13 @@ const InitialCard: React.FC<props> = ({ src, name, width, height, alt, price, is
       marginX="auto"
       width={width ?? ["15em", "18em"]}
       backgroundColor="#000"
-      boxShadow={false ? " 1px 1px 5px rgba(0, 0, 0, 0.5)" : " 10px 10px 50px rgba(0, 0, 0, 0.5)"}
+      boxShadow={{
+        base: " 1px 1px 5px rgba(0, 0, 0, 0.5)",
+        sm: " 1px 1px 5px rgba(0, 0, 0, 0.5)",
+        md: " 10px 10px 50px rgba(0, 0, 0, 0.5)",
+        lg: " 10px 10px 50px rgba(0, 0, 0, 0.5)",
+        xl: " 10px 10px 50px rgba(0, 0, 0, 0.5)",
+      }}
     >
       <ImageHeader alt={alt} src={src} height="100%" width="100%" />
       <BasicFooter

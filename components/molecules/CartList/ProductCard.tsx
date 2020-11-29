@@ -26,7 +26,12 @@ type props = {
 
 const ProductCard: React.FC<props> = ({ image, name, price, total, uniteds, onChange, remove }) => {
   return (
-    <Flex boxShadow="2xl" marginTop="2em" alignItems="center" position="relative">
+    <Flex
+      boxShadow={{ base: "sm", sm: "2xl", md: "2xl", xl: "2xl", lg: "2xl" }}
+      marginTop="2em"
+      alignItems="center"
+      position="relative"
+    >
       <Box position="absolute" top={0} right={2}>
         <IconButton
           width="1em"

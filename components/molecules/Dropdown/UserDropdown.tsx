@@ -92,7 +92,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
           >
             {user.name}
           </MenuButton>
-          <MenuList zIndex={5}>
+          <MenuList zIndex="6">
             {user.role == "ADMINISTRADOR" && (
               <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
                 <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
@@ -100,16 +100,16 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
               </MenuItem>
             )}
             {user.role == "CLIENT" && (
-             <>
-              <MenuItem minH="48px" onClick={()=> router.push("/")}>
-                <Icon icon={home} width="2em" />
-                <span className="margin-span">Inicio</span>
-              </MenuItem>
-              <MenuItem minH="48px" onClick={()=> router.push("/client")}>
-                <Icon icon={list} width="2em" />
-                <span className="margin-span">Pedidos</span>
-              </MenuItem>
-             </>
+              <>
+                <MenuItem minH="48px" onClick={() => router.push("/")}>
+                  <Icon icon={home} width="2em" />
+                  <span className="margin-span">Inicio</span>
+                </MenuItem>
+                <MenuItem minH="48px" onClick={() => router.push("/client")}>
+                  <Icon icon={list} width="2em" />
+                  <span className="margin-span">Pedidos</span>
+                </MenuItem>
+              </>
             )}
             <MenuItem minH="40px" onClick={CloseSession}>
               <Icon icon={exit} width="2em" />

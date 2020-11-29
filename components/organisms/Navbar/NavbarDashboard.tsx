@@ -46,7 +46,9 @@ const NavbarDashboard = ({ toggle }) => {
           {hour < 12 ? hour : hour - 12}&#58;{minutes < 10 ? `0${minutes}` : minutes} {hour >= 12 ? "PM" : "AM"}
         </Parragraph>
         <Divider borderColor="#222" orientation="vertical" height="3em" />
-        <UserDropdown image="https://randomuser.me/api/portraits/men/23.jpg" imageAlt="Jhon Doe" userName="Jhon Doe" />
+        <div>
+          <UserDropdown />
+        </div>
       </Flex>
     </Flex>
   );

@@ -59,7 +59,7 @@ const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next,
     });
 
   return (
-    <Flex align="center" justify="space-between" width="25vw">
+    <Flex align="center" justify="space-between" width="25vw" marginY="1em">
       <IconButton
         aria-label="heart"
         backgroundColor="#FFF"
