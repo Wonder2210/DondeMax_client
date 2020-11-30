@@ -113,6 +113,14 @@ const updateOrder = gql`
   }
 `;
 
+const ProduceOrder = gql`
+  mutation ProduceOrder($id: Int!) {
+    produceOrder(id: $id) {
+      id
+    }
+  }
+`;
+
 const deleteOrderq = gql`
   mutation DeleteOrder($id: Int!) {
     deleteOrder(id: $id)
@@ -121,69 +129,18 @@ const deleteOrderq = gql`
 const pedidos = () => {
   const defaultState = { order_id: null, orderMaterials: null, materials: null };
   const toast = createStandaloneToast();
-  const { data, loading } = useQuery(GET_DATA, { pollInterval: 500 });
+  const { data, loading, error: errorData } = useQuery(GET_DATA, { pollInterval: 500 });
   const [executeOrder, { error: execute }] = useMutation(updateOrder);
+  const [produceOrder, { error: produceError }] = useMutation(ProduceOrder, {
+    onError: () =>
+      alert("no hay suficiente mercancia para realizar este producto verifique el inventario y vuelva a intentar"),
+  });
+
+  if (errorData) {
+    console.log(JSON.stringify(errorData.networkError, null, 2));
+    console.log(errorData.graphQLErrors);
+  }
   const [deleteOrder] = useMutation(deleteOrderq);
-
-  // const [state, setState] = React.useState<{
-  //   order_id?: number;
-  //   orderMaterials?: Array<any>;
-  //   materials?: Array<any>;
-  // }>(defaultState);
-  // React.useEffect(() => {
-  //   if (data) {
-  //     const materials = data.materialsStage;
-  //     setState({ ...state, materials });
-  //   }
-  // }, [data]);
-  // React.useEffect(() => {
-  //   if (data && state.order_id) {
-  //     const products = data.orders.find((i) => i.id == state.order_id).products;
-  //     const materials = products.map((i) => i.materials).flat();
-  //     const list = state.materials.map((item) => {
-  //       const same = materials.filter((i) => i.id == item.id);
-  //       const result = same.reduce(
-  //         (prev, actual) => {
-  //           return {
-  //             ...actual,
-  //             quantity: actual.quantity + prev.quantity,
-  //           };
-  //         },
-  //         { quantity: 0 },
-  //       );
-  //       return result;
-  //     });
-
-  //     setState((last) => ({ ...last, orderMaterials: list }));
-  //   }
-  // }, [state.order_id]);
-
-  // React.useEffect(() => {
-  //   if (state.orderMaterials) {
-  //     let errors = [];
-  //     const data = state.materials.map((i) => {
-  //       const materialProduct = state.orderMaterials.find((item) => i.material_id == item.material_id);
-  //       if (i.weight < materialProduct.quantity) {
-  //         errors.concat(`Hacen falta ${materialProduct.weight - i.quantity}Kg de ${i.material_name}`);
-  //         return false;
-  //       }
-  //       return {
-  //         ...i,
-  //         weight: Number(i.weight) - Number(materialProduct.quantity),
-  //       };
-  //     });
-  //     if (errors.length > 0) {
-  //       console.log(data);
-  //       console.log(errors);
-
-  //       errors = [];
-  //       alert("ups no hay mercancia suficiente");
-  //       return () => {};
-  //     }
-  //     console.log(data);
-  //   }
-  // }, [state.orderMaterials]);
-
   const [takeOrderMutate, { error }] = useMutation(takeOrder);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const onSubmit = (data) => {
@@ -328,7 +285,7 @@ const pedidos = () => {
                   }
             }
             onClick={() => {
-              executeOrder({
+              produceOrder({
                 variables: {
                   id: row.original.id,
                   status: {

@@ -10,7 +10,7 @@ const Client = (token) => {
     headers: { authorization: token },
   }));
 
-  const link = new createUploadLink({ uri: "https://dondemax.herokuapp.com/graphql", fetch });
+  const link = new createUploadLink({ uri: "http://localhost:4000/graphql", fetch });
   return new ApolloClient({
     link: setAuthorizationLink.concat(link),
     cache: new InMemoryCache(),
