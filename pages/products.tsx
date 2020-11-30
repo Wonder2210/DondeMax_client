@@ -31,9 +31,9 @@ const products = () => {
 
   return (
     <Standard>
-         <Head>
-            <title>Donde Max - productos</title>
-            </Head>
+      <Head>
+        <title>Donde Max - productos</title>
+      </Head>
       <Flex
         justify="center"
         width="100%"
@@ -49,7 +49,9 @@ const products = () => {
       </Flex>
       <Tabs
         margin="1em auto"
-        width={{ base: "80%", sm: "100%", md: "75%", lg: "70%" }}
+        overflow="auto"
+        width={{ base: "100%", sm: "100%", md: "75%", lg: "70%" }}
+        paddingX="1em"
         onChange={(index) => {
           switch (index) {
             case 0:
