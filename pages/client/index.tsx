@@ -4,7 +4,7 @@ import { Box, Flex } from "@chakra-ui/core";
 import { NavbarClient } from "@/organisms/Navbar";
 import { Parragraph } from "@/atoms/Text";
 import { Table } from "@/organisms/Table";
-import  Head from "next/head";
+import Head from "next/head";
 
 const query = gql`
   query {
@@ -46,9 +46,10 @@ const index = () => {
         Header: "fecha de entrega",
         accessor: "delivery_date",
         Cell: ({ value }) => {
-          const date = new Date(Number(value));
+          let dateString = value;
+          const date = new Date(dateString.replace(" ", "T"));
 
-          const day = date.getDay();
+          const day = date.getDate();
           const month = date.getMonth();
           const year = date.getFullYear();
           return day + "-" + month + "-" + year;
@@ -94,9 +95,9 @@ const index = () => {
   }
   return (
     <Box position="fixed" w="100%" h="100vh">
-         <Head>
-            <title>Cliente - pedidos</title>
-            </Head>
+      <Head>
+        <title>Cliente - pedidos</title>
+      </Head>
       <NavbarClient />
       <Flex display="row" align="flex-start">
         <Parragraph>Pedidos Pendientes</Parragraph>
@@ -105,8 +106,7 @@ const index = () => {
       <Flex display="row" align="flex-start">
         <Parragraph>Pedidos Entregados</Parragraph>
         {loading ? <h1>Cargando ...</h1> : <Table columns={rows} data={data.clientOrders.delivered} />}
-  <Parragraph>para cancelar el pedido ponerse en contacto con nosotros al numero 0416979861</Parragraph>
-        
+        <Parragraph>para cancelar el pedido ponerse en contacto con nosotros al numero 0416979861</Parragraph>
       </Flex>
     </Box>
   );

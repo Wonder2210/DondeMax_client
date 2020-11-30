@@ -188,10 +188,10 @@ const mercancia = () => {
           Header: "Fecha de Vencimiento",
           accessor: "expiration_date",
           Cell: ({ value }) => {
-            const date = new Date(Number(value));
+            const date = new Date(value.replace(" ", "T"));
 
-            const day = date.getDay();
-            const month = date.getMonth();
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
             const year = date.getFullYear();
 
             return day + "-" + month + "-" + year;
@@ -248,9 +248,9 @@ const mercancia = () => {
 
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Mercancia</title>
-            </Head>
+      <Head>
+        <title>Admin - Mercancia</title>
+      </Head>
       <Tabs>
         <TabList>
           <Tab>Materiales</Tab>

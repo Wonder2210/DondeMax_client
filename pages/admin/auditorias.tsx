@@ -77,9 +77,10 @@ function clientes() {
           Header: "Fecha",
           accessor: "date",
           Cell: ({ value }) => {
-            const date = new Date(Number(value));
+            let dateString = value;
+            const date = new Date(dateString.replace(" ", "T"));
 
-            const day = date.getDay();
+            const day = date.getDate();
             const month = date.getMonth();
             const year = date.getFullYear();
 
@@ -109,9 +110,10 @@ function clientes() {
           Header: "Fecha",
           accessor: "date",
           Cell: ({ value }) => {
-            const date = new Date(Number(value));
+            let dateString = value;
+            const date = new Date(dateString.replace(" ", "T"));
 
-            const day = date.getDay();
+            const day = date.getDate();
             const month = date.getMonth();
             const year = date.getFullYear();
 
@@ -137,9 +139,10 @@ function clientes() {
           Header: "Fecha",
           accessor: "date",
           Cell: ({ value }) => {
-            const date = new Date(Number(value));
+            let dateString = value;
+            const date = new Date(dateString.replace(" ", "T"));
 
-            const day = date.getDay();
+            const day = date.getDate();
             const month = date.getMonth();
             const year = date.getFullYear();
 
@@ -161,9 +164,10 @@ function clientes() {
           Header: "Fecha",
           accessor: "date",
           Cell: ({ value }) => {
-            const date = new Date(Number(value));
+            let dateString = value;
+            const date = new Date(dateString.replace(" ", "T"));
 
-            const day = date.getDay();
+            const day = date.getDate();
             const month = date.getMonth();
             const year = date.getFullYear();
 
@@ -181,9 +185,9 @@ function clientes() {
   }
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Auditorias</title>
-            </Head>
+      <Head>
+        <title>Admin - Auditorias</title>
+      </Head>
       <Tabs>
         <TabList>
           <Tab>Pedidos</Tab>

@@ -164,10 +164,11 @@ const pedidos = () => {
         Header: "Fecha a ser entregado",
         accessor: "delivery_date",
         Cell: ({ value }) => {
-          const date = new Date(Number(value));
+          let dateString = value;
+          const date = new Date(dateString.replace(" ", "T"));
 
-          const day = date.getDay();
-          const month = date.getMonth();
+          const day = date.getDate();
+          const month = date.getMonth() + 1;
           const year = date.getFullYear();
 
           console.log(year);
