@@ -1,6 +1,11 @@
 import React from "react";
 import { Flex, useDisclosure, Box, Grid, Stat, StatNumber } from "@chakra-ui/core";
+import { Parragraph } from "@/atoms/Text";
 import { useQuery, gql } from "@apollo/client";
+import dynamic from "next/dynamic";
+const ProductsOrderChart = dynamic(() => import("@/molecules/Charts/ProductsOrders"), { ssr: false });
+const MaterialsChart = dynamic(() => import("@/molecules/Charts/MaterialsStage"), { ssr: false });
+const OrdersChart = dynamic(() => import("@/molecules/Charts/PedidosChart"), { ssr: false });
 
 import { SubHeader, Header } from "@/atoms/Text";
 
@@ -10,6 +15,14 @@ const GET_BASE_PRODUCTS = gql`
   query Get {
     orders {
       id
+      delivery_status
+      products {
+        id
+      }
+    }
+    materialsStage {
+      name
+      weight
     }
     users {
       id
@@ -36,77 +49,56 @@ const index = () => {
 
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Inicio</title>
-            </Head>
+      <Head>
+        <title>Admin - Inicio</title>
+      </Head>
       <Flex height="5em" justifyContent="space-between" alignItems="center">
         <SubHeader>Bienvenido</SubHeader>
       </Flex>
       {loading ? (
         "Cargando ..."
       ) : (
-        <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" templateRows="minmax(300px, auto)" heigh="70vh">
-          <Box bgColor="" boxShadow="xl">
-            <Flex>
-              <Header fontSize="1.5em">
-                Pedidos <br /> Tomados
-              </Header>
-              <Stat>
-                <StatNumber fontSize="4em" fontWeight="700" color="colors.rose.600">
-                  {data.orders.length}
-                </StatNumber>
-              </Stat>
-            </Flex>
-          </Box>
-          <Box bgColor="" boxShadow="xl">
-            <Flex>
-              <Header fontSize="1.5em">
-                Usuarios <br /> Registrado
-              </Header>
-              <Stat>
-                <StatNumber fontSize="4em" fontWeight="700" color="colors.rose.600">
-                  {data.users.length}
-                </StatNumber>
-              </Stat>
-            </Flex>
-          </Box>
-          <Box bgColor="" boxShadow="xl">
-            <Flex>
-              <Header fontSize="1.5em">
-                Clientes <br /> Registrados
-              </Header>
-              <Stat>
-                <StatNumber fontSize="4em" fontWeight="700" color="colors.rose.600">
-                  {data.clients.length}
-                </StatNumber>
-              </Stat>
-            </Flex>
-          </Box>
-          <Box bgColor="" boxShadow="xl">
-            <Flex>
-              <Header fontSize="1.5em">
-                Productos <br /> disponibles
-              </Header>
-              <Stat>
-                <StatNumber fontSize="4em" fontWeight="700" color="colors.rose.600">
-                  {data.productsRaw.length}
-                </StatNumber>
-              </Stat>
-            </Flex>
-          </Box>
-          <Box bgColor="" boxShadow="xl">
-            <Flex>
-              <Header fontSize="1.5em">
-                Proveedores <br /> Registrados
-              </Header>
-              <Stat>
-                <StatNumber fontSize="4em" fontWeight="700" color="colors.rose.600">
-                  {data.providers.length}
-                </StatNumber>
-              </Stat>
-            </Flex>
-          </Box>
-        </Grid>
+        <>
+          <Grid
+            templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+            gridTemplateRows="minmax(300px, auto)"
+            gridAutoRows="auto"
+            gridAutoFlow="dense"
+            heigh="70vh"
+          >
+            <Box bgColor="" boxShadow="xl" height="30vh">
+              <ProductsOrderChart orders={data.orders} />
+              <Flex justify="center" alignItems="center">
+                <Parragraph fontSize="1em">Numero de productos pedidos</Parragraph>{" "}
+              </Flex>
+            </Box>
+            <Box bgColor="" boxShadow="xl" height="30vh">
+              <MaterialsChart data={data} />
+              <Flex justify="center" alignItems="center">
+                <Parragraph fontSize="1em">Mercancia en inventario</Parragraph>{" "}
+              </Flex>
+            </Box>
+          </Grid>
+          <Grid
+            templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+            gridTemplateRows="minmax(300px, auto)"
+            gridAutoRows="auto"
+            gridAutoFlow="dense"
+          >
+            <Box bgColor="" boxShadow="xl">
+              <OrdersChart data={data} />
+              <Flex justify="center" alignItems="center">
+                <Parragraph fontSize="1em">Pedidos</Parragraph>{" "}
+              </Flex>
+            </Box>
+            <Box bgColor="" boxShadow="xl">
+              {/* <ChartistGraph/> */}
+            </Box>
+            <Box bgColor="" boxShadow="xl">
+              {/* <ChartistGraph/> */}
+            </Box>
+          </Grid>
+        </>
       )}
     </Dashboard>
   );
