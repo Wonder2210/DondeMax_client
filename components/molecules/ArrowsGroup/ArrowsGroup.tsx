@@ -9,8 +9,8 @@ const ArrowsGroup = ({ next, previous }) => {
   return (
     <Flex
       direction="row"
-      bottom="0"
-      transform="translateY(10%)"
+      bottom="0.2em"
+      transform="translateY(13%)"
       right="10%"
       justify="space-between"
       position="absolute"

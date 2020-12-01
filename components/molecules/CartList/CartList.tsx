@@ -79,19 +79,21 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
   };
   React.useEffect(() => {
     if (state.products.length == 0 || context.productsCart.length != state.products) {
+      console.log(context);
       setState({ ...state, products: [...context.productsCart.map((i) => ({ ...i, total: i.precio, quantity: 1 }))] });
     }
-  }, [context.productsCart]);
+  }, [context.productsCart, state.products]);
   React.useEffect(() => {
-    if (state.products.length > 0) {
+    if (state.products.length) {
       setState({ ...state, total: state.products.reduce((prev, current) => prev + current.total, 0) });
-    } else {
+    }
+    if (context.productsCart.length == 0) {
       setState({ ...state, total: 0 });
     }
   }, [state.products]);
   const deleteFromCart = (id) => () =>
     setContext((last) => ({ ...last, productsCart: last.productsCart.filter((i) => id !== i.id) }));
-  const onChange = (id) => (str, val) =>
+  const onChange = (id) => (str, val) => {
     setState({
       ...state,
       products: state.products.map((i) => {
@@ -101,6 +103,7 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
         return i;
       }),
     });
+  };
   const onSubmit = (data) => {
     if (state.products.length == 0) {
       alert("debes de agregar productos primero");
