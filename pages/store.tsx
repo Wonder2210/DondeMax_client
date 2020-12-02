@@ -7,7 +7,7 @@ import { FilterBar } from "@/organisms/FilterBar";
 import ProductCard from "@/components/organisms/Cards/ProductCardShop";
 import { Header } from "@/atoms/Text";
 import { useAppContext } from "@/utils/AppContext";
-import { GET_TYPES, GET_DATA } from "../utils/queries";
+import { GET_DATA_STORE } from "@/graphql";
 import Head from "next/head";
 
 type state = {
@@ -48,23 +48,30 @@ const store = () => {
     },
   });
 
-  const { loading, error, data } = useQuery(GET_TYPES);
-  const { loading: LoadingProducts, error: ErrorProducts, data: ProductsData } = useQuery(GET_DATA, {
+  const { loading, error, data } = useQuery(GET_DATA_STORE, {
     variables: { preservation: state.preservations, type: state.types, cursor: state.page - 1 },
   });
+
   const onChangePreservations = (e) => {
     setState((lastState) => ({ ...lastState, preservations: e }));
   };
   React.useEffect(() => {
-    if (ProductsData) setState({ ...state, products: { ...ProductsData.products, onCart: false } });
-  }, [ProductsData, context.productsCart]);
+    if (data) setState({ ...state, products: { ...data.products, onCart: false } });
+  }, [data, context.productsCart]);
+
   const onChangeTypes = (e) => setState((lastState) => ({ ...lastState, types: e }));
+
   const toggleTypes = () => setState((lastState) => ({ ...lastState, showTypes: !lastState.showTypes }));
+
   const togglePreservations = () =>
     setState((lastState) => ({ ...lastState, showPreservations: !lastState.showPreservations }));
+
   const next = () => setState((last) => ({ ...last, page: last.page + 1 }));
+
   const last = () => setState((last) => ({ ...last, page: last.page - 1 }));
+
   const onClick = (e: number) => setState((last) => ({ ...last, page: e }));
+
   const addToCart = (item) => {
     setState({
       ...state,
@@ -78,6 +85,7 @@ const store = () => {
       productsCart: [...last.productsCart, item],
     }));
   };
+
   const removeFromCart = (id) => {
     setState({
       ...state,
@@ -88,6 +96,7 @@ const store = () => {
     });
     setContext((last) => ({ ...last, productsCart: last.productsCart.filter((i) => id !== i.id) }));
   };
+
   let total = state.products.total;
   if (error) {
     return <h1>Error </h1>;

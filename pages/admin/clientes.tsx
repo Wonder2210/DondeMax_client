@@ -12,42 +12,8 @@ import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
-
-const GET_CLIENTS = gql`
-  query GetClients {
-    clients {
-      id
-      name
-      cedula
-      nationality
-      phone
-    }
-  }
-`;
-
-const CREATE_CLIENT = gql`
-  mutation CreateClient($nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
-    createClient(client: { name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
-      id
-      name
-    }
-  }
-`;
-
-const UPDATE_CLIENT = gql`
-  mutation updateClient($id: Int!, $nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
-    editClient(client: { id: $id, name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
-      id
-      name
-    }
-  }
-`;
-
-const DELETE_CLIENT = gql`
-  mutation DeleteClient($id: Int!) {
-    deleteClient(id: $id)
-  }
-`;
+import { clientes as clients } from "@/utils/TablesHeader";
+import { GET_DATA_CLIENTS, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT } from "@/graphql";
 
 function clientes() {
   const defaultState = {
@@ -72,7 +38,7 @@ function clientes() {
       phone?: string;
     };
   }>(defaultState);
-  const { data, loading } = useQuery(GET_CLIENTS, { pollInterval: 500 });
+  const { data, loading } = useQuery(GET_DATA_CLIENTS, { pollInterval: 500 });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [createClient, { error }] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
   const [updateClient] = useMutation(UPDATE_CLIENT, { onCompleted: onClose });
@@ -101,27 +67,8 @@ function clientes() {
     onClose();
   };
   const headers = React.useMemo(
-    () => [
-      {
-        Header: "id",
-        accessor: "id",
-      },
-      {
-        Header: "Nombre",
-        accessor: "name",
-      },
-      {
-        Header: "Nacionalidad",
-        accessor: "nationality",
-      },
-      {
-        Header: "Cedula",
-        accessor: "cedula",
-      },
-      {
-        Header: "Telefono",
-        accessor: "phone",
-      },
+    (): Array<{ Header: string; accessor?: string; Cell?: any }> => [
+      ...clients,
       {
         Header: "Acciones",
         Cell: ({ row }) => (
@@ -138,9 +85,9 @@ function clientes() {
   );
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Clientes</title>
-            </Head>
+      <Head>
+        <title>Admin - Clientes</title>
+      </Head>
       {loading ? (
         "Cargando..."
       ) : (

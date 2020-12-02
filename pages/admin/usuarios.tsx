@@ -11,42 +11,11 @@ import { CreateUser as User } from "@/organisms/Forms";
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 import { useAuth } from "@/utils/AuthHook";
+import { usuarios as users } from "@/utils/TablesHeader";
+import { GET_DATA_USERS, UPDATE_USER, DELETE_USER, CREATE_USER } from "@/graphql";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
-const GET_USERS = gql`
-  query GetUsers {
-    users {
-      id
-      name
-      email
-      role
-      phone
-    }
-  }
-`;
 
-const CREATE_USER = gql`
-  mutation CreateUser($name: String!, $email: String!, $password: String!, $role: UserRole!, $phone: String!) {
-    createUser(user: { name: $name, email: $email, password: $password, role: $role, phone: $phone }) {
-      id
-    }
-  }
-`;
-
-const DELETE_USER = gql`
-  mutation DeleteUser($id: Int!) {
-    deleteUser(id: $id)
-  }
-`;
-
-const UPDATE_USER = gql`
-  mutation editUser($id: Int!, $name: String, $email: String, $password: String, $role: UserRole, $phone: String) {
-    editUser(user: { id: $id, name: $name, phone: $phone, email: $email, password: $password, role: $role }) {
-      id
-      name
-    }
-  }
-`;
 function usuarios() {
   const defaultState = {
     edit: false,
@@ -71,7 +40,7 @@ function usuarios() {
       phone?: string;
     };
   }>(defaultState);
-  const { data, loading } = useQuery(GET_USERS, { pollInterval: 500 });
+  const { data, loading } = useQuery(GET_DATA_USERS, { pollInterval: 500 });
   const [createUser] = useMutation(CREATE_USER, { onCompleted: onClose });
   const [updateUser] = useMutation(UPDATE_USER, { onCompleted: onClose });
   const [deleteUser, { error }] = useMutation(DELETE_USER, { onCompleted: onClose });
@@ -101,36 +70,12 @@ function usuarios() {
     setState({ ...defaultState });
     onClose();
   };
-  const headers = React.useMemo(
-    () => [
-      {
-        Header: "id",
-        accessor: "id",
-      },
-      {
-        Header: "Nombre",
-        accessor: "name",
-      },
-      {
-        Header: "Rol",
-        accessor: "role",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "Telefono",
-        accessor: "phone",
-      },
-    ],
-    [],
-  );
+  const headers = React.useMemo(() => [...users], []);
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Usuarios</title>
-            </Head>
+      <Head>
+        <title>Admin - Usuarios</title>
+      </Head>
       {loading ? (
         "Cargando..."
       ) : (

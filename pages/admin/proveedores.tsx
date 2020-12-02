@@ -8,7 +8,7 @@ import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
 import { Provider } from "@/organisms/Forms";
-import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/utils/queries";
+import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/graphql";
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
@@ -90,9 +90,9 @@ const proveedores = () => {
   };
   return (
     <Dashboard>
-         <Head>
-            <title>Admin - Proveedores</title>
-            </Head>
+      <Head>
+        <title>Admin - Proveedores</title>
+      </Head>
       {loading ? (
         <h1>Cargando ... </h1>
       ) : (

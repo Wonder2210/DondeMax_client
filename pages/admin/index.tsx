@@ -1,47 +1,19 @@
 import React from "react";
-import { Flex, useDisclosure, Box, Grid, Stat, StatNumber } from "@chakra-ui/core";
+import { Flex, Box, Grid } from "@chakra-ui/core";
 import { Parragraph } from "@/atoms/Text";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import dynamic from "next/dynamic";
 const ProductsOrderChart = dynamic(() => import("@/molecules/Charts/ProductsOrders"), { ssr: false });
 const MaterialsChart = dynamic(() => import("@/molecules/Charts/MaterialsStage"), { ssr: false });
 const OrdersChart = dynamic(() => import("@/molecules/Charts/PedidosChart"), { ssr: false });
-
+import { GET_DATA_INDEX } from "@/graphql";
 import { SubHeader, Header } from "@/atoms/Text";
 
 import { Dashboard } from "@/layouts/Dashboard";
 import Head from "next/head";
-const GET_BASE_PRODUCTS = gql`
-  query Get {
-    orders {
-      id
-      delivery_status
-      products {
-        id
-      }
-    }
-    materialsStage {
-      name
-      weight
-    }
-    users {
-      id
-    }
-    clients {
-      id
-    }
-    productsRaw {
-      id
-    }
-    providers {
-      id
-    }
-  }
-`;
 
 const index = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, error, loading } = useQuery(GET_BASE_PRODUCTS, { variables: { cursor: 0 } });
+  const { data, loading } = useQuery(GET_DATA_INDEX, { variables: { cursor: 0 } });
 
   if (loading) {
     return <h1>Cargando ... </h1>;
@@ -90,12 +62,6 @@ const index = () => {
               <Flex justify="center" alignItems="center">
                 <Parragraph fontSize="1em">Pedidos</Parragraph>{" "}
               </Flex>
-            </Box>
-            <Box bgColor="" boxShadow="xl">
-              {/* <ChartistGraph/> */}
-            </Box>
-            <Box bgColor="" boxShadow="xl">
-              {/* <ChartistGraph/> */}
             </Box>
           </Grid>
         </>

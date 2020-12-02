@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { Standard } from "@/layouts/Standard";
 import { Header } from "@/atoms/Text";
 import { Products } from "@/organisms/CardsContainer";
-import { GET_BASE_PRODUCTS } from "../utils/queries";
+import { GET_BASE_PRODUCTS } from "@/graphql";
 import { useRouter } from "next/router";
 import Head from "next/head";
 

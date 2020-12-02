@@ -8,6 +8,7 @@
       "@/organisms/*":["components/organisms/*"],
       "@/layouts/*":["components/layouts/*"],
       "@/utils/*":["utils/*"],
+      "@/graphql":["graphql/index"],
     },
     "target": "es5",
     "lib": [

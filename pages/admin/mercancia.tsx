@@ -11,92 +11,22 @@ import { Table } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
 import input from "@iconify/icons-cil/input";
 import { Mercancia, Storage } from "@/organisms/Forms";
-import { CREATE_MATERIAL, DELETE_MATERIAL, GET_MERCANCIA, UPDATE_MATERIAL } from "@/utils/queries";
+import { ADD_TO_STORAGE, GET_DATA_MERCANCIA, DELETE_MATERIAL, UPDATE_MATERIAL, CREATE_MATERIAL } from "@/graphql";
+import { mercancia as headers } from "@/utils/TablesHeader";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
-const GET_INVENTARIO = gql`
-  query GetStorage {
-    storage {
-      id
-      expiration_date
-      brand
-      uniteds
-      weight
-      united_weight
-      material {
-        id
-        nombre
-        type {
-          name
-        }
-      }
-      provider {
-        name
-        RIF
-        phone
-        direction
-      }
-    }
-    materialsStage {
-      id
-      name
-      uniteds
-      weight
-    }
-    providers {
-      name
-      id
-    }
-    materials {
-      id
-      nombre
-      onStock {
-        uniteds
-        weight
-      }
-      type {
-        id
-        name
-      }
-    }
-    materialTypes {
-      id
-      type: name
-    }
-  }
-`;
-
-const ADD_TO_STORAGE = gql`
-  mutation AddToStorage(
-    $materialId: Int!
-    $providerId: Int!
-    $uniteds: Int!
-    $expirationDate: String!
-    $brand: String!
-    $weight: Float!
-    $united_weight: Float!
-  ) {
-    addToStore(
-      store: {
-        materialsId: $materialId
-        providerId: $providerId
-        uniteds: $uniteds
-        united_weight: $united_weight
-        expirationDate: $expirationDate
-        brand: $brand
-        weight: $weight
-      }
-    ) {
-      id
-    }
-  }
-`;
 
 const mercancia = () => {
-  const { data, loading } = useQuery(GET_INVENTARIO, { pollInterval: 500 });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenStore, onOpen: onOpenStore, onClose: onCloseStore } = useDisclosure();
+  const { data, loading } = useQuery(GET_DATA_MERCANCIA, { pollInterval: 500 });
+  const [deleteMutation] = useMutation(DELETE_MATERIAL);
+  const [createMaterial, { error }] = useMutation(CREATE_MATERIAL, { onCompleted: onClose });
+  const [addToStore] = useMutation(ADD_TO_STORAGE, { onCompleted: onCloseStore });
+  const [updateMaterial] = useMutation(UPDATE_MATERIAL, { onCompleted: closeAndReset });
   const deleteMaterial = (e) => {
-    console.log(e);
+    deleteMutation(e);
   };
   const defaultState = {
     edit: false,
@@ -108,31 +38,33 @@ const mercancia = () => {
   };
 
   const [editData, setEditData] = React.useState(defaultState);
-  const columns = React.useMemo(
-    () => [
-      [
-        {
-          Header: "ID",
-          accessor: "id",
-        },
 
-        {
-          Header: "Nombre",
-          accessor: "nombre",
-        },
-        {
-          Header: "Peso Total",
-          accessor: "onStock.weight",
-        },
-        {
-          Header: "Unidades totales",
-          accessor: "onStock.uniteds",
-        },
-        {
-          Header: "Tipo",
-          accessor: "type",
-          Cell: ({ value }) => String(value.name),
-        },
+  const onSubmit = ({ nombre, type }) => {
+    createMaterial({ variables: { nombre: nombre, type: Number(type) } });
+  };
+  const resetState = () => setEditData({ ...defaultState });
+  const closeAndReset = () => {
+    resetState();
+    onClose();
+  };
+
+  const onEdit = (data) =>
+    updateMaterial({ variables: { id: editData.data.id, nombre: data.nombre, type: Number(data.type) } });
+  const submitStore = (data) =>
+    addToStore({
+      variables: {
+        ...data,
+        providerId: parseInt(data.providerId),
+        materialId: parseInt(data.materialId),
+        uniteds: parseInt(data.uniteds),
+        weight: parseFloat(data.weight),
+        united_weight: parseFloat(data.united_weight),
+      },
+    });
+  const columns = React.useMemo(
+    (): Array<{ Header: string; accessor?: string; Cell?: any }> => [
+      [
+        ...headers[0],
         {
           Header: "Acciones",
           Cell: ({ row }) => (
@@ -149,98 +81,11 @@ const mercancia = () => {
           ),
         },
       ],
-      [
-        {
-          Header: "ID",
-          accessor: "id",
-        },
-        {
-          Header: "Material",
-          accessor: "material.nombre",
-        },
-        {
-          Header: "Marca",
-          accessor: "brand",
-        },
-        {
-          Header: "Unidades",
-          accessor: "uniteds",
-        },
-
-        {
-          Header: "Peso c/u",
-          accessor: "weight",
-          Cell: ({ value }) => String(value + "Kg"),
-        },
-        {
-          Header: "Peso Neto",
-          Cell: ({ row }) => String(row.original["uniteds"] * row.original["weight"] + "Kg"),
-        },
-        {
-          Header: "Tipo",
-          accessor: "material.type.name",
-        },
-        {
-          Header: "Proveedor",
-          accessor: "provider.name",
-        },
-        {
-          Header: "Fecha de Vencimiento",
-          accessor: "expiration_date",
-          Cell: ({ value }) => {
-            const date = new Date(value.replace(" ", "T"));
-
-            const day = date.getDate();
-            const month = date.getMonth() + 1;
-            const year = date.getFullYear();
-
-            return day + "-" + month + "-" + year;
-          },
-        },
-      ],
-      [
-        {
-          Header: "tipo",
-          accessor: "name",
-        },
-
-        {
-          Header: "Peso",
-          accessor: "weight",
-          Cell: ({ value }) => `${value}Kg`,
-        },
-      ],
+      [...headers[1]],
+      [...headers[2]],
     ],
     [],
   );
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isOpenStore, onOpen: onOpenStore, onClose: onCloseStore } = useDisclosure();
-
-  const [createMaterial, { error }] = useMutation(CREATE_MATERIAL, { onCompleted: onClose });
-  const [addToStore] = useMutation(ADD_TO_STORAGE, { onCompleted: onCloseStore });
-  const onSubmit = ({ nombre, type }) => {
-    createMaterial({ variables: { nombre: nombre, type: Number(type) } });
-  };
-  const resetState = () => setEditData({ ...defaultState });
-  const closeAndReset = () => {
-    resetState();
-    onClose();
-  };
-  const [updateMaterial] = useMutation(UPDATE_MATERIAL, { onCompleted: closeAndReset });
-  const onEdit = (data) =>
-    updateMaterial({ variables: { id: editData.data.id, nombre: data.nombre, type: Number(data.type) } });
-  const submitStore = (data) =>
-    addToStore({
-      variables: {
-        ...data,
-        providerId: parseInt(data.providerId),
-        materialId: parseInt(data.materialId),
-        uniteds: parseInt(data.uniteds),
-        weight: parseFloat(data.weight),
-        united_weight: parseFloat(data.united_weight),
-      },
-    });
-
   if (error) {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);

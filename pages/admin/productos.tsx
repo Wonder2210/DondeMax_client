@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure, Grid } from "@chakra-ui/core";
+import { Flex, useDisclosure, Grid } from "@chakra-ui/core";
 import { IconButton } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
@@ -9,90 +9,7 @@ import { ProductCardAdmin as Product } from "@/organisms/Cards";
 import { Dashboard } from "@/layouts/Dashboard";
 import { Products } from "@/organisms/Forms";
 import Head from "next/head";
-
-const GET = gql`
-  query GetProducts {
-    products(size: 10, cursor: 0) {
-      total
-      results {
-        id
-        name
-        image
-        info
-        type
-        precio
-        available
-        materials {
-          quantity
-          id
-          material {
-            id
-            nombre
-          }
-        }
-      }
-    }
-    materials {
-      id
-      type: nombre
-    }
-    productTypes {
-      id: type
-      type
-    }
-  }
-`;
-
-const ADD = gql`
-  mutation AddProduct(
-    $name: String!
-    $price: Float!
-    $materials: [MaterialProductInput!]!
-    $image: Upload!
-    $info: String!
-    $type: String!
-  ) {
-    createProduct(
-      product: { name: $name, precio: $price, materials: $materials, image: $image, info: $info, type: $type }
-    ) {
-      id
-    }
-  }
-`;
-
-const UPDATE_PRODUCT = gql`
-  mutation UpdateProduct(
-    $id: Int!
-    $name: String
-    $precio: Float
-    $type: String
-    $info: String
-    $materials: [MaterialProductInput]
-    $available: Boolean
-    $image: Upload
-  ) {
-    updateProduct(
-      product: {
-        id: $id
-        name: $name
-        precio: $precio
-        type: $type
-        info: $info
-        materials: $materials
-        available: $available
-        image: $image
-      }
-    ) {
-      id
-    }
-  }
-`;
-
-const DELETE_PRODUCT = gql`
-  mutation DeleteProduct($id: Int!) {
-    deleteProduct(id: $id)
-  }
-`;
+import { GET_DATA_PRODUCTS, ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from "@/graphql";
 
 const productos = () => {
   const defaultState = {
@@ -109,8 +26,8 @@ const productos = () => {
   };
   const [state, setState] = React.useState(defaultState);
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const { data, loading } = useQuery(GET, { pollInterval: 500, variables: { size: 10, cursor: 0 } });
-  const [mutate] = useMutation(ADD, { onCompleted: onClose });
+  const { data, loading } = useQuery(GET_DATA_PRODUCTS, { pollInterval: 500, variables: { size: 10, cursor: 0 } });
+  const [mutate] = useMutation(ADD_PRODUCT, { onCompleted: onClose });
   const [deleteP] = useMutation(DELETE_PRODUCT);
   const [update, { error }] = useMutation(UPDATE_PRODUCT, { onCompleted: onClose });
 

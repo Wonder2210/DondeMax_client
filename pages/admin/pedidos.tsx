@@ -22,116 +22,16 @@ import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
+import { GET_DATA_PEDIDOS, UPDATE_ORDER, PRODUCE_ORDER, DELETE_ORDER, TAKE_ORDER } from "@/graphql";
 
-const GET_DATA = gql`
-  query GetOrders {
-    clients {
-      id
-      type: name
-    }
-    productList: productsRaw {
-      id
-      type: name
-      price: precio
-    }
-
-    materialsStage {
-      id
-      name
-      uniteds
-      weight
-    }
-    orders {
-      id
-      pay_method
-      delivery_date
-      note
-      delivery_status
-      production_status
-      stage_status
-      abono
-      monto
-      total
-      creator {
-        name
-      }
-      client {
-        name
-      }
-      products {
-        id
-        quantity
-        product {
-          name
-        }
-        materials {
-          id
-          material_name
-          quantity
-        }
-      }
-    }
-  }
-`;
-
-const takeOrder = gql`
-  mutation TakeOrder(
-    $client: Int!
-    $deliveryDate: String!
-    $payMethod: PayMethod!
-    $note: String!
-    $abono: Float!
-    $total: Float!
-    $monto: Float!
-    $orderProducts: [ProductOrderInput!]!
-  ) {
-    takeOrder(
-      order: {
-        client: $client
-        deliveryDate: $deliveryDate
-        payMethod: $payMethod
-        note: $note
-        deliveryStatus: false
-        stageStatus: false
-        productionStatus: false
-        abono: $abono
-        total: $total
-        monto: $monto
-        orderProducts: $orderProducts
-      }
-    ) {
-      id
-    }
-  }
-`;
-
-const updateOrder = gql`
-  mutation update($id: Int!, $status: UpdateOrder!) {
-    updatStateOrder(id: $id, state: $status) {
-      id
-    }
-  }
-`;
-
-const ProduceOrder = gql`
-  mutation ProduceOrder($id: Int!) {
-    produceOrder(id: $id) {
-      id
-    }
-  }
-`;
-
-const deleteOrderq = gql`
-  mutation DeleteOrder($id: Int!) {
-    deleteOrder(id: $id)
-  }
-`;
 const pedidos = () => {
   const defaultState = { order_id: null, orderMaterials: null, materials: null };
-  const toast = createStandaloneToast();
-  const { data, loading, error: errorData } = useQuery(GET_DATA, { pollInterval: 500 });
-  const [executeOrder, { error: execute }] = useMutation(updateOrder);
-  const [produceOrder, { error: produceError }] = useMutation(ProduceOrder, {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, loading, error: errorData } = useQuery(GET_DATA_PEDIDOS, { pollInterval: 500 });
+  const [executeOrder, { error: execute }] = useMutation(UPDATE_ORDER);
+  const [deleteOrder] = useMutation(DELETE_ORDER);
+  const [takeOrderMutate] = useMutation(TAKE_ORDER);
+  const [produceOrder] = useMutation(PRODUCE_ORDER, {
     onError: () =>
       alert("no hay suficiente mercancia para realizar este producto verifique el inventario y vuelva a intentar"),
   });
@@ -140,9 +40,7 @@ const pedidos = () => {
     console.log(JSON.stringify(errorData.networkError, null, 2));
     console.log(errorData.graphQLErrors);
   }
-  const [deleteOrder] = useMutation(deleteOrderq);
-  const [takeOrderMutate, { error }] = useMutation(takeOrder);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const onSubmit = (data) => {
     takeOrderMutate({
       variables: {
@@ -171,7 +69,6 @@ const pedidos = () => {
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
 
-          console.log(year);
           return day + "-" + month + "-" + year;
         },
       },
