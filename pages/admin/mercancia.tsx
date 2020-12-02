@@ -24,7 +24,6 @@ const mercancia = () => {
   const [deleteMutation] = useMutation(DELETE_MATERIAL);
   const [createMaterial, { error }] = useMutation(CREATE_MATERIAL, { onCompleted: onClose });
   const [addToStore] = useMutation(ADD_TO_STORAGE, { onCompleted: onCloseStore });
-  const [updateMaterial] = useMutation(UPDATE_MATERIAL, { onCompleted: closeAndReset });
   const deleteMaterial = (e) => {
     deleteMutation(e);
   };
@@ -47,6 +46,7 @@ const mercancia = () => {
     resetState();
     onClose();
   };
+  const [updateMaterial] = useMutation(UPDATE_MATERIAL, { onCompleted: closeAndReset });
 
   const onEdit = (data) =>
     updateMaterial({ variables: { id: editData.data.id, nombre: data.nombre, type: Number(data.type) } });
