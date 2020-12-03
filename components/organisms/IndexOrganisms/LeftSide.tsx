@@ -16,7 +16,7 @@ const LeftSide = () => {
       backgroundPosition="left"
       backgroundSize="cover"
       position="relative"
-      display={{ sm: "none", md: "none", lg: "block", xl: "block" }}
+      display={{ base: "none", sm: "none", md: "none", lg: "block", xl: "block" }}
     >
       <Flex
         position="absolute"

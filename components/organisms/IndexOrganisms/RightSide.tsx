@@ -2,7 +2,6 @@ import React from "react";
 
 import { Flex, Box } from "@chakra-ui/core";
 import { useRouter } from "next/router";
-import { useMediaQuery } from "react-responsive";
 import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
 import Whatsapp from "@iconify/icons-cib/whatsapp";
 import Instagram from "@iconify/icons-cib/instagram";
@@ -14,9 +13,7 @@ import { InitialCard } from "@/organisms/Cards";
 
 const RightSide = () => {
   const router = useRouter();
-  const isPhone = useMediaQuery({
-    query: "(max-width:62em)",
-  });
+
   return (
     <Flex
       bg="#FFF"
@@ -64,31 +61,36 @@ const RightSide = () => {
           </InitialCard>
         </CardSlider>
       </Box>
-      {isPhone && (
-        <Flex
-          position="absolute"
-          w="100%"
-          justify="center"
-          align="center"
-          bottom="0"
-          height="10vh"
-          backgroundColor="#E91E63"
-        >
-          <SubHeader>Contactanos a traves de</SubHeader>
-          <IconButton
-            aria-label="heart"
-            backgroundColor="rgba(0,0,0,0)"
-            color="black"
-            icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
-          />
-          <IconButton
-            aria-label="heart"
-            backgroundColor="rgba(0,0,0,0)"
-            color="black"
-            icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
-          />
-        </Flex>
-      )}
+      <Flex
+        position="absolute"
+        w="100%"
+        display={{
+          base: "block",
+          sm: "block",
+          md: "block",
+          lg: "block",
+          xl: "none",
+        }}
+        justify="center"
+        align="center"
+        bottom="0"
+        height="10vh"
+        backgroundColor="#E91E63"
+      >
+        <SubHeader>Contactanos a traves de</SubHeader>
+        <IconButton
+          aria-label="heart"
+          backgroundColor="rgba(0,0,0,0)"
+          color="black"
+          icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
+        />
+        <IconButton
+          aria-label="heart"
+          backgroundColor="rgba(0,0,0,0)"
+          color="black"
+          icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
+        />
+      </Flex>
     </Flex>
   );
 };

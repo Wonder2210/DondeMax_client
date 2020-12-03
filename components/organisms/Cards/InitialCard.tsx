@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+
 import { Box } from "@chakra-ui/core";
 import { BasicFooter, ImageHeader } from "../../atoms/CardPieces";
 
