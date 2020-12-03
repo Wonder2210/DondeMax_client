@@ -18,7 +18,12 @@ const Table: React.FC<props> = ({ columns, data, width, ref, id = "table" }) => 
       width={width}
       padding="2em"
       margin="1em auto"
-      overflowX={{ base: "auto", sm: "auto", md: "hidden", lg: "hidden", xl: "hidden" }}
+      transition=".1s ease-in"
+      overflowX="auto"
+      _hover={{
+        border: "1px solid #f2f2f2",
+        boxShadow: "0 0 40px -5px #9e9c9e",
+      }}
     >
       <table {...getTableProps()} style={{ width: "100%" }} id={id}>
         <thead>
@@ -28,7 +33,7 @@ const Table: React.FC<props> = ({ columns, data, width, ref, id = "table" }) => 
                 <th
                   {...column.getHeaderProps()}
                   style={{
-                    borderBottom: "solid 3px black",
+                    // borderBottom: "solid 3px black",
                     color: "black",
                     fontWeight: "bold",
                   }}
@@ -51,7 +56,7 @@ const Table: React.FC<props> = ({ columns, data, width, ref, id = "table" }) => 
                       style={{
                         padding: "10px",
                         borderWidth: "0px 0px 1px 0px",
-                        borderColor: "black",
+                        // borderColor: "#BeBeBe",
                       }}
                     >
                       <Flex justifyContent="center">{cell.render("Cell")}</Flex>

@@ -84,6 +84,7 @@ const pedidos = () => {
         }) => (
           <Button
             width="6em"
+            height="2.7em"
             isDisabled={value || (production_status && stage_status)}
             backgroundColor="transparent"
             color="black"
@@ -124,6 +125,7 @@ const pedidos = () => {
         Cell: ({ value, row }) => (
           <Button
             width="6em"
+            height="2.7em"
             isDisabled={!row.original.production_status || (row.original.production_status && value)}
             backgroundColor="transparent"
             color="black"
@@ -164,6 +166,7 @@ const pedidos = () => {
         Cell: ({ value, row }) => (
           <Button
             width="6em"
+            height="2.7em"
             backgroundColor="transparent"
             color="black"
             isDisabled={value}
@@ -171,8 +174,8 @@ const pedidos = () => {
               value
                 ? {}
                 : {
-                    bgColor: "black",
-                    color: "black",
+                    bgColor: "colors.green.400",
+                    color: "colors.green.400",
                     _after: {
                       content: '"Producir"',
 
