@@ -4,6 +4,7 @@ import { NavbarDashboard } from "../../organisms/Navbar";
 import { SidebarDashboard } from "../../molecules/Sidebar";
 import { useRouter } from "next/router";
 import { useAuth } from "../../../utils/AuthHook";
+import Cookie from "js-cookie";
 
 type props = {
   sidebar: boolean;
@@ -18,7 +19,9 @@ const Dashboard = ({ children }) => {
   });
 
   React.useEffect(() => {
-    if (user.role == "CLIENT") {
+    const cookie = Cookie.get("auth");
+
+    if (!cookie) {
       router.push("/");
       alert("no tienes permiso de estar aqui");
     }
