@@ -1,21 +1,16 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
-import { useMediaQuery } from "react-responsive";
+import { Box, useMediaQuery } from "@chakra-ui/core";
 import NavbarWideScreen from "./NavbarWideScreens";
 import NavbarMobile from "./NavbarMobile";
 
 const Navbar = () => {
-  const isTabletOrPc = useMediaQuery({
-    minDeviceWidth: 768,
-  });
-  const isMobile = useMediaQuery({
-    maxDeviceWidth: 768,
-  });
+  const [isLargerThan768] = useMediaQuery("(min-width:768px)");
+  const [isLessThan768] = useMediaQuery("(max-width:768px)");
 
   return (
     <Box w="100%" height="min-content" top="0" position="absolute">
-      {isTabletOrPc && <NavbarWideScreen />}
-      {isMobile && <NavbarMobile />}
+      {isLargerThan768 && <NavbarWideScreen />}
+      {isLessThan768 && <NavbarMobile />}
     </Box>
   );
 };

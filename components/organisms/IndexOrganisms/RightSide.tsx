@@ -78,18 +78,20 @@ const RightSide = () => {
         backgroundColor="#E91E63"
       >
         <SubHeader>Contactanos a traves de</SubHeader>
-        <IconButton
-          aria-label="heart"
-          backgroundColor="rgba(0,0,0,0)"
-          color="black"
-          icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
-        />
-        <IconButton
-          aria-label="heart"
-          backgroundColor="rgba(0,0,0,0)"
-          color="black"
-          icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
-        />
+        <Flex>
+          <IconButton
+            aria-label="heart"
+            backgroundColor="rgba(0,0,0,0)"
+            color="black"
+            icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
+          />
+          <IconButton
+            aria-label="heart"
+            backgroundColor="rgba(0,0,0,0)"
+            color="black"
+            icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
+          />
+        </Flex>
       </Flex>
     </Flex>
   );
