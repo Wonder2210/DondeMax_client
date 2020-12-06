@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex } from "@chakra-ui/core";
+import Animation from "@/molecules/Loader/Animation";
 import { SubHeader } from "@/atoms/Text";
 import { Table } from "@/organisms/Table";
 import { Dashboard } from "@/layouts/Dashboard";
@@ -40,7 +41,7 @@ function clientes() {
                   .filter((i) => i.header !== "Acciones")}
               />
             </Flex>
-            {loading ? <h1>Cargando...</h1> : <Table id="orders" columns={columns[0]} data={data.ordersLog} />}
+            {loading ? <Animation /> : <Table id="orders" columns={columns[0]} data={data.ordersLog} />}
           </TabPanel>
           <TabPanel>
             <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
@@ -52,7 +53,7 @@ function clientes() {
                   .filter((i) => i.header !== "Acciones")}
               />
             </Flex>
-            {loading ? <h1>Cargando...</h1> : <Table id="products" columns={columns[2]} data={data.productsLog} />}
+            {loading ? <Animation /> : <Table id="products" columns={columns[2]} data={data.productsLog} />}
           </TabPanel>
           <TabPanel>
             <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
@@ -64,7 +65,7 @@ function clientes() {
                   .filter((i) => i.header !== "Acciones")}
               />
             </Flex>
-            {loading ? <h1>Cargando...</h1> : <Table id="inventario" columns={columns[1]} data={data.storageLog} />}
+            {loading ? <Animation /> : <Table id="inventario" columns={columns[1]} data={data.storageLog} />}
           </TabPanel>
           <TabPanel>
             <Flex height="5em" justifyContent="space-between" alignItems="center">
@@ -76,7 +77,7 @@ function clientes() {
                   .filter((i) => i.header !== "Acciones")}
               />
             </Flex>
-            {loading ? <h1>Cargando...</h1> : <Table id="sesion" columns={columns[3]} data={data.sessionLog} />}
+            {loading ? <Animation /> : <Table id="sesion" columns={columns[3]} data={data.sessionLog} />}
           </TabPanel>
         </TabPanels>
       </Tabs>

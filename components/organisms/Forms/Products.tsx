@@ -14,16 +14,16 @@ import {
 import x from "@iconify/icons-cil/x-circle";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
-import { IconButton } from "@/atoms/Buttons";
+import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
-import { FormInput, DropImage, DynamicInput, SelectInput } from "@/atoms/Inputs";
+import { FormInput, DropImage, DynamicInput, SelectInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
 
 type props = {
   values: {
     materials?: Array<{
-        id:number| string;
+      id: number | string;
     }>;
   };
   isOpen: boolean;

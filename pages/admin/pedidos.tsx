@@ -1,17 +1,7 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Flex,
-  Badge,
-  useDisclosure,
-  createStandaloneToast,
-} from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Badge, useDisclosure } from "@chakra-ui/core";
 import { SubHeader } from "@/atoms/Text";
 import { Table } from "@/organisms/Table";
 import { IconButton, Button } from "@/atoms/Buttons";
@@ -19,6 +9,7 @@ import { Order } from "@/organisms/Forms";
 import Plus from "@iconify/icons-cil/plus";
 import trash from "@iconify/icons-cil/trash";
 import { Icon } from "@iconify/react";
+import Animation from "@/molecules/Loader/Animation";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
@@ -255,7 +246,7 @@ const pedidos = () => {
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <h1>Cargando ... </h1>
+              <Animation />
             ) : (
               <>
                 <Order
@@ -291,7 +282,7 @@ const pedidos = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <h1>Cargando ...</h1>
+              <Animation />
             ) : (
               <>
                 <Flex height="5em" justifyContent="space-between" alignItems="center">

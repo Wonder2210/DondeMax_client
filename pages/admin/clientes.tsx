@@ -9,6 +9,7 @@ import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
 import { CreateClient as Client } from "@/organisms/Forms";
 import { Table } from "@/organisms/Table";
+import Animation from "@/molecules/Loader/Animation";
 import dynamic from "next/dynamic";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
@@ -88,8 +89,8 @@ function clientes() {
       <Head>
         <title>Admin - Clientes</title>
       </Head>
-      {loading ? (
-        "Cargando..."
+      {true ? (
+        <Animation />
       ) : (
         <>
           <Client

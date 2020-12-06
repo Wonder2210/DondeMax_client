@@ -21,7 +21,6 @@ import { Icon } from "@iconify/react";
 import shop from "@iconify/icons-cil/cart";
 import { OrderClient } from "../../organisms/Forms";
 import { useMutation, gql } from "@apollo/client";
-import Cookie from "js-cookie";
 
 const take_order = gql`
   mutation TakeOrderClient(

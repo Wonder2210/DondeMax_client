@@ -12,6 +12,7 @@ import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
 import { useAuth } from "@/utils/AuthHook";
 import { usuarios as users } from "@/utils/TablesHeader";
+import Animation from "@/molecules/Loader/Animation";
 import { GET_DATA_USERS, UPDATE_USER, DELETE_USER, CREATE_USER } from "@/graphql";
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
@@ -77,7 +78,7 @@ function usuarios() {
         <title>Admin - Usuarios</title>
       </Head>
       {loading ? (
-        "Cargando..."
+        <Animation />
       ) : (
         <>
           <User
@@ -98,7 +99,7 @@ function usuarios() {
             onEdit={onUpdateUser}
             values={{ ...state.data }}
           />
-          <Flex height="5em" justifyContent="space-between" alignItems="center">
+          <Flex height="5em" justifyContent="space-between" paddingX="5em" alignItems="center">
             <SubHeader>Usuarios</SubHeader>
 
             <Flex width="10em" paddingX="3em" justifyContent="space-between" alignItems="center">

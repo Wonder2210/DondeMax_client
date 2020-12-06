@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box, Grid } from "@chakra-ui/core";
 import { Parragraph } from "@/atoms/Text";
+import Animation from "@/molecules/Loader/Animation";
 import { useQuery } from "@apollo/client";
 import dynamic from "next/dynamic";
 const ProductsOrderChart = dynamic(() => import("@/molecules/Charts/ProductsOrders"), { ssr: false });
@@ -15,10 +16,6 @@ import Head from "next/head";
 const index = () => {
   const { data, loading } = useQuery(GET_DATA_INDEX, { variables: { cursor: 0 } });
 
-  if (loading) {
-    return <h1>Cargando ... </h1>;
-  }
-
   return (
     <Dashboard>
       <Head>
@@ -28,7 +25,7 @@ const index = () => {
         <SubHeader>Bienvenido</SubHeader>
       </Flex>
       {loading ? (
-        "Cargando ..."
+        <Animation />
       ) : (
         <>
           <Grid

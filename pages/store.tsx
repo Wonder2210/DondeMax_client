@@ -8,6 +8,7 @@ import ProductCard from "@/components/organisms/Cards/ProductCardShop";
 import { Header } from "@/atoms/Text";
 import { useAppContext } from "@/utils/AppContext";
 import { GET_DATA_STORE } from "@/graphql";
+import Animation from "@/molecules/Loader/Animation";
 import Head from "next/head";
 
 type state = {
@@ -102,7 +103,7 @@ const store = () => {
     return <h1>Error </h1>;
   }
   if (loading) {
-    return <h1>Cargando ...</h1>;
+    return <Animation />;
   }
 
   const products = state.products.results.map((i) => {

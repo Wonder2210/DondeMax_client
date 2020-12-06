@@ -15,11 +15,11 @@ import {
 } from "@chakra-ui/core";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
-import { IconButton } from "@/atoms/Buttons";
+import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
 import x from "@iconify/icons-cil/x";
-import { SelectInput, DateInput } from "@/atoms/Inputs";
+import { SelectInput, DateInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
 
 type props = {

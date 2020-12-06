@@ -77,8 +77,8 @@ const RightSide = () => {
         height="10vh"
         backgroundColor="#E91E63"
       >
-        <SubHeader>Contactanos a traves de</SubHeader>
-        <Flex>
+        <Flex alignItems="center" justifyContent="center" margin="auto 0 auto 0">
+          <SubHeader>Contactanos a traves de</SubHeader>
           <IconButton
             aria-label="heart"
             backgroundColor="rgba(0,0,0,0)"

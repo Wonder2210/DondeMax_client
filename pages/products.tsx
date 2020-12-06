@@ -6,6 +6,7 @@ import { Header } from "@/atoms/Text";
 import { Products } from "@/organisms/CardsContainer";
 import { GET_BASE_PRODUCTS } from "@/graphql";
 import { useRouter } from "next/router";
+import Animation from "@/molecules/Loader/Animation";
 import Head from "next/head";
 
 type state = {
@@ -76,7 +77,7 @@ const products = () => {
           <Tab>Galletas</Tab>
         </TabList>
       </Tabs>
-      {loading ? "Cargando" : <Products data={data.products.results} action={(e) => router.push("/store")} />}
+      {loading ? <Animation /> : <Products data={data.products.results} action={(e) => router.push("/store")} />}
     </Standard>
   );
 };

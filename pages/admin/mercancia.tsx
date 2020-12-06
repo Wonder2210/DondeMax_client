@@ -3,13 +3,13 @@ import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/core";
+import Animation from "@/molecules/Loader/Animation";
 import { IconButton, Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
 import { Table } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
-import input from "@iconify/icons-cil/input";
 import { Mercancia, Storage } from "@/organisms/Forms";
 import { ADD_TO_STORAGE, GET_DATA_MERCANCIA, DELETE_MATERIAL, UPDATE_MATERIAL, CREATE_MATERIAL } from "@/graphql";
 import { mercancia as headers } from "@/utils/TablesHeader";
@@ -105,7 +105,7 @@ const mercancia = () => {
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <h1>Loading bro</h1>
+              <Animation />
             ) : (
               <>
                 <Mercancia
@@ -140,7 +140,7 @@ const mercancia = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <h1>Cargando ...</h1>
+              <Animation />
             ) : (
               <>
                 <Storage
@@ -176,7 +176,7 @@ const mercancia = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <h1>Cargando ...</h1>
+              <Animation />
             ) : (
               <>
                 <Flex height="5em" justifyContent="space-between" alignItems="center">

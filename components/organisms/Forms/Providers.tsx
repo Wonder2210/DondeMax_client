@@ -10,14 +10,14 @@ import {
 } from "@chakra-ui/core";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
-import { IconButton } from "@/atoms/Buttons";
+import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
-import { FormInput } from "@/atoms/Inputs";
+import { FormInput } from "../../atoms/Inputs";
 
 type props = {
   values: {
-      name?:string;
+    name?: string;
   };
   isOpen: boolean;
   onClose: () => void;

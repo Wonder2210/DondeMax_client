@@ -9,6 +9,7 @@ import { ProductCardAdmin as Product } from "@/organisms/Cards";
 import { Dashboard } from "@/layouts/Dashboard";
 import { Products } from "@/organisms/Forms";
 import Head from "next/head";
+import Animation from "@/molecules/Loader/Animation";
 import { GET_DATA_PRODUCTS, ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from "@/graphql";
 
 const productos = () => {
@@ -73,7 +74,7 @@ const productos = () => {
         <title>Admin - Productos</title>
       </Head>
       {loading ? (
-        <h1>Cargando ...</h1>
+        <Animation />
       ) : (
         <>
           <Products

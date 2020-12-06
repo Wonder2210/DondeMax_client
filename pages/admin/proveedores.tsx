@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react";
 import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
 import { Provider } from "@/organisms/Forms";
+import Animation from "@/molecules/Loader/Animation";
 import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/graphql";
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
@@ -94,7 +95,7 @@ const proveedores = () => {
         <title>Admin - Proveedores</title>
       </Head>
       {loading ? (
-        <h1>Cargando ... </h1>
+        <Animation />
       ) : (
         <>
           <Provider
