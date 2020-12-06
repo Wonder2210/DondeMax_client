@@ -17,7 +17,16 @@ type props = {
 
 const ProductCard: React.FC<props> = ({ name, image, info, type, action, big }) => {
   return (
-    <Box margin="1em">
+    <Box
+      margin="1em"
+      maxWidth={{
+        base: "auto",
+        sm: "auto",
+        md: "25em",
+        lg: "25em",
+        xl: "25em",
+      }}
+    >
       <ImageHeader maxHeight="50vh" alt={name} src={image} height="auto" width="100%" />
       <Box margin="0 10%">
         <Header type="h6" weight="semibold" fontSize="1.5em">
