@@ -89,7 +89,7 @@ function clientes() {
       <Head>
         <title>Admin - Clientes</title>
       </Head>
-      { loafing ? (
+      { loading ? (
         <Animation />
       ) : (
         <>
