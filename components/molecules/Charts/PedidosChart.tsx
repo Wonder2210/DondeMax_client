@@ -1,4 +1,4 @@
-//@ts-nocheck
+// @ts-nocheck
 import React from "react";
 import { VictoryPie, VictoryLabel } from "victory";
 
@@ -15,13 +15,13 @@ const Chart = ({ data }) => (
     data={[
       {
         ...data.orders
-          .map((i) => i.delivery_status == true)
-          .reduce((prev, actual) => ({ ...prev, y: prev.y + 1 }), { x: "Entregados", y: 0 }),
+          .map((i) => i.delivery_status === true)
+          .reduce((prev) => ({ ...prev, y: prev.y + 1 }), { x: "Entregados", y: 0 }),
       },
       {
         ...data.orders
-          .map((i) => i.delivery_status == false)
-          .reduce((prev, actual) => ({ ...prev, y: prev.y + 1 }), { x: "Por entregar", y: 0 }),
+          .map((i) => i.delivery_status === false)
+          .reduce((prev) => ({ ...prev, y: prev.y + 1 }), { x: "Por entregar", y: 0 }),
       },
     ]}
   />

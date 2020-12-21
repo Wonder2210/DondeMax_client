@@ -69,7 +69,7 @@ const store = () => {
 
   const next = () => setState((last) => ({ ...last, page: last.page + 1 }));
 
-  const last = () => setState((last) => ({ ...last, page: last.page - 1 }));
+  const lastItem = () => setState((last) => ({ ...last, page: last.page - 1 }));
 
   const onClick = (e: number) => setState((last) => ({ ...last, page: e }));
 
@@ -78,7 +78,7 @@ const store = () => {
       ...state,
       products: {
         ...state.products,
-        results: state.products.results.map((i) => (i.id == item.id ? { ...i, onCart: true } : i)),
+        results: state.products.results.map((i) => (i.id === item.id ? { ...i, onCart: true } : i)),
       },
     });
     setContext((last) => ({
@@ -92,13 +92,13 @@ const store = () => {
       ...state,
       products: {
         ...state.products,
-        results: state.products.results.map((i) => (i.id == id ? { ...i, onCart: false } : i)),
+        results: state.products.results.map((i) => (i.id === id ? { ...i, onCart: false } : i)),
       },
     });
     setContext((last) => ({ ...last, productsCart: last.productsCart.filter((i) => id !== i.id) }));
   };
 
-  let total = state.products.total;
+  let { total } = state.products;
   if (error) {
     return <h1>Error </h1>;
   }
@@ -171,7 +171,14 @@ const store = () => {
         {products}
       </Grid>
       <Flex align="center" justify="center" height="min-content">
-        <Pagination pageItems={12} numberItems={total} page={state.page} next={next} last={last} onClick={onClick} />
+        <Pagination
+          pageItems={12}
+          numberItems={total}
+          page={state.page}
+          next={next}
+          last={lastItem}
+          onClick={onClick}
+        />
       </Flex>
     </Standard>
   );

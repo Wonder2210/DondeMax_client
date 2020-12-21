@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Flex, Box, Tabs, Tab, TabList, TabPanel, TabPanels } from "@chakra-ui/core";
 import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 import { Button } from "../../atoms/Buttons";
 import { SubHeader } from "../../atoms/Text";
 import { FormInput } from "../../atoms/Inputs";
-
-import * as Yup from "yup";
 
 type FormValidation = {
   password: string;

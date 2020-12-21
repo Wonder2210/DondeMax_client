@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-nested-ternary */
 import * as React from "react";
 import { Image } from "@chakra-ui/core";
 import { useDropzone } from "react-dropzone";
@@ -12,14 +14,14 @@ type props = {
 
 const DropImage = ({ onChange, image }) => {
   const [state, setState] = React.useState({
-    image: image,
+    image,
   });
 
   const onDrop = React.useCallback((acceptedFiles, allFiles) => {
     setState({ image: URL.createObjectURL(allFiles[0].file) });
     onChange(allFiles[0].file);
   }, []);
-  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({ onDrop, accept: ".jpeg,.png" });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: ".jpeg,.png" });
 
   return (
     <>

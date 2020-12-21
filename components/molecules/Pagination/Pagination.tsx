@@ -65,7 +65,7 @@ const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next,
         backgroundColor="#FFF"
         color="black"
         icon={<Icon icon={chevronLeft} width="1.563rem" height="1.5rem" />}
-        onClick={page <= 1 ? (e) => console.log("nothing") : last}
+        onClick={page <= 1 ? () => console.log("nothing") : last}
       />
 
       {renderItems}
@@ -74,7 +74,7 @@ const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next,
         backgroundColor="#FFF"
         color="black"
         icon={<Icon icon={chevronRight} width="1.563rem" height="1.5rem" />}
-        onClick={page >= totalPages ? (e) => console.log("nothing") : next}
+        onClick={page >= totalPages ? () => console.log("nothing") : next}
       />
     </Flex>
   );

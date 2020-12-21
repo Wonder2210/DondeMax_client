@@ -31,7 +31,7 @@ const NumberInput: React.FC<props> = ({
   defaultValue = 0,
   min = 0,
   max = 1000,
-  field,
+
   label,
   helper,
   errorMessage,
@@ -39,7 +39,7 @@ const NumberInput: React.FC<props> = ({
   variant,
   isRequired,
   onChange,
-  form,
+
   id,
 }) => {
   return (

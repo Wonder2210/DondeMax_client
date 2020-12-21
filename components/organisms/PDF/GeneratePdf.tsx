@@ -1,10 +1,10 @@
 import React from "react";
-import jsPDF from "jspdf";
+import JsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import { IconButton } from "../../atoms/Buttons";
-import pdf from "@iconify/icons-cib/adobe-acrobat-reader";
-
 import { Icon } from "@iconify/react";
+import pdf from "@iconify/icons-cib/adobe-acrobat-reader";
+import { IconButton } from "../../atoms/Buttons";
+
 type props = {
   tableId?: string;
   columns?: Array<{ header: string; dataKey: string }>;
@@ -12,9 +12,9 @@ type props = {
 };
 const GeneratePdf: React.FC<props> = ({ tableId = "#table", columns, orientation = "p" }) => {
   const generatePdf = () => {
-    const doc = new jsPDF(orientation);
+    const doc = new JsPDF(orientation);
 
-    autoTable(doc, { html: tableId, columns: columns });
+    autoTable(doc, { html: tableId, columns });
 
     doc.output("dataurlnewwindow");
   };

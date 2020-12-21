@@ -35,9 +35,9 @@ const DynamicType: React.FC<props> = ({ options, focusBorderColor, add, placehol
 
   const onChangeSelect = (e) => {
     const { value } = e.target;
-    setState((lstState) => ({
-      ...lstState,
-      name: options.find((i) => String(i.id) == value).type,
+    setState((lastState) => ({
+      ...lastState,
+      name: options.find((i) => String(i.id) === value).type,
       id: value,
     }));
   };

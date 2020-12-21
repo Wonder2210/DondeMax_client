@@ -1,5 +1,3 @@
 import SidebarDashboard from "./SidebarDashboard";
 
-export {
-    SidebarDashboard
-}
+export { SidebarDashboard };

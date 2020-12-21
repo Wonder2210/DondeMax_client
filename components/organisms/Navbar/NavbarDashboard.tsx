@@ -12,18 +12,18 @@ type props = {
 
 const NavbarDashboard = ({ toggle }) => {
   const [date, setDate] = React.useState(new Date());
+  function tick() {
+    setDate(new Date());
+  }
   React.useEffect(() => {
-    let timerID = setInterval(() => tick(), 1000);
+    const timerID = setInterval(() => tick(), 1000);
     return function cleanup() {
       clearInterval(timerID);
     };
   });
 
-  function tick() {
-    setDate(new Date());
-  }
-  let hour = date.getHours();
-  let minutes = date.getMinutes();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
   return (
     <Flex
       width="100%"

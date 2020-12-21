@@ -24,21 +24,48 @@ type props = {
   add?: (e: { id: number; name: string; quantity: number; price: number; total: number }) => void;
 };
 
+type stateType = {
+  name: string;
+  id: number;
+  quantity: number;
+  price: number;
+  total: number;
+};
+
 const DynamicType: React.FC<props> = ({ options, focusBorderColor, add, placeholder, variant }) => {
   const baseState = {
-    name: null,
-    id: null,
+    name: "",
+    id: 0,
     quantity: 1,
-    price: null,
+    price: 0,
     total: 0,
   };
-  const [state, setState] = React.useState({ ...baseState });
+  const [state, setState] = React.useState<stateType>({ ...baseState });
 
   const addBtn = () => {
     add(state);
     setState({ ...baseState });
   };
 
+  const onChangeNumber = (e) =>
+    setState((lastState) => ({
+      ...lastState,
+      quantity: e,
+      total: e * lastState.price,
+    }));
+
+  const onChangeSelect = (e) => {
+    const { value: id } = e.currentTarget;
+    const name = options.find((i) => i.id === Number(id)).type;
+    const { price } = options.find((i) => String(i.id) === id);
+    setState((lastState) => ({
+      ...lastState,
+      name,
+      id,
+      price,
+      total: Number(options.find((i) => String(i.id) === id).price) * lastState.quantity,
+    }));
+  };
   const optionsRender = options.map((item) => {
     return (
       <option key={item.id} value={String(item.id)}>
@@ -46,23 +73,6 @@ const DynamicType: React.FC<props> = ({ options, focusBorderColor, add, placehol
       </option>
     );
   });
-  const currentProduct = options.find((i) => i.id === state.id);
-  const onChangeNumber = (e) =>
-    setState((lstState) => ({
-      ...lstState,
-      quantity: e,
-      total: e * lstState.price,
-    }));
-  const onChangeSelect = (e) => {
-    const { value } = e.currentTarget;
-    setState((lstState) => ({
-      ...lstState,
-      name: options.find((i) => i.id == Number(value)).type,
-      id: value,
-      price: options.find((i) => String(i.id) == value).price,
-      total: Number(options.find((i) => String(i.id) == value).price) * lstState.quantity,
-    }));
-  };
 
   return (
     <>

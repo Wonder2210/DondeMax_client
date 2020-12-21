@@ -1,12 +1,8 @@
 import * as React from "react";
 import { Box, Flex, Stat, StatLabel, StatNumber } from "@chakra-ui/core";
 import { TableActions } from "../../molecules/ActionButtons";
-import { IconButton } from "../../atoms/Buttons";
 import { Header, SubHeader, Parragraph } from "../../atoms/Text";
 import { ImageHeader } from "../../atoms/CardPieces";
-import { Icon } from "@iconify/react";
-import check from "@iconify/icons-cil/check";
-import x from "@iconify/icons-cil/x";
 
 type props = {
   name: string;
@@ -21,18 +17,7 @@ type props = {
   available: boolean;
 };
 
-const ProductCard: React.FC<props> = ({
-  name,
-  image,
-  price,
-  onStatus,
-  info,
-  type,
-  onUpdate,
-  onDelete,
-  big,
-  available,
-}) => {
+const ProductCard: React.FC<props> = ({ name, image, price, info, type, onUpdate, onDelete, big }) => {
   return (
     <Box gridColumn={big && "span 2"} margin="1em">
       <ImageHeader maxHeight="50vh" alt={name} src={image} height="auto" width="100%" />
@@ -50,7 +35,6 @@ const ProductCard: React.FC<props> = ({
             <StatNumber>{price}$</StatNumber>
           </Stat>
           <TableActions onUpdate={onUpdate} onDelete={onDelete} />
-        
         </Flex>
       </Box>
     </Box>

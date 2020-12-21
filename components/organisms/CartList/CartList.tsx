@@ -13,62 +13,35 @@ import {
   StatLabel,
   StatNumber,
 } from "@chakra-ui/core";
+import { Icon } from "@iconify/react";
+import { useMutation } from "@apollo/client";
+import shop from "@iconify/icons-cil/cart";
 import ProductCard from "./ProductCard";
 import { ShoppingCart, Button } from "../../atoms/Buttons";
 import { useAppContext } from "../../../utils/AppContext";
 import { useAuth } from "../../../utils/AuthHook";
-import { Icon } from "@iconify/react";
-import shop from "@iconify/icons-cil/cart";
-import { OrderClient } from "../../organisms/Forms";
-import { useMutation, gql } from "@apollo/client";
+import { OrderClient } from "../Forms";
+import { TAKE_ORDER_CLIENT } from "../../../graphql/mutations";
 
-const take_order = gql`
-  mutation TakeOrderClient(
-    $client: Int!
-    $deliveryDate: String!
-    $payMethod: PayMethod!
-    $note: String!
-    $total: Float!
-    $monto: Float!
-    $orderProducts: [ProductOrderInput!]!
-  ) {
-    takeOrderClient(
-      order: {
-        client: $client
-        deliveryDate: $deliveryDate
-        payMethod: $payMethod
-        note: $note
-        deliveryStatus: false
-        stageStatus: false
-        productionStatus: false
-        abono: 0
-        total: $total
-        monto: $monto
-        orderProducts: $orderProducts
-      }
-    ) {
-      id
-    }
-  }
-`;
+type state = {
+  products: Array<{
+    id: number;
+    name: string;
+    image: string;
+    precio: number;
+    total: number;
+    quantity: number;
+  }>;
+  total: number;
+};
 
 const CartList: React.FC<{ color?: string }> = ({ color }) => {
   const { onClose, onOpen, isOpen } = useDisclosure();
   const { user } = useAuth();
-  const [takeOrder, { error }] = useMutation(take_order);
+  const [takeOrder, { error }] = useMutation(TAKE_ORDER_CLIENT);
   const { onClose: onCloseModal, onOpen: onOpenModal, isOpen: isOpenModal } = useDisclosure();
   const { state: context, setState: setContext } = useAppContext();
-  const [state, setState] = React.useState<{
-    products: Array<{
-      id: number;
-      name: string;
-      image: string;
-      precio: number;
-      total: number;
-      quantity: number;
-    }>;
-    total: number;
-  }>({ products: [], total: 0 });
+  const [state, setState] = React.useState<state>({ products: [], total: 0 });
   const buyButton = () => {
     if (user.role !== "CLIENT") {
       alert("debes iniciar sesion primero");
@@ -76,17 +49,17 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
     }
     onOpenModal();
   };
+  const { productsCart } = context;
   React.useEffect(() => {
-    if (state.products.length == 0 || context.productsCart.length != state.products) {
-      console.log(context);
+    if (state.products.length === 0 || context.productsCart.length !== state.products) {
       setState({ ...state, products: [...context.productsCart.map((i) => ({ ...i, total: i.precio, quantity: 1 }))] });
     }
-  }, [context.productsCart, state.products]);
+  }, [productsCart, state.products]);
   React.useEffect(() => {
     if (state.products.length) {
       setState({ ...state, total: state.products.reduce((prev, current) => prev + current.total, 0) });
     }
-    if (context.productsCart.length == 0) {
+    if (context.productsCart.length === 0) {
       setState({ ...state, total: 0 });
     }
   }, [state.products]);
@@ -96,7 +69,7 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
     setState({
       ...state,
       products: state.products.map((i) => {
-        if (id == i.id) {
+        if (id === i.id) {
           return { ...i, quantity: val, total: val * i.precio };
         }
         return i;
@@ -104,7 +77,7 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
     });
   };
   const onSubmit = (data) => {
-    if (state.products.length == 0) {
+    if (state.products.length === 0) {
       alert("debes de agregar productos primero");
       return;
     }

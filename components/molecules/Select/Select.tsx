@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-wrap-multilines */
 // @ts-nocheck
-import React, { FormEvent } from "react";
-import { Box, Menu, MenuOptionGroup, MenuItemOption, MenuList, MenuButton, Flex } from "@chakra-ui/core";
+import React from "react";
+import { Box, Menu, MenuOptionGroup, MenuItemOption, MenuList, MenuButton } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import ChevronBottom from "@iconify/icons-dashicons/arrow-down-alt2";
 import ChevronUp from "@iconify/icons-dashicons/arrow-up-alt2";

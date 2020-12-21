@@ -1,6 +1,6 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
-import { useQuery, useMutation, gql } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Flex, useDisclosure } from "@chakra-ui/core";
 import { IconButton } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
@@ -14,8 +14,9 @@ import { useAuth } from "@/utils/AuthHook";
 import { usuarios as users } from "@/utils/TablesHeader";
 import Animation from "@/molecules/Loader/Animation";
 import { GET_DATA_USERS, UPDATE_USER, DELETE_USER, CREATE_USER } from "@/graphql";
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
+
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 function usuarios() {
   const defaultState = {
@@ -51,19 +52,19 @@ function usuarios() {
     console.log(error.graphQLErrors);
   }
 
-  const onSubmit = (data) => {
-    createUser({ variables: { ...data } });
+  const onSubmit = (values) => {
+    createUser({ variables: { ...values } });
   };
 
-  const onUpdateUser = (data) => {
-    updateUser({ variables: { id: state.data.id, ...data } });
+  const onUpdateUser = (values) => {
+    updateUser({ variables: { id: state.data.id, ...values } });
   };
 
   const onDelete = (id) => {
-    deleteUser({ variables: { id: parseInt(id) } });
+    deleteUser({ variables: { id: parseInt(id, 10) } });
   };
-  const setEdit = (data) => {
-    setState({ edit: true, data: { ...data } });
+  const setEdit = (values) => {
+    setState({ edit: true, data: { ...values } });
     onOpen();
   };
 
@@ -118,7 +119,7 @@ function usuarios() {
           </Flex>
           <Table
             columns={
-              user.role == "ADMINISTRADOR"
+              user.role === "ADMINISTRADOR"
                 ? [
                     ...headers,
                     {
@@ -126,7 +127,7 @@ function usuarios() {
                       Cell: ({ row }) => (
                         <TableActions
                           onDelete={() =>
-                            user.id != row.original.id
+                            user.id !== row.original.id
                               ? onDelete(row.original.id)
                               : alert("no puedes borrarte a ti mismo")
                           }

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React from "react";
 import {
   Menu,
@@ -15,7 +16,6 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/core";
-import { useAppContext } from "../../../utils/AppContext";
 import { Icon } from "@iconify/react";
 import exit from "@iconify/icons-cil/exit-to-app";
 import locked from "@iconify/icons-cil/lock-locked";
@@ -23,11 +23,12 @@ import home from "@iconify/icons-cil/home";
 import list from "@iconify/icons-cil/list";
 import unlocked from "@iconify/icons-cil/lock-unlocked";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import { useAppContext } from "../../../utils/AppContext";
 import { Button as CustomButton } from "../../atoms/Buttons";
 import { FormInput } from "../../atoms/Inputs";
 import { useAuth } from "../../../utils/AuthHook";
-import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 
 type props = {
   image?: string;
@@ -47,17 +48,16 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   const onChange = (e) => {
     setPassword({ ...password, error: false, value: e.target.value });
   };
+  const closeModal = () => {
+    onClose();
+    setPassword({ error: false, value: "" });
+  };
   const onUnlock = () => {
-    console.log(password.value);
     if (Number(password.value) === Number(state.adminPassword)) {
       setState({ ...state, admin: true });
       closeModal();
     }
     setPassword({ ...password, error: true });
-  };
-  const closeModal = () => {
-    onClose();
-    setPassword({ error: false, value: "" });
   };
   const dropAdminMode = () => {
     setState({ ...state, admin: false });
@@ -68,11 +68,13 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   };
   return (
     <>
-      <style jsx>{`
-        .margin-span {
-          margin-left: 1.5em;
-        }
-      `}</style>
+      <style jsx>
+        {`
+          .margin-span {
+            margin-left: 1.5em;
+          }
+        `}
+      </style>
 
       {user ? (
         <Menu>
@@ -93,13 +95,13 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
             {user.name}
           </MenuButton>
           <MenuList zIndex="6">
-            {user.role == "ADMINISTRADOR" && (
+            {user.role === "ADMINISTRADOR" && (
               <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
-                <Icon icon={Boolean(state.admin) ? unlocked : locked} width="2em" />
+                <Icon icon={state.admin ? unlocked : locked} width="2em" />
                 <span className="margin-span">Admin</span>
               </MenuItem>
             )}
-            {user.role == "CLIENT" && (
+            {user.role === "CLIENT" && (
               <>
                 <MenuItem minH="48px" onClick={() => router.push("/")}>
                   <Icon icon={home} width="2em" />
@@ -143,7 +145,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
               type="password"
               variant="flushed"
               field={{
-                onChange: onChange,
+                onChange,
                 value: password.value,
               }}
             />

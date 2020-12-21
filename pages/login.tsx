@@ -1,13 +1,12 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Flex, Box, useDisclosure } from "@chakra-ui/core";
-import { Login } from "@/organisms/Forms";
+import { Login, CreateClient as Client } from "@/organisms/Forms";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { Button } from "@/atoms/Buttons";
 import { Icon } from "@iconify/react";
 import sign from "@iconify/icons-cil/group";
-import { CreateClient as Client } from "@/organisms/Forms";
 import Head from "next/head";
 
 const loginUserQuery = gql`
@@ -54,14 +53,14 @@ const login = () => {
       alert("usuario Exitosamente registrado");
     },
   });
-  const onSubmit = (data) => {
-    loginUser({ variables: { ...data } });
+  const onSubmit = (values) => {
+    loginUser({ variables: { ...values } });
   };
-  const onSubmitClientSign = (data) => {
-    createClient({ variables: { ...data } });
+  const onSubmitClientSign = (values) => {
+    createClient({ variables: { ...values } });
   };
-  const onSubmitClient = (data) => {
-    logClient({ variables: { ...data } });
+  const onSubmitClient = (values) => {
+    logClient({ variables: { ...values } });
   };
 
   if (data) {

@@ -8,7 +8,10 @@
     "dev": "next",
     "start": "next start",
     "build": "next build",
-    "storybook": "start-storybook -s ./public -p 9001"
+    "storybook": "start-storybook -s ./public -p 9001",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "format": "prettier --write .",
+    "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.2.0",
@@ -68,7 +71,7 @@
     "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-jest-dom": "^3.2.3",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-testing-library": "^3.9.2",
     "prettier": "^2.0.5",

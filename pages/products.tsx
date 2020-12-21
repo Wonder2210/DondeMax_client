@@ -67,6 +67,8 @@ const products = () => {
             case 3:
               setState((last) => ({ ...last, types: "Galleta" }));
               break;
+            default:
+              break;
           }
         }}
       >

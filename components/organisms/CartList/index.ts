@@ -1,5 +1,3 @@
 import CartList from "./CartList";
 
-export {
-    CartList
-}
+export { CartList };

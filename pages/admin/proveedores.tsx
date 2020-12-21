@@ -12,9 +12,9 @@ import Animation from "@/molecules/Loader/Animation";
 import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/graphql";
 import { Table } from "@/organisms/Table";
 import dynamic from "next/dynamic";
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
 
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 const initialState = {
   edit: false,
   data: {
@@ -29,6 +29,8 @@ const initialState = {
 const proveedores = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const ref = React.useRef();
+  const [editData, setData] = React.useState({ ...initialState });
+  const cleanState = () => setData({ ...initialState });
   const { data, loading } = useQuery(GET_PROVIDERS, { pollInterval: 500 });
   const [createProvider] = useMutation(CREATE_PROVIDER, { onCompleted: onClose });
   const [deleteProvider] = useMutation(DELETE_PROVIDER);
@@ -38,9 +40,7 @@ const proveedores = () => {
       cleanState();
     },
   });
-  const [editData, setData] = React.useState({ ...initialState });
 
-  const cleanState = () => setData({ ...initialState });
   const headers = React.useMemo(
     () => [
       {
@@ -67,7 +67,7 @@ const proveedores = () => {
         Header: "Acciones",
         Cell: ({ row }) => (
           <TableActions
-            onDelete={() => deleteProvider({ variables: { id: row.original["id"] } })}
+            onDelete={() => deleteProvider({ variables: { id: row.original.id } })}
             onUpdate={() => {
               setData({ edit: true, data: { ...row.original } });
               onOpen();
@@ -78,16 +78,16 @@ const proveedores = () => {
     ],
     [],
   );
-  const onSubmit = (data) => {
-    createProvider({ variables: { ...data } });
+  const onSubmit = (values) => {
+    createProvider({ variables: { ...values } });
   };
 
   const onCloseEdit = () => {
     cleanState();
     onClose();
   };
-  const onEdit = (data) => {
-    updateProvider({ variables: { id: editData.data.id, ...data } });
+  const onEdit = (values) => {
+    updateProvider({ variables: { id: editData.data.id, ...values } });
   };
   return (
     <Dashboard>

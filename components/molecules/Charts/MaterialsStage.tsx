@@ -10,8 +10,7 @@ const Chart = ({ data }) => (
     <VictoryAxis
       // tickValues specifies both the number of ticks and where
       // they are placed on the axis
-
-      tickFormat={[...data.materialsStage.map((i) => String(i.name))]}
+      tickFormat={[...data.materialsStage.map((i: { name: any }) => String(i.name))]}
     />
     <VictoryAxis
       dependentAxis

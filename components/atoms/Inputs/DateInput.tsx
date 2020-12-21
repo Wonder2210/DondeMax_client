@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
 import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage } from "@chakra-ui/core";
 import DayPickerInput from "react-day-picker/DayPickerInput";
@@ -16,7 +15,7 @@ type props = {
   isInvalid?: boolean;
   errorMessage: string;
 };
-const FormInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form, errorMessage }) => {
+const DateInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form, errorMessage }) => {
   return (
     <FormControl isInvalid={isInvalid}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
@@ -31,4 +30,4 @@ const FormInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form,
   );
 };
 
-export default FormInput;
+export default DateInput;

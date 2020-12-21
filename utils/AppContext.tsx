@@ -1,5 +1,6 @@
 import * as React from "react";
 import Cookies from "js-cookie";
+
 export const AppContext = React.createContext(null);
 
 type ProductsCart = {
@@ -14,6 +15,7 @@ export function useAppContext() {
   const context = React.useContext(AppContext);
 
   if (!context) {
+    // eslint-disable-next-line no-console
     console.error("Error deploying App Context!!!");
   }
 
@@ -26,7 +28,7 @@ export const AppProvider: React.FC = ({ children }) => {
     adminPassword: number;
     productsCart?: [ProductsCart];
   }>(() => {
-    const admin = Cookies.get("admin") == "true" ?? false;
+    const admin = Cookies.get("admin") === "true" ?? false;
     const adminPassword = 221099;
     const productsCart = Cookies.getJSON("productsCart") ?? [];
 
@@ -39,6 +41,7 @@ export const AppProvider: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     const stateJ = JSON.stringify(state.productsCart);
+    // eslint-disable-next-line no-console
     console.log(stateJ);
     Cookies.set("admin", String(state.admin), { expires: 1 });
     Cookies.set("adminPassword", String(state.adminPassword), { expires: 1 });

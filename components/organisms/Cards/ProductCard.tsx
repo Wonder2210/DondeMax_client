@@ -12,10 +12,9 @@ type props = {
   info: string;
   type: string;
   action: (e: React.FormEvent) => void;
-  big: boolean;
 };
 
-const ProductCard: React.FC<props> = ({ name, image, info, type, action, big }) => {
+const ProductCard: React.FC<props> = ({ name, image, info, type, action }) => {
   return (
     <Box
       margin="1em"

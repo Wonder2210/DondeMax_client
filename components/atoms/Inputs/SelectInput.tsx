@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
-import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage, Select } from "@chakra-ui/core";
+import { FormControl, FormLabel, FormHelperText, FormErrorMessage, Select } from "@chakra-ui/core";
 
 type props = {
   id: string;
@@ -29,7 +30,7 @@ const SelectInput: React.FC<props> = ({
   defaultValue,
 }) => {
   const optionsRender = options.map((item) => {
-    if (defaultValue == item.id) {
+    if (defaultValue === item.id) {
       return (
         <option key={item.id} value={String(item.id)} selected>
           {item.type}

@@ -11,26 +11,25 @@ const colors = {
     },
   },
 };
-const tab={
-  
-    color:"#898989",
-    fontWeight:'semibold',
-  
-  _selected:{
-    color:"#000",
-    borderBottomColor:"#E91E63"
-  }
-}
+const tab = {
+  color: "#898989",
+  fontWeight: "semibold",
+
+  _selected: {
+    color: "#000",
+    borderBottomColor: "#E91E63",
+  },
+};
 export default theme({
   colors,
-  components:{
-    Tabs:{
-     variants:{
-       line:{
-         tab
-       }
-     }
-    }
+  components: {
+    Tabs: {
+      variants: {
+        line: {
+          tab,
+        },
+      },
+    },
   },
   fonts: {
     heading: `"Poppins", sans-serif`,

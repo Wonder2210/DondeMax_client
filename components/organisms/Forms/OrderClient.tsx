@@ -15,10 +15,9 @@ import {
 } from "@chakra-ui/core";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
-import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
-import x from "@iconify/icons-cil/x";
+import { IconButton } from "../../atoms/Buttons";
 import { SelectInput, DateInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
 
@@ -41,7 +40,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, total, productsList }) => {
-  const pay_method = ["EFECTIVO", "DEBITO", "TRANSFERENCIA", " DOLARES", "PESOS"].map((i) => ({
+  const payMethod = ["EFECTIVO", "DEBITO", "TRANSFERENCIA", " DOLARES", "PESOS"].map((i) => ({
     id: i,
     type: i,
   }));
@@ -50,7 +49,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, total, pro
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{"Agrega nuevo Pedido"}</ModalHeader>
+        <ModalHeader>Agrega nuevo Pedido</ModalHeader>
         <ModalCloseButton />
         <Formik
           initialValues={{}}
@@ -79,7 +78,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, total, pro
                 {({ field, form }) => (
                   <SelectInput
                     placeholder="Metodo de pago"
-                    options={pay_method}
+                    options={payMethod}
                     id="mthod"
                     field={field}
                     isInvalid={form.errors.payMethod && form.touched.payMethod}

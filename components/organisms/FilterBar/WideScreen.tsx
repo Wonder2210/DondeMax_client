@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "@chakra-ui/core";
-import { CartList } from "../../molecules/CartList";
+import { CartList } from "../CartList";
 
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
@@ -30,8 +30,6 @@ const WideScreen = ({ preservations, types }: props) => {
       top="0"
       backgroundColor="#2F4858"
     >
-      
-
       <Flex marginRight="1vw" position="relative" align="center" flexDirection="row" w="20%" justify="flex-end">
         <CartList color="white" />
       </Flex>

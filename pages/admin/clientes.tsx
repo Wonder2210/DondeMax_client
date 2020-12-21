@@ -5,16 +5,17 @@ import { Flex, useDisclosure } from "@chakra-ui/core";
 import { IconButton } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
 import { CreateClient as Client } from "@/organisms/Forms";
 import { Table } from "@/organisms/Table";
 import Animation from "@/molecules/Loader/Animation";
-import dynamic from "next/dynamic";
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
-import Head from "next/head";
 import { clientes as clients } from "@/utils/TablesHeader";
 import { GET_DATA_CLIENTS, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT } from "@/graphql";
+
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 function clientes() {
   const defaultState = {
@@ -49,18 +50,18 @@ function clientes() {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);
   }
-  const setEdit = (data) => {
-    setState({ edit: true, data: { ...data } });
+  const setEdit = (values) => {
+    setState({ edit: true, data: { ...values } });
     onOpen();
   };
   const onDelete = (id) => {
-    deleteClient({ variables: { id: parseInt(id) } });
+    deleteClient({ variables: { id: parseInt(id, 10) } });
   };
-  const onUpdateClient = (data) => {
-    updateClient({ variables: { id: state.data.id, ...data } });
+  const onUpdateClient = (values) => {
+    updateClient({ variables: { id: state.data.id, ...values } });
   };
-  const onSubmit = (data) => {
-    createClient({ variables: { ...data } });
+  const onSubmit = (values) => {
+    createClient({ variables: { ...values } });
     setState({ ...defaultState });
   };
   const closeModal = () => {
@@ -89,7 +90,7 @@ function clientes() {
       <Head>
         <title>Admin - Clientes</title>
       </Head>
-      { loading ? (
+      {loading ? (
         <Animation />
       ) : (
         <>

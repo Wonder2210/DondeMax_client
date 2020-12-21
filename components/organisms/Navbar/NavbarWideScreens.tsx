@@ -1,8 +1,7 @@
 import React from "react";
 import { Flex, Divider } from "@chakra-ui/core";
 import Link from "next/link";
-import { Link as StyleLink } from "../../atoms/Links";
-import { CartList } from "../../molecules/CartList";
+import { CartList } from "../CartList";
 import { UserDropdown } from "../../molecules/Dropdown";
 
 const NavbarWideScreen = () => {

@@ -9,10 +9,10 @@ import {
   NumberDecrementStepper,
   Box,
 } from "@chakra-ui/core";
-import { IconButton } from "../../atoms/Buttons";
-import { SubHeader } from "../../atoms/Text";
 import { Icon } from "@iconify/react";
 import minus from "@iconify/icons-cil/minus";
+import { IconButton } from "../../atoms/Buttons";
+import { SubHeader } from "../../atoms/Text";
 
 type props = {
   image: string;

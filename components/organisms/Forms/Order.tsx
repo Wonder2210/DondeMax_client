@@ -15,10 +15,10 @@ import {
 } from "@chakra-ui/core";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
-import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
 import x from "@iconify/icons-cil/x";
+import { IconButton } from "../../atoms/Buttons";
 import { DynamicProductType, SelectInput, DateInput, NumberInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
 
@@ -64,15 +64,15 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
   const [state, setState] = React.useState(defaultState);
   React.useEffect(() => {
     if (state.list.length > 0) {
-      let total = state.list.reduce((prev, current) => prev + current.total, 0);
-      let monto = total - state.abono;
+      const total = state.list.reduce((prev, current) => prev + current.total, 0);
+      const monto = total - state.abono;
       setState({ ...state, total, monto });
     } else {
       setState({ ...state, total: 0, monto: 0, abono: 0 });
     }
   }, [state.list, state.abono]);
 
-  const pay_method = ["EFECTIVO", "DEBITO", "TRANSFERENCIA", " DOLARES", "PESOS"].map((i) => ({
+  const payMethod = ["EFECTIVO", "DEBITO", "TRANSFERENCIA", " DOLARES", "PESOS"].map((i) => ({
     id: i,
     type: i,
   }));
@@ -92,7 +92,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
   const RemoveFromList = (set, { id, name, price }, last) => {
     setState((lastState) => ({
       ...lastState,
-      data: lastState.data.concat({ id: id, type: name, price: price }),
+      data: lastState.data.concat({ id, type: name, price }),
       list: lastState.list.filter((i) => i.id !== id),
     }));
     set(
@@ -122,6 +122,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
               monto: state.monto,
             });
             close();
+            return undefined;
           }}
         >
           <Form>
@@ -156,7 +157,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
                 {({ field, form }) => (
                   <SelectInput
                     placeholder="Metodo de pago"
-                    options={pay_method}
+                    options={payMethod}
                     id="mthod"
                     field={field}
                     isInvalid={form.errors.payMethod && form.touched.payMethod}
@@ -169,7 +170,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
               <Field name="note">
                 {({ field, form }) => (
                   <>
-                    <label htmlFor="text">Nota</label>
+                    <span>Nota</span>
                     <Textarea id="text" variant="flushed" size="sm" {...field} />
                   </>
                 )}

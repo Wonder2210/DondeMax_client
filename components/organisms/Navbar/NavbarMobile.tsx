@@ -3,12 +3,10 @@ import { Box, Flex } from "@chakra-ui/core";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import MenuIcon from "@iconify/icons-cil/hamburger-menu";
-import { Link as StyleLink } from "../../atoms/Links";
 import { ListItem } from "../../atoms/List";
-import { Dropdown } from "../../molecules/Dropdown";
+import { Dropdown, UserDropdown } from "../../molecules/Dropdown";
 import { IconButton } from "../../atoms/Buttons";
-import { CartList } from "../../molecules/CartList";
-import { UserDropdown } from "../../molecules/Dropdown";
+import { CartList } from "../CartList";
 
 const { useState } = React;
 
@@ -19,30 +17,31 @@ const NavbarMobile = () => {
   });
 
   const openDropDown = () => {
-    if (state.open) {
-      setState({
-        height: state.height,
-        open: false,
-      });
-      setTimeout(() => {
-        setState(() => ({
-          height: "7vh",
-          open: false,
-        }));
-      }, 500);
-    }
-    if (!state.open) {
-      setState({
-        height: "100vh",
-        open: false,
-      });
-      setTimeout(() => {
-        setState({
-          height: "100vh",
-          open: true,
-        });
-      }, 400);
-    }
+    return state.open
+      ? () => {
+          setState({
+            height: state.height,
+            open: false,
+          });
+          setTimeout(() => {
+            setState(() => ({
+              height: "7vh",
+              open: false,
+            }));
+          }, 500);
+        }
+      : () => {
+          setState({
+            height: "100vh",
+            open: false,
+          });
+          setTimeout(() => {
+            setState({
+              height: "100vh",
+              open: true,
+            });
+          }, 400);
+        };
   };
 
   return (

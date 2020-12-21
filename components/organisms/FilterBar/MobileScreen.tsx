@@ -11,14 +11,11 @@ import {
   Button,
   ModalCloseButton,
 } from "@chakra-ui/core";
-import { Icon } from "@iconify/react";
-import Config from "@iconify/icons-cil/cog";
-import { IconButton, Button as CustomButton } from "../../atoms/Buttons";
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
-import { CartList } from "../../molecules/CartList";
+import { CartList } from "../CartList";
 
-const MobileScreen = ({ preservations, types }: props) => {
+const MobileScreen: React.FC<props> = ({ preservations, types }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const PreservationsOptions = preservations.list.map((i, n) => {
     return (
@@ -47,7 +44,7 @@ const MobileScreen = ({ preservations, types }: props) => {
         h="3em"
         w="100%"
       >
-        <Flex w="20%" marginLeft="0.3em" h="100%" alignItems="center"></Flex>
+        <Flex w="20%" marginLeft="0.3em" h="100%" alignItems="center" />
         <Flex w="20%" h="100%" alignItems="center">
           <CartList color="white" />
         </Flex>

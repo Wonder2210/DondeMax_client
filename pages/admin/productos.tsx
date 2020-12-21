@@ -33,7 +33,7 @@ const productos = () => {
   const [update, { error }] = useMutation(UPDATE_PRODUCT, { onCompleted: onClose });
 
   const onSubmit = ({ name, price, materials, image, info, type }) => {
-    const data = {
+    const values = {
       name,
       price,
       materials: materials.map((i) => ({ materialId: Number(i.id), quantity: parseFloat(i.quantity) })),
@@ -41,10 +41,10 @@ const productos = () => {
       info,
       type,
     };
-    mutate({ variables: { ...data } });
+    mutate({ variables: { ...values } });
   };
   const onUpdate = ({ name, price, materials, image, info, type }) => {
-    const data = {
+    const values = {
       id: state.data.id,
       name,
       precio: parseFloat(price),
@@ -53,7 +53,7 @@ const productos = () => {
       info,
       type,
     };
-    update({ variables: { ...data } });
+    update({ variables: { ...values } });
     setState({ ...defaultState });
     onClose();
   };
@@ -110,8 +110,8 @@ const productos = () => {
                 type={type}
                 available={available}
                 price={precio}
-                onStatus={() => update({ variables: { id: id, available: !available } })}
-                onDelete={() => deleteP({ variables: { id: id } })}
+                onStatus={() => update({ variables: { id, available: !available } })}
+                onDelete={() => deleteP({ variables: { id } })}
                 onUpdate={() =>
                   setUpdate({
                     id,

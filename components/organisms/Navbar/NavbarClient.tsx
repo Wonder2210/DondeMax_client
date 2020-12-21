@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Flex, Divider } from "@chakra-ui/core";
 import { useQuery, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 import { Parragraph } from "../../atoms/Text";
 import { UserDropdown } from "../../molecules/Dropdown";
-import { useRouter } from "next/router";
 
 const user = gql`
   query SessionUser {
@@ -15,18 +15,18 @@ const NavbarClient: React.FC = () => {
   const router = useRouter();
   const { data, error, loading } = useQuery(user);
   const [date, setDate] = React.useState(new Date());
+  function tick() {
+    setDate(new Date());
+  }
   React.useEffect(() => {
-    let timerID = setInterval(() => tick(), 1000);
+    const timerID = setInterval(() => tick(), 1000);
     return function cleanup() {
       clearInterval(timerID);
     };
   });
 
-  function tick() {
-    setDate(new Date());
-  }
-  let hour = date.getHours();
-  let minutes = date.getMinutes();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
   return (
     <Flex
       width="100%"
@@ -41,7 +41,7 @@ const NavbarClient: React.FC = () => {
       <Parragraph width="13em" height="min-content">
         {loading ? "Cargando ..." : JSON.parse(data.sessionUser).name}
       </Parragraph>
-      
+
       <Flex flexGrow={1} align="center" justify="flex-end" justifySelf="flex-end" bgColor="#FFF">
         <Parragraph width="13em" height="min-content">
           {hour < 12 ? hour : hour - 12}&#58;{minutes < 10 ? `0${minutes}` : minutes} {hour >= 12 ? "PM" : "AM"}

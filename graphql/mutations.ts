@@ -1,5 +1,4 @@
-import {gql} from "@apollo/client";
-
+import { gql } from "@apollo/client";
 
 export const CREATE_PROVIDER = gql`
   mutation CreateProvider($name: String!, $RIF: String!, $phone: String!, $direction: String!) {
@@ -18,11 +17,10 @@ export const UPDATE_PROVIDER = gql`
 `;
 
 export const DELETE_PROVIDER = gql`
-  mutation DeleteProvider($id : Int!){
-  deleteProvider(id:$id)
-}
+  mutation DeleteProvider($id: Int!) {
+    deleteProvider(id: $id)
+  }
 `;
-
 
 export const CREATE_USER = gql`
   mutation CreateUser($name: String!, $email: String!, $password: String!, $role: UserRole!, $phone: String!) {
@@ -46,7 +44,6 @@ export const UPDATE_USER = gql`
     }
   }
 `;
-
 
 export const CREATE_CLIENT = gql`
   mutation CreateClient($nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
@@ -73,29 +70,29 @@ export const DELETE_CLIENT = gql`
 `;
 
 export const ADD_TO_STORAGE = gql`
-mutation AddToStorage(
-  $materialId: Int!
-  $providerId: Int!
-  $uniteds: Int!
-  $expirationDate: String!
-  $brand: String!
-  $weight: Float!
-  $united_weight: Float!
-) {
-  addToStore(
-    store: {
-      materialsId: $materialId
-      providerId: $providerId
-      uniteds: $uniteds
-      united_weight: $united_weight
-      expirationDate: $expirationDate
-      brand: $brand
-      weight: $weight
-    }
+  mutation AddToStorage(
+    $materialId: Int!
+    $providerId: Int!
+    $uniteds: Int!
+    $expirationDate: String!
+    $brand: String!
+    $weight: Float!
+    $united_weight: Float!
   ) {
-    id
+    addToStore(
+      store: {
+        materialsId: $materialId
+        providerId: $providerId
+        uniteds: $uniteds
+        united_weight: $united_weight
+        expirationDate: $expirationDate
+        brand: $brand
+        weight: $weight
+      }
+    ) {
+      id
+    }
   }
-}
 `;
 
 export const CREATE_MATERIAL = gql`
@@ -121,7 +118,7 @@ export const DELETE_MATERIAL = gql`
   }
 `;
 
-export const TAKE_ORDER= gql`
+export const TAKE_ORDER = gql`
   mutation TakeOrder(
     $client: Int!
     $deliveryDate: String!
@@ -174,7 +171,6 @@ export const DELETE_ORDER = gql`
   }
 `;
 
-
 export const ADD_PRODUCT = gql`
   mutation AddProduct(
     $name: String!
@@ -213,6 +209,36 @@ export const UPDATE_PRODUCT = gql`
         materials: $materials
         available: $available
         image: $image
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+export const TAKE_ORDER_CLIENT = gql`
+  mutation TakeOrderClient(
+    $client: Int!
+    $deliveryDate: String!
+    $payMethod: PayMethod!
+    $note: String!
+    $total: Float!
+    $monto: Float!
+    $orderProducts: [ProductOrderInput!]!
+  ) {
+    takeOrderClient(
+      order: {
+        client: $client
+        deliveryDate: $deliveryDate
+        payMethod: $payMethod
+        note: $note
+        deliveryStatus: false
+        stageStatus: false
+        productionStatus: false
+        abono: 0
+        total: $total
+        monto: $monto
+        orderProducts: $orderProducts
       }
     ) {
       id

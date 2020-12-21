@@ -16,7 +16,7 @@ import { Form, Formik, Field } from "formik";
 import { FormInput, SelectInput } from "@/atoms/Inputs";
 
 type props = {
-  values: {nombre?:string};
+  values: { nombre?: string };
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: Object) => void;

@@ -14,8 +14,9 @@ import { Mercancia, Storage } from "@/organisms/Forms";
 import { ADD_TO_STORAGE, GET_DATA_MERCANCIA, DELETE_MATERIAL, UPDATE_MATERIAL, CREATE_MATERIAL } from "@/graphql";
 import { mercancia as headers } from "@/utils/TablesHeader";
 import dynamic from "next/dynamic";
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
+
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 const mercancia = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,7 +40,7 @@ const mercancia = () => {
   const [editData, setEditData] = React.useState(defaultState);
 
   const onSubmit = ({ nombre, type }) => {
-    createMaterial({ variables: { nombre: nombre, type: Number(type) } });
+    createMaterial({ variables: { nombre, type: Number(type) } });
   };
   const resetState = () => setEditData({ ...defaultState });
   const closeAndReset = () => {
@@ -48,17 +49,17 @@ const mercancia = () => {
   };
   const [updateMaterial] = useMutation(UPDATE_MATERIAL, { onCompleted: closeAndReset });
 
-  const onEdit = (data) =>
-    updateMaterial({ variables: { id: editData.data.id, nombre: data.nombre, type: Number(data.type) } });
-  const submitStore = (data) =>
+  const onEdit = (values) =>
+    updateMaterial({ variables: { id: editData.data.id, nombre: values.nombre, type: Number(values.type) } });
+  const submitStore = (values) =>
     addToStore({
       variables: {
         ...data,
-        providerId: parseInt(data.providerId),
-        materialId: parseInt(data.materialId),
-        uniteds: parseInt(data.uniteds),
-        weight: parseFloat(data.weight),
-        united_weight: parseFloat(data.united_weight),
+        providerId: parseInt(values.providerId, 10),
+        materialId: parseInt(values.materialId, 10),
+        uniteds: parseInt(values.uniteds, 10),
+        weight: parseFloat(values.weight),
+        united_weight: parseFloat(values.united_weight),
       },
     });
   const columns = React.useMemo(

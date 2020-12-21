@@ -2,7 +2,7 @@ import * as React from "react";
 import Cookies from "js-cookie";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { createUploadLink } from "apollo-upload-client";
+import { createUploadLink as CreateUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
 
 const Client = (token) => {
@@ -10,7 +10,7 @@ const Client = (token) => {
     headers: { authorization: token },
   }));
 
-  const link = new createUploadLink({ uri: "https://dondemax.herokuapp.com/graphql", fetch });
+  const link = new CreateUploadLink({ uri: "https://dondemax.herokuapp.com/graphql", fetch });
   return new ApolloClient({
     link: setAuthorizationLink.concat(link),
     cache: new InMemoryCache(),

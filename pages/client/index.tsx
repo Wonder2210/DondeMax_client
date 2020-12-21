@@ -46,13 +46,13 @@ const index = () => {
         Header: "fecha de entrega",
         accessor: "delivery_date",
         Cell: ({ value }) => {
-          let dateString = value;
+          const dateString = value;
           const date = new Date(dateString.replace(" ", "T"));
 
           const day = date.getDate();
           const month = date.getMonth();
           const year = date.getFullYear();
-          return day + "-" + month + "-" + year;
+          return String(`${day}-${month}-${year}`);
         },
       },
       {
@@ -90,9 +90,6 @@ const index = () => {
     [],
   );
   const { data, loading } = useQuery(query);
-  if (data) {
-    console.log(data);
-  }
   return (
     <Box position="fixed" w="100%" h="100vh">
       <Head>

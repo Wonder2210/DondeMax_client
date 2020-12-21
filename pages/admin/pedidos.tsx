@@ -11,9 +11,9 @@ import trash from "@iconify/icons-cil/trash";
 import { Icon } from "@iconify/react";
 import Animation from "@/molecules/Loader/Animation";
 import dynamic from "next/dynamic";
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import Head from "next/head";
 import { GET_DATA_PEDIDOS, UPDATE_ORDER, PRODUCE_ORDER, DELETE_ORDER, TAKE_ORDER } from "@/graphql";
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 const pedidos = () => {
   const defaultState = { order_id: null, orderMaterials: null, materials: null };
@@ -32,12 +32,12 @@ const pedidos = () => {
     console.log(errorData.graphQLErrors);
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = (values) => {
     takeOrderMutate({
       variables: {
-        ...data,
+        ...values,
         client: Number(data.client),
-        orderProducts: data.products.map((i) => ({ id: Number(i.id), quantity: Number(i.quantity) })),
+        orderProducts: values.products.map((i) => ({ id: Number(i.id), quantity: Number(i.quantity) })),
       },
     });
   };
@@ -53,14 +53,14 @@ const pedidos = () => {
         Header: "Fecha a ser entregado",
         accessor: "delivery_date",
         Cell: ({ value }) => {
-          let dateString = value;
+          const dateString = value;
           const date = new Date(dateString.replace(" ", "T"));
 
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
 
-          return day + "-" + month + "-" + year;
+          return String(`${day}-${month}-${year}`);
         },
       },
       { Header: "Nota", accessor: "note" },
@@ -70,13 +70,13 @@ const pedidos = () => {
         Cell: ({
           value,
           row: {
-            original: { id, delivery_status, production_status, stage_status },
+            original: { id, production_status: productionStatus, stage_status: stageStatus },
           },
         }) => (
           <Button
             width="6em"
             height="2.7em"
-            isDisabled={value || (production_status && stage_status)}
+            isDisabled={value || (productionStatus && stageStatus)}
             backgroundColor="transparent"
             color="black"
             _hover={
@@ -97,13 +97,12 @@ const pedidos = () => {
             onClick={() => {
               executeOrder({
                 variables: {
-                  id: id,
+                  id,
                   status: {
                     delivery_status: true,
                   },
                 },
               });
-              return;
             }}
           >
             {value ? "listo" : "Todavia"}
@@ -144,7 +143,6 @@ const pedidos = () => {
                   },
                 },
               });
-              return;
             }}
           >
             {value ? "listo" : "Aun no"}
@@ -185,7 +183,6 @@ const pedidos = () => {
                   },
                 },
               });
-              return;
             }}
           >
             {value ? "listo" : "Aun no"}
@@ -215,7 +212,7 @@ const pedidos = () => {
         Header: "Productos",
         accessor: "products",
         Cell: ({ value }) => {
-          let products = [];
+          const products = [];
           value.forEach((i) => {
             products.push(
               <>

@@ -1,5 +1,3 @@
 import TableActions from "./ActionButtons";
 
-export {
-    TableActions
-}
+export { TableActions };

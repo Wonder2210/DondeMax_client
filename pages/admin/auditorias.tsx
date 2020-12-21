@@ -8,8 +8,9 @@ import { Dashboard } from "@/layouts/Dashboard";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { auditorias } from "@/utils/TablesHeader";
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 import { GET_DATA_AUDITORIAS } from "@/graphql";
+
+const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 function clientes() {
   const { data, loading, error } = useQuery(GET_DATA_AUDITORIAS, { pollInterval: 5000 });

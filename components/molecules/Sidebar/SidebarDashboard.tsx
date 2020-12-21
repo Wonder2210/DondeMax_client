@@ -2,11 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Box, Image, Flex } from "@chakra-ui/core";
 import { useRouter } from "next/router";
-import { List, ListItemDashboard } from "../../atoms/List";
-import { IconButton } from "../../atoms/Buttons";
-import { Icon } from "@iconify/react";
-import { useAppContext } from "../../../utils/AppContext";
-import { useAuth } from "../../../utils/AuthHook";
 import Home from "@iconify/icons-cil/home";
 import ListIcon from "@iconify/icons-cil/list-rich";
 import cake from "@iconify/icons-cil/birthday-cake";
@@ -16,7 +11,11 @@ import providers from "@iconify/icons-cil/group";
 import userIcon from "@iconify/icons-cil/user";
 import mercancia from "@iconify/icons-cil/storage";
 import findInPage from "@iconify/icons-cil/find-in-page";
-import sun from "@iconify/icons-emojione/crescent-moon";
+import { Icon } from "@iconify/react";
+import { List, ListItemDashboard } from "../../atoms/List";
+import { IconButton } from "../../atoms/Buttons";
+import { useAppContext } from "../../../utils/AppContext";
+import { useAuth } from "../../../utils/AuthHook";
 
 type props = {
   open: boolean;
@@ -57,15 +56,6 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
       </Flex>
 
       <Image src="/images/logo.jpg" width="50%" margin="1em auto" height="auto" />
-      {/* <Flex justify="flex-end">
-        <IconButton
-          aria-label="dark"
-          backgroundColor="transparent"
-          color="white"
-          icon={<Icon icon={sun} height="100%" />}
-          onClick={() => alert("dark mode not enable yet")}
-        />
-      </Flex> */}
       <List spacing={5}>
         <ListItemDashboard selected={verifySelected("")} height="4em" icon={Home}>
           <Link href="/admin/">Inicio</Link>

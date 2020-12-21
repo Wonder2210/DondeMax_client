@@ -11,7 +11,7 @@ type props = {
   width?: string;
 };
 
-const InitialCard: React.FC<props> = ({ src, width, height, alt, children, href = "/" }) => {
+const InitialCard: React.FC<props> = ({ src, width, height, alt, children }) => {
   return (
     <Box
       rounded="35px"

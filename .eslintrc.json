@@ -1,52 +1,61 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true
+  "env": {
+    "browser": true,
+    "commonjs": true
+  },
+  "extends": [
+    "prettier/react",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "plugin:prettier/recommended",
+    "plugin:testing-library/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:jest/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-        "plugin:prettier/recommended",
-        "plugin:testing-library/recommended",
-        "plugin:jest-dom/recommended",
-        "plugin:jest/recommended"
+    "ecmaVersion": 11,
+    "project": "./tsconfig.eslint.json"
+  },
+  "plugins": ["jest", "react", "prettier", "@typescript-eslint", "testing-library", "jest-dom"],
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 11,
-        "project": "./tsconfig.json"
-    },
-    "plugins": [
-        "jest",
-        "react",
-        "@typescript-eslint",
-        "testing-library",
-        "jest-dom"
+    "react/prop-types": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "css": "allways"
+      }
     ],
-    "rules": {
-        "linebreak-style": ["error", "windows"],
-        "react/jsx-filename-extension": [2, {
-            "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        }],
-        "react/prop-types": 0,
-        "import/no-extraneous-dependencies": 0,
-        "import/extensions": ["error", "never", {
-            "css": "allways"
-        }],
-        "import/no-unresolved": 0,
-        "prettier/prettier": ["error", {
-
-            "endOfLine": "auto"
-
-        }],
-        "import/prefer-default-export":false
-
-    },
-    "settings": {
-        "json/ignore-files": ["**/*"]
-    }
+    "import/no-unresolved": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "no-unused-vars": "off",
+    "react/jsx-uses-vars": "error",
+    "react/no-unused-prop-types": "error",
+    "react/jsx-curly-newline": "off",
+    "react/jsx-props-no-spreading": "off"
+  },
+  "settings": {
+    "json/ignore-files": ["**/*"]
+  }
 }

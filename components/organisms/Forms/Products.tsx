@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
 import {
   Modal,
@@ -14,9 +15,9 @@ import {
 import x from "@iconify/icons-cil/x-circle";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
-import { IconButton } from "../../atoms/Buttons";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
+import { IconButton } from "../../atoms/Buttons";
 import { FormInput, DropImage, DynamicInput, SelectInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
 
@@ -69,7 +70,7 @@ const Products: React.FC<props> = ({
     if (isEditing) {
       setState({
         data: state.data.filter((i) => {
-          let val = values.materials.find((item) => Number(item.id) == Number(i.id));
+          const val = values.materials.find((item) => Number(item.id) === Number(i.id));
           console.log(val);
           if (val) {
             return false;
@@ -88,7 +89,7 @@ const Products: React.FC<props> = ({
   };
   const RemoveFromList = (set, { id, name }, last) => {
     setState((lastState) => ({
-      data: lastState.data.concat({ id: id, type: name }),
+      data: lastState.data.concat({ id, type: name }),
     }));
 
     set(
