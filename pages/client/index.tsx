@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Box, Flex } from "@chakra-ui/core";
@@ -5,37 +6,43 @@ import { NavbarClient } from "@/organisms/Navbar";
 import { Parragraph } from "@/atoms/Text";
 import { Table } from "@/organisms/Table";
 import Head from "next/head";
+import { useAuth } from "../../utils/AuthHook";
 
 const query = gql`
-  query {
-    clientOrders {
-      pending {
-        id
-        pay_method
-        delivery_date
-        note
-        production_status
-        stage_status
-        delivery_status
-        abono
-        total
-      }
-      delivered {
-        id
-        id
-        pay_method
-        delivery_date
-        note
-        production_status
-        stage_status
-        delivery_status
-        abono
-        total
+  query client($id: Int = 0) {
+    client(id: $id) {
+      orders {
+        pending {
+          id
+          pay_method
+          delivery_date
+          note
+          production_status
+          stage_status
+          delivery_status
+          abono
+          total
+        }
+        delivered {
+          id
+          id
+          pay_method
+          delivery_date
+          note
+          production_status
+          stage_status
+          delivery_status
+          abono
+          total
+        }
       }
     }
   }
 `;
 const index = () => {
+  const { user } = useAuth();
+  const { data, loading } = useQuery(query, { variables: { id: user.id } });
+
   const rows = React.useMemo(
     () => [
       {
@@ -89,7 +96,6 @@ const index = () => {
     ],
     [],
   );
-  const { data, loading } = useQuery(query);
   return (
     <Box position="fixed" w="100%" h="100vh">
       <Head>
@@ -98,11 +104,17 @@ const index = () => {
       <NavbarClient />
       <Flex display="row" align="flex-start">
         <Parragraph>Pedidos Pendientes</Parragraph>
-        {loading ? <h1>Cargando ...</h1> : <Table columns={rows} data={data.clientOrders.pending} />}
+        {loading ? <h1>Cargando ...</h1> : data ? <Table columns={rows} data={data.client.orders.pending} /> : "error"}
       </Flex>
       <Flex display="row" align="flex-start">
         <Parragraph>Pedidos Entregados</Parragraph>
-        {loading ? <h1>Cargando ...</h1> : <Table columns={rows} data={data.clientOrders.delivered} />}
+        {loading ? (
+          <h1>Cargando ...</h1>
+        ) : data ? (
+          <Table columns={rows} data={data.client.orders.delivered} />
+        ) : (
+          "error"
+        )}
         <Parragraph>para cancelar el pedido ponerse en contacto con nosotros al numero 0416979861</Parragraph>
       </Flex>
     </Box>

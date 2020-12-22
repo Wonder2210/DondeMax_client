@@ -1,19 +1,11 @@
 import * as React from "react";
 import { Flex, Divider } from "@chakra-ui/core";
-import { useQuery, gql } from "@apollo/client";
-import { useRouter } from "next/router";
 import { Parragraph } from "../../atoms/Text";
 import { UserDropdown } from "../../molecules/Dropdown";
-
-const user = gql`
-  query SessionUser {
-    sessionUser
-  }
-`;
+import { useAuth } from "../../../utils/AuthHook";
 
 const NavbarClient: React.FC = () => {
-  const router = useRouter();
-  const { data, error, loading } = useQuery(user);
+  const { user: userauth } = useAuth();
   const [date, setDate] = React.useState(new Date());
   function tick() {
     setDate(new Date());
@@ -39,7 +31,7 @@ const NavbarClient: React.FC = () => {
       backgroundColor="white"
     >
       <Parragraph width="13em" height="min-content">
-        {loading ? "Cargando ..." : JSON.parse(data.sessionUser).name}
+        {userauth.name ?? "loading"}
       </Parragraph>
 
       <Flex flexGrow={1} align="center" justify="flex-end" justifySelf="flex-end" bgColor="#FFF">
