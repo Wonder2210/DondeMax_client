@@ -79,7 +79,7 @@ const products = () => {
           <Tab>Galletas</Tab>
         </TabList>
       </Tabs>
-      {loading ? <Animation /> : <Products data={data.products.results} action={(e) => router.push("/store")} />}
+      {loading ? <Animation /> : <Products data={data.searchProducts.results} action={(e) => router.push("/store")} />}
     </Standard>
   );
 };

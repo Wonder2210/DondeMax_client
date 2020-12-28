@@ -12,7 +12,9 @@ const Button: React.FC<ButtonProps> = ({
   rightIcon,
   borderRadius,
   children,
+  isLoading = false,
   _hover = {},
+  loadingText = "",
 }) => {
   return (
     <Btn
@@ -27,6 +29,8 @@ const Button: React.FC<ButtonProps> = ({
       fontWeight="bold"
       fontSize={[".9rem", "1.125rem"]}
       _hover={_hover}
+      isLoading={isLoading}
+      loadingText={loadingText}
       rightIcon={rightIcon}
     >
       {children}

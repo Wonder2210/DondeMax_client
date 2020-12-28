@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_DATA_STORE = gql`
   query ProductsData($size: Int! = 12, $cursor: Int! = 0, $type: String = "", $preservation: String = "") {
-    products(size: $size, cursor: $cursor, type: $type, preservation: $preservation) {
+    searchProducts(size: $size, cursor: $cursor, type: $type, preservation: $preservation) {
       total
       results {
         id
@@ -24,7 +24,7 @@ export const GET_DATA_STORE = gql`
 
 export const GET_BASE_PRODUCTS = gql`
   query GetProductsBase($size: Int! = 12, $cursor: Int! = 0, $type: String = "", $preservation: String = "") {
-    products(size: $size, cursor: $cursor, type: $type, preservation: $preservation) {
+    searchProducts(size: $size, cursor: $cursor, type: $type, preservation: $preservation) {
       total
       results {
         id
@@ -173,7 +173,7 @@ export const GET_DATA_PEDIDOS = gql`
       id
       type: name
     }
-    productList: productsRaw {
+    productList: getProducts {
       id
       type: name
       price: precio
@@ -237,7 +237,7 @@ export const GET_DATA_INDEX = gql`
     clients {
       id
     }
-    productsRaw {
+    getProducts {
       id
     }
     providers {
@@ -248,7 +248,7 @@ export const GET_DATA_INDEX = gql`
 
 export const GET_DATA_PRODUCTS = gql`
   query GetProducts {
-    products(size: 10, cursor: 0) {
+    searchProducts(size: 10, cursor: 0) {
       total
       results {
         id

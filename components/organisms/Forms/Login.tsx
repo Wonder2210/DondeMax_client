@@ -17,6 +17,8 @@ type FormValidationClient = {
 type props = {
   onSubmit: (e: FormValidation) => void;
   onSubmitClient: (e: FormValidationClient) => void;
+  onOpen: () => void;
+  isLoading: boolean;
 };
 
 const validationSchema = Yup.object().shape({
@@ -27,7 +29,7 @@ const validationSchemaClient = Yup.object().shape({
   cedula: Yup.string().required("Este campo no debe ser vacio"),
 });
 
-const Login: React.FC<props> = ({ onSubmit, onSubmitClient }) => {
+const Login: React.FC<props> = ({ onSubmit, onSubmitClient, onOpen, isLoading }) => {
   const initialValues: FormValidation = {
     password: "",
     email: "",
@@ -38,16 +40,15 @@ const Login: React.FC<props> = ({ onSubmit, onSubmitClient }) => {
     <Flex
       direction="column"
       borderRadius="35px"
-      width={{ md: "20em", xl: "25em" }}
+      width={{ md: "24em", xl: "30em" }}
       padding="3em"
-      boxShadow=" 6px 6px 6px 2px rgba(0, 0, 0, 0.25)"
       align="center"
       minHeight="min(50vh , 29em)"
     >
       <Box marginY="1.5em">
-        <SubHeader>Inicia sesion</SubHeader>
+        <SubHeader fontSize="2.5em">Inicia sesion</SubHeader>
       </Box>
-      <Tabs>
+      <Tabs width="100%" transition="all 0.5s ease-in">
         <TabList>
           <Tab>Usuario</Tab>
           <Tab>Cliente</Tab>
@@ -58,7 +59,6 @@ const Login: React.FC<props> = ({ onSubmit, onSubmitClient }) => {
               validationSchema={validationSchema}
               initialValues={initialValues}
               onSubmit={(values) => {
-                console.log(values);
                 onSubmit(values);
               }}
             >
@@ -91,16 +91,20 @@ const Login: React.FC<props> = ({ onSubmit, onSubmitClient }) => {
                     />
                   )}
                 </Field>
-                <Button
-                  type="submit"
-                  backgroundColor="colors.rose.600"
-                  size="md"
-                  width={{ base: "12em" }}
-                  height={{ base: "2.5em" }}
-                  _hover={{ transform: "scale(1.05)" }}
-                >
-                  Ingresar
-                </Button>
+                <Flex justifyContent="center">
+                  <Button
+                    type="submit"
+                    backgroundColor="colors.rose.600"
+                    size="md"
+                    width="100%"
+                    height={{ base: "2.5em" }}
+                    isLoading={isLoading}
+                    loadingText="Cragando"
+                    _hover={{ transform: "scale(1.05)" }}
+                  >
+                    Ingresar
+                  </Button>
+                </Flex>
               </Form>
             </Formik>
           </TabPanel>
@@ -129,21 +133,42 @@ const Login: React.FC<props> = ({ onSubmit, onSubmitClient }) => {
                   )}
                 </Field>
 
-                <Button
-                  type="submit"
-                  backgroundColor="colors.rose.600"
-                  size="md"
-                  width={{ base: "12em" }}
-                  height={{ base: "2.5em" }}
-                  _hover={{ transform: "scale(1.05)" }}
-                >
-                  Ingresar
-                </Button>
+                <Flex justifyContent="center">
+                  <Button
+                    type="submit"
+                    backgroundColor="colors.rose.600"
+                    size="md"
+                    width="100%"
+                    height={{ base: "2.5em" }}
+                    _hover={{ transform: "scale(1.05)" }}
+                    isLoading={isLoading}
+                    loadingText="Cargando"
+                  >
+                    Ingresar
+                  </Button>
+                </Flex>
               </Form>
             </Formik>
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <p
+        style={{
+          textAlign: "center",
+        }}
+      >
+        ¿ No estas registrado ? Si eres cliente
+        <br />
+        <button
+          type="button"
+          style={{
+            color: "#fe4674",
+          }}
+          onClick={onOpen}
+        >
+          Registraste aqui
+        </button>
+      </p>
     </Flex>
   );
 };
