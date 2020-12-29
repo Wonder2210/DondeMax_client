@@ -100,7 +100,7 @@ const productos = () => {
             />
           </Flex>
           <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" templateRows="minmax(300px, auto)">
-            {data.products.results.map(({ id, name, image, info, type, available, precio, materials }) => (
+            {data.searchProducts.results.map(({ id, name, image, info, type, available, precio, materials }) => (
               <Product
                 key={id}
                 big={false}

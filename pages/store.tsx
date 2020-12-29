@@ -57,7 +57,7 @@ const store = () => {
     setState((lastState) => ({ ...lastState, preservations: e }));
   };
   React.useEffect(() => {
-    if (data) setState({ ...state, products: { ...data.products, onCart: false } });
+    if (data) setState({ ...state, products: { ...data.searchProducts, onCart: false } });
   }, [data, context.productsCart]);
 
   const onChangeTypes = (e) => setState((lastState) => ({ ...lastState, types: e }));
