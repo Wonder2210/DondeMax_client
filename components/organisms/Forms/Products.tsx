@@ -18,7 +18,7 @@ import * as Yup from "yup";
 import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
 import { IconButton } from "../../atoms/Buttons";
-import { FormInput, DropImage, DynamicInput, SelectInput } from "../../atoms/Inputs";
+import { FormInput, DropImage, DynamicInput, SelectInput, RateInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
 
 type props = {
@@ -40,6 +40,7 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
   image: Yup.mixed().required(),
   price: Yup.number().required(),
+  rate: Yup.number().required(),
   materials: Yup.array().of(
     Yup.object()
       .shape({
@@ -171,6 +172,17 @@ const Products: React.FC<props> = ({
                     label="Tipo:"
                     variant="flushed"
                     errorMessage={form.errors.name}
+                  />
+                )}
+              </Field>
+              <Field name="rate">
+                {({ field, form }) => (
+                  <RateInput
+                    id="rate"
+                    field={field}
+                    form={form}
+                    errorMessage={form.errors.rate}
+                    isInvalid={form.errors.rate && form.touched.rate}
                   />
                 )}
               </Field>

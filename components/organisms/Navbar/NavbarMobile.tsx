@@ -67,16 +67,15 @@ const NavbarMobile = () => {
       </Box>
       <Dropdown show={state.open}>
         <ListItem marginLeft={3}>
+          <Link href="/">Inicio</Link>
+        </ListItem>
+        <ListItem marginLeft={3}>
           <Link href="/info">Acerca de Nosotros</Link>
         </ListItem>
+
         <ListItem marginLeft={3}>
           <Link href="/products" passHref>
             Productos
-          </Link>
-        </ListItem>
-        <ListItem marginLeft={3}>
-          <Link href="/store" passHref>
-            Pedidos
           </Link>
         </ListItem>
         <ListItem marginLeft={3}>

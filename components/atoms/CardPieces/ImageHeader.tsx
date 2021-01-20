@@ -7,7 +7,6 @@ type props = {
   height?: string;
   maxHeight?: string;
   width?: string;
-  objectFit?: string;
 };
 
 const ImageHeader: React.FC<props> = ({ src, alt, height, width, maxHeight = "auto" }) => {

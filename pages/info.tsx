@@ -20,7 +20,9 @@ const Info = () => {
         backgroundPosition="center"
         backgroundSize="cover"
       >
-        <Header color="#E91E63">¿Quienes somos?</Header>
+        <Header size="4xl" color="#E91E63">
+          ¿Quienes somos?
+        </Header>
       </Flex>
       <Flex>
         <Flex
@@ -32,7 +34,9 @@ const Info = () => {
           paddingTop="6em"
           bgColor="#EDB3C7"
         >
-          <Header color="#E5E6E2">Mision</Header>
+          <Header size="3xl" color="#E5E6E2">
+            Mision
+          </Header>
           <br />
           <br />
           <br />
@@ -70,12 +74,14 @@ const Info = () => {
           paddingTop="6em"
           bgColor="#E7CFA4"
         >
-          <Header color="#E5E6E2">Vision</Header>
+          <Header size="3xl" color="#E5E6E2">
+            Vision
+          </Header>
           <br />
           <br />
           <br />
           <br />
-          <Parragraph color="#E5E6E2" height="auto">
+          <Parragraph color="#E5E6E2" size="2xl" height="auto">
             LLegar a mas clientes que puedan disfrutar de nuestros productos y la calidad del servicio
           </Parragraph>
         </Flex>
@@ -100,14 +106,16 @@ const Info = () => {
           height="100vh"
           paddingTop="6em"
         >
-          <Header color="#E5E6E2">Visitanos</Header>
+          <Header size="3xl" color="#E5E6E2">
+            Visitanos
+          </Header>
           <br />
           <br />
           <br />
-          <Parragraph color="#E5E6E2" height="auto">
+          <Parragraph color="#E5E6E2" size="2xl" height="auto">
             Lunes - Sabados: 7am -7pm
           </Parragraph>
-          <Parragraph color="#E5E6E2" height="auto">
+          <Parragraph color="#E5E6E2" size="2xl" height="auto">
             Zorca , Sector el Bosque , Diagonal al preescolar Tarabay, Municipio Independecia
           </Parragraph>
         </Flex>

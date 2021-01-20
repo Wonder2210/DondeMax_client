@@ -9,6 +9,15 @@ const NavbarWideScreen = () => {
     <Flex zIndex={1} position="absolute" justifyContent="space-between" flexDirection="row" width="100%" height="72px">
       <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">
         <Link
+          href="/"
+          css={{
+            fontsize: "1.2em",
+            fontWeight: 400,
+          }}
+        >
+          Inicio
+        </Link>
+        <Link
           href="/info"
           css={{
             fontsize: "1.2em",
@@ -17,9 +26,9 @@ const NavbarWideScreen = () => {
         >
           Acerca de Nosotros
         </Link>
-        <Link href="/products">Productos</Link>
-        <Link href="/store" passHref>
-          Pedidos
+
+        <Link href="/products" passHref>
+          Productos
         </Link>
       </Flex>
 

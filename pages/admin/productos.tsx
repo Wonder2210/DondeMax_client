@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useMutation, gql } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { Flex, useDisclosure, Grid } from "@chakra-ui/core";
 import { IconButton } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
@@ -32,10 +32,11 @@ const productos = () => {
   const [deleteP] = useMutation(DELETE_PRODUCT);
   const [update, { error }] = useMutation(UPDATE_PRODUCT, { onCompleted: onClose });
 
-  const onSubmit = ({ name, price, materials, image, info, type }) => {
+  const onSubmit = ({ name, price, materials, image, info, type, rate }) => {
     const values = {
       name,
       price,
+      rate,
       materials: materials.map((i) => ({ materialId: Number(i.id), quantity: parseFloat(i.quantity) })),
       image,
       info,
@@ -100,35 +101,38 @@ const productos = () => {
             />
           </Flex>
           <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" templateRows="minmax(300px, auto)">
-            {data.searchProducts.results.map(({ id, name, image, info, type, available, precio, materials }) => (
-              <Product
-                key={id}
-                big={false}
-                image={image}
-                info={info}
-                name={name}
-                type={type}
-                available={available}
-                price={precio}
-                onStatus={() => update({ variables: { id, available: !available } })}
-                onDelete={() => deleteP({ variables: { id } })}
-                onUpdate={() =>
-                  setUpdate({
-                    id,
-                    name,
-                    image,
-                    price: precio,
-                    type,
-                    info,
-                    materials: materials.map((i) => ({
-                      name: i.material.nombre,
-                      id: i.material.id,
-                      quantity: i.quantity,
-                    })),
-                  })
-                }
-              />
-            ))}
+            {data.searchProducts.results.map(
+              ({ id, name, image, info, type, available, precio, materials, rate: { value, times_valued } }) => (
+                <Product
+                  key={id}
+                  image={image}
+                  timesValued={times_valued}
+                  rating={value}
+                  info={info}
+                  name={name}
+                  type={type}
+                  available={available}
+                  price={precio}
+                  onStatus={() => update({ variables: { id, available: !available } })}
+                  onDelete={() => deleteP({ variables: { id } })}
+                  onUpdate={() =>
+                    setUpdate({
+                      id,
+                      name,
+                      image,
+                      price: precio,
+                      type,
+                      info,
+                      materials: materials.map((i) => ({
+                        name: i.material.nombre,
+                        id: i.material.id,
+                        quantity: i.quantity,
+                      })),
+                    })
+                  }
+                />
+              ),
+            )}
           </Grid>
         </>
       )}
