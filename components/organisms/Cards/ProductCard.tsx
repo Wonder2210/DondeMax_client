@@ -1,51 +1,57 @@
-import * as React from "react";
-import { Box } from "@chakra-ui/core";
-import { Icon } from "@iconify/react";
-import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
-import { Button } from "../../atoms/Buttons";
-import { Header, SubHeader, Parragraph } from "../../atoms/Text";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React from "react";
+import Link from "next/link";
+import { Box, Stat, StatNumber, Flex } from "@chakra-ui/core";
+import ReactStars from "react-rating-stars-component";
+import { Header } from "../../atoms/Text";
 import { ImageHeader } from "../../atoms/CardPieces";
 
 type props = {
+  src: string;
+  alt: string;
+  price: string;
   name: string;
-  image: string;
-  info: string;
-  type: string;
-  action: (e: React.FormEvent) => void;
+  id: number;
+  height?: string;
+  width?: string;
+  timesValued: number;
+  rating: number;
 };
 
-const ProductCard: React.FC<props> = ({ name, image, info, type, action }) => {
+const ProductCard: React.FC<props> = ({ src, id, name, timesValued, rating, alt, price }) => {
   return (
     <Box
       margin="1em"
       maxWidth={{
         base: "auto",
         sm: "auto",
-        md: "25em",
-        lg: "25em",
-        xl: "25em",
+        md: "20em",
       }}
     >
-      <ImageHeader maxHeight="50vh" alt={name} src={image} height="auto" width="100%" />
-      <Box margin="0 10%">
-        <Header type="h6" weight="semibold" fontSize="1.5em">
-          Here
-        </Header>
-        <SubHeader fontSize="1em">{type}</SubHeader>
-        <Parragraph fontSize="0.8em" textAlign="left">
-          {info}
-        </Parragraph>
-        <Box margin="0 0 0 auto" width="min-content">
-          <Button
-            backgroundColor="colors.rose.600"
-            onClick={action}
-            width="7em"
-            height="2.5em"
-            rightIcon={<Icon icon={chevronRight} />}
+      <ImageHeader alt={alt} src={src} height="auto" width="100%" maxHeight="min(40vh , 21.875em)" />
+      <Box margin="0.5em .5em 0 0.5em">
+        <Link href={`/products/${name}?id=${id}`} passHref>
+          <a>
+            <Header type="h6" weight="semibold" fontSize="1.8em">
+              {name}
+            </Header>
+          </a>
+        </Link>
+        <Flex alignItems="center">
+          <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#ffd700" />{" "}
+          <span
+            style={{
+              marginLeft: ".5em",
+            }}
           >
-            Comprar
-          </Button>
-        </Box>
+            {timesValued} Valoraciones
+          </span>
+        </Flex>
+        <Flex justifyContent="space-between" alignItems="center">
+          <Stat>
+            <StatNumber>{price}</StatNumber>
+          </Stat>
+        </Flex>
       </Box>
     </Box>
   );

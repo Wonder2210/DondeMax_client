@@ -17,7 +17,6 @@ type props = {
 
 const Pagination: React.FC<props> = ({ numberItems, pageItems, page, last, next, onClick }) => {
   const totalPages = Math.ceil(numberItems / pageItems);
-  console.log(totalPages, numberItems, pageItems);
 
   const renderItems = [...new Array(totalPages).fill(0)]
     .map((i, k) => k + 1)

@@ -9,6 +9,10 @@ export const GET_DATA_STORE = gql`
         name
         image
         precio
+        rate {
+          value
+          times_valued
+        }
       }
     }
     productTypes {
@@ -258,6 +262,10 @@ export const GET_DATA_PRODUCTS = gql`
         type
         precio
         available
+        rate {
+          value
+          times_valued
+        }
         materials {
           quantity
           id

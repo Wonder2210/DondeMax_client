@@ -3,7 +3,7 @@ import JsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { Icon } from "@iconify/react";
 import pdf from "@iconify/icons-cib/adobe-acrobat-reader";
-import { IconButton } from "../../atoms/Buttons";
+import { Button } from "../../atoms/Buttons";
 
 type props = {
   tableId?: string;
@@ -20,12 +20,21 @@ const GeneratePdf: React.FC<props> = ({ tableId = "#table", columns, orientation
   };
   return (
     <>
-      <IconButton
+      <Button
         borderColor="tomato"
+        borderWidth="0.75px"
         onClick={generatePdf}
         aria-label="create-pdf"
-        icon={<Icon icon={pdf} color="tomato" />}
-      />
+        leftIcon={<Icon icon={pdf} color="tomato" />}
+        backgroundColor="white"
+        color="black"
+        height="1.9em"
+        width="11em"
+        borderRadius="8px"
+        fontWeight="medium"
+      >
+        Generar PDF
+      </Button>
     </>
   );
 };

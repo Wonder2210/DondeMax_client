@@ -1,3 +1,4 @@
 import CardSlider from "./CardSlider";
+import CardSliderProducts from "./CardSliderProducts";
 
-export { CardSlider };
+export { CardSlider, CardSliderProducts };

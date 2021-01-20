@@ -46,7 +46,16 @@ const Dashboard = ({ children }) => {
         transition=".5s linear"
       >
         <NavbarDashboard toggle={toggleSidebar} />
-        <Box margin="1em" borderRadius="48px">
+        <Box
+          margin="auto"
+          bgColor="#f2f2f2"
+          maxWidth={{
+            md: "calc( 100vw - 18.5em )",
+            lg: "calc( 100vw - 18.5em )",
+            xl: "calc( 100vw - 18.5em )",
+          }}
+          borderRadius="48px"
+        >
           {children}
         </Box>
       </Box>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Badge, useDisclosure } from "@chakra-ui/core";
+import { useQuery, useMutation } from "@apollo/client";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Stack, Badge, Skeleton, useDisclosure } from "@chakra-ui/core";
 import { SubHeader } from "@/atoms/Text";
 import { Table } from "@/organisms/Table";
 import { IconButton, Button } from "@/atoms/Buttons";
@@ -13,6 +13,7 @@ import Animation from "@/molecules/Loader/Animation";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { GET_DATA_PEDIDOS, UPDATE_ORDER, PRODUCE_ORDER, DELETE_ORDER, TAKE_ORDER } from "@/graphql";
+
 const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 const pedidos = () => {
@@ -234,16 +235,40 @@ const pedidos = () => {
       <Head>
         <title>Admin - Pedidos</title>
       </Head>
+      <Flex height="5em" justifyContent="space-between" paddingX="2em" alignItems="center">
+        <SubHeader fontSize="1.5em" fontWeight="bold">
+          Pedidos
+        </SubHeader>
+        <Button
+          aria-label="add-more"
+          onClick={onOpen}
+          backgroundColor="colors.rose.600"
+          height="1.9em"
+          width="11em"
+          leftIcon={<Icon icon={Plus} color="white" />}
+          borderRadius="8px"
+        >
+          Agregar pedido
+        </Button>
+      </Flex>
       <Tabs>
-        <TabList>
-          <Tab>Pedidos Activos</Tab>
-          <Tab>Pedidos Entregados</Tab>
+        <TabList paddingX="2em">
+          <Tab>Activos</Tab>
+          <Tab>Entregados</Tab>
+          <Tab>Form test</Tab>
         </TabList>
 
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <Animation />
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
             ) : (
               <>
                 <Order
@@ -256,23 +281,15 @@ const pedidos = () => {
                   productList={data.productList}
                   clientList={data.clients}
                 />
-                <Flex height="5em" justifyContent="space-between" alignItems="center">
-                  <SubHeader>Pedidos activos</SubHeader>
-                  <Flex width="10em" justifyContent="space-between" alignItems="center">
-                    <GeneratePDF
-                      orientation="landscape"
-                      columns={columns
-                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                        .filter((i) => i.header !== "Acciones")}
-                    />
-                    <IconButton
-                      aria-label="add-more"
-                      onClick={onOpen}
-                      backgroundColor="colors.rose.600"
-                      icon={<Icon icon={Plus} color="white" />}
-                    />
-                  </Flex>
+                <Flex width="100%" justifyContent="flex-start" paddingY="1.5em" flexGrow={1} alignItems="center">
+                  <GeneratePDF
+                    orientation="landscape"
+                    columns={columns
+                      .map((i) => ({ header: i.Header, dataKey: i.accessor }))
+                      .filter((i) => i.header !== "Acciones")}
+                  />
                 </Flex>
+
                 <Table columns={columns} data={data.orders.filter((i) => i.delivery_status === false)} />
               </>
             )}
@@ -282,8 +299,7 @@ const pedidos = () => {
               <Animation />
             ) : (
               <>
-                <Flex height="5em" justifyContent="space-between" alignItems="center">
-                  <SubHeader>Pedidos Pasados</SubHeader>
+                <Flex width="100%" justifyContent="flex-end" flexGrow={1} alignItems="center">
                   <Flex width="10em" justifyContent="space-between" alignItems="center">
                     <GeneratePDF
                       orientation="landscape"
@@ -291,12 +307,6 @@ const pedidos = () => {
                       columns={columns
                         .map((i) => ({ header: i.Header, dataKey: i.accessor }))
                         .filter((i) => i.header !== "Acciones")}
-                    />
-                    <IconButton
-                      aria-label="add-more"
-                      onClick={onOpen}
-                      backgroundColor="colors.rose.600"
-                      icon={<Icon icon={Plus} color="white" />}
                     />
                   </Flex>
                 </Flex>
@@ -307,6 +317,11 @@ const pedidos = () => {
                 />
               </>
             )}
+          </TabPanel>
+          <TabPanel>
+            <Flex margin="5em auto" maxW="xl" height="50vh" bgColor="#e5e6e8">
+              {" "}
+            </Flex>
           </TabPanel>
         </TabPanels>
       </Tabs>

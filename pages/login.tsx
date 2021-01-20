@@ -51,6 +51,10 @@ const login = () => {
       setState({ loading: false, error: true });
     },
   });
+  if (error) {
+    console.log(JSON.stringify(error.networkError, null, 2));
+    console.log(error.graphQLErrors);
+  }
   const [logClient, { data: dataClient, error: errorClient }] = useMutation(loginClientQuery, {
     onCompleted: () => setState({ ...defaultState }),
     onError: () => setState({ loading: false, error: true }),

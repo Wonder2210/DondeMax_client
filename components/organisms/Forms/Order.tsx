@@ -12,6 +12,7 @@ import {
   StatNumber,
   StatLabel,
   Flex,
+  useBreakpointValue,
 } from "@chakra-ui/core";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
@@ -61,6 +62,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
     abono: 0,
     monto: 0,
   };
+  const variant = useBreakpointValue({ base: "full", md: "md" });
   const [state, setState] = React.useState(defaultState);
   React.useEffect(() => {
     if (state.list.length > 0) {
@@ -101,7 +103,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
     );
   };
   return (
-    <Modal isOpen={isOpen} onClose={close}>
+    <Modal isOpen={isOpen} isCentered motionPreset="slideInBottom" onClose={close} size={variant}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{isEditing ? `Editando pedido` : "Agrega nuevo Pedido"}</ModalHeader>

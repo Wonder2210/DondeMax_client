@@ -24,10 +24,14 @@ const RightSide = () => {
       h="100vh"
     >
       <Box marginTop="15vh">
-        <Header color="#E91E63">D</Header>
-        <Header>onde</Header>
-        <Header color="#E91E63">M</Header>
-        <Header>ax</Header>
+        <Header size="4xl" color="#E91E63">
+          D
+        </Header>
+        <Header size="4xl">onde</Header>
+        <Header size="4xl" color="#E91E63">
+          M
+        </Header>
+        <Header size="4xl">ax</Header>
       </Box>
       <Box marginTop="5vh">
         <SubHeader>
@@ -36,7 +40,11 @@ const RightSide = () => {
       </Box>
       <Box marginTop="5vh" height="auto">
         <Button
+          fontSize="1.2em"
           backgroundColor="#E91E63"
+          width="14em"
+          height="3.5em"
+          size="lg"
           onClick={() => router.push("/products")}
           rightIcon={
             <Icon icon={chevronRight} color="white" height="2.875rem" width="2.375rem" style={{ marginLeft: "10%" }} />

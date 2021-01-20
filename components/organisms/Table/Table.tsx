@@ -15,17 +15,7 @@ const Table: React.FC<props> = ({ columns, data, width, ref, id = "table" }) => 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   return (
-    <Box
-      width={width}
-      padding="2em"
-      margin="1em auto"
-      transition=".1s ease-in"
-      overflowX="auto"
-      _hover={{
-        border: "1px solid #f2f2f2",
-        boxShadow: "0 0 40px -5px #9e9c9e",
-      }}
-    >
+    <Box width={width} paddingX="2em" margin="1em auto" transition=".1s ease-in" overflowX="auto">
       <table {...getTableProps()} style={{ width: "100%" }} id={id}>
         <thead>
           {headerGroups.map((headerGroup, index) => (

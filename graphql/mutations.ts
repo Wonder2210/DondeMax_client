@@ -179,9 +179,18 @@ export const ADD_PRODUCT = gql`
     $image: Upload!
     $info: String!
     $type: String!
+    $rate: Float
   ) {
     createProduct(
-      product: { name: $name, precio: $price, materials: $materials, image: $image, info: $info, type: $type }
+      product: {
+        name: $name
+        precio: $price
+        materials: $materials
+        image: $image
+        info: $info
+        type: $type
+        rate: $rate
+      }
     ) {
       id
     }
