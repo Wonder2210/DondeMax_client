@@ -28,7 +28,7 @@ type props = {
   id?: string;
   variant?: string;
   isRequired?: boolean;
-  onChange?: (e: number, ee: string) => void;
+  onChange?: (e: string, ee: number) => void;
 };
 
 const NumberInput: React.FC<props> = ({
