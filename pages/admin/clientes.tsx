@@ -1,21 +1,15 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { Flex, useDisclosure } from "@chakra-ui/core";
-import { IconButton } from "@/atoms/Buttons";
+import { useQuery, useMutation } from "@apollo/client";
+import { Flex, useDisclosure, Stack, Skeleton } from "@chakra-ui/core";
+import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
-import { Icon } from "@iconify/react";
-import dynamic from "next/dynamic";
 import Head from "next/head";
-import { TableActions } from "@/molecules/ActionButtons";
+import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
 import { CreateClient as Client } from "@/organisms/Forms";
-import { Table } from "@/organisms/Table";
-import Animation from "@/molecules/Loader/Animation";
-import { clientes as clients } from "@/utils/TablesHeader";
+import { CustomerTable } from "@/organisms/Table";
 import { GET_DATA_CLIENTS, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT } from "@/graphql";
-
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 function clientes() {
   const defaultState = {
@@ -40,8 +34,8 @@ function clientes() {
       phone?: string;
     };
   }>(defaultState);
-  const { data, loading } = useQuery(GET_DATA_CLIENTS, { pollInterval: 500 });
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, loading } = useQuery(GET_DATA_CLIENTS, { pollInterval: 500 });
   const [createClient, { error }] = useMutation(CREATE_CLIENT, { onCompleted: onClose });
   const [updateClient] = useMutation(UPDATE_CLIENT, { onCompleted: onClose });
   const [deleteClient] = useMutation(DELETE_CLIENT, { onCompleted: onClose });
@@ -50,12 +44,8 @@ function clientes() {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);
   }
-  const setEdit = (values) => {
-    setState({ edit: true, data: { ...values } });
-    onOpen();
-  };
-  const onDelete = (id) => {
-    deleteClient({ variables: { id: parseInt(id, 10) } });
+  const onDelete = (row: any) => {
+    deleteClient({ variables: { id: parseInt(row.original.id, 10) } });
   };
   const onUpdateClient = (values) => {
     updateClient({ variables: { id: state.data.id, ...values } });
@@ -68,30 +58,41 @@ function clientes() {
     setState({ ...defaultState });
     onClose();
   };
-  const headers = React.useMemo(
-    (): Array<{ Header: string; accessor?: string; Cell?: any }> => [
-      ...clients,
-      {
-        Header: "Acciones",
-        Cell: ({ row }) => (
-          <TableActions
-            onDelete={() => onDelete(row.original.id)}
-            onUpdate={() => {
-              setEdit(row.original);
-            }}
-          />
-        ),
-      },
-    ],
-    [],
-  );
+  const onUpdate = (row: any) => {
+    setState({ edit: true, data: { ...row.original } });
+    onOpen();
+  };
+
   return (
     <Dashboard>
       <Head>
         <title>Admin - Clientes</title>
       </Head>
+      <Flex height="5em" justifyContent="space-between" paddingX="2em" alignItems="center">
+        <SubHeader fontSize="1.5em" fontWeight="bold">
+          Clientes
+        </SubHeader>
+        <Button
+          aria-label="add-more"
+          onClick={onOpen}
+          backgroundColor="colors.rose.600"
+          height="1.9em"
+          width="12em"
+          leftIcon={<Icon icon={Plus} color="white" />}
+          borderRadius="8px"
+        >
+          Agregar Cliente
+        </Button>
+      </Flex>
       {loading ? (
-        <Animation />
+        <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+        </Stack>
       ) : (
         <>
           <Client
@@ -102,24 +103,7 @@ function clientes() {
             onEdit={onUpdateClient}
             values={{ ...state.data }}
           />
-          <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-            <SubHeader>Clientes</SubHeader>
-
-            <Flex width="10em" justifyContent="space-between" alignItems="center">
-              <GeneratePDF
-                columns={headers
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-              <IconButton
-                aria-label="add-more"
-                onClick={onOpen}
-                backgroundColor="colors.rose.600"
-                icon={<Icon icon={Plus} color="white" />}
-              />
-            </Flex>
-          </Flex>
-          <Table columns={headers} data={data.clients} />
+          <CustomerTable onDelete={onDelete} id="customers" onUpdate={onUpdate} data={data.clients} />
         </>
       )}
     </Dashboard>

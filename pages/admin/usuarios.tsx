@@ -1,22 +1,16 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
-import { Flex, useDisclosure } from "@chakra-ui/core";
-import { IconButton } from "@/atoms/Buttons";
+import { Flex, Stack, Skeleton, useDisclosure } from "@chakra-ui/core";
+import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
-import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
 import { CreateUser as User } from "@/organisms/Forms";
-import { Table } from "@/organisms/Table";
-import dynamic from "next/dynamic";
+import { UsersTable } from "@/organisms/Table";
 import { useAuth } from "@/utils/AuthHook";
-import { usuarios as users } from "@/utils/TablesHeader";
-import Animation from "@/molecules/Loader/Animation";
 import { GET_DATA_USERS, UPDATE_USER, DELETE_USER, CREATE_USER } from "@/graphql";
 import Head from "next/head";
-
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 function usuarios() {
   const defaultState = {
@@ -55,31 +49,59 @@ function usuarios() {
   const onSubmit = (values) => {
     createUser({ variables: { ...values } });
   };
-
-  const onUpdateUser = (values) => {
-    updateUser({ variables: { id: state.data.id, ...values } });
-  };
-
   const onDelete = (id) => {
     deleteUser({ variables: { id: parseInt(id, 10) } });
   };
+
+  const onClickDeleteUser = (row: any) =>
+    user.id !== row.original.id ? onDelete(row.original.id) : alert("no puedes borrarte a ti mismo");
+
   const setEdit = (values) => {
     setState({ edit: true, data: { ...values } });
     onOpen();
+  };
+  const onClickUpdateUser = (row: any) => {
+    setEdit(row.original);
+  };
+
+  const onUpdateUser = (values) => {
+    updateUser({ variables: { id: state.data.id, ...values } });
   };
 
   const closeModal = () => {
     setState({ ...defaultState });
     onClose();
   };
-  const headers = React.useMemo(() => [...users], []);
   return (
     <Dashboard>
       <Head>
         <title>Admin - Usuarios</title>
       </Head>
+      <Flex height="5em" justifyContent="space-between" paddingX="2em" alignItems="center">
+        <SubHeader fontSize="1.5em" fontWeight="bold">
+          Usuarios
+        </SubHeader>
+        <Button
+          aria-label="add-more"
+          onClick={onOpen}
+          backgroundColor="colors.rose.600"
+          height="1.9em"
+          width="11em"
+          leftIcon={<Icon icon={Plus} color="white" />}
+          borderRadius="8px"
+        >
+          Agregar Usuario
+        </Button>
+      </Flex>
       {loading ? (
-        <Animation />
+        <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+        </Stack>
       ) : (
         <>
           <User
@@ -100,46 +122,11 @@ function usuarios() {
             onEdit={onUpdateUser}
             values={{ ...state.data }}
           />
-          <Flex height="5em" justifyContent="space-between" paddingX="5em" alignItems="center">
-            <SubHeader>Usuarios</SubHeader>
-
-            <Flex width="10em" paddingX="3em" justifyContent="space-between" alignItems="center">
-              <GeneratePDF
-                columns={headers
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-              <IconButton
-                aria-label="add-more"
-                onClick={onOpen}
-                backgroundColor="colors.rose.600"
-                icon={<Icon icon={Plus} color="white" />}
-              />
-            </Flex>
-          </Flex>
-          <Table
-            columns={
-              user.role === "ADMINISTRADOR"
-                ? [
-                    ...headers,
-                    {
-                      Header: "Acciones",
-                      Cell: ({ row }) => (
-                        <TableActions
-                          onDelete={() =>
-                            user.id !== row.original.id
-                              ? onDelete(row.original.id)
-                              : alert("no puedes borrarte a ti mismo")
-                          }
-                          onUpdate={() => {
-                            setEdit(row.original);
-                          }}
-                        />
-                      ),
-                    },
-                  ]
-                : headers
-            }
+          <UsersTable
+            id="users"
+            onUpdate={onClickUpdateUser}
+            onDelete={onClickDeleteUser}
+            isAdmin={user.role === "ADMINISTRADOR"}
             data={data.users}
           />
         </>

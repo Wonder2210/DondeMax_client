@@ -38,7 +38,7 @@ import { Header, Parragraph } from "@/atoms/Text";
 import { useQuery, gql } from "@apollo/client";
 import { Standard } from "@/layouts/Standard";
 import Animation from "@/molecules/Loader/Animation";
-import { CardSliderProducts as CardSlider } from "@/organisms/CardSlider";
+import { CardSliderProducts as CardSlider } from "@/organisms/Carousel";
 
 const query = gql`
   query Product($id: Int!) {
@@ -69,8 +69,11 @@ const query = gql`
 
 const ProductInfo = () => {
   const router = useRouter();
+  const [state, setState] = React.useState({
+    qty: 1,
+  });
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { state: context, setState: setContext } = useAppContext();
+  const { state: context, setState: setContext, addToCart: addToCartContext, removeFromCart } = useAppContext();
   const { product, id } = router.query;
   const { data, error, loading } = useQuery(query, {
     variables: {
@@ -85,8 +88,20 @@ const ProductInfo = () => {
   }
 
   const addToCart = () => {
+    addToCartContext({
+      id: data.product.id,
+      name: data.product.name,
+      quantity: parseInt(state.qty),
+      image: data.product.image,
+      price: data.product.precio,
+      total: parseFloat(state.qty) * data.product.precio,
+    });
     onOpen();
-    setTimeout(onClose, 2500);
+    setTimeout(onClose, 1500);
+  };
+
+  const onChangeQty = (valN: number) => {
+    setState({ qty: valN });
   };
 
   return (
@@ -94,13 +109,18 @@ const ProductInfo = () => {
       <Head>
         <title>{product}</title>
       </Head>
-      <AlertDialog motionPreset="scale" onClose={onClose} isOpen={isOpen}>
+      <AlertDialog onClose={onClose} isOpen={isOpen}>
         <AlertDialogOverlay />
 
         <AlertDialogContent>
           <AlertDialogCloseButton />
-          <AlertDialogBody paddingY="2.5em">
-            Are you sure you want to discard all of your notes? 44 words will be deleted.
+          <AlertDialogBody paddingY="2.75em">
+            <Stack direction="row">
+              <Image rounded="35px" src={data.product.image} boxSize="50px" />
+              <p>
+                Haz agregado <strong>{state.qty}</strong> unidades de {data.product.name} al carrito Exitosamente
+              </p>
+            </Stack>
           </AlertDialogBody>
         </AlertDialogContent>
       </AlertDialog>
@@ -230,7 +250,7 @@ const ProductInfo = () => {
                 {/* {data.product.info} */}
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, natus hic.
               </Parragraph>
-              <NumberInput label="Cantidad:" defaultValue={1} min={1} max={12} size="xs" />
+              <NumberInput label="Cantidad:" defaultValue={1} onChange={onChangeQty} min={1} max={12} size="xs" />
               <Button
                 onClick={addToCart}
                 marginTop="1em"

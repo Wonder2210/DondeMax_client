@@ -7,6 +7,7 @@ type ProductsCart = {
   id: number;
   name: string;
   price: number;
+  image: string;
   quantity: number;
   total: number;
 };
@@ -26,7 +27,7 @@ export const AppProvider: React.FC = ({ children }) => {
   const [state, setState] = React.useState<{
     admin: boolean;
     adminPassword: number;
-    productsCart?: [ProductsCart];
+    productsCart?: Array<ProductsCart>;
   }>(() => {
     const admin = Cookies.get("admin") === "true" ?? false;
     const adminPassword = 221099;
@@ -39,6 +40,23 @@ export const AppProvider: React.FC = ({ children }) => {
     };
   });
 
+  const addToCart = (product: ProductsCart) => {
+    const itemIndex = state.productsCart.findIndex((i) => i.id === product.id);
+    console.log(itemIndex);
+    if (itemIndex >= 0) {
+      const items = [...state.productsCart];
+      items[itemIndex].quantity += product.quantity;
+      items[itemIndex].total += product.total;
+      console.log(items);
+      setState({ ...state, productsCart: items });
+      return;
+    }
+    setState({ ...state, productsCart: [...state.productsCart, product] });
+  };
+
+  const removeFromCart = (id: number) => {
+    setState({ ...state, productsCart: state.productsCart.filter((i) => i.id !== id) });
+  };
   React.useEffect(() => {
     const stateJ = JSON.stringify(state.productsCart);
     // eslint-disable-next-line no-console
@@ -52,6 +70,8 @@ export const AppProvider: React.FC = ({ children }) => {
     () => ({
       state,
       setState,
+      addToCart,
+      removeFromCart,
     }),
     [state],
   );

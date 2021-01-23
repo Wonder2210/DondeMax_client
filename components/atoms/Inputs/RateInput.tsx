@@ -13,7 +13,7 @@ type props = {
   errorMessage: string;
 };
 
-const RateInput: React.FC<props> = ({ isInvalid, form, field, id, helper, label, errorMessage }) => {
+const RateInput: React.FC<props> = ({ isInvalid, form, field, id, helper, errorMessage }) => {
   const onChange = (value) => {
     form.setFieldValue(field.name, value);
   };

@@ -1,20 +1,13 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex } from "@chakra-ui/core";
-import Animation from "@/molecules/Loader/Animation";
-import { SubHeader } from "@/atoms/Text";
-import { Table } from "@/organisms/Table";
+import { useQuery } from "@apollo/client";
+import { Tabs, TabList, TabPanels, Stack, Skeleton, Tab, TabPanel, Flex } from "@chakra-ui/core";
+import { OrdersHistoryTable, ProductsHistoryTable, StockHistoryTable, SessionHistoryTable } from "@/organisms/Table";
 import { Dashboard } from "@/layouts/Dashboard";
-import dynamic from "next/dynamic";
 import Head from "next/head";
-import { auditorias } from "@/utils/TablesHeader";
 import { GET_DATA_AUDITORIAS } from "@/graphql";
-
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 function clientes() {
   const { data, loading, error } = useQuery(GET_DATA_AUDITORIAS, { pollInterval: 5000 });
-  const columns = React.useMemo(() => [...auditorias], []);
   if (error) {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);
@@ -33,52 +26,60 @@ function clientes() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-              <SubHeader>Pedidos</SubHeader>
-              <GeneratePDF
-                tableId="#orders"
-                columns={columns[0]
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-            </Flex>
-            {loading ? <Animation /> : <Table id="orders" columns={columns[0]} data={data.ordersLog} />}
+            {loading ? (
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
+            ) : (
+              <OrdersHistoryTable id="orders" data={data.ordersLog} />
+            )}
           </TabPanel>
           <TabPanel>
-            <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-              <SubHeader>Productos</SubHeader>
-              <GeneratePDF
-                tableId="#products"
-                columns={columns[1]
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-            </Flex>
-            {loading ? <Animation /> : <Table id="products" columns={columns[2]} data={data.productsLog} />}
+            {loading ? (
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
+            ) : (
+              <ProductsHistoryTable id="products" data={data.productsLog} />
+            )}
           </TabPanel>
           <TabPanel>
-            <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-              <SubHeader>Inventario</SubHeader>
-              <GeneratePDF
-                tableId="#inventario"
-                columns={columns[2]
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-            </Flex>
-            {loading ? <Animation /> : <Table id="inventario" columns={columns[1]} data={data.storageLog} />}
+            {loading ? (
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
+            ) : (
+              <StockHistoryTable id="inventario" data={data.storageLog} />
+            )}
           </TabPanel>
           <TabPanel>
-            <Flex height="5em" justifyContent="space-between" alignItems="center">
-              <SubHeader>Sesion</SubHeader>
-              <GeneratePDF
-                tableId="#sesion"
-                columns={columns[3]
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-            </Flex>
-            {loading ? <Animation /> : <Table id="sesion" columns={columns[3]} data={data.sessionLog} />}
+            {loading ? (
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
+            ) : (
+              <SessionHistoryTable id="sesion" data={data.sessionLog} />
+            )}
           </TabPanel>
         </TabPanels>
       </Tabs>

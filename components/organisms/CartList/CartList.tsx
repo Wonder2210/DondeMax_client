@@ -28,7 +28,7 @@ type state = {
     id: number;
     name: string;
     image: string;
-    precio: number;
+    price: number;
     total: number;
     quantity: number;
   }>;
@@ -49,11 +49,12 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
     }
     onOpenModal();
   };
+  function arrayEquals(a, b) {
+    return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((val, index) => val === b[index]);
+  }
   const { productsCart } = context;
   React.useEffect(() => {
-    if (state.products.length === 0 || context.productsCart.length !== state.products) {
-      setState({ ...state, products: [...context.productsCart.map((i) => ({ ...i, total: i.precio, quantity: 1 }))] });
-    }
+    setState({ ...state, products: [...context.productsCart] });
   }, [productsCart, state.products]);
   React.useEffect(() => {
     if (state.products.length) {
@@ -61,6 +62,9 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
     }
     if (context.productsCart.length === 0) {
       setState({ ...state, total: 0 });
+    }
+    if (!arrayEquals(context.productsCart, state.products)) {
+      setContext({ ...context, productsCart: state.products });
     }
   }, [state.products]);
   const deleteFromCart = (id) => () =>
@@ -70,7 +74,7 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
       ...state,
       products: state.products.map((i) => {
         if (id === i.id) {
-          return { ...i, quantity: val, total: val * i.precio };
+          return { ...i, quantity: val, total: val * i.price };
         }
         return i;
       }),
@@ -104,7 +108,7 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
         onChange={onChange(i.id)}
         image={i.image}
         name={i.name}
-        price={i.precio}
+        price={i.price}
         uniteds={i.quantity}
         total={i.total}
         key={i.id}

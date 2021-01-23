@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Box, Flex } from "@chakra-ui/core";
-import { useTable } from "react-table";
+import { useTable, Column } from "react-table";
 
 type props = {
-  columns: Array<object>;
+  columns: Column<object>[];
   data: Array<object>;
   width?: string;
   ref?: React.Ref<HTMLDivElement>;
@@ -15,7 +15,7 @@ const Table: React.FC<props> = ({ columns, data, width, ref, id = "table" }) => 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   return (
-    <Box width={width} paddingX="2em" margin="1em auto" transition=".1s ease-in" overflowX="auto">
+    <Box width={width} paddingX="2em" margin="1em auto" boxShadow="2px 2px 0 #d6d6d6" overflowX="auto">
       <table {...getTableProps()} style={{ width: "100%" }} id={id}>
         <thead>
           {headerGroups.map((headerGroup, index) => (

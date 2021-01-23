@@ -1,20 +1,16 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { Flex, useDisclosure } from "@chakra-ui/core";
-import { IconButton } from "@/atoms/Buttons";
+import { useQuery, useMutation } from "@apollo/client";
+import { Flex, useDisclosure, Stack, Skeleton } from "@chakra-ui/core";
+import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
-import { TableActions } from "@/molecules/ActionButtons";
 import Plus from "@iconify/icons-cil/plus";
 import { Provider } from "@/organisms/Forms";
-import Animation from "@/molecules/Loader/Animation";
 import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/graphql";
-import { Table } from "@/organisms/Table";
-import dynamic from "next/dynamic";
+import { ProvidersTable } from "@/organisms/Table";
 import Head from "next/head";
 
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 const initialState = {
   edit: false,
   data: {
@@ -41,47 +37,14 @@ const proveedores = () => {
     },
   });
 
-  const headers = React.useMemo(
-    () => [
-      {
-        Header: "ID",
-        accessor: "id",
-      },
-      {
-        Header: "Nombre",
-        accessor: "name",
-      },
-      {
-        Header: "RIF",
-        accessor: "RIF",
-      },
-      {
-        Header: "Telefono",
-        accessor: "phone",
-      },
-      {
-        Header: "Direccion",
-        accessor: "direction",
-      },
-      {
-        Header: "Acciones",
-        Cell: ({ row }) => (
-          <TableActions
-            onDelete={() => deleteProvider({ variables: { id: row.original.id } })}
-            onUpdate={() => {
-              setData({ edit: true, data: { ...row.original } });
-              onOpen();
-            }}
-          />
-        ),
-      },
-    ],
-    [],
-  );
   const onSubmit = (values) => {
     createProvider({ variables: { ...values } });
   };
-
+  const onUpdate = (row: any) => {
+    setData({ edit: true, data: { ...row.original } });
+    onOpen();
+  };
+  const onDelete = (row: any) => deleteProvider({ variables: { id: row.original.id } });
   const onCloseEdit = () => {
     cleanState();
     onClose();
@@ -94,8 +57,40 @@ const proveedores = () => {
       <Head>
         <title>Admin - Proveedores</title>
       </Head>
+      <Flex
+        height="5em"
+        justifyContent="space-between"
+        paddingX={{
+          base: ".4em",
+          md: "2em",
+        }}
+        alignItems="center"
+      >
+        <SubHeader fontSize="1.5em" fontWeight="bold">
+          Proveedores
+        </SubHeader>
+        <Button
+          aria-label="add-more"
+          onClick={onOpen}
+          backgroundColor="colors.rose.600"
+          height="1.9em"
+          size="xl"
+          width="12em"
+          leftIcon={<Icon icon={Plus} color="white" />}
+          borderRadius="8px"
+        >
+          Agregar proveedor
+        </Button>
+      </Flex>
       {loading ? (
-        <Animation />
+        <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+          <Skeleton height="25px" />
+        </Stack>
       ) : (
         <>
           <Provider
@@ -106,24 +101,8 @@ const proveedores = () => {
             onClose={onCloseEdit}
             onSubmit={onSubmit}
           />
-          <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-            <SubHeader>Proveedores</SubHeader>
 
-            <Flex width="10em" justifyContent="space-between" alignItems="center">
-              <GeneratePDF
-                columns={headers
-                  .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                  .filter((i) => i.header !== "Acciones")}
-              />
-              <IconButton
-                aria-label="add-more"
-                onClick={onOpen}
-                backgroundColor="colors.rose.600"
-                icon={<Icon icon={Plus} color="white" />}
-              />
-            </Flex>
-          </Flex>
-          <Table ref={ref} columns={headers} data={data.providers} />
+          <ProvidersTable onDelete={onDelete} onUpdate={onUpdate} id="providers" data={data.providers} />
         </>
       )}
     </Dashboard>

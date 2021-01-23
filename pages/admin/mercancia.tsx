@@ -1,22 +1,16 @@
 // @ts-nocheck
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/core";
-import Animation from "@/molecules/Loader/Animation";
-import { IconButton, Button } from "@/atoms/Buttons";
+import { useQuery, useMutation } from "@apollo/client";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure, Stack, Skeleton } from "@chakra-ui/core";
+import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
-import { TableActions } from "@/molecules/ActionButtons";
-import { Table } from "@/organisms/Table";
+import { MaterialsTable, MaterialsAvailableTable, StockIncomeTable } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
 import { Mercancia, Storage } from "@/organisms/Forms";
 import { ADD_TO_STORAGE, GET_DATA_MERCANCIA, DELETE_MATERIAL, UPDATE_MATERIAL, CREATE_MATERIAL } from "@/graphql";
-import { mercancia as headers } from "@/utils/TablesHeader";
-import dynamic from "next/dynamic";
 import Head from "next/head";
-
-const GeneratePDF = dynamic(() => import("@/organisms/PDF/GeneratePdf"), { ssr: false });
 
 const mercancia = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,8 +31,15 @@ const mercancia = () => {
     },
   };
 
+  const onDeleteMaterials = (row: any) => deleteMaterial({ variables: { id: row.original.id } });
   const [editData, setEditData] = React.useState(defaultState);
-
+  const onUpdateMaterials = (row: any) => {
+    setEditData({
+      edit: true,
+      data: { id: row.original.id, type: row.original.type.id, nombre: row.original.nombre },
+    });
+    onOpen();
+  };
   const onSubmit = ({ nombre, type }) => {
     createMaterial({ variables: { nombre, type: Number(type) } });
   };
@@ -62,31 +63,6 @@ const mercancia = () => {
         united_weight: parseFloat(values.united_weight),
       },
     });
-  const columns = React.useMemo(
-    (): Array<{ Header: string; accessor?: string; Cell?: any }> => [
-      [
-        ...headers[0],
-        {
-          Header: "Acciones",
-          Cell: ({ row }) => (
-            <TableActions
-              onDelete={() => deleteMaterial({ variables: { id: row.original.id } })}
-              onUpdate={() => {
-                setEditData({
-                  edit: true,
-                  data: { id: row.original.id, type: row.original.type.id, nombre: row.original.nombre },
-                });
-                onOpen();
-              }}
-            />
-          ),
-        },
-      ],
-      [...headers[1]],
-      [...headers[2]],
-    ],
-    [],
-  );
   if (error) {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);
@@ -97,6 +73,48 @@ const mercancia = () => {
       <Head>
         <title>Admin - Mercancia</title>
       </Head>
+      <Flex height="5em" justifyContent="space-between" paddingX="2em" alignItems="center">
+        <SubHeader fontSize="1.5em" fontWeight="bold">
+          Mercancia
+        </SubHeader>
+        <Flex
+          alignItems="flex-end"
+          flexDirection={{
+            base: "column",
+            md: "row",
+          }}
+        >
+          <Button
+            aria-label="add-more"
+            onClick={onOpen}
+            variant="outline"
+            borderColor="colors.rose.600"
+            backgroundColor="transparent"
+            color="colors.rose.600"
+            height="1.9em"
+            width="12em"
+            leftIcon={<Icon icon={Plus} color="#e91e63" />}
+            borderRadius="8px"
+            marginRight={{
+              base: "0em",
+              md: ".4em",
+            }}
+          >
+            Agregar Materiales
+          </Button>
+          <Button
+            aria-label="add-more"
+            onClick={onOpenStore}
+            backgroundColor="colors.rose.600"
+            height="1.9em"
+            width="12em"
+            leftIcon={<Icon icon={Plus} color="white" />}
+            borderRadius="8px"
+          >
+            Agregar Mercancia
+          </Button>
+        </Flex>
+      </Flex>
       <Tabs>
         <TabList>
           <Tab>Materiales</Tab>
@@ -106,7 +124,14 @@ const mercancia = () => {
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <Animation />
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
             ) : (
               <>
                 <Mercancia
@@ -118,30 +143,26 @@ const mercancia = () => {
                   onEdit={onEdit}
                   values={editData.data}
                 />
-                <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-                  <SubHeader>Mercancia</SubHeader>
-                  <Flex width="10em" justifyContent="space-between" alignItems="center">
-                    <GeneratePDF
-                      tableId="#materials"
-                      columns={columns[0]
-                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                        .filter((i) => i.header !== "Acciones")}
-                    />
-                    <IconButton
-                      aria-label="add-more"
-                      onClick={onOpen}
-                      backgroundColor="colors.rose.600"
-                      icon={<Icon icon={Plus} color="white" />}
-                    />
-                  </Flex>
-                </Flex>
-                <Table columns={columns[0]} id="materials" data={data.materials} />
+
+                <MaterialsTable
+                  onDelete={onDeleteMaterials}
+                  onUpdate={onUpdateMaterials}
+                  id="materials"
+                  data={data.materials}
+                />
               </>
             )}
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <Animation />
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
             ) : (
               <>
                 <Storage
@@ -154,45 +175,22 @@ const mercancia = () => {
                   providersList={data.providers.map((i) => ({ id: i.id, type: i.name }))}
                   materialList={data.materials.map((i) => ({ id: i.id, type: i.nombre }))}
                 />
-                <Flex height="5em" paddingX="3em" justifyContent="space-between" alignItems="center">
-                  <SubHeader> Inventario </SubHeader>
-                  <Flex width="10em" justifyContent="space-between" alignItems="center">
-                    <GeneratePDF
-                      tableId="#inventario"
-                      columns={columns[1]
-                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                        .filter((i) => i.header !== "Acciones")}
-                    />
-                    <IconButton
-                      aria-label="add-more"
-                      onClick={onOpenStore}
-                      backgroundColor="colors.rose.600"
-                      icon={<Icon icon={Plus} color="white" />}
-                    />
-                  </Flex>
-                </Flex>
-                <Table columns={columns[1]} id="inventario" data={data.storage} />
+                <StockIncomeTable id="inventario" data={data.storage} />
               </>
             )}
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <Animation />
+              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+                <Skeleton height="25px" />
+              </Stack>
             ) : (
-              <>
-                <Flex height="5em" justifyContent="space-between" alignItems="center">
-                  <SubHeader> Materia disponible </SubHeader>
-                  <Flex width="10em" justifyContent="space-between" alignItems="center">
-                    <GeneratePDF
-                      tableId="#disponible"
-                      columns={columns[2]
-                        .map((i) => ({ header: i.Header, dataKey: i.accessor }))
-                        .filter((i) => i.header !== "Acciones")}
-                    />
-                  </Flex>
-                </Flex>
-                <Table columns={columns[2]} id="disponible" data={data.materialsStage} />
-              </>
+              <MaterialsAvailableTable id="disponible" data={data.materialsStage} />
             )}
           </TabPanel>
         </TabPanels>
