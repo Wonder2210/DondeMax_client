@@ -61,10 +61,8 @@ const Storage: React.FC<props> = ({
                 {({ field, form }) => (
                   <NumberInput
                     id="uniteds"
-                    form={form}
                     isInvalid={form.errors.uniteds && form.touched.uniteds}
                     label="Unidades:"
-                    field={field}
                     variant="flushed"
                     onChange={(e) => form.setFieldValue(field.name, e)}
                     errorMessage={form.errors.uniteds}

@@ -88,7 +88,7 @@ const Products: React.FC<props> = ({
 
     set("materials", [...last, value]);
   };
-  const RemoveFromList = (set, { id, name }, last) => {
+  const RemoveFromList = (set, { id, name }: { id?: any; name?: any }, last) => {
     setState((lastState) => ({
       data: lastState.data.concat({ id, type: name }),
     }));

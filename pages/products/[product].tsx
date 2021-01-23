@@ -91,29 +91,30 @@ const ProductInfo = () => {
     addToCartContext({
       id: data.product.id,
       name: data.product.name,
-      quantity: parseInt(state.qty),
+      quantity: state.qty,
       image: data.product.image,
       price: data.product.precio,
-      total: parseFloat(state.qty) * data.product.precio,
+      total: state.qty * data.product.precio,
     });
     onOpen();
     setTimeout(onClose, 1500);
   };
 
-  const onChangeQty = (valN: number) => {
+  const onChangeQty = (valS: string, valN: number) => {
     setState({ qty: valN });
   };
+  const addRef = React.useRef();
 
   return (
     <>
       <Head>
         <title>{product}</title>
       </Head>
-      <AlertDialog onClose={onClose} isOpen={isOpen}>
+      <AlertDialog leastDestructiveRef={addRef} onClose={onClose} isOpen={isOpen}>
         <AlertDialogOverlay />
 
         <AlertDialogContent>
-          <AlertDialogCloseButton />
+          <AlertDialogCloseButton ref={addRef} />
           <AlertDialogBody paddingY="2.75em">
             <Stack direction="row">
               <Image rounded="35px" src={data.product.image} boxSize="50px" />

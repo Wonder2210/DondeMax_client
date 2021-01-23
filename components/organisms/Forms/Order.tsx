@@ -91,7 +91,7 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
     resetState();
     onClose();
   };
-  const RemoveFromList = (set, { id, name, price }, last) => {
+  const RemoveFromList = (set, { id, name, price }: { id?: number; name?: string; price?: any }, last) => {
     setState((lastState) => ({
       ...lastState,
       data: lastState.data.concat({ id, type: name, price }),
@@ -237,8 +237,6 @@ const Pedido: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing,
                       form.setFieldValue(field.name, val);
                       setState({ ...state, abono: Number(val) });
                     }}
-                    field={field}
-                    form={form}
                   />
                 )}
               </Field>
