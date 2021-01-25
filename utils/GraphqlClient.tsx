@@ -5,7 +5,7 @@ import { setContext } from "@apollo/client/link/context";
 import { createUploadLink as CreateUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
 
-const Client = (token) => {
+export const Client = (token) => {
   const setAuthorizationLink = setContext((request, previousContext) => ({
     headers: { authorization: token },
   }));
