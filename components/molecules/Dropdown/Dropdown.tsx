@@ -41,7 +41,7 @@ const Dropdown: React.FC<props> = ({ show, children }) => {
         `}
       </style>
       <div className="inner">
-        <CSSTransition in={show} timeout={1000} classNames="dropdown" unmountOnExit>
+        <CSSTransition in={show} timeout={5000} classNames="dropdown" unmountOnExit>
           <div className="dropdown">
             <List spacing={6} padding={3}>
               {children}

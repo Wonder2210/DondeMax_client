@@ -28,6 +28,7 @@ export const AppProvider: React.FC = ({ children }) => {
     admin: boolean;
     adminPassword: number;
     productsCart?: Array<ProductsCart>;
+    total: number;
   }>(() => {
     const admin = Cookies.get("admin") === "true" ?? false;
     const adminPassword = 221099;
@@ -37,17 +38,24 @@ export const AppProvider: React.FC = ({ children }) => {
       admin,
       adminPassword,
       productsCart,
+      total: 0,
     };
   });
+  React.useEffect(() => {
+    if (state.productsCart.length) {
+      setState({ ...state, total: state.productsCart.reduce((prev, current) => prev + current.total, 0) });
+      console.log("updated");
+    }
+  }, [state.productsCart]);
 
   const addToCart = (product: ProductsCart) => {
     const itemIndex = state.productsCart.findIndex((i) => i.id === product.id);
-    console.log(itemIndex);
+
     if (itemIndex >= 0) {
       const items = [...state.productsCart];
       items[itemIndex].quantity += product.quantity;
       items[itemIndex].total += product.total;
-      console.log(items);
+
       setState({ ...state, productsCart: items });
       return;
     }

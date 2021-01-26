@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable prettier/prettier */
 import * as React from "react";
 import { Flex, Box } from "@chakra-ui/core";
@@ -20,7 +21,7 @@ const index = () => {
         <title>Donde Max - Inicio</title>
       </Head>
       <Navbar />
-      <Flex position="fixed" width="100%" height="100vh">
+      <Flex position="fixed" width="100%" overflowY="auto" height="100%">
         <Box
           bg="#FDE7DC"
           width="100%"
@@ -64,7 +65,12 @@ const index = () => {
           width={{ base: "100%", sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
           h="100vh"
         >
-          <Box marginTop="15vh">
+          <Box
+            marginTop={{
+              base: "5em",
+              md: "8em",
+            }}
+          >
             <Header size="4xl" color="#E91E63">
               D
             </Header>
@@ -80,7 +86,7 @@ const index = () => {
               necesidades
             </SubHeader>
           </Box>
-          <Box marginTop="5vh" height="auto">
+          <Box marginY="2em" height="auto">
             <Button
               fontSize="1.2em"
               backgroundColor="#E91E63"

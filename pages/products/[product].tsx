@@ -187,15 +187,9 @@ const ProductInfo = ({ data, id, product }) => {
             >
               {data.product.name}
             </Header>
-            {data.product.available ? (
-              <Badge width="min-content" colorScheme="green">
-                Disponible
-              </Badge>
-            ) : (
-              <Badge width="min-content" colorScheme="red">
-                No disponible
-              </Badge>
-            )}
+            <Badge width="min-content" colorScheme={data.product.available ? "green" : "red"}>
+              {data.product.available ? "Disponible" : "No disponible"}
+            </Badge>
             <Stat>
               <StatNumber>{data.product.precio}$</StatNumber>
             </Stat>
@@ -238,8 +232,7 @@ const ProductInfo = ({ data, id, product }) => {
               marginBottom=".5em"
               textAlign="left"
             >
-              {/* {data.product.info} */}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, natus hic.
+              {data.product.info}
             </Parragraph>
             <NumberInput label="Cantidad:" defaultValue={1} onChange={onChangeQty} min={1} max={12} size="xs" />
             <Button
@@ -267,7 +260,6 @@ const ProductInfo = ({ data, id, product }) => {
               <Stack
                 direction={{
                   base: "column",
-
                   md: "row",
                 }}
                 justify="space-around"
@@ -275,7 +267,14 @@ const ProductInfo = ({ data, id, product }) => {
                 <CircularProgress thickness="12px" size="140px" value={data.product.rate.value * 20} color="green.400">
                   <CircularProgressLabel>{data.product.rate.value}/5</CircularProgressLabel>
                 </CircularProgress>
-                <Stack spacing={2} maxWidth="min(25vw, 10em)" justify="center">
+                <Stack
+                  spacing={2}
+                  maxWidth={{
+                    base: "80vw",
+                    md: "min(25vw, 10em)",
+                  }}
+                  justify="center"
+                >
                   <p>
                     <span color="colors.rose.600">{data.product.rate.times_valued}</span> de nuestros clientes han dado
                     una opinion acerca de este producto
@@ -292,32 +291,38 @@ const ProductInfo = ({ data, id, product }) => {
             </TabPanel>
           </TabPanels>
         </Tabs>
-
-        <>
-          <Parragraph fontWeight="medium" marginLeft="2em" marginTop="3em" fontSize="2xl" textAlign="left" height="3em">
-            Productos que te pueden interesar:
-          </Parragraph>
-          <Flex
-            marginX={{
-              md: "2em",
-            }}
-          >
-            <CardSlider>
-              {data.getProducts.map((i) => (
-                <ProductCard
-                  id={i.id}
-                  key={i.id}
-                  rating={i.rate.value}
-                  timesValued={i.rate.times_valued}
-                  alt="image-test"
-                  src={i.image}
-                  price={`${i.precio}$`}
-                  name={i.name}
-                />
-              ))}
-            </CardSlider>
-          </Flex>
-        </>
+        <Parragraph
+          fontWeight="medium"
+          marginLeft={{
+            base: ".5em",
+            md: "2em",
+          }}
+          fontSize="2xl"
+          textAlign="left"
+          height="5em"
+        >
+          Productos que te pueden interesar:
+        </Parragraph>
+        <Flex
+          marginX={{
+            md: "2em",
+          }}
+        >
+          <CardSlider>
+            {data.getProducts.map((i) => (
+              <ProductCard
+                id={i.id}
+                key={i.id}
+                rating={i.rate.value}
+                timesValued={i.rate.times_valued}
+                alt="image-test"
+                src={i.image}
+                price={`${i.precio}$`}
+                name={i.name}
+              />
+            ))}
+          </CardSlider>
+        </Flex>
       </Standard>
     </>
   );
