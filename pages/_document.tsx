@@ -11,6 +11,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+        
           <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png" />
           <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png" />
@@ -28,6 +29,7 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#E91E63" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta name="theme-color" content="#ffffff" />
+          <meta name="google-site-verification" content="kzDuWLDzZj37KXwJ13Ut9pyt7qEaznFpD1Fb-iswIWQ" />
           <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"

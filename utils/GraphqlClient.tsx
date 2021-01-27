@@ -7,7 +7,7 @@ import fetch from "cross-fetch";
 
 export const Client = (token) => {
   const setAuthorizationLink = setContext((request, previousContext) => ({
-    headers: { authorization: token },
+    headers: { authorization: `Bearer ${token}` },
   }));
 
   const link = new CreateUploadLink({ uri: "https://dondemax.herokuapp.com/graphql", fetch });
