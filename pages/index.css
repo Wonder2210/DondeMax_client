@@ -2,6 +2,12 @@
   padding-bottom: 2em;
   margin: 0 auto 4vh auto;
 }
+.container-products {
+  padding-bottom: 2em;
+  margin: 1em auto 3em auto;
+  overflow: visible;
+}
+
 .custom-dots {
   width: min-content;
   left: 50%;

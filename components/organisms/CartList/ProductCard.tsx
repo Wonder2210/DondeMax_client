@@ -22,15 +22,19 @@ type props = {
   onChange: (str: string, e: number) => void;
   uniteds: number;
   remove: () => void;
+  boxShadow?: string;
 };
 
-const ProductCard: React.FC<props> = ({ image, name, price, total, uniteds, onChange, remove }) => {
+const ProductCard: React.FC<props> = ({ image, boxShadow, name, price, total, uniteds, onChange, remove }) => {
   return (
     <Flex
-      boxShadow={{ base: "sm", sm: "2xl", md: "2xl", xl: "2xl", lg: "2xl" }}
+      // boxShadow={boxShadow ?? { base: "sm", sm: "2xl", md: "2xl", xl: "2xl", lg: "2xl" }}
       marginTop="2em"
       alignItems="center"
       position="relative"
+      bgColor="white"
+      borderRadius="22px"
+      padding="0.5em"
     >
       <Box position="absolute" top={0} right={2}>
         <IconButton

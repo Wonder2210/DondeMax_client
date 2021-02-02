@@ -227,7 +227,6 @@ export const UPDATE_PRODUCT = gql`
 
 export const TAKE_ORDER_CLIENT = gql`
   mutation TakeOrderClient(
-    $client: Int!
     $deliveryDate: String!
     $payMethod: PayMethod!
     $note: String!
@@ -237,7 +236,6 @@ export const TAKE_ORDER_CLIENT = gql`
   ) {
     takeOrderClient(
       order: {
-        client: $client
         deliveryDate: $deliveryDate
         payMethod: $payMethod
         note: $note

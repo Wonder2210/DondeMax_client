@@ -1,5 +1,4 @@
 import * as React from "react";
-import Dynamic from "next/dynamic";
 import {
   Flex,
   Image,
@@ -36,9 +35,8 @@ import { ProductCard } from "@/organisms/Cards";
 import { NumberInput } from "@/atoms/Inputs";
 import { useAppContext } from "@/utils/AppContext";
 import { Header, Parragraph } from "@/atoms/Text";
-import { useQuery, gql } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { Standard } from "@/layouts/Standard";
-import Animation from "@/molecules/Loader/Animation";
 import { CardSliderProducts as CardSlider } from "@/organisms/Carousel";
 import { Client } from "@/utils/GraphqlClient";
 import { GetServerSideProps } from "next";
@@ -307,6 +305,7 @@ const ProductInfo = ({ data, id, product }) => {
           marginX={{
             md: "2em",
           }}
+          marginTop="1em"
         >
           <CardSlider>
             {data.getProducts.map((i) => (

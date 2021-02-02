@@ -10,21 +10,26 @@ import Link from "next/link";
 
 const loginUserQuery = gql`
   mutation LoginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password)
-  }
-`;
-const CREATE_CLIENT = gql`
-  mutation CreateClient($nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
-    createClient(client: { name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
-      id
-      name
+    loginUser(email: $email, password: $password) {
+      token
+      role
     }
   }
 `;
-
-const loginClientQuery = gql`
-  mutation LoginUser($cedula: String!) {
-    loginClient(cedula: $cedula)
+const CREATE_USER = gql`
+  mutation(
+    $name: String!
+    $email: String!
+    $last_name: String!
+    $password: String!
+    $phone: String!
+    $role: UserRole!
+  ) {
+    createUser(
+      user: { name: $name, email: $email, last_name: $last_name, password: $password, phone: $phone, role: $role }
+    ) {
+      id
+    }
   }
 `;
 
@@ -37,7 +42,7 @@ const login = () => {
   const toast = useToast();
   const [state, setState] = React.useState(defaultState);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [createClient] = useMutation(CREATE_CLIENT, {
+  const [createUser] = useMutation(CREATE_USER, {
     onError: () => alert("datos invalidos verifica y intenta de nuevo"),
     onCompleted: () => {
       setState({ ...defaultState });
@@ -45,8 +50,12 @@ const login = () => {
       alert("usuario Exitosamente registrado");
     },
   });
-  const [loginUser, { data, error }] = useMutation(loginUserQuery, {
-    onCompleted: () => setState({ ...defaultState }),
+  const [loginUser, { data, error, loading }] = useMutation(loginUserQuery, {
+    onCompleted: (result) => {
+      Cookies.set("auth", result.loginUser.token, { expires: 12 });
+      if (result.loginUser.role === "CLIENTE") push("/client", "/client", { shallow: true });
+      else if (result.loginUser.role !== "CLIENTE") push("/admin", "/admin", { shallow: true });
+    },
     onError: () => {
       setState({ loading: false, error: true });
     },
@@ -55,10 +64,7 @@ const login = () => {
     console.log(JSON.stringify(error.networkError, null, 2));
     console.log(error.graphQLErrors);
   }
-  const [logClient, { data: dataClient, error: errorClient }] = useMutation(loginClientQuery, {
-    onCompleted: () => setState({ ...defaultState }),
-    onError: () => setState({ loading: false, error: true }),
-  });
+
   const onSubmit = (values) => {
     setState({ ...state, loading: true });
     loginUser({ variables: { ...values } });
@@ -66,22 +72,8 @@ const login = () => {
   const onSubmitClientSign = (values) => {
     setState({ ...state, loading: true });
 
-    createClient({ variables: { ...values } });
+    createUser({ variables: { ...values } });
   };
-  const onSubmitClient = (values) => {
-    setState({ ...state, loading: true });
-
-    logClient({ variables: { ...values } });
-  };
-
-  if (data) {
-    Cookies.set("auth", data.loginUser, { expires: 12 });
-    push("/admin", "/admin", { shallow: true });
-  }
-  if (dataClient) {
-    Cookies.set("auth", dataClient.loginClient, { expires: 1 });
-    push("/client", "/client", { shallow: true });
-  }
 
   return (
     <>
@@ -143,7 +135,7 @@ const login = () => {
             </div>
             <Header fontSize="1.2em">DondeMax</Header>
           </Flex>
-          <Login onSubmit={onSubmit} isLoading={state.loading} onOpen={onOpen} onSubmitClient={onSubmitClient} />
+          <Login onSubmit={onSubmit} isLoading={loading} onOpen={onOpen} />
         </Flex>
       </Flex>
     </>

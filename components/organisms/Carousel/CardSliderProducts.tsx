@@ -35,7 +35,7 @@ const CardSlider = (props) => {
         ssr // means to render carousel on server-side.
         infinite
         transitionDuration={500}
-        containerClass="container"
+        containerClass="container-products"
         itemClass="custom-item"
         arrows
         removeArrowOnDeviceType={["tablet", "mobile"]}

@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Box, Stat, StatNumber, Flex } from "@chakra-ui/core";
 import ReactStars from "react-rating-stars-component";
+import { motion } from "framer-motion";
 import { Header } from "../../atoms/Text";
 import { ImageHeader } from "../../atoms/CardPieces";
 
@@ -20,40 +21,49 @@ type props = {
 
 const ProductCard: React.FC<props> = ({ src, id, name, timesValued, rating, alt, price }) => {
   return (
-    <Box
-      margin="1em"
-      maxWidth={{
-        base: "auto",
-        sm: "auto",
-        md: "20em",
-      }}
-    >
-      <ImageHeader alt={alt} src={src} height="auto" width="100%" maxHeight="min(40vh , 21.875em)" />
-      <Box margin="0.5em .5em 0 0.5em">
-        <Link href={`/products/${name}?id=${id}`} passHref>
-          <a>
-            <Header type="h6" weight="semibold" fontSize="1.8em">
-              {name}
-            </Header>
-          </a>
-        </Link>
-        <Flex alignItems="center">
-          <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#ffd700" />{" "}
-          <span
-            style={{
-              marginLeft: ".5em",
-            }}
-          >
-            {timesValued} Valoraciones
-          </span>
-        </Flex>
-        <Flex justifyContent="space-between" alignItems="center">
-          <Stat>
-            <StatNumber>{price}</StatNumber>
-          </Stat>
-        </Flex>
+    <Link href={`/products/${name}?id=${id}`} passHref>
+      <Box
+        margin="1em"
+        maxWidth={{
+          base: "auto",
+          sm: "auto",
+          md: "20em",
+        }}
+        zIndex={2}
+      >
+        <motion.div
+          transition={{
+            duration: 0.35,
+          }}
+          whileHover={{ scale: 1.07, y: -17, cursor: "pointer" }}
+          whileTap={{ scale: 1.05 }}
+        >
+          <ImageHeader alt={alt} src={src} height="auto" width="100%" maxHeight="min(40vh , 21.875em)" />
+          <Box margin="0.5em .5em 0 0.5em">
+            <a>
+              <Header type="h6" weight="semibold" fontSize="1.8em">
+                {name}
+              </Header>
+            </a>
+            <Flex alignItems="center">
+              <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#ffd700" />{" "}
+              <span
+                style={{
+                  marginLeft: ".5em",
+                }}
+              >
+                {timesValued} Valoraciones
+              </span>
+            </Flex>
+            <Flex justifyContent="space-between" alignItems="center">
+              <Stat>
+                <StatNumber>{price}</StatNumber>
+              </Stat>
+            </Flex>
+          </Box>
+        </motion.div>
       </Box>
-    </Box>
+    </Link>
   );
 };
 

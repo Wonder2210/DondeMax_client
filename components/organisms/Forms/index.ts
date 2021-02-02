@@ -8,5 +8,18 @@ import Order from "./Order";
 import OrderClient from "./OrderClient";
 import CreateUser from "./CreateUser";
 import CreateClient from "./CreateClient";
+import LoginClient from "./LoginClient";
 
-export { ContactUs, Login, Provider, Mercancia, Storage, Products, Order, OrderClient, CreateClient, CreateUser };
+export {
+  ContactUs,
+  Login,
+  Provider,
+  Mercancia,
+  Storage,
+  Products,
+  Order,
+  OrderClient,
+  CreateClient,
+  CreateUser,
+  LoginClient,
+};

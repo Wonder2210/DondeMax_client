@@ -16,25 +16,22 @@ import {
 import { Icon } from "@iconify/react";
 import { useMutation } from "@apollo/client";
 import shop from "@iconify/icons-cil/cart";
+import { useRouter } from "next/router";
 import ProductCard from "./ProductCard";
 import { ShoppingCart, Button } from "../../atoms/Buttons";
 import { useAppContext } from "../../../utils/AppContext";
 import { useAuth } from "../../../utils/AuthHook";
-import { OrderClient } from "../Forms";
 import { TAKE_ORDER_CLIENT } from "../../../graphql/mutations";
 
 const CartList: React.FC<{ color?: string }> = ({ color }) => {
+  const router = useRouter();
   const { onClose, onOpen, isOpen } = useDisclosure();
   const { user } = useAuth();
   const [takeOrder, { error }] = useMutation(TAKE_ORDER_CLIENT);
   const { onClose: onCloseModal, onOpen: onOpenModal, isOpen: isOpenModal } = useDisclosure();
   const { state: context, setState: setContext } = useAppContext();
   const buyButton = () => {
-    if (user.role !== "CLIENT") {
-      alert("debes iniciar sesion primero");
-      return;
-    }
-    onOpenModal();
+    router.push("/comprar");
   };
   const { productsCart, total } = context;
 
@@ -91,14 +88,7 @@ const CartList: React.FC<{ color?: string }> = ({ color }) => {
   return (
     <>
       <ShoppingCart itemsCount={productsCart.length} color={color ?? "black"} onClick={onOpen} />
-      <OrderClient
-        values={{}}
-        onClose={onCloseModal}
-        isOpen={isOpenModal}
-        onSubmit={onSubmit}
-        productsList={productsCart}
-        total={total}
-      />
+
       <Drawer placement="right" onClose={onClose} isOpen={isOpen} size="sm">
         <DrawerOverlay>
           <DrawerContent>
