@@ -178,8 +178,6 @@ const OrdersTable: React.FC<props> = ({ data, id, executeOrder, produceOrder, de
       { Header: "Abono", accessor: "abono", Cell: ({ value }) => `${value}$` },
       { Header: "Monto restante", accessor: "monto", Cell: ({ value }) => `${value}$` },
       { Header: "Total", accessor: "total", Cell: ({ value }) => `${value}$` },
-      { Header: "Creador", accessor: "creator.name" },
-      { Header: "Cliente", accessor: "client.name" },
       {
         Header: "Productos",
         accessor: "products",

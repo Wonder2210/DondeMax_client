@@ -111,8 +111,8 @@ export const GET_DATA_CLIENTS = gql`
     clients {
       id
       name
-      cedula
-      nationality
+      last_name
+      email
       phone
     }
   }
@@ -200,12 +200,6 @@ export const GET_DATA_PEDIDOS = gql`
       abono
       monto
       total
-      creator {
-        name
-      }
-      client {
-        name
-      }
       products {
         id
         quantity

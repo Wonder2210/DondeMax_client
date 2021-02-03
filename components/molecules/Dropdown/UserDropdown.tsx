@@ -76,7 +76,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
         `}
       </style>
 
-      {user ? (
+      {user.id ? (
         <Menu>
           <MenuButton
             as={Button}

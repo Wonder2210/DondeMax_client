@@ -25,16 +25,18 @@ const CustomersTable: React.FC<props> = ({ data, id, onUpdate, onDelete }) => {
         accessor: "name",
       },
       {
-        Header: "Nacionalidad",
-        accessor: "nationality",
+        Header: "Apellido",
+
+        accessor: "last_name",
       },
-      {
-        Header: "Cedula",
-        accessor: "cedula",
-      },
+
       {
         Header: "Telefono",
         accessor: "phone",
+      },
+      {
+        Header: "Email",
+        accessor: "email",
       },
       {
         Header: "Acciones",

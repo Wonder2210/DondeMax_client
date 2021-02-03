@@ -67,7 +67,7 @@ const CartList: React.FC<props> = ({ onClickCheckout, isLoading }) => {
           onClick={onClickCheckout}
           rightIcon={<Icon icon={shop} width="1.7em" height="1.7em" />}
           isLoading={isLoading}
-          disabled={productsCart.length == 0}
+          disabled={!(productsCart.length > 0)}
         >
           comprar
         </Button>

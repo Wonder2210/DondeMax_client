@@ -12,8 +12,11 @@ import { useAppContext } from "@/utils/AppContext";
 import { TAKE_ORDER_CLIENT } from "@/graphql";
 
 const loginClientQuery = gql`
-  mutation LoginUser($cedula: String!) {
-    loginClient(cedula: $cedula)
+  mutation LogIn($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      id
+      token
+    }
   }
 `;
 
@@ -27,11 +30,12 @@ const CheckoutCart = () => {
       router.push("/products");
     },
   });
-  const { user } = useAuth();
+  const { user, refetch } = useAuth();
   const [logClient, { loading }] = useMutation(loginClientQuery, {
     onCompleted: (data) => {
       Cookies.remove("auth");
-      Cookies.set("auth", data.loginClient, { expires: 1 });
+      Cookies.set("auth", data.loginUser.token, { expires: 1 });
+      router.reload(window.location.pathname);
     },
   });
 
@@ -46,10 +50,11 @@ const CheckoutCart = () => {
     });
   };
   const onClickSubmit = () => dispatchSubmit(true);
-  const onLogin = (cedula: string) => {
+  const onLogin: (values: { email: string; password: string }) => void = ({ email, password }) => {
     logClient({
       variables: {
-        cedula,
+        password,
+        email,
       },
     });
   };
