@@ -44,7 +44,6 @@ export const AppProvider: React.FC = ({ children }) => {
   React.useEffect(() => {
     if (state.productsCart.length) {
       setState({ ...state, total: state.productsCart.reduce((prev, current) => prev + current.total, 0) });
-      console.log("updated");
     }
   }, [state.productsCart]);
 
@@ -67,8 +66,6 @@ export const AppProvider: React.FC = ({ children }) => {
   };
   React.useEffect(() => {
     const stateJ = JSON.stringify(state.productsCart);
-    // eslint-disable-next-line no-console
-    console.log(stateJ);
     Cookies.set("admin", String(state.admin), { expires: 1 });
     Cookies.set("adminPassword", String(state.adminPassword), { expires: 1 });
     Cookies.set("productsCart", stateJ, { expires: 1 });

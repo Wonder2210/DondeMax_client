@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Flex, Divider } from "@chakra-ui/core";
 import Link from "next/link";
@@ -8,27 +9,25 @@ const NavbarWideScreen = () => {
   return (
     <Flex zIndex={1} position="absolute" justifyContent="space-between" flexDirection="row" width="100%" height="72px">
       <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">
-        <Link
-          href="/"
-          css={{
-            fontsize: "1.2em",
-            fontWeight: 400,
-          }}
-        >
-          Inicio
+        <style jsx>
+          {`
+            .link {
+              font-size: 1.12em;
+              font-weight: 450;
+            }
+          `}
+        </style>
+        <Link href="/">
+          <a className="link"> Inicio</a>
         </Link>
-        <Link
-          href="/info"
-          css={{
-            fontsize: "1.2em",
-            fontWeight: 400,
-          }}
-        >
-          Acerca de Nosotros
+        <Link href="/info">
+          <a href="" className="link">
+            Acerca de Nosotros
+          </a>
         </Link>
 
         <Link href="/products" passHref>
-          Productos
+          <a className="link">Productos</a>
         </Link>
       </Flex>
 

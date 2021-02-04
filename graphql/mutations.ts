@@ -46,26 +46,34 @@ export const UPDATE_USER = gql`
 `;
 
 export const CREATE_CLIENT = gql`
-  mutation CreateClient($nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
-    createClient(client: { name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
+  mutation CreateClient(
+    $name: String!
+    $email: String!
+    $last_name: String!
+    $password: String!
+    $phone: String!
+    $role: UserRole!
+  ) {
+    createUser(
+      user: { name: $name, email: $email, last_name: $last_name, password: $password, phone: $phone, role: $role }
+    ) {
       id
-      name
     }
   }
 `;
 
 export const UPDATE_CLIENT = gql`
-  mutation updateClient($id: Int!, $nationality: String!, $name: String!, $cedula: String!, $phone: String!) {
-    editClient(client: { id: $id, name: $name, cedula: $cedula, phone: $phone, nationality: $nationality }) {
+  mutation UpdateUser($id: Int!, $name: String, $email: String, $last_name: String, $password: String, $phone: String) {
+    editUser(user: { id: $id, name: $name, email: $email, last_name: $last_name, password: $password, phone: $phone }) {
       id
-      name
+      last_name
     }
   }
 `;
 
 export const DELETE_CLIENT = gql`
-  mutation DeleteClient($id: Int!) {
-    deleteClient(id: $id)
+  mutation DeleteUser($id: Int!) {
+    deleteUser(id: $id)
   }
 `;
 

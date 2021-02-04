@@ -35,7 +35,7 @@ const CheckoutCart = () => {
     onCompleted: (data) => {
       Cookies.remove("auth");
       Cookies.set("auth", data.loginUser.token, { expires: 1 });
-      router.reload(window.location.pathname);
+      router.reload();
     },
   });
 
@@ -60,8 +60,16 @@ const CheckoutCart = () => {
   };
   return (
     <Standard>
-      <Flex justifyContent="space-evenly" marginY="5em">
-        <Flex width="24em" flexDirection="column">
+      <Flex
+        justifyContent="space-evenly"
+        marginY="5em"
+        marginX="1.5em"
+        flexDirection={{
+          base: "column",
+          md: "row",
+        }}
+      >
+        <Flex width="min(24em, 100%)" marginBottom="2em" flexDirection="column">
           {user.id ? (
             <>
               <Header>Datos de la compra</Header>

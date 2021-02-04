@@ -22,17 +22,18 @@ type props = {
   onSubmit: (data: Object) => void;
   onEdit: (data: Object) => void;
   isEditing: Boolean;
-  typeList: Array<{ id: string; type: string }>;
+  typeList?: Array<{ id: string; type: string }>;
 };
 
 const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required(VALIDATION_MESSAGE),
+  last_name: Yup.string().required(VALIDATION_MESSAGE),
   email: Yup.string().email("Introduce un email valido").required(VALIDATION_MESSAGE),
   phone: Yup.string().required(VALIDATION_MESSAGE),
   password: Yup.string().required(VALIDATION_MESSAGE),
-  role: Yup.string().required(VALIDATION_MESSAGE),
+  role: Yup.string(),
 });
 
 const CreateUser: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing, onEdit, typeList }) => {
@@ -60,6 +61,20 @@ const CreateUser: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEdit
                     placeHolder="nombre"
                     variant="flushed"
                     errorMessage={form.errors.name}
+                  />
+                )}
+              </Field>
+              <Field name="last_name">
+                {({ field, form }) => (
+                  <FormInput
+                    id="last_name"
+                    isInvalid={form.errors.last_name && form.touched.last_name}
+                    label="Apellido:"
+                    type="text"
+                    field={field}
+                    placeHolder="apellido"
+                    variant="flushed"
+                    errorMessage={form.errors.last_name}
                   />
                 )}
               </Field>
@@ -105,20 +120,22 @@ const CreateUser: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEdit
                   />
                 )}
               </Field>
-              <Field name="role">
-                {({ field, form }) => (
-                  <SelectInput
-                    placeholder="Rol"
-                    options={typeList}
-                    id="rol"
-                    field={field}
-                    isInvalid={form.errors.role && form.touched.role}
-                    label="Rol:"
-                    variant="flushed"
-                    errorMessage={form.errors.role}
-                  />
-                )}
-              </Field>
+              {typeList && (
+                <Field name="role">
+                  {({ field, form }) => (
+                    <SelectInput
+                      placeholder="Rol"
+                      options={typeList}
+                      id="rol"
+                      field={field}
+                      isInvalid={form.errors.role && form.touched.role}
+                      label="Rol:"
+                      variant="flushed"
+                      errorMessage={form.errors.role}
+                    />
+                  )}
+                </Field>
+              )}
             </ModalBody>
 
             <ModalFooter>

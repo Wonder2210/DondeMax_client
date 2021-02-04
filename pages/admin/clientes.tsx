@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
@@ -7,7 +8,7 @@ import { SubHeader } from "@/atoms/Text";
 import Head from "next/head";
 import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
-import { CreateClient as Client } from "@/organisms/Forms";
+import { CreateUser as Client } from "@/organisms/Forms";
 import { CustomerTable } from "@/organisms/Table";
 import { GET_DATA_CLIENTS, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT } from "@/graphql";
 
@@ -17,9 +18,9 @@ function clientes() {
     data: {
       id: null,
       name: "",
-      nationality: "",
-      cedula: "",
-
+      email: "",
+      last_name: "",
+      password: "",
       phone: "",
     },
   };
@@ -28,9 +29,9 @@ function clientes() {
     data: {
       id?: number;
       name?: string;
-      nationality?: string;
-      cedula?: string;
-
+      email?: string;
+      last_name?: string;
+      password?: string;
       phone?: string;
     };
   }>(defaultState);
@@ -51,7 +52,7 @@ function clientes() {
     updateClient({ variables: { id: state.data.id, ...values } });
   };
   const onSubmit = (values) => {
-    createClient({ variables: { ...values } });
+    createClient({ variables: { ...values, role: "CLIENTE" } });
     setState({ ...defaultState });
   };
   const closeModal = () => {

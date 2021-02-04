@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Flex, Box, Image, useDisclosure, Alert, AlertIcon, useToast } from "@chakra-ui/core";
-import { Login, CreateClient as Client } from "@/organisms/Forms";
+import { Login, CreateUser } from "@/organisms/Forms";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { Header } from "@/atoms/Text";
@@ -72,7 +72,7 @@ const login = () => {
   const onSubmitClientSign = (values) => {
     setState({ ...state, loading: true });
 
-    createUser({ variables: { ...values } });
+    createUser({ variables: { ...values, role: "CLIENTE" } });
   };
 
   return (
@@ -87,7 +87,7 @@ const login = () => {
         <Head>
           <title>Inicia sesion</title>
         </Head>
-        <Client
+        <CreateUser
           isEditing={false}
           isOpen={isOpen}
           onClose={onClose}

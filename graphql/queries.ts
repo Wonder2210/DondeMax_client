@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_DATA_STORE = gql`
-  query ProductsData($size: Int! = 12, $cursor: Int! = 0, $type: String = "", $preservation: String = "") {
+  query ProductsData($size: Int = 12, $cursor: Int = 0, $type: String = "", $preservation: String = "") {
     searchProducts(size: $size, cursor: $cursor, type: $type, preservation: $preservation) {
       total
       results {
