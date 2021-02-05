@@ -2,10 +2,11 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure, Stack, Skeleton } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/core";
 import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
+import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";
 import { MaterialsTable, MaterialsAvailableTable, StockIncomeTable } from "@/organisms/Table";
 import Plus from "@iconify/icons-cil/plus";
 import { Mercancia, Storage } from "@/organisms/Forms";
@@ -124,14 +125,7 @@ const mercancia = () => {
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
+              <SkeletonLoader />
             ) : (
               <>
                 <Mercancia
@@ -155,14 +149,7 @@ const mercancia = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
+              <SkeletonLoader />
             ) : (
               <>
                 <Storage
@@ -180,18 +167,7 @@ const mercancia = () => {
             )}
           </TabPanel>
           <TabPanel>
-            {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
-            ) : (
-              <MaterialsAvailableTable id="disponible" data={data.materialsStage} />
-            )}
+            {loading ? <SkeletonLoader /> : <MaterialsAvailableTable id="disponible" data={data.materialsStage} />}
           </TabPanel>
         </TabPanels>
       </Tabs>

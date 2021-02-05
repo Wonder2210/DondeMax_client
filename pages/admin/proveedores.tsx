@@ -6,6 +6,7 @@ import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
+import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";
 import { Provider } from "@/organisms/Forms";
 import { GET_PROVIDERS, CREATE_PROVIDER, UPDATE_PROVIDER, DELETE_PROVIDER } from "@/graphql";
 import { ProvidersTable } from "@/organisms/Table";
@@ -83,14 +84,7 @@ const proveedores = () => {
         </Button>
       </Flex>
       {loading ? (
-        <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-        </Stack>
+        <SkeletonLoader />
       ) : (
         <>
           <Provider

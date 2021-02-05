@@ -1,9 +1,10 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Stack, Skeleton, Tab, TabPanel, Flex } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core";
 import { OrdersHistoryTable, ProductsHistoryTable, StockHistoryTable, SessionHistoryTable } from "@/organisms/Table";
 import { Dashboard } from "@/layouts/Dashboard";
 import Head from "next/head";
+import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";
 import { GET_DATA_AUDITORIAS } from "@/graphql";
 
 function clientes() {
@@ -25,61 +26,15 @@ function clientes() {
           <Tab>Sesion</Tab>
         </TabList>
         <TabPanels>
+          <TabPanel>{loading ? <SkeletonLoader /> : <OrdersHistoryTable id="orders" data={data.ordersLog} />}</TabPanel>
           <TabPanel>
-            {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
-            ) : (
-              <OrdersHistoryTable id="orders" data={data.ordersLog} />
-            )}
+            {loading ? <SkeletonLoader /> : <ProductsHistoryTable id="products" data={data.productsLog} />}
           </TabPanel>
           <TabPanel>
-            {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
-            ) : (
-              <ProductsHistoryTable id="products" data={data.productsLog} />
-            )}
+            {loading ? <SkeletonLoader /> : <StockHistoryTable id="inventario" data={data.storageLog} />}
           </TabPanel>
           <TabPanel>
-            {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
-            ) : (
-              <StockHistoryTable id="inventario" data={data.storageLog} />
-            )}
-          </TabPanel>
-          <TabPanel>
-            {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
-            ) : (
-              <SessionHistoryTable id="sesion" data={data.sessionLog} />
-            )}
+            {loading ? <SkeletonLoader /> : <SessionHistoryTable id="sesion" data={data.sessionLog} />}
           </TabPanel>
         </TabPanels>
       </Tabs>

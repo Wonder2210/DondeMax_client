@@ -2,13 +2,14 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
-import { Flex, useDisclosure, Stack, Skeleton } from "@chakra-ui/core";
+import { Flex, useDisclosure } from "@chakra-ui/core";
 import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import Head from "next/head";
 import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
 import { CreateUser as Client } from "@/organisms/Forms";
+import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";
 import { CustomerTable } from "@/organisms/Table";
 import { GET_DATA_CLIENTS, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT } from "@/graphql";
 
@@ -86,14 +87,7 @@ function clientes() {
         </Button>
       </Flex>
       {loading ? (
-        <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-          <Skeleton height="25px" />
-        </Stack>
+        <SkeletonLoader />
       ) : (
         <>
           <Client

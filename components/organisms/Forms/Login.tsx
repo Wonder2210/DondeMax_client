@@ -85,7 +85,7 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
                 width="100%"
                 height={{ base: "2.5em" }}
                 isLoading={isLoading}
-                loadingText="Cragando"
+                loadingText="Cargando"
                 _hover={{ transform: "scale(1.05)" }}
               >
                 Ingresar

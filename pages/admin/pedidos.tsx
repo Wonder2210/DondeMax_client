@@ -1,11 +1,12 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Stack, Skeleton, useDisclosure } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/core";
 import { SubHeader } from "@/atoms/Text";
 import { OrdersTable } from "@/organisms/Table";
 import { Button } from "@/atoms/Buttons";
 import { Order } from "@/organisms/Forms";
+import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";
 import Plus from "@iconify/icons-cil/plus";
 import { Icon } from "@iconify/react";
 import Head from "next/head";
@@ -72,14 +73,7 @@ const pedidos = () => {
         <TabPanels>
           <TabPanel>
             {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
+              <SkeletonLoader />
             ) : (
               <>
                 <Order
@@ -105,14 +99,7 @@ const pedidos = () => {
           </TabPanel>
           <TabPanel>
             {loading ? (
-              <Stack spacing={3} width="100%" paddingX="2em" marginTop="4em">
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-                <Skeleton height="25px" />
-              </Stack>
+              <SkeletonLoader />
             ) : (
               <OrdersTable
                 id="orders-done"
