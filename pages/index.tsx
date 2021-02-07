@@ -9,6 +9,7 @@ import { Icon } from "@iconify/react";
 import Whatsapp from "@iconify/icons-cib/whatsapp";
 import Instagram from "@iconify/icons-cib/instagram";
 import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
+import { motion } from "framer-motion";
 import { IndexCarousel } from "@/organisms/Carousel";
 import { Button, IconButton } from "@/atoms/Buttons";
 import { Header, SubHeader } from "@/atoms/Text";
@@ -16,7 +17,18 @@ import { Header, SubHeader } from "@/atoms/Text";
 const index = () => {
   const router = useRouter();
   return (
-    <>
+    <motion.div
+      initial="pageInitial"
+      animate="pageAnimate"
+      variants={{
+        pageInitial: {
+          opacity: 0,
+        },
+        pageAnimate: {
+          opacity: 1,
+        },
+      }}
+    >
       <Head>
         <title>Donde Max - Inicio</title>
       </Head>
@@ -142,7 +154,7 @@ const index = () => {
           </Flex>
         </Flex>
       </Flex>
-    </>
+    </motion.div>
   );
 };
 

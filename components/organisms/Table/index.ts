@@ -10,6 +10,7 @@ import OrdersHistoryTable from "./OrdersHistoryTable";
 import ProductsHistoryTable from "./ProductsHistoryTable";
 import StockHistoryTable from "./StockHistoryTable";
 import SessionHistoryTable from "./SessionHistoryTable";
+import OrdersCustomerTable from "./OrdersCustomerTable";
 
 export {
   Table,
@@ -24,4 +25,5 @@ export {
   ProductsHistoryTable,
   StockHistoryTable,
   SessionHistoryTable,
+  OrdersCustomerTable,
 };

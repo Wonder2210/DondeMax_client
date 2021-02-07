@@ -1,5 +1,8 @@
 import * as React from "react";
+import Link from "next/link";
 import { Flex, Divider } from "@chakra-ui/core";
+import { Icon } from "@iconify/react";
+import Home from "@iconify/icons-cil/home";
 import { Parragraph } from "../../atoms/Text";
 import { UserDropdown } from "../../molecules/Dropdown";
 import { useAuth } from "../../../utils/AuthHook";
@@ -23,15 +26,18 @@ const NavbarClient: React.FC = () => {
     <Flex
       width="100%"
       height="4em"
-      paddingX="1em"
+      paddingX="1.5em"
       alignItems="center"
       position="sticky"
       zIndex="3"
       top={0}
       backgroundColor="white"
     >
-      <Parragraph width="13em" height="min-content">
-        {userauth.name ?? "loading"}
+      <Link href="/">
+        <Icon icon={Home} width="2em" height="2em" />
+      </Link>
+      <Parragraph width="13em" height="min-content" fontSize="2em" fontWeight="600">
+        Hola {userauth.name ?? "loading"}
       </Parragraph>
 
       <Flex flexGrow={1} align="center" justify="flex-end" justifySelf="flex-end" bgColor="#FFF">
