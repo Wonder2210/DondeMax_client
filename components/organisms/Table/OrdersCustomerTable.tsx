@@ -1,4 +1,5 @@
 import React from "react";
+import { Badge } from "@chakra-ui/core";
 import Table from "./TableBase";
 
 type props = {
@@ -35,20 +36,24 @@ const OrdersCustomerTable: React.FC<props> = ({ data, id }) => {
         accessor: "note",
       },
       {
-        Header: "Estatus de produccion",
-        accessor: "production_status",
-        Cell: ({ value }) => (value ? "Listo" : "Pendiente por ser producido"),
+        Header: "Estatus",
+
+        Cell: ({ row }) => {
+          if (row.production_status && row.stage_status && !row.delivery_status) {
+            return <Badge colorScheme="orange">Listo para ser entregado</Badge>;
+          }
+          if (row.delivery_status) {
+            return <Badge colorScheme="green">Entregado</Badge>;
+          }
+          if (row.production_status && row.stage_status && !row.delivery_status) {
+            return <Badge colorScheme="purple">pedido en produccion</Badge>;
+          }
+          if (!row.production_status && !row.stage_status && !row.delivery_status) {
+            return <Badge>Pedido recibido</Badge>;
+          }
+        },
       },
-      {
-        Header: "Listo para ser entregado",
-        accessor: "stage_status",
-        Cell: ({ value }) => (value ? "Listo" : "Todavia"),
-      },
-      {
-        Header: "Entregado",
-        accessor: " delivery_status",
-        Cell: ({ value }) => (value ? "Entregado" : "Aun no retirado"),
-      },
+
       {
         Header: "abono",
         accessor: "abono",

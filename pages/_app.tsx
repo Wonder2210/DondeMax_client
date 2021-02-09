@@ -11,13 +11,13 @@ import "./index.css";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <GraphqlProvider>
-      <AppProvider>
+    <AppProvider>
+      <GraphqlProvider>
         <ChakraProvider theme={theme}>
           <Component {...pageProps} />
         </ChakraProvider>
-      </AppProvider>
-    </GraphqlProvider>
+      </GraphqlProvider>
+    </AppProvider>
   );
 };
 

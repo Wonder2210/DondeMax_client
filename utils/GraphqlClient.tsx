@@ -4,10 +4,11 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink as CreateUploadLink } from "apollo-upload-client";
 import fetch from "cross-fetch";
+import { useAppContext } from "./AppContext";
 
 export const Client = (token) => {
   const setAuthorizationLink = setContext((request, previousContext) => ({
-    headers: { authorization: `Bearer ${token}` },
+    headers: { authorization: token },
   }));
 
   const link = new CreateUploadLink({ uri: "https://dondemax.herokuapp.com/graphql", fetch });
@@ -18,7 +19,9 @@ export const Client = (token) => {
 };
 
 const GraphqlProvider: React.FC = ({ children }) => {
-  return <ApolloProvider client={Client(Cookies.get("auth"))}>{children}</ApolloProvider>;
+  const { state } = useAppContext();
+
+  return <ApolloProvider client={Client(state.authToken)}>{children}</ApolloProvider>;
 };
 
 export default GraphqlProvider;

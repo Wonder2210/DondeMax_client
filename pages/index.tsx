@@ -52,18 +52,19 @@ const index = () => {
             bottom="0"
             height="10vh"
             backgroundColor="#E91E63"
+            color="white"
           >
-            <SubHeader>Contactanos a traves de</SubHeader>
+            <SubHeader color="white" fontSize="1.2em">
+              Contactanos a traves de
+            </SubHeader>
             <IconButton
               aria-label="heart"
               backgroundColor="rgba(0,0,0,0)"
-              color="black"
               icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
             />
             <IconButton
               aria-label="heart"
               backgroundColor="rgba(0,0,0,0)"
-              color="black"
               icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
             />
           </Flex>
@@ -93,7 +94,7 @@ const index = () => {
             <Header size="4xl">ax</Header>
           </Box>
           <Box marginTop="5vh">
-            <SubHeader>
+            <SubHeader color="#333">
               Postres , dulces , tortas y Pasapalos de la <br /> mas alta calidad , a la medida de sus <br />{" "}
               necesidades
             </SubHeader>
@@ -136,18 +137,18 @@ const index = () => {
             height="10vh"
             backgroundColor="#E91E63"
           >
-            <Flex alignItems="center" justifyContent="center" margin="auto 0 auto 0">
-              <SubHeader>Contactanos a traves de</SubHeader>
+            <Flex alignItems="center" justifyContent="center" color="white" margin="auto 0 auto 0">
+              <SubHeader color="white" fontSize="1.2em">
+                Contactanos a traves de
+              </SubHeader>
               <IconButton
                 aria-label="heart"
                 backgroundColor="rgba(0,0,0,0)"
-                color="black"
                 icon={<Icon icon={Whatsapp} width="1.563rem" height="1.5rem" />}
               />
               <IconButton
                 aria-label="heart"
                 backgroundColor="rgba(0,0,0,0)"
-                color="black"
                 icon={<Icon icon={Instagram} width="1.563rem" height="1.5rem" />}
               />
             </Flex>

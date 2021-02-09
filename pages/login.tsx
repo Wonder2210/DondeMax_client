@@ -5,6 +5,7 @@ import { Login, CreateUser } from "@/organisms/Forms";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { Header } from "@/atoms/Text";
+import { useAppContext } from "@/utils/AppContext";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -34,6 +35,7 @@ const CREATE_USER = gql`
 `;
 
 const login = () => {
+  const { setAuthToken } = useAppContext();
   const defaultState = {
     loading: false,
     error: false,
@@ -52,7 +54,7 @@ const login = () => {
   });
   const [loginUser, { data, error, loading }] = useMutation(loginUserQuery, {
     onCompleted: (result) => {
-      Cookies.set("auth", result.loginUser.token, { expires: 12 });
+      setAuthToken(result.loginUser.token);
       if (result.loginUser.role === "CLIENTE") push("/client", "/client", { shallow: true });
       else if (result.loginUser.role !== "CLIENTE") push("/admin", "/admin", { shallow: true });
     },

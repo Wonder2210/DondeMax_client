@@ -39,7 +39,7 @@ type props = {
 const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { state, setState } = useAppContext();
+  const { state, setState, setAuthToken } = useAppContext();
   const { user } = useAuth();
   const [password, setPassword] = React.useState({
     value: "",
@@ -63,7 +63,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
     setState({ ...state, admin: false });
   };
   const CloseSession = () => {
-    Cookies.remove("auth");
+    setAuthToken("");
     router.push("/");
   };
   return (

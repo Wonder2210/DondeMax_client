@@ -13,7 +13,8 @@ const NavbarWideScreen = () => {
           {`
             .link {
               font-size: 1.12em;
-              font-weight: 450;
+              font-weight: 400;
+              color: #333;
             }
           `}
         </style>

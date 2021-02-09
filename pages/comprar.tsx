@@ -22,7 +22,7 @@ const loginClientQuery = gql`
 
 const CheckoutCart = () => {
   const router = useRouter();
-  const { state: context, setState: setContext } = useAppContext();
+  const { state: context, setState: setContext, setAuthToken } = useAppContext();
   const [isSubmitting, dispatchSubmit] = React.useState(false);
   const [takeOrder, { loading: isTakingOrder }] = useMutation(TAKE_ORDER_CLIENT, {
     onCompleted: () => {
@@ -30,12 +30,11 @@ const CheckoutCart = () => {
       router.push("/products");
     },
   });
-  const { user, refetch } = useAuth();
+  const { user } = useAuth();
   const [logClient, { loading }] = useMutation(loginClientQuery, {
     onCompleted: (data) => {
-      Cookies.remove("auth");
-      Cookies.set("auth", data.loginUser.token, { expires: 1 });
-      router.reload();
+      setAuthToken(data.loginUser.token);
+  
     },
   });
 

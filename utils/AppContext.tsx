@@ -29,16 +29,19 @@ export const AppProvider: React.FC = ({ children }) => {
     adminPassword: number;
     productsCart?: Array<ProductsCart>;
     total: number;
+    authToken: string;
   }>(() => {
     const admin = Cookies.get("admin") === "true" ?? false;
     const adminPassword = 221099;
     const productsCart = Cookies.getJSON("productsCart") ?? [];
+    const authToken = Cookies.get("authToken") ?? "";
 
     return {
       admin,
       adminPassword,
       productsCart,
       total: 0,
+      authToken,
     };
   });
   React.useEffect(() => {
@@ -64,11 +67,14 @@ export const AppProvider: React.FC = ({ children }) => {
   const removeFromCart = (id: number) => {
     setState({ ...state, productsCart: state.productsCart.filter((i) => i.id !== id) });
   };
+
+  const setAuthToken = (e: string) => setState({ ...state, authToken: `Bearer ${e}` });
   React.useEffect(() => {
     const stateJ = JSON.stringify(state.productsCart);
     Cookies.set("admin", String(state.admin), { expires: 1 });
     Cookies.set("adminPassword", String(state.adminPassword), { expires: 1 });
     Cookies.set("productsCart", stateJ, { expires: 1 });
+    Cookies.set("authToken", state.authToken);
   }, [state]);
 
   const values = React.useMemo(
@@ -77,6 +83,7 @@ export const AppProvider: React.FC = ({ children }) => {
       setState,
       addToCart,
       removeFromCart,
+      setAuthToken,
     }),
     [state],
   );

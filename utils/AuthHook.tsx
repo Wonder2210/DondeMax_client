@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
-import Cookie from "js-cookie";
+import { useAppContext } from "./AppContext";
 
 const query = gql`
   query SessionUser {
@@ -15,6 +15,7 @@ const query = gql`
 `;
 
 export const useAuth = () => {
+  const { state } = useAppContext();
   const [user, setUser] = React.useState({
     id: 0,
     name: "",
@@ -34,6 +35,10 @@ export const useAuth = () => {
       });
     }
   }, [data]);
+
+  React.useEffect(() => {
+    refetch();
+  }, [state.authToken]);
 
   return {
     user,
