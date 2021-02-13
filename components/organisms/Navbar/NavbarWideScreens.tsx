@@ -2,10 +2,15 @@
 import React from "react";
 import { Flex, Divider } from "@chakra-ui/core";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { CartList } from "../CartList";
 import { UserDropdown } from "../../molecules/Dropdown";
+import Languages from "../../../locales";
 
 const NavbarWideScreen = () => {
+  const router = useRouter();
+  const { locale } = router;
+  const t = Languages(locale);
   return (
     <Flex zIndex={1} position="absolute" justifyContent="space-between" flexDirection="row" width="100%" height="72px">
       <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">
@@ -19,22 +24,21 @@ const NavbarWideScreen = () => {
           `}
         </style>
         <Link href="/">
-          <a className="link"> Inicio</a>
+          <a className="link">{t.navbar.home}</a>
         </Link>
         <Link href="/info">
           <a href="" className="link">
-            Acerca de Nosotros
+            {t.navbar.aboutUs}
           </a>
         </Link>
 
-        <Link href="/products" passHref>
-          <a className="link">Productos</a>
+        <Link href="/compra" passHref>
+          <a className="link">{t.navbar.shop}</a>
         </Link>
       </Flex>
 
       <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">
         <CartList />
-        <Divider borderColor="#222" orientation="vertical" height="3em" />
         <UserDropdown image="https://randomuser.me/api/portraits/men/23.jpg" imageAlt="Jhon Doe" userName="Jhon Doe" />
       </Flex>
     </Flex>

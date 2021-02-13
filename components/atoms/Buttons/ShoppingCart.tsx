@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
-import Cart from "@iconify/icons-cil/cart";
+import Cart from "@iconify/icons-dashicons/cart";
 import IconButton from "./IconButton";
 
 type props = {

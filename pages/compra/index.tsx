@@ -1,13 +1,15 @@
 import * as React from "react";
 import { Flex, Grid, Tabs, Tab, TabList } from "@chakra-ui/core";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import Animation from "@/molecules/Loader/Animation";
 import { useQuery } from "@apollo/client";
 import { Standard } from "@/layouts/Standard";
 import { Pagination } from "@/molecules/Pagination";
 import { ProductCard } from "@/components/organisms/Cards";
 import { Header } from "@/atoms/Text";
 import { GET_DATA_STORE } from "@/graphql";
-import Animation from "@/molecules/Loader/Animation";
-import Head from "next/head";
+import Language from "../../locales";
 
 type state = {
   types: string;
@@ -19,6 +21,9 @@ type state = {
 };
 
 const store = () => {
+  const router = useRouter();
+  const { locale } = router;
+  const t = Language(locale);
   const [state, setState] = React.useState<state>({
     types: "",
     preservations: "",
@@ -62,7 +67,7 @@ const store = () => {
   return (
     <Standard>
       <Head>
-        <title>Pedidos</title>
+        <title> DondeMax - Shop</title>
       </Head>
       <Flex
         justify="center"
@@ -73,15 +78,9 @@ const store = () => {
         bgPos="center"
         bgImage="url('/images/header-2.png')"
       >
-        <Header size="4xl">Pe</Header>
         <Header size="4xl" color="colors.rose.600">
-          d
+          {t.shop.title}
         </Header>
-        <Header size="4xl">i</Header>
-        <Header size="4xl" color="colors.rose.600">
-          d
-        </Header>
-        <Header size="4xl">os</Header>
       </Flex>
       <Tabs
         margin="1em auto"
@@ -91,10 +90,10 @@ const store = () => {
         onChange={onChangeTabs}
       >
         <TabList>
-          <Tab>Todos</Tab>
-          <Tab>Tortas</Tab>
-          <Tab>Porciones de torta</Tab>
-          <Tab>Galletas</Tab>
+          <Tab>{t.shop.type1}</Tab>
+          <Tab>{t.shop.type2}</Tab>
+          <Tab>{t.shop.type3}</Tab>
+          <Tab>{t.shop.type4}</Tab>
         </TabList>
       </Tabs>
       <Grid
@@ -112,6 +111,7 @@ const store = () => {
           data.searchProducts.results.map((i) => (
             <ProductCard
               id={i.id}
+              lang={locale}
               key={i.id}
               rating={i.rate.value}
               timesValued={i.rate.times_valued}

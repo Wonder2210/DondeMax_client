@@ -19,14 +19,14 @@ import {
 import { Icon } from "@iconify/react";
 import exit from "@iconify/icons-cil/exit-to-app";
 import locked from "@iconify/icons-cil/lock-locked";
+import UserIcon from "@iconify/icons-dashicons/admin-users";
 import home from "@iconify/icons-cil/home";
 import list from "@iconify/icons-cil/list";
 import unlocked from "@iconify/icons-cil/lock-unlocked";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 import { useAppContext } from "../../../utils/AppContext";
-import { Button as CustomButton } from "../../atoms/Buttons";
+import { Button as CustomButton, IconButton } from "../../atoms/Buttons";
 import { FormInput } from "../../atoms/Inputs";
 import { useAuth } from "../../../utils/AuthHook";
 
@@ -120,15 +120,15 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
           </MenuList>
         </Menu>
       ) : (
-        <CustomButton
+        <IconButton
+          aria-label="user"
           color="black"
           onClick={() => router.push("/login")}
           width="5em"
           height="2.5em"
           backgroundColor="transparent"
-        >
-          Ingresar
-        </CustomButton>
+          icon={<Icon icon={UserIcon} width="36px" />}
+        />
       )}
 
       <Modal isOpen={isOpen} onClose={closeModal}>

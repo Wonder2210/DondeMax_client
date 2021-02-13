@@ -6,7 +6,6 @@ import { Standard } from "@/layouts/Standard";
 import { CheckoutCartList } from "@/organisms/CartList";
 import { LoginClient, OrderClient } from "@/organisms/Forms";
 import { SubHeader, Header } from "@/atoms/Text";
-import Cookies from "js-cookie";
 import { useAuth } from "@/utils/AuthHook";
 import { useAppContext } from "@/utils/AppContext";
 import { TAKE_ORDER_CLIENT } from "@/graphql";
@@ -34,7 +33,6 @@ const CheckoutCart = () => {
   const [logClient, { loading }] = useMutation(loginClientQuery, {
     onCompleted: (data) => {
       setAuthToken(data.loginUser.token);
-  
     },
   });
 

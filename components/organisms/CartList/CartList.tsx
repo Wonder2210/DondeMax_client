@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/core";
 import { Icon } from "@iconify/react";
 import { useMutation } from "@apollo/client";
-import shop from "@iconify/icons-cil/cart";
+import shop from "@iconify/icons-dashicons/cart";
 import { useRouter } from "next/router";
 import ProductCard from "./ProductCard";
 import { ShoppingCart, Button } from "../../atoms/Buttons";

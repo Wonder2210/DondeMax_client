@@ -6,6 +6,7 @@ import ReactStars from "react-rating-stars-component";
 import { motion } from "framer-motion";
 import { Header } from "../../atoms/Text";
 import { ImageHeader } from "../../atoms/CardPieces";
+import Language from "../../../locales";
 
 type props = {
   src: string;
@@ -17,11 +18,13 @@ type props = {
   width?: string;
   timesValued: number;
   rating: number;
+  lang: string;
 };
 
-const ProductCard: React.FC<props> = ({ src, id, name, timesValued, rating, alt, price }) => {
+const ProductCard: React.FC<props> = ({ src, id, name, timesValued, rating, alt, price, lang }) => {
+  const t = Language(lang);
   return (
-    <Link href={`/products/${name}?id=${id}`} passHref>
+    <Link href={`/compra/${name}?id=${id}`} passHref>
       <Box
         margin="1em"
         maxWidth={{
@@ -46,13 +49,13 @@ const ProductCard: React.FC<props> = ({ src, id, name, timesValued, rating, alt,
               </Header>
             </a>
             <Flex alignItems="center">
-              <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#ffd700" />{" "}
+              <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#ffd700" />
               <span
                 style={{
                   marginLeft: ".5em",
                 }}
               >
-                {timesValued} Valoraciones
+                {timesValued} {t.productsInfo.ratings}
               </span>
             </Flex>
             <Flex justifyContent="space-between" alignItems="center">

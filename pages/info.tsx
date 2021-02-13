@@ -31,7 +31,7 @@ const Info = () => {
           direction="column"
           width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
           height="100vh"
-          paddingTop="6em"
+          padding="6em"
           bgColor="#EDB3C7"
         >
           <Header size="3xl" color="#E5E6E2">
@@ -71,7 +71,7 @@ const Info = () => {
           direction="column"
           width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
           height="100vh"
-          paddingTop="6em"
+          padding="6em"
           bgColor="#E7CFA4"
         >
           <Header size="3xl" color="#E5E6E2">
@@ -104,7 +104,7 @@ const Info = () => {
           direction="column"
           width={{ sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
           height="100vh"
-          paddingTop="6em"
+          padding="6em"
         >
           <Header size="3xl" color="#E5E6E2">
             Visitanos

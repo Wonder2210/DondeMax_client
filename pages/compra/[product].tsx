@@ -41,6 +41,7 @@ import { CardSliderProducts as CardSlider } from "@/organisms/Carousel";
 import { Client } from "@/utils/GraphqlClient";
 import { GetServerSideProps } from "next";
 import Cookie from "js-cookie";
+import Language from "../../locales";
 
 const query = gql`
   query Product($id: Int!) {
@@ -76,6 +77,8 @@ const ProductInfo = ({ data, id, product }) => {
   });
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { state: context, setState: setContext, addToCart: addToCartContext, removeFromCart } = useAppContext();
+  const { locale } = useRouter();
+  const t = Language(locale);
 
   const addToCart = () => {
     addToCartContext({
@@ -186,7 +189,7 @@ const ProductInfo = ({ data, id, product }) => {
               {data.product.name}
             </Header>
             <Badge width="min-content" colorScheme={data.product.available ? "green" : "red"}>
-              {data.product.available ? "Disponible" : "No disponible"}
+              {data.product.available ? t.productsInfo.available : t.productsInfo.notAvailable}
             </Badge>
             <Stat>
               <StatNumber>{data.product.precio}$</StatNumber>
@@ -216,7 +219,7 @@ const ProductInfo = ({ data, id, product }) => {
                   marginLeft: ".5em",
                 }}
               >
-                ({data.product.rate.times_valued}) Valoraciones
+                ({data.product.rate.times_valued}) {t.productsInfo.ratings}
               </span>
             </Flex>
             <Parragraph
@@ -232,7 +235,14 @@ const ProductInfo = ({ data, id, product }) => {
             >
               {data.product.info}
             </Parragraph>
-            <NumberInput label="Cantidad:" defaultValue={1} onChange={onChangeQty} min={1} max={12} size="xs" />
+            <NumberInput
+              label={t.productsInfo.quantity}
+              defaultValue={1}
+              onChange={onChangeQty}
+              min={1}
+              max={12}
+              size="xs"
+            />
             <Button
               onClick={addToCart}
               marginTop="1em"
@@ -242,15 +252,15 @@ const ProductInfo = ({ data, id, product }) => {
               leftIcon={<Icon icon={Cart} width="2em" />}
               isDisabled={!data.product.available}
             >
-              Agregar al Carrito
+              {t.productsInfo.addToCart}
             </Button>
           </VStack>
         </Stack>
 
         <Tabs align="center" marginTop="2.5em" isFitted marginX="auto" maxWidth="35em">
           <TabList>
-            <Tab>Valoraciones</Tab>
-            <Tab>Entregas</Tab>
+            <Tab>{t.productsInfo.ratings}</Tab>
+            <Tab>{t.productsInfo.delivery}</Tab>
           </TabList>
 
           <TabPanels minHeight="min(30vh , 20em)">
@@ -274,18 +284,13 @@ const ProductInfo = ({ data, id, product }) => {
                   justify="center"
                 >
                   <p>
-                    <span color="colors.rose.600">{data.product.rate.times_valued}</span> de nuestros clientes han dado
-                    una opinion acerca de este producto
+                    <span color="colors.rose.600">{data.product.rate.times_valued}</span> {t.productsInfo.ratingsInfo}
                   </p>
                 </Stack>
               </Stack>
             </TabPanel>
             <TabPanel>
-              <p>
-                Todos nuestros productos son producidos el mismo dia de su entrega por lo tanto sus pedidos se deberan
-                realizar con la debida antelacio Podran ser retirados en el horario de 8 am a 7pm en nuestro local y se
-                puede acordar el delivery con un recargo adicional (a consultar varia del lugar) de entre 10am y 5pm
-              </p>
+              <p>{t.productsInfo.deliveryInfo}</p>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -299,7 +304,7 @@ const ProductInfo = ({ data, id, product }) => {
           textAlign="left"
           height="5em"
         >
-          Productos que te pueden interesar:
+          {t.productsInfo.moreProducts}
         </Parragraph>
         <Flex
           marginX={{
@@ -312,6 +317,7 @@ const ProductInfo = ({ data, id, product }) => {
               <ProductCard
                 id={i.id}
                 key={i.id}
+                lang={locale}
                 rating={i.rate.value}
                 timesValued={i.rate.times_valued}
                 alt="image-test"

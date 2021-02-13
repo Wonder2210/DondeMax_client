@@ -13,9 +13,12 @@ import { motion } from "framer-motion";
 import { IndexCarousel } from "@/organisms/Carousel";
 import { Button, IconButton } from "@/atoms/Buttons";
 import { Header, SubHeader } from "@/atoms/Text";
+import Languages from "../locales";
 
 const index = () => {
   const router = useRouter();
+  const { locale } = router;
+  const t = Languages(locale);
   return (
     <motion.div
       initial="pageInitial"
@@ -55,7 +58,7 @@ const index = () => {
             color="white"
           >
             <SubHeader color="white" fontSize="1.2em">
-              Contactanos a traves de
+              {t.index.contactUs}
             </SubHeader>
             <IconButton
               aria-label="heart"
@@ -93,11 +96,8 @@ const index = () => {
             </Header>
             <Header size="4xl">ax</Header>
           </Box>
-          <Box marginTop="5vh">
-            <SubHeader color="#333">
-              Postres , dulces , tortas y Pasapalos de la <br /> mas alta calidad , a la medida de sus <br />{" "}
-              necesidades
-            </SubHeader>
+          <Box marginTop="3em" marginX="4em">
+            <SubHeader color="#333">{t.index.subHeader}</SubHeader>
           </Box>
           <Box marginY="2em" height="auto">
             <Button
