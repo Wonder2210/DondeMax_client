@@ -25,9 +25,14 @@ const language: LocalesType = {
     type4: "Galletas",
   },
   aboutUs: {
-    mision: "lol",
-    vision: "lol",
-    contactUs: "lol",
+    misionInfo: "Entregar a los compradores una grata atencion y productos de gran calidad a un precio accesible",
+    mision: "Mision",
+    vision: "Vision",
+    visionInfo: "LLegar a mas clientes que puedan disfrutar de nuestros productos y la calidad del servicio",
+    contactUs: "Contactanos",
+    contactUsInfo: "lol",
+    whoAmi: "¿Quienes somos?",
+    visitUs: "Visitanos",
   },
   productsInfo: {
     ratings: "valoraciones",

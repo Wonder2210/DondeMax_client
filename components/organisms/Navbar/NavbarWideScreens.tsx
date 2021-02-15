@@ -4,7 +4,7 @@ import { Flex, Divider } from "@chakra-ui/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { CartList } from "../CartList";
-import { UserDropdown } from "../../molecules/Dropdown";
+import { UserDropdown, LanguageDropDown } from "../../molecules/Dropdown";
 import Languages from "../../../locales";
 
 const NavbarWideScreen = () => {
@@ -38,6 +38,7 @@ const NavbarWideScreen = () => {
       </Flex>
 
       <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">
+        <LanguageDropDown />
         <CartList />
         <UserDropdown image="https://randomuser.me/api/portraits/men/23.jpg" imageAlt="Jhon Doe" userName="Jhon Doe" />
       </Flex>

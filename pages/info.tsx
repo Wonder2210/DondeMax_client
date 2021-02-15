@@ -4,12 +4,17 @@ import { Header, Parragraph } from "@/atoms/Text";
 import { Standard } from "@/layouts/Standard";
 import { ContactUs } from "@/organisms/Forms";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import Language from "../locales";
 
 const Info = () => {
+  const router = useRouter();
+  const { locale } = router;
+  const t = Language(locale);
   return (
     <Standard>
       <Head>
-        <title>Acerca de nosotros</title>
+        <title>DondeMax - Acerca de nosotros</title>
       </Head>
       <Flex
         justify="center"
@@ -21,7 +26,7 @@ const Info = () => {
         backgroundSize="cover"
       >
         <Header size="4xl" color="#E91E63">
-          ¿Quienes somos?
+          {t.aboutUs.whoAmi}
         </Header>
       </Flex>
       <Flex>
@@ -35,14 +40,14 @@ const Info = () => {
           bgColor="#EDB3C7"
         >
           <Header size="3xl" color="#E5E6E2">
-            Mision
+            {t.aboutUs.mision}
           </Header>
           <br />
           <br />
           <br />
           <br />
           <Parragraph color="#E5E6E2" height="auto">
-            Entregar a los compradores una grata atencion y productos de gran calidad a un precio accesible
+            {t.aboutUs.misionInfo}
           </Parragraph>
         </Flex>
         <Box
@@ -75,14 +80,14 @@ const Info = () => {
           bgColor="#E7CFA4"
         >
           <Header size="3xl" color="#E5E6E2">
-            Vision
+            {t.aboutUs.vision}
           </Header>
           <br />
           <br />
           <br />
           <br />
           <Parragraph color="#E5E6E2" size="2xl" height="auto">
-            LLegar a mas clientes que puedan disfrutar de nuestros productos y la calidad del servicio
+            {t.aboutUs.visionInfo}
           </Parragraph>
         </Flex>
       </Flex>

@@ -23,8 +23,13 @@ interface locales {
   };
   aboutUs: {
     mision: string;
+    misionInfo: string;
     vision: string;
+    visionInfo: string;
     contactUs: string;
+    contactUsInfo: string;
+    visitUs: string;
+    whoAmi: string;
   };
   productsInfo: {
     ratings: string;

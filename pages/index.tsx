@@ -117,10 +117,10 @@ const index = () => {
                 />
               }
             >
-              Nuestras Tortas
+              {t.index.actionButton}
             </Button>
           </Box>
-          <IndexCarousel />
+          <IndexCarousel lang={locale} />
           <Flex
             position="absolute"
             w="100%"
@@ -139,7 +139,7 @@ const index = () => {
           >
             <Flex alignItems="center" justifyContent="center" color="white" margin="auto 0 auto 0">
               <SubHeader color="white" fontSize="1.2em">
-                Contactanos a traves de
+                {t.index.contactUs}
               </SubHeader>
               <IconButton
                 aria-label="heart"

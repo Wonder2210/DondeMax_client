@@ -2,15 +2,13 @@ import LocalesType from "./types";
 
 const language: LocalesType = {
   index: {
-    subHeader: `Postres , dulces , tortas y Pasapalos de la
-      mas alta calidad , a la medida de sus
-      necesidades`,
-    actionButton: `Nuestros productos`,
-    contactUs: "Contactanos a traves de",
-    product1: "Tortas",
-    product2: "Dulces frios",
-    product3: "Galletas",
-    product4: "Pasapalos dulces",
+    subHeader: `Desserts, pastries, cakes and sweet snacks of the highest quality , in the way you need`,
+    actionButton: `Our products`,
+    contactUs: "Contact us through:",
+    product1: "Cakes",
+    product2: "Cold pastries",
+    product3: "Cookies",
+    product4: "Sweet snacks",
   },
   navbar: {
     aboutUs: "About Us",
@@ -25,9 +23,14 @@ const language: LocalesType = {
     type4: "Cookies",
   },
   aboutUs: {
-    mision: "lol",
-    vision: "lol",
-    contactUs: "lol",
+    misionInfo: "Give to our customers the best attention , and the best products for an affordable price",
+    mision: "Mission",
+    vision: "Vision",
+    visionInfo: "Reach as most customers as possible and bring themm a high quality service",
+    contactUs: "Contact Us",
+    contactUsInfo: "lol",
+    whoAmi: " who are we?",
+    visitUs: "Visit us",
   },
   productsInfo: {
     ratings: "ratings",
