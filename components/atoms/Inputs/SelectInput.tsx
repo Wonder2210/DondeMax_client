@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
-import { FormControl, FormLabel, FormHelperText, FormErrorMessage, Select } from "@chakra-ui/core";
+import { FormControl, FormLabel, FormHelperText, FormErrorMessage, Select } from "@chakra-ui/react";
 
 type props = {
   id: string;

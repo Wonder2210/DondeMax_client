@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Box } from "@chakra-ui/core";
+import { Flex, Box } from "@chakra-ui/react";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { Standard } from "@/layouts/Standard";

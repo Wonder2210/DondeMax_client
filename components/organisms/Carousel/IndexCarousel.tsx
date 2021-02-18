@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import { CardSlider } from "@/organisms/Carousel";
 import { InitialCard } from "@/organisms/Cards";
 import Languages from "../../../locales";

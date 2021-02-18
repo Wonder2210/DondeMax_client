@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image } from "@chakra-ui/core";
+import { Image } from "@chakra-ui/react";
 
 type props = {
   src: string;

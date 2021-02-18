@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import chevronRight from "@iconify/icons-dashicons/arrow-right-alt2";
 import chevronLeft from "@iconify/icons-dashicons/arrow-left-alt2";

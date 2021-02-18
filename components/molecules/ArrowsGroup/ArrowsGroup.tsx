@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import RightArrow from "@iconify/icons-cil/arrow-circle-right";
 import LeftArrow from "@iconify/icons-cil/arrow-circle-left";

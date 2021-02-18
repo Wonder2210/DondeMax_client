@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Grid } from "@chakra-ui/core";
+import { Flex, Box, Grid } from "@chakra-ui/react";
 import Head from "next/head";
 import Animation from "@/molecules/Loader/Animation";
 import { useQuery } from "@apollo/client";

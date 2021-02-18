@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import { Flex, Heading } from "@chakra-ui/core";
+import { Flex, Heading } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Instagram from "@iconify/icons-cib/instagram";
 import Whatsapp from "@iconify/icons-cib/whatsapp";

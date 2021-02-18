@@ -1,7 +1,7 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, useDisclosure } from "@chakra-ui/react";
 import { SubHeader } from "@/atoms/Text";
 import { OrdersTable } from "@/organisms/Table";
 import { Button } from "@/atoms/Buttons";
@@ -45,6 +45,7 @@ const pedidos = () => {
 
   return (
     <Dashboard>
+      here
       <Head>
         <title>Admin - Pedidos</title>
       </Head>

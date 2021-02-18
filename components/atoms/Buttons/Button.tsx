@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button as Btn, ButtonProps } from "@chakra-ui/core";
+import { Button as Btn, ButtonProps } from "@chakra-ui/react";
 
 const Button: React.FC<ButtonProps> = ({
   color,

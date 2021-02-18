@@ -37,7 +37,7 @@ export const useAuth = () => {
   }, [data]);
 
   React.useEffect(() => {
-    refetch();
+    if (refetch) refetch();
   }, [state.authToken]);
 
   return {

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable prettier/prettier */
 import * as React from "react";
-import { Flex, Box } from "@chakra-ui/core";
+import { Flex, Box } from "@chakra-ui/react";
 import { Navbar } from "@/organisms/Navbar";
 import Head from "next/head";
 import { useRouter } from "next/router";

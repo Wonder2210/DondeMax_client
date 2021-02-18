@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "@chakra-ui/core";
+import { Badge } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Cart from "@iconify/icons-dashicons/cart";
 import IconButton from "./IconButton";

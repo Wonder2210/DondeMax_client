@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Flex, Divider } from "@chakra-ui/core";
+import { Flex, Divider } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { CartList } from "../CartList";

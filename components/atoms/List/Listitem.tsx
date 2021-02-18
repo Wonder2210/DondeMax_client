@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ListItem as Lst, ListIcon } from "@chakra-ui/core";
+import { ListItem as Lst, ListIcon } from "@chakra-ui/react";
 
 type props = {
   icon?: React.FunctionComponent | string;

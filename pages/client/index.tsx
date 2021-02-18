@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { Box, Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core";
+import { Box, Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { NavbarClient } from "@/organisms/Navbar";
 import { OrdersCustomerTable } from "@/organisms/Table";
 import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";

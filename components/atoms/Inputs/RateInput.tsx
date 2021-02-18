@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage } from "@chakra-ui/core";
+import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage } from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
 
 type props = {

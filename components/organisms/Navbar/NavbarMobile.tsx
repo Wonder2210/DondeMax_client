@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, useDisclosure } from "@chakra-ui/core";
+import { Box, Flex, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import MenuIcon from "@iconify/icons-cil/hamburger-menu";

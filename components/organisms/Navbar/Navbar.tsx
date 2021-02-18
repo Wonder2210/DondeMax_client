@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useMediaQuery } from "@chakra-ui/core";
+import { Box, useMediaQuery } from "@chakra-ui/react";
 import NavbarWideScreen from "./NavbarWideScreens";
 import NavbarMobile from "./NavbarMobile";
 

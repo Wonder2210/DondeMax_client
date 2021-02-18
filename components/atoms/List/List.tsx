@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List as Lst } from "@chakra-ui/core";
+import { List as Lst } from "@chakra-ui/react";
 
 type props = {
   spacing: number;

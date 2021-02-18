@@ -10,7 +10,7 @@ import {
   ModalCloseButton,
   Flex,
   Textarea,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 
 import x from "@iconify/icons-cil/x-circle";
 import Plus from "@iconify/icons-cil/plus";

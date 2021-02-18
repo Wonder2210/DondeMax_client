@@ -12,7 +12,7 @@ import {
   Stat,
   StatLabel,
   StatNumber,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { useMutation } from "@apollo/client";
 import shop from "@iconify/icons-dashicons/cart";

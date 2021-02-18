@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Divider } from "@chakra-ui/core";
+import { Flex, Divider } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import menuIcon from "@iconify/icons-cil/hamburger-menu";
 import { IconButton } from "../../atoms/Buttons";
@@ -31,6 +31,7 @@ const NavbarDashboard = ({ toggle }) => {
       paddingX="1em"
       alignItems="center"
       position="sticky"
+      zIndex="1"
       top={0}
       backgroundColor="white"
     >

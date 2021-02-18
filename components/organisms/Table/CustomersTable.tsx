@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "@chakra-ui/core";
+import { Flex } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import Table from "./TableBase";
 import { TableActions } from "../../molecules/ActionButtons";

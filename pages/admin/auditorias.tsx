@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { OrdersHistoryTable, ProductsHistoryTable, StockHistoryTable, SessionHistoryTable } from "@/organisms/Table";
 import { Dashboard } from "@/layouts/Dashboard";
 import Head from "next/head";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Flex, Stat, StatLabel, StatNumber } from "@chakra-ui/core";
+import { Box, Flex, Stat, StatLabel, StatNumber } from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
 import { TableActions } from "../../molecules/ActionButtons";
 import { Header, Parragraph } from "../../atoms/Text";

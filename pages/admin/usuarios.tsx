@@ -1,7 +1,7 @@
 import React from "react";
 import { Dashboard } from "@/layouts/Dashboard";
 import { useQuery, useMutation } from "@apollo/client";
-import { Flex, useDisclosure } from "@chakra-ui/core";
+import { Flex, useDisclosure } from "@chakra-ui/react";
 import { Button } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";

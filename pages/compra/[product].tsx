@@ -23,7 +23,7 @@ import {
   CircularProgressLabel,
   Badge,
   useDisclosure,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
 import Icon from "@iconify/react";
 import ChevronRight from "@iconify/icons-dashicons/arrow-right-alt2";

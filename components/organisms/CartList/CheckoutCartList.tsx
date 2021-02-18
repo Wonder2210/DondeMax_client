@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Stat, StatNumber } from "@chakra-ui/core";
+import { Flex, Stat, StatNumber } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import shop from "@iconify/icons-cil/cart";
 import ProductCard from "./ProductCard";

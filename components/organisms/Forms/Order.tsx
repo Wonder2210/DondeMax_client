@@ -13,7 +13,7 @@ import {
   StatLabel,
   Flex,
   useBreakpointValue,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import Plus from "@iconify/icons-cil/plus";
 import * as Yup from "yup";
 import { Icon } from "@iconify/react";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Flex, useMediaQuery } from "@chakra-ui/core";
+import { Box, Flex, useMediaQuery } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { NavbarDashboard } from "../../organisms/Navbar";
@@ -17,15 +17,6 @@ const Dashboard = ({ children }) => {
   const [state, setState] = React.useState<props>({
     sidebar: isMobile,
   });
-
-  React.useEffect(() => {
-    const cookie = Cookie.get("auth");
-
-    if (!cookie) {
-      router.push("/");
-      alert("no tienes permiso de estar aqui");
-    }
-  }, [user]);
 
   const toggleSidebar = () => setState({ sidebar: !state.sidebar });
   const close = () => setState({ sidebar: false });

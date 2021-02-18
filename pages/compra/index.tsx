@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Grid, Tabs, Tab, TabList } from "@chakra-ui/core";
+import { Flex, Grid, Tabs, Tab, TabList } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Animation from "@/molecules/Loader/Animation";

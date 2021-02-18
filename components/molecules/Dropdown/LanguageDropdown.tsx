@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Menu, Button, MenuButton, MenuList, MenuItemOption, MenuOptionGroup } from "@chakra-ui/core";
+import { Menu, Button, MenuButton, MenuList, MenuItemOption, MenuOptionGroup } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
 import { useRouter } from "next/router";

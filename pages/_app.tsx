@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
 import GraphqlProvider from "@/utils/GraphqlClient";
-import { ChakraProvider } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import "react-multi-carousel/lib/styles.css";
 import type { AppProps } from "next/app";

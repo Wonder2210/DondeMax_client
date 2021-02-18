@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from "react";
-import { ListItem as Lst, Flex } from "@chakra-ui/core";
+import { ListItem as Lst, Flex } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 
 type props = {

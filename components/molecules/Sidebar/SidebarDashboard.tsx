@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Box, Image, Flex } from "@chakra-ui/core";
+import { Box, Image, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Home from "@iconify/icons-cil/home";
 import ListIcon from "@iconify/icons-cil/list-rich";

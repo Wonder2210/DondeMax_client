@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import { Flex, Divider } from "@chakra-ui/core";
+import { Flex, Divider } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Home from "@iconify/icons-cil/home";
 import { Parragraph } from "../../atoms/Text";

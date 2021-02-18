@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
-import { Flex, Box, Image, useDisclosure, Alert, AlertIcon, useToast } from "@chakra-ui/core";
+import { Flex, Box, Image, useDisclosure, Alert, AlertIcon, useToast } from "@chakra-ui/react";
 import { Login, CreateUser } from "@/organisms/Forms";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";

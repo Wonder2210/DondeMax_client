@@ -10,7 +10,7 @@ import {
   ModalBody,
   Button,
   ModalCloseButton,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { SelectCustom, SelectOption } from "../../molecules/Select";
 import { props } from "./types";
 import { CartList } from "../CartList";

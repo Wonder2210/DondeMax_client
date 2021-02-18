@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Textarea, FormControl, FormLabel } from "@chakra-ui/core";
+import { Textarea, FormControl, FormLabel } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { Form, Formik, Field, useFormikContext } from "formik";
 import { SelectInput, DateInput } from "../../atoms/Inputs";

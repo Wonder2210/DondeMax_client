@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Select, NumberInput, NumberInputField, FormLabel } from "@chakra-ui/core";
+import { Flex, Select, NumberInput, NumberInputField, FormLabel } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
 import { IconButton } from "../Buttons";

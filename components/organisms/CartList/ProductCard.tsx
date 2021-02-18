@@ -8,7 +8,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Box,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import minus from "@iconify/icons-cil/minus";
 import { IconButton } from "../../atoms/Buttons";

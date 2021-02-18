@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, FlexProps } from "@chakra-ui/core";
+import { Flex, FlexProps } from "@chakra-ui/react";
 
 interface props extends FlexProps {
   borders?: [string, string];

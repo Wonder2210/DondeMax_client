@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Navbar } from "../../organisms/Navbar";
 import { Footer } from "../../organisms/Footer";

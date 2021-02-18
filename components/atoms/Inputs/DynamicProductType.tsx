@@ -10,7 +10,7 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Plus from "@iconify/icons-cil/plus";
 import { IconButton } from "../Buttons";

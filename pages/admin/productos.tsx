@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { Flex, useDisclosure, Grid } from "@chakra-ui/core";
+import { Flex, useDisclosure, Grid } from "@chakra-ui/react";
 import { IconButton } from "@/atoms/Buttons";
 import { SubHeader } from "@/atoms/Text";
 import { Icon } from "@iconify/react";

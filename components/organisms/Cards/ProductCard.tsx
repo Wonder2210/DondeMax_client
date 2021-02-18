@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Link from "next/link";
-import { Box, Stat, StatNumber, Flex } from "@chakra-ui/core";
+import { Box, Stat, StatNumber, Flex } from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
 import { motion } from "framer-motion";
 import { Header } from "../../atoms/Text";

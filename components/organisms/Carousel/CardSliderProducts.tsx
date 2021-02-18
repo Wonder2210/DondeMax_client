@@ -2,7 +2,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import { useMediaQuery } from "react-responsive";
-import { Box } from "@chakra-ui/core";
+import { Box } from "@chakra-ui/react";
 
 const CardSlider = (props) => {
   const responsive = React.useMemo(

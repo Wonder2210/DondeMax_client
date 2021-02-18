@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage } from "@chakra-ui/core";
+import { FormControl, FormLabel, Input, FormHelperText, FormErrorMessage } from "@chakra-ui/react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import { format } from "date-fns";
 import "react-day-picker/lib/style.css";

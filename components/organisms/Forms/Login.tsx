@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Box, Tabs, Tab, TabList, TabPanel, TabPanels } from "@chakra-ui/core";
+import { Flex, Box, Tabs, Tab, TabList, TabPanel, TabPanels } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Button } from "../../atoms/Buttons";

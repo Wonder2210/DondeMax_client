@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Box, TextProps } from "@chakra-ui/core";
+import { Text, Box, TextProps } from "@chakra-ui/react";
 
 type props = {
   width?: string;

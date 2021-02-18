@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box } from "@chakra-ui/core";
+import { Flex, Box } from "@chakra-ui/react";
 import { Header, Parragraph } from "@/atoms/Text";
 import { Standard } from "@/layouts/Standard";
 import { ContactUs } from "@/organisms/Forms";

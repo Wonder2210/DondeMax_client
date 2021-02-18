@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Flex } from "@chakra-ui/core";
+import { Badge, Flex } from "@chakra-ui/react";
 import trash from "@iconify/icons-cil/trash";
 import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
@@ -37,130 +37,81 @@ const OrdersTable: React.FC<props> = ({ data, id, executeOrder, produceOrder, de
       },
       { Header: "Nota", accessor: "note" },
       {
-        Header: "Entregado",
-        accessor: "delivery_status",
-        Cell: ({
-          value,
-          row: {
-            original: { id, production_status: productionStatus, stage_status: stageStatus },
-          },
-        }) => (
-          <Button
-            width="6em"
-            height="2.7em"
-            isDisabled={value || (productionStatus && stageStatus)}
-            backgroundColor="transparent"
-            color="black"
-            _hover={
-              value
-                ? {}
-                : {
-                    bgColor: "black",
-                    color: "black",
-                    _after: {
-                      content: '"Entregar"',
+        Header: "Estatus",
 
-                      position: "absolute",
-                      zIndex: 1,
-                      color: "white",
-                    },
-                  }
-            }
-            onClick={() => {
-              executeOrder({
-                variables: {
-                  id,
-                  status: {
-                    delivery_status: true,
-                  },
-                },
-              });
-            }}
-          >
-            {value ? "listo" : "Todavia"}
-          </Button>
-        ),
-      },
-      {
-        Header: "Listo para entregar",
-        accessor: "stage_status",
-        Cell: ({ value, row }) => (
-          <Button
-            width="6em"
-            height="2.7em"
-            isDisabled={!row.original.production_status || (row.original.production_status && value)}
-            backgroundColor="transparent"
-            color="black"
-            _hover={
-              value
-                ? {}
-                : {
-                    bgColor: "black",
-                    color: "black",
-                    _after: {
-                      content: '"Listo"',
+        Cell: ({ row }) => {
+          if (row.production_status && row.stage_status && !row.delivery_status) {
+            return (
+              <Button
+                width="6em"
+                height="2.7em"
+                backgroundColor="transparent"
+                color="black"
+                _hover={{
+                  bgColor: "black",
+                  color: "black",
+                  _after: {
+                    content: '"Listo"',
 
-                      position: "absolute",
-                      zIndex: 1,
-                      color: "white",
-                    },
-                  }
-            }
-            onClick={() => {
-              executeOrder({
-                variables: {
-                  id: row.original.id,
-                  status: {
-                    stage_status: true,
+                    position: "absolute",
+                    zIndex: 1,
+                    color: "white",
                   },
-                },
-              });
-            }}
-          >
-            {value ? "listo" : "Aun no"}
-          </Button>
-        ),
-      },
-      {
-        Header: "Producido",
-        accessor: "production_status",
-        Cell: ({ value, row }) => (
-          <Button
-            width="6em"
-            height="2.7em"
-            backgroundColor="transparent"
-            color="black"
-            isDisabled={value}
-            _hover={
-              value
-                ? {}
-                : {
-                    bgColor: "colors.green.400",
-                    color: "colors.green.400",
-                    _after: {
-                      content: '"Producir"',
+                }}
+                onClick={() => {
+                  executeOrder({
+                    variables: {
+                      id: row.original.id,
+                      status: {
+                        stage_status: true,
+                      },
+                    },
+                  });
+                }}
+              >
+                Entregar
+              </Button>
+            );
+          }
+          if (row.delivery_status) {
+            return "Entregada";
+          }
+          if (!row.production_status && !row.stage_status && !row.delivery_status) {
+            return (
+              <Button
+                width="6em"
+                height="2.7em"
+                backgroundColor="transparent"
+                color="black"
+                _hover={{
+                  bgColor: "black",
+                  color: "black",
+                  _after: {
+                    content: '"Listo"',
 
-                      position: "absolute",
-                      zIndex: 1,
-                      color: "white",
-                    },
-                  }
-            }
-            onClick={() => {
-              produceOrder({
-                variables: {
-                  id: row.original.id,
-                  status: {
-                    production_status: true,
+                    position: "absolute",
+                    zIndex: 1,
+                    color: "white",
                   },
-                },
-              });
-            }}
-          >
-            {value ? "listo" : "Aun no"}
-          </Button>
-        ),
+                }}
+                onClick={() => {
+                  produceOrder({
+                    variables: {
+                      id: row.original.id,
+                      status: {
+                        stage_status: true,
+                      },
+                    },
+                  });
+                }}
+              >
+                Producir
+              </Button>
+            );
+          }
+        },
       },
+
       {
         Header: "cancelar",
         Cell: ({ row }) => (

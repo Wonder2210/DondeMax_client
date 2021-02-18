@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "@chakra-ui/core";
+import { Badge } from "@chakra-ui/react";
 import Table from "./TableBase";
 
 type props = {

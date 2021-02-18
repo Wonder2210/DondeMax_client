@@ -15,7 +15,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import exit from "@iconify/icons-cil/exit-to-app";
 import locked from "@iconify/icons-cil/lock-locked";
@@ -68,16 +68,15 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   };
   return (
     <>
-      <style jsx>
-        {`
-          .margin-span {
-            margin-left: 1.5em;
-          }
-        `}
-      </style>
-
       {user.id ? (
         <Menu>
+          <style jsx>
+            {`
+              .margin-span {
+                margin-left: 1.5em;
+              }
+            `}
+          </style>
           <MenuButton
             as={Button}
             leftIcon={
@@ -94,7 +93,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
           >
             {user.name}
           </MenuButton>
-          <MenuList zIndex="6">
+          <MenuList>
             {user.role === "ADMINISTRADOR" && (
               <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
                 <Icon icon={state.admin ? unlocked : locked} width="2em" />

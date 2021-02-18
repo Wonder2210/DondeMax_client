@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-nested-ternary */
 import * as React from "react";
-import { Image } from "@chakra-ui/core";
+import { Image } from "@chakra-ui/react";
 import { useDropzone } from "react-dropzone";
 import ImageIcon from "@iconify/icons-cil/image-plus";
 import Upload from "@iconify/icons-cil/cloud-upload";
