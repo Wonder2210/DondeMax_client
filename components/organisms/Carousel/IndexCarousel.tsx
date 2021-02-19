@@ -13,16 +13,32 @@ const IndexCarousel: React.FC<props> = ({ lang }) => {
   return (
     <Box width="100%" alignItems="center" marginTop="auto" marginBottom="1em">
       <CardSlider>
-        <InitialCard alt="image of test" href="/products" src="/images/tortas.jpg">
+        <InitialCard
+          alt="image of test"
+          href="/products"
+          src="https://res.cloudinary.com/dy2f1moqn/image/upload/c_scale,q_auto:good,w_400/v1613704456/DondeMax/tortas_ry43ra.jpg"
+        >
           {t.index.product1}
         </InitialCard>
-        <InitialCard alt="image of test" href="/products" src="/images/dulces_frios.jpg">
+        <InitialCard
+          alt="image of test"
+          href="/products"
+          src="https://res.cloudinary.com/dy2f1moqn/image/upload/c_scale,q_auto:good,w_400/v1613704430/DondeMax/dulces_frios_pbsxjk.jpg"
+        >
           {t.index.product2}
         </InitialCard>
-        <InitialCard alt="image of test" href="/products" src="/images/galletas.jpg">
+        <InitialCard
+          alt="image of test"
+          href="/products"
+          src="https://res.cloudinary.com/dy2f1moqn/image/upload/c_scale,q_auto:good,w_400/v1613704474/DondeMax/galletas_xxsi6s.jpg"
+        >
           {t.index.product3}
         </InitialCard>
-        <InitialCard alt="image of test" href="/products" src="/images/pasapalos_dulces.jpg">
+        <InitialCard
+          alt="image of test"
+          href="/products"
+          src="https://res.cloudinary.com/dy2f1moqn/image/upload/c_scale,q_auto:good,w_464/v1613704491/DondeMax/pasapalos_dulces_jonylc.jpg"
+        >
           {t.index.product4}
         </InitialCard>
       </CardSlider>
