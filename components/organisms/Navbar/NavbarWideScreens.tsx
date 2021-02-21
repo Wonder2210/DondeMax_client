@@ -1,16 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Flex, Divider } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { CartList } from "../CartList";
 import { UserDropdown, LanguageDropDown } from "../../molecules/Dropdown";
 import Languages from "../../../locales";
 
-const NavbarWideScreen = () => {
-  const router = useRouter();
-  const { locale } = router;
-  const t = Languages(locale);
+const NavbarWideScreen: React.FC<{ lang: string }> = ({ lang }) => {
+  const t = Languages(lang);
   return (
     <Flex zIndex={1} position="absolute" justifyContent="space-between" flexDirection="row" width="100%" height="72px">
       <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">

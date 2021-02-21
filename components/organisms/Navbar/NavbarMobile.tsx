@@ -4,12 +4,14 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import MenuIcon from "@iconify/icons-cil/hamburger-menu";
 import { ListItem } from "../../atoms/List";
-import { Dropdown, UserDropdown } from "../../molecules/Dropdown";
+import { Dropdown, UserDropdown, LanguageDropDown } from "../../molecules/Dropdown";
 import { IconButton } from "../../atoms/Buttons";
 import { CartList } from "../CartList";
+import Languages from "../../../locales";
 
-const NavbarMobile = () => {
+const NavbarMobile: React.FC<{ lang: string }> = ({ lang }) => {
   const { onClose, onOpen, isOpen } = useDisclosure();
+  const t = Languages(lang);
 
   return (
     <Box
@@ -21,11 +23,11 @@ const NavbarMobile = () => {
       h={isOpen ? "100vh" : "7vh"}
       w="100%"
     >
-      <Box
+      <Flex
         position="relative"
         bg="white"
-        display="flex"
         zIndex={2}
+        align="center"
         flexDirection="row-reverse"
         w="100%"
         height="7vh"
@@ -36,26 +38,30 @@ const NavbarMobile = () => {
           width="10%"
           height="70%"
           margin={3}
+          backgroundColor="transparent"
           onClick={isOpen ? onClose : onOpen}
           icon={<Icon icon={MenuIcon} width="90%" height="90%" />}
         />
-      </Box>
+        <LanguageDropDown />
+      </Flex>
       <Dropdown show={isOpen}>
         <ListItem marginLeft={3}>
-          <Link href="/">Inicio</Link>
+          <Link href="/">{t.navbar.home}</Link>
         </ListItem>
         <ListItem marginLeft={3}>
-          <Link href="/info">Acerca de Nosotros</Link>
+          <Link href="/info">{t.navbar.aboutUs}</Link>
         </ListItem>
 
         <ListItem marginLeft={3}>
           <Link href="/products" passHref>
-            Productos
+            {t.navbar.shop}
           </Link>
         </ListItem>
+
         <ListItem marginLeft={3}>
           <Flex alignItems="center" justifyContent="space-between">
             <UserDropdown />
+
             <CartList />
           </Flex>
         </ListItem>

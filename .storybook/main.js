@@ -1,29 +1,10 @@
-const path = require("path");
 module.exports = {
-  stories: ["../components/**/**/*.stories.tsx"],
-  addons: ["storybook-addon-designs", "@storybook/addon-viewport/register", "@storybook/addon-actions/register"],
-};
-
-/*webpackFinal: async config => {
-          config.module.rules.push({
-            test: /\.(ts|tsx)$/,
-            use: [
-              {
-                loader: require.resolve('awesome-typescript-loader'),
-                options:{
-                  configFileName: path.resolve(__dirname, './tsconfig.json')
-                }
-              },
-              // Optional
-              {
-                loader: require.resolve('react-docgen-typescript-loader'),
-                options:{
-                  tsconfigPath: path.resolve(__dirname, './tsconfig.json'),
-
-                }
-              },
-            ],
-          });
-          config.resolve.extensions.push('.ts', '.tsx');
-          return config;
-        },*/
+  "stories": [
+    "../stories/**/*.stories.mdx",
+    "../components/**/**/*.stories.@(js|jsx|ts|tsx)"
+  ],
+  "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials"
+  ]
+}

@@ -11,8 +11,16 @@ const Provider = ({ children }) => (
   </MockedProvider>
 );
 
-addDecorator((storyFn) => (
-  <Provider>
-    <ChakraProvider theme={theme}>{storyFn()}</ChakraProvider>
-  </Provider>
-));
+export const decorators = [
+  (Story) => (
+    <Provider theme="default">
+      <ChakraProvider>
+        <Story />
+      </ChakraProvider>
+    </Provider>
+  ),
+];
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+};

@@ -37,7 +37,7 @@ const index = () => {
           },
         }}
       >
-        <Flex position="fixed" width="100%" overflowY="auto" height="100%">
+        <Flex position="fixed" width="100%" height="100%">
           <Box
             bg="#FDE7DC"
             width="100%"
@@ -80,7 +80,9 @@ const index = () => {
             align="center"
             position="relative"
             width={{ base: "100%", sm: "100%", md: "100%", lg: "50%", xl: "50%" }}
-            h="100vh"
+            minWidth={{ base: "100%", lg: "50%" }}
+            h="100%"
+            overflowY="auto"
           >
             <Box
               marginTop={{
@@ -123,7 +125,10 @@ const index = () => {
             </Box>
             <IndexCarousel lang={locale} />
             <Flex
-              position="absolute"
+              position={{
+                base: "fixed",
+                xl: "absolute",
+              }}
               w="100%"
               display={{
                 base: "block",
