@@ -143,7 +143,7 @@ const index = () => {
               height="10vh"
               backgroundColor="#E91E63"
             >
-              <Flex alignItems="center" justifyContent="center" color="white" margin="auto 0 auto 0">
+              <Flex align="center" justify="center" color="white" height="100%">
                 <SubHeader color="white" fontSize="1.2em">
                   {t.index.contactUs}
                 </SubHeader>

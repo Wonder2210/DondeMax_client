@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Stat, StatNumber } from "@chakra-ui/react";
+import { Flex, Spacer, Stat, StatNumber } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import shop from "@iconify/icons-cil/cart";
 import ProductCard from "./ProductCard";
@@ -52,9 +52,10 @@ const CartList: React.FC<props> = ({ onClickCheckout, isLoading }) => {
         <Flex flexGrow={1} overflowY="auto" flexDirection="column">
           {productsList}
         </Flex>
-        <Flex width="100%" justifyContent="space-between" marginBottom="1em">
+        <Flex width="100%" justify="space-between" align="center" marginBottom="1em">
           <SubHeader>Total:</SubHeader>
-          <Stat>
+          <Spacer />
+          <Stat textAlign="right">
             <StatNumber>{total}$</StatNumber>
           </Stat>
         </Flex>
@@ -67,7 +68,7 @@ const CartList: React.FC<props> = ({ onClickCheckout, isLoading }) => {
           onClick={onClickCheckout}
           rightIcon={<Icon icon={shop} width="1.7em" height="1.7em" />}
           isLoading={isLoading}
-          disabled={!(productsCart.length > 0)}
+          disabled={!(productsCart.length >= 0)}
         >
           comprar
         </Button>

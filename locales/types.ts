@@ -42,6 +42,10 @@ interface locales {
     moreProducts: string;
     deliveryInfo: string;
   };
+  checkout: {
+    logIn: string;
+    info: string;
+  };
 }
 
 export default locales;

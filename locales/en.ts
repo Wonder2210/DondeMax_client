@@ -47,6 +47,10 @@ const language: LocalesType = {
       installations or from 8am to 7pm or could be delivered to your
        place`,
   },
+  checkout: {
+    info: "Order Info",
+    logIn: "Log In",
+  },
 };
 
 export default language;

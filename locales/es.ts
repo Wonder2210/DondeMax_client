@@ -47,6 +47,10 @@ const language: LocalesType = {
     realizar con la debida antelacio Podran ser retirados en el horario de 8 am a 7pm en nuestro local y 
     se puede acordar el delivery con un recargo adicional (a consultar varia del lugar) de entre 10am y 5pm`,
   },
+  checkout: {
+    info: "Informacion del pedido",
+    logIn: "Inicia Sesion",
+  },
 };
 
 export default language;

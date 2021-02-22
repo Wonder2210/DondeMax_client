@@ -53,7 +53,7 @@ const NavbarMobile: React.FC<{ lang: string }> = ({ lang }) => {
         </ListItem>
 
         <ListItem marginLeft={3}>
-          <Link href="/products" passHref>
+          <Link href="/compra" passHref>
             {t.navbar.shop}
           </Link>
         </ListItem>

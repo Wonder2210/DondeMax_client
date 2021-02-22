@@ -1,14 +1,15 @@
 import * as React from "react";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { Standard } from "@/layouts/Standard";
 import { CheckoutCartList } from "@/organisms/CartList";
 import { LoginClient, OrderClient } from "@/organisms/Forms";
-import { SubHeader, Header } from "@/atoms/Text";
+import { Header } from "@/atoms/Text";
 import { useAuth } from "@/utils/AuthHook";
 import { useAppContext } from "@/utils/AppContext";
 import { TAKE_ORDER_CLIENT } from "@/graphql";
+import Languages from "../locales";
 
 const loginClientQuery = gql`
   mutation LogIn($email: String!, $password: String!) {
@@ -21,6 +22,8 @@ const loginClientQuery = gql`
 
 const CheckoutCart = () => {
   const router = useRouter();
+  const { locale } = router;
+  const t = Languages(locale);
   const { state: context, setState: setContext, setAuthToken } = useAppContext();
   const [isSubmitting, dispatchSubmit] = React.useState(false);
   const [takeOrder, { loading: isTakingOrder }] = useMutation(TAKE_ORDER_CLIENT, {
@@ -69,7 +72,7 @@ const CheckoutCart = () => {
         <Flex width="min(24em, 100%)" marginBottom="2em" flexDirection="column">
           {user.id ? (
             <>
-              <Header>Datos de la compra</Header>
+              <Header>{t.checkout.info}</Header>
               <Flex marginTop="2.5em" maxHeight="min(80vh,80em)" height="min(80vh,80em)">
                 <OrderClient
                   isSubmiting={isSubmitting}
@@ -81,7 +84,7 @@ const CheckoutCart = () => {
             </>
           ) : (
             <>
-              <SubHeader fontSize="2.5em">Iniciar Sesion</SubHeader>
+              <Header fontSize="2.5em">{t.checkout.logIn}</Header>
               <LoginClient onLogin={onLogin} isLoading={loading} />
             </>
           )}
