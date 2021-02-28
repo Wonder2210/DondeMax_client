@@ -4,12 +4,14 @@ import * as Yup from "yup";
 import { Form, Formik, Field, useFormikContext } from "formik";
 import { SelectInput, DateInput } from "../../atoms/Inputs";
 import { Table } from "../Table";
+import Language from "../../../locales";
 
 type props = {
   onSubmit: (data: Object) => void;
   total: number;
   isSubmiting: boolean;
   productsList: Array<{ id: number; name: string; price: number; quantity: number; total: number }>;
+  lang: string;
 };
 
 const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";
@@ -33,7 +35,10 @@ const SubmitForm: React.FC<{
   return null;
 };
 
-const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList }) => {
+const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList, lang }) => {
+  const {
+    forms: { orderClient },
+  } = Language(lang);
   const payMethod = ["EFECTIVO", "DEBITO", "TRANSFERENCIA", " DOLARES", "PESOS"].map((i) => ({
     id: i,
     type: i,
@@ -54,7 +59,7 @@ const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList }) =
           {({ field, form }) => (
             <DateInput
               id="deliveryDate"
-              label="Fecha de Entrega"
+              label={orderClient.deliveryDate}
               errorMessage={form.errors.deliveryDate}
               isInvalid={form.errors.deliveryDate && form.touched.deliveryDate}
               form={form}
@@ -66,12 +71,12 @@ const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList }) =
         <Field name="payMethod">
           {({ field, form }) => (
             <SelectInput
-              placeholder="Metodo de pago"
+              placeholder={orderClient.payMethod}
               options={payMethod}
               id="mthod"
               field={field}
               isInvalid={form.errors.payMethod && form.touched.payMethod}
-              label="Metodo de pago:"
+              label={`${orderClient.payMethod}:`}
               variant="flushed"
               errorMessage={form.errors.payMethod}
             />
@@ -80,7 +85,7 @@ const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList }) =
         <Field name="note">
           {({ field, form }) => (
             <FormControl>
-              <FormLabel>Nota:</FormLabel>
+              <FormLabel>{orderClient.note}</FormLabel>
               <Textarea variant="flushed" size="sm" id="note" {...field} />
             </FormControl>
           )}

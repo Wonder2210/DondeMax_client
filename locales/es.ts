@@ -46,10 +46,36 @@ const language: LocalesType = {
     deliveryInfo: `Todos nuestros productos son producidos el mismo dia de su entrega por lo tanto sus pedidos se deberan 
     realizar con la debida antelacio Podran ser retirados en el horario de 8 am a 7pm en nuestro local y 
     se puede acordar el delivery con un recargo adicional (a consultar varia del lugar) de entre 10am y 5pm`,
+    addedSuccesfully: (qty, name) => `Haz agregado <strong>${qty}</strong> unidades de ${name} al carrito Exitosamente`,
   },
   checkout: {
     info: "Informacion del pedido",
     logIn: "Inicia Sesion",
+  },
+  cart: {
+    buy: "Realizar pedido",
+    items: "Productos",
+    price: "Precio",
+    total: "Total",
+    uniteds: "Unidades",
+  },
+  login: {
+    badData: "El correo o la contraseña que usastes es incorrecta",
+    noAccount: "¿No estas registrado?",
+    signUpHere: "Registrate aqui",
+  },
+  forms: {
+    orderClient: {
+      payMethod: "Metodo de pago",
+      deliveryDate: "Fecha de entrega",
+      note: "Nota",
+    },
+    loginClient: {
+      logIn: "Ingresa",
+      email: "Email",
+      password: "Contraseña",
+      submit: "Ingresar",
+    },
   },
 };
 

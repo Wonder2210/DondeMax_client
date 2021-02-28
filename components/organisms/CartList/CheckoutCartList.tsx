@@ -6,15 +6,18 @@ import ProductCard from "./ProductCard";
 import { SubHeader, Header } from "../../atoms/Text";
 import { Button } from "../../atoms/Buttons";
 import { useAppContext } from "../../../utils/AppContext";
+import Languages from "../../../locales";
 
 type props = {
   onClickCheckout: () => void;
   isLoading: boolean;
+  lang: string;
 };
 
-const CartList: React.FC<props> = ({ onClickCheckout, isLoading }) => {
+const CartList: React.FC<props> = ({ onClickCheckout, isLoading, lang }) => {
   const { state: context, setState: setContext } = useAppContext();
   const { productsCart, total } = context;
+  const t = Languages(lang);
   const deleteFromCart = (id) => () =>
     setContext((last) => ({ ...last, productsCart: last.productsCart.filter((i) => id !== i.id) }));
   const onChange = (id) => (str, val) => {
@@ -40,20 +43,20 @@ const CartList: React.FC<props> = ({ onClickCheckout, isLoading }) => {
         uniteds={i.quantity}
         total={i.total}
         key={i.id}
+        lang={lang}
         remove={deleteFromCart(i.id)}
-        boxShadow="md"
       />
     );
   });
   return (
     <>
       <Flex maxHeight="min(80vh,80em)" height="min(80vh,80em)" flexDirection="column">
-        <Header>Compras:</Header>
+        <Header>{t.cart.items}:</Header>
         <Flex flexGrow={1} overflowY="auto" flexDirection="column">
           {productsList}
         </Flex>
         <Flex width="100%" justify="space-between" align="center" marginBottom="1em">
-          <SubHeader>Total:</SubHeader>
+          <SubHeader>{t.cart.total}:</SubHeader>
           <Spacer />
           <Stat textAlign="right">
             <StatNumber>{total}$</StatNumber>
@@ -70,7 +73,7 @@ const CartList: React.FC<props> = ({ onClickCheckout, isLoading }) => {
           isLoading={isLoading}
           disabled={!(productsCart.length >= 0)}
         >
-          comprar
+          {t.cart.buy}
         </Button>
       </Flex>
     </>

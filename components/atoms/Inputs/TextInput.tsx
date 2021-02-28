@@ -38,6 +38,7 @@ const TextInput: React.FC<props> = ({
           {left ?? ""}
         </InputLeftAddon>
         <Input
+          data-testid="text-input"
           backgroundColor="#FFF !important"
           variant={variant}
           borderColor={borderColor}

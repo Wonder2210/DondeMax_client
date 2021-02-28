@@ -36,7 +36,7 @@ const NavbarWideScreen: React.FC<{ lang: string }> = ({ lang }) => {
 
       <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">
         <LanguageDropDown />
-        <CartList />
+        <CartList lang={lang} />
         <UserDropdown image="https://randomuser.me/api/portraits/men/23.jpg" imageAlt="Jhon Doe" userName="Jhon Doe" />
       </Flex>
     </Flex>

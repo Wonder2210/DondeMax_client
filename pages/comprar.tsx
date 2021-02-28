@@ -25,6 +25,7 @@ const CheckoutCart = () => {
   const { locale } = router;
   const t = Languages(locale);
   const { state: context, setState: setContext, setAuthToken } = useAppContext();
+  const { productsCart } = context;
   const [isSubmitting, dispatchSubmit] = React.useState(false);
   const [takeOrder, { loading: isTakingOrder }] = useMutation(TAKE_ORDER_CLIENT, {
     onCompleted: () => {
@@ -78,19 +79,20 @@ const CheckoutCart = () => {
                   isSubmiting={isSubmitting}
                   total={12}
                   onSubmit={onSubmit}
-                  productsList={context.productsCart}
+                  lang={locale}
+                  productsList={productsCart}
                 />
               </Flex>
             </>
           ) : (
             <>
               <Header fontSize="2.5em">{t.checkout.logIn}</Header>
-              <LoginClient onLogin={onLogin} isLoading={loading} />
+              <LoginClient onLogin={onLogin} lang={locale} isLoading={loading} />
             </>
           )}
         </Flex>
 
-        <CheckoutCartList onClickCheckout={onClickSubmit} isLoading={isTakingOrder} />
+        <CheckoutCartList onClickCheckout={onClickSubmit} lang={locale} isLoading={isTakingOrder} />
       </Flex>
     </Standard>
   );

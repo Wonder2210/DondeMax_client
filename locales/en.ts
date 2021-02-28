@@ -46,10 +46,37 @@ const language: LocalesType = {
      anticipation and could be delivered in our
       installations or from 8am to 7pm or could be delivered to your
        place`,
+    addedSuccesfully: (qty, name) =>
+      `You have added <strong>${qty}</strong> uniteds of ${name} to the cart succesfully`,
   },
   checkout: {
     info: "Order Info",
     logIn: "Log In",
+  },
+  cart: {
+    buy: "Make Order",
+    items: "Items",
+    price: "Price",
+    total: "Total",
+    uniteds: "Uniteds",
+  },
+  login: {
+    badData: "The email or the password you submit is incorrect",
+    noAccount: "Don't have an account?",
+    signUpHere: "Sign Up",
+  },
+  forms: {
+    orderClient: {
+      payMethod: "Pay method",
+      deliveryDate: "Delivery Date",
+      note: "Note",
+    },
+    loginClient: {
+      logIn: "Log In",
+      email: "Email",
+      password: "Password",
+      submit: "Log In",
+    },
   },
 };
 

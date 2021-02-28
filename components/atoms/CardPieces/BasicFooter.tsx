@@ -20,6 +20,7 @@ const BasicFooter: React.FC<props> = ({
 }) => {
   return (
     <Flex
+      data-testid="basicfooter"
       backgroundColor={backgroundColor}
       zIndex={zIndex ?? 0}
       pos={position}

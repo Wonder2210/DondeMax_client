@@ -2,12 +2,12 @@ import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Flex, Box, Image, useDisclosure, Alert, AlertIcon, useToast } from "@chakra-ui/react";
 import { Login, CreateUser } from "@/organisms/Forms";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { Header } from "@/atoms/Text";
 import { useAppContext } from "@/utils/AppContext";
 import Head from "next/head";
 import Link from "next/link";
+import Languages from "../locales";
 
 const loginUserQuery = gql`
   mutation LoginUser($email: String!, $password: String!) {
@@ -40,8 +40,7 @@ const login = () => {
     loading: false,
     error: false,
   };
-  const { push } = useRouter();
-  const toast = useToast();
+  const { push, locale } = useRouter();
   const [state, setState] = React.useState(defaultState);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [createUser] = useMutation(CREATE_USER, {
@@ -52,6 +51,7 @@ const login = () => {
       alert("usuario Exitosamente registrado");
     },
   });
+  const t = Languages(locale);
   const [loginUser, { data, error, loading }] = useMutation(loginUserQuery, {
     onCompleted: (result) => {
       setAuthToken(result.loginUser.token);
@@ -82,7 +82,7 @@ const login = () => {
       {state.error && (
         <Alert status="error" variant="solid" alignItems="center" justifyContent="center" textAlign="center">
           <AlertIcon />
-          El correo o la contraseña que usastes es incorrecta
+          {t.login.badData}
         </Alert>
       )}
       <Flex width="100%" height="100vh">
@@ -137,7 +137,7 @@ const login = () => {
             </div>
             <Header fontSize="1.2em">DondeMax</Header>
           </Flex>
-          <Login onSubmit={onSubmit} isLoading={loading} onOpen={onOpen} />
+          <Login onSubmit={onSubmit} isLoading={loading} lang={locale} onOpen={onOpen} />
         </Flex>
       </Flex>
     </>

@@ -41,10 +41,36 @@ interface locales {
     delivery: string;
     moreProducts: string;
     deliveryInfo: string;
+    addedSuccesfully: (qty: number, name: string) => string;
   };
   checkout: {
     logIn: string;
     info: string;
+  };
+  cart: {
+    items: string;
+    total: string;
+    buy: string;
+    price: string;
+    uniteds: string;
+  };
+  login: {
+    noAccount: string;
+    signUpHere: string;
+    badData: string;
+  };
+  forms: {
+    orderClient: {
+      deliveryDate: string;
+      payMethod: string;
+      note: string;
+    };
+    loginClient: {
+      logIn: string;
+      email: string;
+      password: string;
+      submit: string;
+    };
   };
 }
 

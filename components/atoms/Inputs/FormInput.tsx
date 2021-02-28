@@ -30,8 +30,11 @@ const FormInput: React.FC<props> = ({
 }) => {
   return (
     <FormControl isInvalid={isInvalid}>
-      <FormLabel htmlFor={id}>{label}</FormLabel>
+      <FormLabel data-testid="form-label" htmlFor={id}>
+        {label}
+      </FormLabel>
       <Input
+        data-testid="form-input"
         {...field}
         type={type}
         placeholder={placeHolder}
@@ -39,8 +42,8 @@ const FormInput: React.FC<props> = ({
         border={borders}
         focusBorderColor={focusBorderColor}
       />
-      <FormHelperText>{helper}</FormHelperText>
-      <FormErrorMessage>{errorMessage}</FormErrorMessage>
+      <FormHelperText data-testid="form-helper">{helper}</FormHelperText>
+      <FormErrorMessage data-testid="form-error-message">{errorMessage}</FormErrorMessage>
     </FormControl>
   );
 };

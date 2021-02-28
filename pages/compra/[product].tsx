@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import * as React from "react";
 import {
   Flex,
@@ -111,9 +112,11 @@ const ProductInfo = ({ data, id, product }) => {
           <AlertDialogBody paddingY="2.75em">
             <Stack direction="row">
               <Image rounded="35px" src={data.product.image} boxSize="50px" />
-              <p>
-                Haz agregado <strong>{state.qty}</strong> unidades de {data.product.name} al carrito Exitosamente
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: t.productsInfo.addedSuccesfully(state.qty, data.name),
+                }}
+              />
             </Stack>
           </AlertDialogBody>
         </AlertDialogContent>

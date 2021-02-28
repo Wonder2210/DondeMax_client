@@ -13,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <Btn
+      data-testid="button"
       backgroundColor={backgroundColor ?? "black"}
       onClick={onClick}
       color={color ?? "white"}

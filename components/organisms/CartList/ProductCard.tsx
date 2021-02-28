@@ -13,19 +13,21 @@ import { Icon } from "@iconify/react";
 import minus from "@iconify/icons-cil/minus";
 import { IconButton } from "../../atoms/Buttons";
 import { SubHeader } from "../../atoms/Text";
+import Languages from "../../../locales";
 
 type props = {
   image: string;
   name: string;
+  lang: string;
   price: number;
   total: number;
   onChange: (str: string, e: number) => void;
   uniteds: number;
   remove: () => void;
-  boxShadow?: string;
 };
 
-const ProductCard: React.FC<props> = ({ image, boxShadow, name, price, total, uniteds, onChange, remove }) => {
+const ProductCard: React.FC<props> = ({ image, name, price, lang, total, uniteds, onChange, remove }) => {
+  const t = Languages(lang);
   return (
     <Flex
       // boxShadow={boxShadow ?? { base: "sm", sm: "2xl", md: "2xl", xl: "2xl", lg: "2xl" }}
@@ -50,13 +52,13 @@ const ProductCard: React.FC<props> = ({ image, boxShadow, name, price, total, un
       <Flex marginLeft="1em" direction="column">
         <SubHeader>{name}</SubHeader>
         <p>
-          Precio: <strong>{price}$</strong>
+          {t.cart.price}: <strong>{price}$</strong>
         </p>
         <p>
-          Total: <strong>{total}$</strong>
+          {t.cart.total}: <strong>{total}$</strong>
         </p>
         <Flex alignItems="center" marginY="0.5em">
-          <p>Unidades:</p>
+          <p>{t.cart.uniteds}:</p>
           <NumberInput
             size="sm"
             maxWidth="6em"

@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Flex, Box, Tabs, Tab, TabList, TabPanel, TabPanels } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Button } from "../../atoms/Buttons";
 import { SubHeader } from "../../atoms/Text";
 import { FormInput } from "../../atoms/Inputs";
+import Languages from "../../../locales";
 
 type FormValidation = {
   password: string;
@@ -15,6 +16,7 @@ type props = {
   onSubmit: (e: FormValidation) => void;
   onOpen: () => void;
   isLoading: boolean;
+  lang: string;
 };
 
 const validationSchema = Yup.object().shape({
@@ -22,11 +24,15 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Este campo no puede ser vacio"),
 });
 
-const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
+const Login: React.FC<props> = ({ onSubmit, onOpen, lang, isLoading }) => {
   const initialValues: FormValidation = {
     password: "",
     email: "",
   };
+  const {
+    forms: { loginClient },
+    login,
+  } = Languages(lang);
 
   return (
     <Flex
@@ -38,7 +44,7 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
       minHeight="min(50vh , 29em)"
     >
       <Box marginY="1.5em">
-        <SubHeader fontSize="2.5em">Inicia sesion</SubHeader>
+        <SubHeader fontSize="2.5em">{loginClient.logIn}</SubHeader>
       </Box>
       <Box width="100%">
         <Formik
@@ -54,9 +60,9 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
                 <FormInput
                   id="email"
                   isInvalid={form.errors.cedula && form.touched.cedula}
-                  label="Email:"
                   type="email"
-                  placeHolder="email"
+                  label={`${loginClient.email}:`}
+                  placeHolder={loginClient.email}
                   variant="flushed"
                   field={field}
                   errorMessage={form.errors.email}
@@ -68,9 +74,9 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
                 <FormInput
                   id="password"
                   isInvalid={form.errors.password && form.touched.password}
-                  label="password:"
                   type="password"
-                  placeHolder="Password"
+                  label={`${loginClient.password}:`}
+                  placeHolder={loginClient.password}
                   variant="flushed"
                   field={field}
                   errorMessage={form.errors.password}
@@ -88,7 +94,7 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
                 loadingText="Cargando"
                 _hover={{ transform: "scale(1.05)" }}
               >
-                Ingresar
+                {loginClient.submit}
               </Button>
             </Flex>
           </Form>
@@ -99,7 +105,7 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
           textAlign: "center",
         }}
       >
-        ¿ No estas registrado ? Si eres cliente
+        {login.noAccount}
         <br />
         <button
           type="button"
@@ -108,7 +114,7 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, isLoading }) => {
           }}
           onClick={onOpen}
         >
-          Registraste aqui
+          {login.signUpHere}
         </button>
       </p>
     </Flex>

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card pieces ImageHeader 1`] = `
+<DocumentFragment>
+  <img
+    alt="placeholder"
+    class="chakra-image__placeholder css-qa3p9c"
+  />
+</DocumentFragment>
+`;
+
+exports[`Card pieces basic footer 1`] = `
+<DocumentFragment>
+  <div
+    class="css-qynvi5"
+    data-testid="basicfooter"
+  >
+    here i am
+  </div>
+</DocumentFragment>
+`;

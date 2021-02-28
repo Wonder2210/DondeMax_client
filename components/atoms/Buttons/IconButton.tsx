@@ -18,6 +18,7 @@ const IconButton: React.FC<IconButtonProps & { borders?: [string, string] | stri
   borderColor = "transparent",
 }) => (
   <IconBtn
+    data-testid="icon'button"
     aria-label="Icon"
     type={type}
     onClick={onClick}

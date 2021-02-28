@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Button } from "../../atoms/Buttons";
 import { FormInput } from "../../atoms/Inputs";
+import Languages from "../../../locales";
 
 type FormValidation = {
   password: string;
@@ -17,10 +18,14 @@ const validationSchema = Yup.object().shape({
 
 type props = {
   isLoading?: boolean;
+  lang: string;
   onLogin: (values: { email: string; password: string }) => void;
 };
 
-const LoginClient: React.FC<props> = ({ isLoading, onLogin }) => {
+const LoginClient: React.FC<props> = ({ isLoading, onLogin, lang }) => {
+  const {
+    forms: { loginClient },
+  } = Languages(lang);
   const initialValues: FormValidation = {
     password: "",
     email: "",
@@ -33,9 +38,9 @@ const LoginClient: React.FC<props> = ({ isLoading, onLogin }) => {
             <FormInput
               id="email"
               isInvalid={form.errors.cedula && form.touched.cedula}
-              label="Email:"
               type="email"
-              placeHolder="email"
+              label={`${loginClient.email}:`}
+              placeHolder={loginClient.email}
               variant="flushed"
               field={field}
               errorMessage={form.errors.email}
@@ -47,9 +52,9 @@ const LoginClient: React.FC<props> = ({ isLoading, onLogin }) => {
             <FormInput
               id="password"
               isInvalid={form.errors.password && form.touched.password}
-              label="password:"
               type="password"
-              placeHolder="Password"
+              label={`${loginClient.password}:`}
+              placeHolder={loginClient.password}
               variant="flushed"
               field={field}
               errorMessage={form.errors.password}
@@ -68,7 +73,7 @@ const LoginClient: React.FC<props> = ({ isLoading, onLogin }) => {
             borderRadius="12px"
             _hover={{ transform: "scale(1.05)" }}
           >
-            Ingresar
+            {loginClient.submit}
           </Button>
         </Flex>
       </Form>
