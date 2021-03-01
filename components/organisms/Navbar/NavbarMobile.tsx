@@ -62,7 +62,7 @@ const NavbarMobile: React.FC<{ lang: string }> = ({ lang }) => {
           <Flex alignItems="center" justifyContent="space-between">
             <UserDropdown />
 
-            <CartList />
+            <CartList lang={lang} />
           </Flex>
         </ListItem>
       </Dropdown>

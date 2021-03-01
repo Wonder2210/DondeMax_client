@@ -46,7 +46,7 @@ const MobileScreen: React.FC<props> = ({ preservations, types }) => {
       >
         <Flex w="20%" marginLeft="0.3em" h="100%" alignItems="center" />
         <Flex w="20%" h="100%" alignItems="center">
-          <CartList color="white" />
+          <CartList lang={"es"}/>
         </Flex>
       </Flex>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>

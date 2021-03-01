@@ -20,6 +20,7 @@ const DateInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form,
     <FormControl isInvalid={isInvalid}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
       <DayPickerInput
+        data-testid="date-input"
         format="dd/mm/yyyy"
         dayPickerProps={{ disabledDays: { before: new Date() } }}
         onDayChange={(val) => form.setFieldValue(field.name, format(val, "MM/dd/yyyy"))}

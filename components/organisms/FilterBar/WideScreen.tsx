@@ -31,7 +31,7 @@ const WideScreen = ({ preservations, types }: props) => {
       backgroundColor="#2F4858"
     >
       <Flex marginRight="1vw" position="relative" align="center" flexDirection="row" w="20%" justify="flex-end">
-        <CartList color="white" />
+        <CartList lang={"es"}/>
       </Flex>
     </Flex>
   );
