@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  useDisclosure,
   Drawer,
   DrawerHeader,
   DrawerBody,
@@ -23,9 +22,8 @@ import Languages from "../../../locales";
 
 const CartList: React.FC<{ lang: string }> = ({ lang }) => {
   const router = useRouter();
-  const { onClose, onOpen, isOpen } = useDisclosure();
-  const { state: context, setState: setContext } = useAppContext();
-  const { productsCart, total } = context;
+  const { state: context, setState: setContext, openCart, closeCart } = useAppContext();
+  const { productsCart, total, cart } = context;
   const { cart: t } = Languages(lang);
 
   const buyButton = () => {
@@ -64,9 +62,9 @@ const CartList: React.FC<{ lang: string }> = ({ lang }) => {
   });
   return (
     <>
-      <ShoppingCart itemsCount={productsCart.length} color="black" onClick={onOpen} />
+      <ShoppingCart itemsCount={productsCart.length} color="black" onClick={openCart} />
 
-      <Drawer placement="right" onClose={onClose} isOpen={isOpen} size="sm">
+      <Drawer placement="right" onClose={closeCart} isOpen={cart} size="sm">
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />

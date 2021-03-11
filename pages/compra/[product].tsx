@@ -6,24 +6,12 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Spacer,
   Stack,
   Stat,
   StatNumber,
   VStack,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  AlertDialogCloseButton,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  CircularProgress,
-  CircularProgressLabel,
   Badge,
-  useDisclosure,
 } from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
 import Icon from "@iconify/react";
@@ -72,12 +60,10 @@ const query = gql`
 `;
 
 const ProductInfo = ({ data, id, product }) => {
-  const router = useRouter();
   const [state, setState] = React.useState({
     qty: 1,
   });
-  const { isOpen, onClose, onOpen } = useDisclosure();
-  const { state: context, setState: setContext, addToCart: addToCartContext, removeFromCart } = useAppContext();
+  const { addToCart: addToCartContext, openCart } = useAppContext();
   const { locale } = useRouter();
   const t = Language(locale);
 
@@ -90,37 +76,18 @@ const ProductInfo = ({ data, id, product }) => {
       price: data.product.precio,
       total: state.qty * data.product.precio,
     });
-    onOpen();
-    setTimeout(onClose, 1500);
+    openCart();
   };
 
   const onChangeQty = (valS: string, valN: number) => {
     setState({ qty: valN });
   };
-  const addRef = React.useRef();
 
   return (
     <>
       <Head>
         <title>{product}</title>
       </Head>
-      <AlertDialog leastDestructiveRef={addRef} onClose={onClose} isOpen={isOpen}>
-        <AlertDialogOverlay />
-
-        <AlertDialogContent>
-          <AlertDialogCloseButton ref={addRef} />
-          <AlertDialogBody paddingY="2.75em">
-            <Stack direction="row">
-              <Image rounded="35px" src={data.product.image} boxSize="50px" />
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: t.productsInfo.addedSuccesfully(state.qty, data.name),
-                }}
-              />
-            </Stack>
-          </AlertDialogBody>
-        </AlertDialogContent>
-      </AlertDialog>
       <Standard>
         <Flex justifyContent="center" alignItems="center">
           <Breadcrumb
@@ -134,7 +101,7 @@ const ProductInfo = ({ data, id, product }) => {
             </BreadcrumbItem>
 
             <BreadcrumbItem>
-              <BreadcrumbLink href="/products">Productos</BreadcrumbLink>
+              <BreadcrumbLink href="/compra">Productos</BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
@@ -149,12 +116,16 @@ const ProductInfo = ({ data, id, product }) => {
 
             md: "row",
           }}
-          marginX={{
+          margin={{
             base: "1em",
-            md: "0em",
+            md: "4em 0em",
+          }}
+          paddingX={{
+            base: "0",
+            md: "15%",
           }}
           marginTop="1em"
-          justify="space-around"
+          justify="space-between"
           align="center"
         >
           <Header
@@ -172,13 +143,13 @@ const ProductInfo = ({ data, id, product }) => {
             rounded="35px"
             src={data.product.image}
             boxSize={{
-              base: "19em",
-              sm: "25em",
-              md: "27em",
-              lg: "30em",
-              xl: "33em",
+              base: "100%",
+
+              md: "40vw",
+              lg: "30vw",
             }}
           />
+          <Spacer />
           <VStack align="left">
             <Header
               display={{
@@ -187,7 +158,6 @@ const ProductInfo = ({ data, id, product }) => {
               }}
               textAlign="left"
               size="xl"
-              marginTop="0.3em"
             >
               {data.product.name}
             </Header>
@@ -259,53 +229,15 @@ const ProductInfo = ({ data, id, product }) => {
             </Button>
           </VStack>
         </Stack>
-
-        <Tabs align="center" marginTop="2.5em" isFitted marginX="auto" maxWidth="35em">
-          <TabList>
-            <Tab>{t.productsInfo.ratings}</Tab>
-            <Tab>{t.productsInfo.delivery}</Tab>
-          </TabList>
-
-          <TabPanels minHeight="min(30vh , 20em)">
-            <TabPanel>
-              <Stack
-                direction={{
-                  base: "column",
-                  md: "row",
-                }}
-                justify="space-around"
-              >
-                <CircularProgress thickness="12px" size="140px" value={data.product.rate.value * 20} color="green.400">
-                  <CircularProgressLabel>{data.product.rate.value}/5</CircularProgressLabel>
-                </CircularProgress>
-                <Stack
-                  spacing={2}
-                  maxWidth={{
-                    base: "80vw",
-                    md: "min(25vw, 10em)",
-                  }}
-                  justify="center"
-                >
-                  <p>
-                    <span color="colors.rose.600">{data.product.rate.times_valued}</span> {t.productsInfo.ratingsInfo}
-                  </p>
-                </Stack>
-              </Stack>
-            </TabPanel>
-            <TabPanel>
-              <p>{t.productsInfo.deliveryInfo}</p>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
         <Parragraph
-          fontWeight="medium"
-          marginLeft={{
-            base: ".5em",
-            md: "2em",
+          position="relative"
+          fontWeight="500"
+          boxProps={{
+            marginX: "auto",
+            marginY: "3em",
           }}
-          fontSize="2xl"
-          textAlign="left"
-          height="5em"
+          fontSize="2em"
+          textAlign="center"
         >
           {t.productsInfo.moreProducts}
         </Parragraph>

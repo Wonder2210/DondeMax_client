@@ -1,37 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import * as React from "react";
 import { Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import { CartList } from "../CartList";
 import { UserDropdown, LanguageDropDown } from "../../molecules/Dropdown";
 import Languages from "../../../locales";
 
+const StyledLink: React.FC<{ href: string }> = ({ href, children }) => (
+  <Link href={href}>
+    <a style={{ fontSize: "1.12em", fontWeight: 400, color: "#333" }}>{children}</a>
+  </Link>
+);
+
 const NavbarWideScreen: React.FC<{ lang: string }> = ({ lang }) => {
   const t = Languages(lang);
   return (
     <Flex zIndex={1} position="absolute" justifyContent="space-between" flexDirection="row" width="100%" height="72px">
       <Flex justify="space-evenly" marginTop="4vh" flexDirection="row" left="0" width="50%">
-        <style jsx>
-          {`
-            .link {
-              font-size: 1.12em;
-              font-weight: 400;
-              color: #333;
-            }
-          `}
-        </style>
-        <Link href="/">
-          <a className="link">{t.navbar.home}</a>
-        </Link>
-        <Link href="/info">
-          <a href="" className="link">
-            {t.navbar.aboutUs}
-          </a>
-        </Link>
+        <StyledLink href="/">{t.navbar.home}</StyledLink>
+        <StyledLink href="/info">{t.navbar.aboutUs}</StyledLink>
 
-        <Link href="/compra" passHref>
-          <a className="link">{t.navbar.shop}</a>
-        </Link>
+        <StyledLink href="/compra">{t.navbar.shop}</StyledLink>
       </Flex>
 
       <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">

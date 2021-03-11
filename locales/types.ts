@@ -71,6 +71,14 @@ interface locales {
       password: string;
       submit: string;
     };
+    signUpClient: {
+      signUp: string;
+      name: string;
+      phone: string;
+      last_name: string;
+      email: string;
+      password: string;
+    };
   };
 }
 

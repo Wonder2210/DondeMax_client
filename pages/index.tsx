@@ -134,7 +134,7 @@ const index = () => {
                 base: "block",
                 sm: "block",
                 md: "block",
-                lg: "block",
+                lg: "none",
                 xl: "none",
               }}
               justify="center"

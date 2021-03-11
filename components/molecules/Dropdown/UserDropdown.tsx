@@ -70,13 +70,6 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
     <>
       {user.id ? (
         <Menu>
-          <style jsx>
-            {`
-              .margin-span {
-                margin-left: 1.5em;
-              }
-            `}
-          </style>
           <MenuButton
             as={Button}
             leftIcon={

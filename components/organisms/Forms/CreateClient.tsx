@@ -1,129 +1,138 @@
 import * as React from "react";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
-import Plus from "@iconify/icons-cil/plus";
+import { Flex, Box } from "@chakra-ui/react";
 import * as Yup from "yup";
-import { Icon } from "@iconify/react";
 import { Form, Formik, Field } from "formik";
-import { IconButton } from "../../atoms/Buttons";
-import { FormInput, SelectInput } from "../../atoms/Inputs";
+import { SubHeader } from "../../atoms/Text";
+import { Button } from "../../atoms/Buttons";
+import { FormInput } from "../../atoms/Inputs";
+import Languages from "../../../locales";
 
 type props = {
   values: {};
-  isOpen: boolean;
-  onClose: () => void;
   onSubmit: (data: Object) => void;
-  onEdit: (data: Object) => void;
-  isEditing: Boolean;
+  isLoading: boolean;
+  lang: string;
 };
 
 const VALIDATION_MESSAGE = "Este campo no debe de estar vacio";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().trim().required(VALIDATION_MESSAGE),
-  cedula: Yup.string()
-    .trim()
-    .required(VALIDATION_MESSAGE)
-    .typeError("Dato invalido")
-    .transform((value, originalValue) => (/\s/.test(originalValue) ? NaN : value)),
-  nationality: Yup.string().required(VALIDATION_MESSAGE),
+  last_name: Yup.string().trim().required(VALIDATION_MESSAGE),
+  email: Yup.string().trim().required(VALIDATION_MESSAGE),
+  password: Yup.string().trim().required(VALIDATION_MESSAGE),
   phone: Yup.number()
     .required(VALIDATION_MESSAGE)
     .typeError("Dato invalido")
     .transform((value, originalValue) => (/\s/.test(originalValue) ? NaN : value)),
 });
 
-const CreateClient: React.FC<props> = ({ isOpen, onClose, values, onSubmit, isEditing, onEdit }) => {
+const CreateClient: React.FC<props> = ({ values = {}, onSubmit, lang, isLoading }) => {
+  const {
+    forms: { signUpClient },
+  } = Languages(lang);
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>{isEditing ? `Editando cliente` : "Agrega nuevo CreateClient"}</ModalHeader>
-        <ModalCloseButton />
-        <Formik
-          initialValues={values}
-          validationSchema={validationSchema}
-          onSubmit={(data) => (isEditing ? onEdit(data) : onSubmit(data))}
-        >
+    <Flex
+      direction="column"
+      borderRadius="35px"
+      width={{ md: "24em", xl: "30em" }}
+      padding="3em"
+      align="center"
+      minHeight="min(50vh , 29em)"
+    >
+      <Box marginY="1.5em">
+        <SubHeader fontSize="2.5em">{signUpClient.signUp}</SubHeader>
+      </Box>
+      <Box width="100%">
+        <Formik initialValues={values} validationSchema={validationSchema} onSubmit={(data) => onSubmit(data)}>
           <Form>
-            <ModalBody>
-              <Field name="name">
-                {({ field, form }) => (
-                  <FormInput
-                    id="nombre"
-                    isInvalid={form.errors.name && form.touched.name}
-                    label="Nombre:"
-                    type="text"
-                    field={field}
-                    placeHolder="nombre"
-                    variant="flushed"
-                    errorMessage={form.errors.name}
-                  />
-                )}
-              </Field>
-              <Field name="cedula">
-                {({ field, form }) => (
-                  <FormInput
-                    id="cedula"
-                    isInvalid={form.errors.cedula && form.touched.cedula}
-                    label="Cedula:"
-                    type="text"
-                    field={field}
-                    placeHolder="cedula"
-                    variant="flushed"
-                    errorMessage={form.errors.cedula}
-                  />
-                )}
-              </Field>
-              <Field name="phone">
-                {({ field, form }) => (
-                  <FormInput
-                    id="phone"
-                    isInvalid={form.errors.phone && form.touched.phone}
-                    label="Telefono:"
-                    type="text"
-                    field={field}
-                    placeHolder="Telefono"
-                    variant="flushed"
-                    errorMessage={form.errors.phone}
-                  />
-                )}
-              </Field>
-              <Field name="nationality">
-                {({ field, form }) => (
-                  <FormInput
-                    id="nationality"
-                    isInvalid={form.errors.nationality && form.touched.nationality}
-                    label="Nacionalidad:"
-                    type="text"
-                    field={field}
-                    placeHolder="nacionalidad ej Venezolano , colombiano"
-                    variant="flushed"
-                    errorMessage={form.errors.nationality}
-                  />
-                )}
-              </Field>
-            </ModalBody>
+            <Field name="name">
+              {({ field, form }) => (
+                <FormInput
+                  id="name"
+                  isInvalid={form.errors.name && form.touched.name}
+                  label={signUpClient.name}
+                  type="text"
+                  field={field}
+                  placeHolder={signUpClient.name}
+                  variant="flushed"
+                  errorMessage={form.errors.name}
+                />
+              )}
+            </Field>
+            <Field name="last_name">
+              {({ field, form }) => (
+                <FormInput
+                  id="last_name"
+                  isInvalid={form.errors.last_name && form.touched.last_name}
+                  label={signUpClient.last_name}
+                  type="text"
+                  field={field}
+                  placeHolder={signUpClient.last_name}
+                  variant="flushed"
+                  errorMessage={form.errors.last_name}
+                />
+              )}
+            </Field>
+            <Field name="email">
+              {({ field, form }) => (
+                <FormInput
+                  id="email"
+                  isInvalid={form.errors.email && form.touched.email}
+                  label={signUpClient.email}
+                  type="email"
+                  field={field}
+                  placeHolder={signUpClient.email}
+                  variant="flushed"
+                  errorMessage={form.errors.email}
+                />
+              )}
+            </Field>
+            <Field name="phone">
+              {({ field, form }) => (
+                <FormInput
+                  id="phone"
+                  isInvalid={form.errors.phone && form.touched.phone}
+                  label={signUpClient.phone}
+                  type="text"
+                  field={field}
+                  placeHolder={signUpClient.phone}
+                  variant="flushed"
+                  errorMessage={form.errors.phone}
+                />
+              )}
+            </Field>
+            <Field name="password">
+              {({ field, form }) => (
+                <FormInput
+                  id="password"
+                  isInvalid={form.errors.password && form.touched.password}
+                  label={signUpClient.password}
+                  type="text"
+                  field={field}
+                  placeHolder={signUpClient.password}
+                  variant="flushed"
+                  errorMessage={form.errors.password}
+                />
+              )}
+            </Field>
 
-            <ModalFooter>
-              <IconButton
-                type="submit"
-                aria-label="add-more"
-                backgroundColor="colors.rose.600"
-                icon={<Icon icon={Plus} color="white" />}
-              />
-            </ModalFooter>
+            <Button
+              type="submit"
+              backgroundColor="colors.rose.600"
+              size="md"
+              width="100%"
+              height={{ base: "2.5em" }}
+              isLoading={isLoading}
+              loadingText="Cargando"
+              _hover={{ transform: "scale(1.05)" }}
+            >
+              {signUpClient.signUp}
+            </Button>
           </Form>
         </Formik>
-      </ModalContent>
-    </Modal>
+      </Box>
+    </Flex>
   );
 };
 

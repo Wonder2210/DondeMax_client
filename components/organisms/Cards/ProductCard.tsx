@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Link from "next/link";
-import { Box, Stat, StatNumber, Flex } from "@chakra-ui/react";
+import { Box, Stat, StatNumber, Flex, Button } from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
-import { motion } from "framer-motion";
 import { Header } from "../../atoms/Text";
 import { ImageHeader } from "../../atoms/CardPieces";
 import Language from "../../../locales";
@@ -34,37 +33,42 @@ const ProductCard: React.FC<props> = ({ src, id, name, timesValued, rating, alt,
         }}
         zIndex={2}
       >
-        <motion.div
-          transition={{
-            duration: 0.35,
-          }}
-          whileHover={{ scale: 1.07, y: -17, cursor: "pointer" }}
-          whileTap={{ scale: 1.05 }}
-        >
-          <ImageHeader alt={alt} src={src} height="auto" width="100%" maxHeight="min(40vh , 21.875em)" />
-          <Box margin="0.5em .5em 0 0.5em">
-            <a>
-              <Header type="h6" weight="semibold" fontSize="1.8em">
-                {name}
-              </Header>
-            </a>
-            <Flex alignItems="center">
-              <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#ffd700" />
-              <span
-                style={{
-                  marginLeft: ".5em",
-                }}
-              >
-                {timesValued} {t.productsInfo.ratings}
-              </span>
-            </Flex>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Stat>
-                <StatNumber>{price}</StatNumber>
-              </Stat>
-            </Flex>
-          </Box>
-        </motion.div>
+        <ImageHeader alt={alt} src={src} height="auto" width="100%" maxHeight="min(40vh , 21.875em)" />
+        <Box margin="0.5em .5em 0 0.5em">
+          <a>
+            <Header type="h6" weight="semibold" fontSize="1.8em">
+              {name}
+            </Header>
+          </a>
+          <Flex alignItems="center">
+            <ReactStars value={rating} count={5} edit={false} size={24} isHalf activeColor="#F97615" />
+            <span
+              style={{
+                marginLeft: ".5em",
+              }}
+            >
+              {timesValued} {t.productsInfo.ratings}
+            </span>
+          </Flex>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Stat>
+              <StatNumber>{price}</StatNumber>
+            </Stat>
+            <Button
+              variant="outline"
+              borderRadius="12px"
+              color="colors.rose.600"
+              borderColor="colors.rose.600"
+              transition="color .3s ease, background-color .3s ease"
+              _hover={{
+                color: "white",
+                backgroundColor: "colors.rose.600",
+              }}
+            >
+              Pedir ahora
+            </Button>
+          </Flex>
+        </Box>
       </Box>
     </Link>
   );

@@ -74,7 +74,7 @@ const CheckoutCart = () => {
           {user.id ? (
             <>
               <Header>{t.checkout.info}</Header>
-              <Flex marginTop="2.5em" maxHeight="min(80vh,80em)" height="min(80vh,80em)">
+              <Flex marginTop="2.5em" maxHeight="min(80vh,80em)" height="min(80vh,80em)" boxShadow="md">
                 <OrderClient
                   isSubmiting={isSubmitting}
                   total={12}

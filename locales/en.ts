@@ -77,6 +77,14 @@ const language: LocalesType = {
       password: "Password",
       submit: "Log In",
     },
+    signUpClient: {
+      email: "Email",
+      last_name: "Last Name",
+      name: "Name",
+      phone: "Phone",
+      password: "Password",
+      signUp: "Sign Up",
+    },
   },
 };
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { Flex, Box, Image, useDisclosure, Alert, AlertIcon, useToast } from "@chakra-ui/react";
-import { Login, CreateUser } from "@/organisms/Forms";
+import { Login } from "@/organisms/Forms";
 import { useRouter } from "next/router";
 import { Header } from "@/atoms/Text";
 import { useAppContext } from "@/utils/AppContext";
@@ -17,22 +17,6 @@ const loginUserQuery = gql`
     }
   }
 `;
-const CREATE_USER = gql`
-  mutation(
-    $name: String!
-    $email: String!
-    $last_name: String!
-    $password: String!
-    $phone: String!
-    $role: UserRole!
-  ) {
-    createUser(
-      user: { name: $name, email: $email, last_name: $last_name, password: $password, phone: $phone, role: $role }
-    ) {
-      id
-    }
-  }
-`;
 
 const login = () => {
   const { setAuthToken } = useAppContext();
@@ -43,14 +27,7 @@ const login = () => {
   const { push, locale } = useRouter();
   const [state, setState] = React.useState(defaultState);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [createUser] = useMutation(CREATE_USER, {
-    onError: () => alert("datos invalidos verifica y intenta de nuevo"),
-    onCompleted: () => {
-      setState({ ...defaultState });
-      onClose();
-      alert("usuario Exitosamente registrado");
-    },
-  });
+
   const t = Languages(locale);
   const [loginUser, { data, error, loading }] = useMutation(loginUserQuery, {
     onCompleted: (result) => {
@@ -71,11 +48,6 @@ const login = () => {
     setState({ ...state, loading: true });
     loginUser({ variables: { ...values } });
   };
-  const onSubmitClientSign = (values) => {
-    setState({ ...state, loading: true });
-
-    createUser({ variables: { ...values, role: "CLIENTE" } });
-  };
 
   return (
     <>
@@ -89,14 +61,6 @@ const login = () => {
         <Head>
           <title>Inicia sesion</title>
         </Head>
-        <CreateUser
-          isEditing={false}
-          isOpen={isOpen}
-          onClose={onClose}
-          onSubmit={onSubmitClientSign}
-          onEdit={() => console.log("nada")}
-          values={{}}
-        />
         <Box
           bgImage="url('/images/login.jpg')"
           bgPosition="center"
@@ -135,9 +99,11 @@ const login = () => {
                 <Image _hover={{ cursor: "pointer" }} src="/images/logo.jpg" width="5em" height="auto" />
               </Link>
             </div>
-            <Header fontSize="1.2em">DondeMax</Header>
+            <Header fontWeight="600" fontSize="1.5em">
+              DondeMax
+            </Header>
           </Flex>
-          <Login onSubmit={onSubmit} isLoading={loading} lang={locale} onOpen={onOpen} />
+          <Login onSubmit={onSubmit} isLoading={loading} lang={locale} />
         </Flex>
       </Flex>
     </>

@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
 import { Flex, Box } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import Link from "next/link";
 import { Button } from "../../atoms/Buttons";
 import { SubHeader } from "../../atoms/Text";
 import { FormInput } from "../../atoms/Inputs";
@@ -14,7 +16,6 @@ type FormValidation = {
 
 type props = {
   onSubmit: (e: FormValidation) => void;
-  onOpen: () => void;
   isLoading: boolean;
   lang: string;
 };
@@ -24,7 +25,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Este campo no puede ser vacio"),
 });
 
-const Login: React.FC<props> = ({ onSubmit, onOpen, lang, isLoading }) => {
+const Login: React.FC<props> = ({ onSubmit, lang, isLoading }) => {
   const initialValues: FormValidation = {
     password: "",
     email: "",
@@ -107,15 +108,15 @@ const Login: React.FC<props> = ({ onSubmit, onOpen, lang, isLoading }) => {
       >
         {login.noAccount}
         <br />
-        <button
-          type="button"
-          style={{
-            color: "#fe4674",
-          }}
-          onClick={onOpen}
-        >
-          {login.signUpHere}
-        </button>
+        <Link passHref href="/register">
+          <a
+            style={{
+              color: "#fe4674",
+            }}
+          >
+            {login.signUpHere}
+          </a>
+        </Link>
       </p>
     </Flex>
   );

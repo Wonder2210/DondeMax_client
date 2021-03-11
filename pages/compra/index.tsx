@@ -5,6 +5,7 @@ import Head from "next/head";
 import Animation from "@/molecules/Loader/Animation";
 import { useQuery } from "@apollo/client";
 import { Standard } from "@/layouts/Standard";
+import { ProductTypeDropdown } from "@/molecules/Dropdown";
 import { Pagination } from "@/molecules/Pagination";
 import { ProductCard } from "@/components/organisms/Cards";
 import { Header } from "@/atoms/Text";
@@ -45,18 +46,19 @@ const store = () => {
 
   const onClick = (e: number) => setState((last) => ({ ...last, page: e }));
 
-  const onChangeTabs = (index) => {
+  const onChangeDropDown = (index) => {
+    console.log(index);
     switch (index) {
-      case 0:
+      case "1":
         setState((last) => ({ ...last, types: "" }));
         break;
-      case 1:
+      case "2":
         setState((last) => ({ ...last, types: "Tortas" }));
         break;
-      case 2:
+      case "3":
         setState((last) => ({ ...last, types: "Porcion de torta" }));
         break;
-      case 3:
+      case "4":
         setState((last) => ({ ...last, types: "Galleta" }));
         break;
       default:
@@ -82,20 +84,10 @@ const store = () => {
           {t.shop.title}
         </Header>
       </Flex>
-      <Tabs
-        margin="1em auto"
-        overflow="auto"
-        width={{ base: "100%", sm: "100%", md: "75%", lg: "70%" }}
-        paddingX="1em"
-        onChange={onChangeTabs}
-      >
-        <TabList>
-          <Tab>{t.shop.type1}</Tab>
-          <Tab>{t.shop.type2}</Tab>
-          <Tab>{t.shop.type3}</Tab>
-          <Tab>{t.shop.type4}</Tab>
-        </TabList>
-      </Tabs>
+      <Flex padding="2em 3em" justify="space-between" align="center" position="relative" zIndex={3}>
+        <Header size="md">{t.index.actionButton}</Header>
+        <ProductTypeDropdown lang={locale} onChange={onChangeDropDown} selectedType={state.types} />
+      </Flex>
       <Grid
         templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         gridTemplateRows="minmax(300px, auto)"

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useDisclosure } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 
 export const AppContext = React.createContext(null);
@@ -30,6 +31,7 @@ export const AppProvider: React.FC = ({ children }) => {
     productsCart?: Array<ProductsCart>;
     total: number;
     authToken: string;
+    cart: boolean;
   }>(() => {
     const admin = Cookies.get("admin") === "true" ?? false;
     const adminPassword = 221099;
@@ -42,6 +44,7 @@ export const AppProvider: React.FC = ({ children }) => {
       productsCart,
       total: 0,
       authToken,
+      cart: false,
     };
   });
   React.useEffect(() => {
@@ -68,6 +71,9 @@ export const AppProvider: React.FC = ({ children }) => {
     setState({ ...state, productsCart: state.productsCart.filter((i) => i.id !== id) });
   };
 
+  const openCart = () => setState({ ...state, cart: true });
+  const closeCart = () => setState({ ...state, cart: false });
+
   const setAuthToken = (e: string) => setState({ ...state, authToken: `Bearer ${e}` });
   React.useEffect(() => {
     const stateJ = JSON.stringify(state.productsCart);
@@ -84,6 +90,8 @@ export const AppProvider: React.FC = ({ children }) => {
       addToCart,
       removeFromCart,
       setAuthToken,
+      openCart,
+      closeCart,
     }),
     [state],
   );
