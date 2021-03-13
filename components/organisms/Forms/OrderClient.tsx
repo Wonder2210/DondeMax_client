@@ -1,15 +1,18 @@
 import * as React from "react";
 import { Textarea, FormControl, FormLabel } from "@chakra-ui/react";
 import * as Yup from "yup";
+import { Icon } from "@iconify/react";
+import shop from "@iconify/icons-cil/cart";
 import { Form, Formik, Field, useFormikContext } from "formik";
 import { SelectInput, DateInput } from "../../atoms/Inputs";
+import { Button } from "../../atoms/Buttons";
 import { Table } from "../Table";
 import Language from "../../../locales";
 
 type props = {
   onSubmit: (data: Object) => void;
   total: number;
-  isSubmiting: boolean;
+  isLoading: boolean;
   productsList: Array<{ id: number; name: string; price: number; quantity: number; total: number }>;
   lang: string;
 };
@@ -23,21 +26,10 @@ const validationSchema = Yup.object().shape({
   note: Yup.string(),
 });
 
-const SubmitForm: React.FC<{
-  isSubmiting: boolean;
-}> = ({ isSubmiting }) => {
-  const { values, submitForm, isValid } = useFormikContext();
-  React.useEffect(() => {
-    if (isValid && isSubmiting) {
-      submitForm();
-    }
-  }, [values, submitForm, isSubmiting]);
-  return null;
-};
-
-const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList, lang }) => {
+const OrderClient: React.FC<props> = ({ onSubmit, isLoading, productsList, lang }) => {
   const {
     forms: { orderClient },
+    cart,
   } = Language(lang);
   const payMethod = ["EFECTIVO", "DEBITO", "TRANSFERENCIA", " DOLARES", "PESOS"].map((i) => ({
     id: i,
@@ -113,7 +105,18 @@ const OrderClient: React.FC<props> = ({ onSubmit, isSubmiting, productsList, lan
             ]}
           />
         )}
-        <SubmitForm isSubmiting={isSubmiting} />
+        <Button
+          type="submit"
+          backgroundColor="colors.rose.600"
+          size="xl"
+          width="100%"
+          height="2.5em"
+          borderRadius="12px"
+          rightIcon={<Icon icon={shop} width="1.7em" height="1.7em" />}
+          isLoading={isLoading}
+        >
+          {cart.buy}
+        </Button>
       </Form>
     </Formik>
   );

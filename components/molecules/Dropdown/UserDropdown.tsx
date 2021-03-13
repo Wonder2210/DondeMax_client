@@ -72,6 +72,7 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
         <Menu>
           <MenuButton
             as={Button}
+            isTruncated
             leftIcon={
               <Image
                 boxSize="2rem"

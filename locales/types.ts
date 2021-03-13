@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
 interface locales {
   index: {
@@ -57,6 +58,11 @@ interface locales {
   login: {
     noAccount: string;
     signUpHere: string;
+    badData: string;
+  };
+  register: {
+    haveAccount: string;
+    loginHere: string;
     badData: string;
   };
   forms: {

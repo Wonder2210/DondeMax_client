@@ -65,6 +65,11 @@ const language: LocalesType = {
     noAccount: "Don't have an account?",
     signUpHere: "Sign Up",
   },
+  register: {
+    badData: "The email is already registered , try with a different email",
+    haveAccount: "ALready have an account?",
+    loginHere: "Login here",
+  },
   forms: {
     orderClient: {
       payMethod: "Pay method",

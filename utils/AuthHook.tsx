@@ -23,7 +23,7 @@ export const useAuth = () => {
     email: "",
   });
 
-  const { data, loading, error, refetch } = useQuery(query);
+  const { data, loading, error } = useQuery(query);
 
   React.useEffect(() => {
     if (!loading && !error) {
@@ -36,12 +36,7 @@ export const useAuth = () => {
     }
   }, [data]);
 
-  React.useEffect(() => {
-    if (refetch) refetch();
-  }, [state.authToken]);
-
   return {
     user,
-    refetch,
   };
 };

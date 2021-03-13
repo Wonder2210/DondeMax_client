@@ -27,6 +27,7 @@ const CartList: React.FC<{ lang: string }> = ({ lang }) => {
   const { cart: t } = Languages(lang);
 
   const buyButton = () => {
+    closeCart();
     router.push("/comprar");
   };
 
