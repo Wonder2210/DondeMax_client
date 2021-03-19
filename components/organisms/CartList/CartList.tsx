@@ -79,8 +79,10 @@ const CartList: React.FC<{ lang: string }> = ({ lang }) => {
                 </Stat>
                 <Button
                   backgroundColor="colors.rose.600"
-                  size="sm"
-                  width="10em"
+                  size="md"
+                  borderRadius="12px"
+                  width="11em"
+                  paddingX="1em"
                   height="2.5em"
                   onClick={buyButton}
                   rightIcon={<Icon icon={shop} width="1.7em" height="auto" />}

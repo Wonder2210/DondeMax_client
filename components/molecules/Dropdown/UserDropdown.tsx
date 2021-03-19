@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-wrap-multilines */
+/* eslint-disable no-nested-ternary */
 import React from "react";
 import {
   Menu,
@@ -17,11 +18,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
+import G from "@iconify/icons-dashicons/google";
 import exit from "@iconify/icons-cil/exit-to-app";
 import locked from "@iconify/icons-cil/lock-locked";
 import UserIcon from "@iconify/icons-dashicons/admin-users";
 import home from "@iconify/icons-cil/home";
 import list from "@iconify/icons-cil/list";
+import { useGoogleLogin, useGoogleLogout } from "react-google-login";
 import unlocked from "@iconify/icons-cil/lock-unlocked";
 import downChevron from "@iconify/icons-dashicons/arrow-down-alt2";
 import { useRouter } from "next/router";
@@ -40,11 +43,13 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { state, setState, setAuthToken } = useAppContext();
-  const { user } = useAuth();
+  const { employee, customer, closeSession } = useAuth();
   const [password, setPassword] = React.useState({
     value: "",
     error: false,
   });
+
+  const clientId = "1080660100211-q183khnmnj2rlnbtpvjn9e1o2fo2590v.apps.googleusercontent.com";
   const onChange = (e) => {
     setPassword({ ...password, error: false, value: e.target.value });
   };
@@ -59,71 +64,110 @@ const UserDropdown: React.FC<props> = ({ image, imageAlt, userName }) => {
     }
     setPassword({ ...password, error: true });
   };
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
+
   const dropAdminMode = () => {
     setState({ ...state, admin: false });
   };
   const CloseSession = () => {
+    closeSession();
     setAuthToken("");
     router.push("/");
   };
+  const onSuccess = (data) => {
+    setAuthToken(data.tokenId);
+  };
+  const { signOut } = useGoogleLogout({
+    clientId,
+    onLogoutSuccess: CloseSession,
+    onFailure: () => alert("try later"),
+  });
+  const { signIn } = useGoogleLogin({
+    clientId,
+    cookiePolicy: "single_host_origin",
+    isSignedIn: true,
+    onFailure: responseGoogle,
+    onSuccess,
+  });
   return (
     <>
-      {user.id ? (
-        <Menu>
-          <MenuButton
-            as={Button}
-            isTruncated
-            leftIcon={
-              <Image
-                boxSize="2rem"
-                borderRadius="full"
-                src={`https://ui-avatars.com/api/?background=random&name=${user.name}`}
-                alt={imageAlt}
-                bgColor="#223"
-              />
-            }
-            rightIcon={<Icon icon={downChevron} width="1em" height="auto" />}
-            bgColor="transparent"
-          >
-            {user.name}
-          </MenuButton>
-          <MenuList>
-            {user.role === "ADMINISTRADOR" && (
-              <MenuItem minH="48px" onClick={state.admin ? dropAdminMode : onOpen}>
+      {customer.id || employee.id ? (
+        customer ? (
+          <Menu>
+            <MenuButton
+              as={Button}
+              isTruncated
+              leftIcon={<Image borderRadius="50%" width="2em" src={customer.image} bgColor="#223" />}
+              rightIcon={<Icon icon={downChevron} width="1em" height="auto" />}
+              bgColor="transparent"
+            >
+              {customer.name}
+            </MenuButton>
+            <MenuList>
+              <MenuItem minH="3em" onClick={() => router.push("/")} icon={<Icon icon={home} width="2em" />}>
+                <span className="margin-span">Inicio</span>
+              </MenuItem>
+              <MenuItem minH="3em" onClick={() => router.push("/client")} icon={<Icon icon={list} width="2em" />}>
+                <span className="margin-span">Pedidos</span>
+              </MenuItem>
+              <MenuItem minH="3em" onClick={signOut} icon={<Icon icon={exit} width="2em" />}>
+                <span className="margin-span">Salir</span>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Menu>
+            <MenuButton
+              as={Button}
+              isTruncated
+              leftIcon={
+                <Image
+                  boxSize="1rem"
+                  borderRadius="full"
+                  src={`https://ui-avatars.com/api/?background=random&name=${employee.name}`}
+                  alt={imageAlt}
+                  bgColor="#223"
+                />
+              }
+              rightIcon={<Icon icon={downChevron} width="1em" height="auto" />}
+              bgColor="transparent"
+            >
+              {employee.name}
+            </MenuButton>
+            <MenuList>
+              <MenuItem minH="3em" onClick={state.admin ? dropAdminMode : onOpen}>
                 <Icon icon={state.admin ? unlocked : locked} width="2em" />
                 <span className="margin-span">Admin</span>
               </MenuItem>
-            )}
-            {user.role === "CLIENT" && (
-              <>
-                <MenuItem minH="48px" onClick={() => router.push("/")}>
-                  <Icon icon={home} width="2em" />
-                  <span className="margin-span">Inicio</span>
-                </MenuItem>
-                <MenuItem minH="48px" onClick={() => router.push("/client")}>
-                  <Icon icon={list} width="2em" />
-                  <span className="margin-span">Pedidos</span>
-                </MenuItem>
-              </>
-            )}
-            <MenuItem minH="40px" onClick={CloseSession}>
-              <Icon icon={exit} width="2em" />
-              <span className="margin-span">Salir</span>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+
+              <MenuItem minH="3em" onClick={() => router.push("/")}>
+                <Icon icon={home} width="2em" />
+                <span className="margin-span">Inicio</span>
+              </MenuItem>
+              <MenuItem minH="3em" onClick={() => router.push("/client")}>
+                <Icon icon={list} width="2em" />
+                <span className="margin-span">Pedidos</span>
+              </MenuItem>
+              <MenuItem minH="3em" onClick={CloseSession}>
+                <Icon icon={exit} width="2em" />
+                <span className="margin-span">Salir</span>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        )
       ) : (
         <IconButton
           aria-label="user"
           color="black"
-          onClick={() => router.push("/login")}
           width="5em"
           height="2.5em"
           backgroundColor="transparent"
+          onClick={signIn}
           icon={<Icon icon={UserIcon} width="36px" />}
         />
       )}
-
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
         <ModalContent>

@@ -1,12 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import { Box, Flex, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { NavbarClient } from "@/organisms/Navbar";
 import { OrdersCustomerTable } from "@/organisms/Table";
 import SkeletonLoader from "@/molecules/Loader/SkeletonLoader";
 import Head from "next/head";
 import { useAuth } from "../../utils/AuthHook";
+
+const AddPhone = dynamic(() => import("@/organisms/Forms/AddPhone"));
 
 const query = gql`
   query client($id: Int = 0) {
@@ -41,10 +45,14 @@ const query = gql`
     }
   }
 `;
+
 const index = () => {
-  const { user } = useAuth();
+  const { customer, addPhone } = useAuth();
+  const router = useRouter();
+  const { locale } = router;
+
   const { data, loading } = useQuery(query, {
-    variables: { id: user.id },
+    variables: { id: customer.id },
     onCompleted: (res) => console.log(data.client),
     onError: (e) => {
       console.log(JSON.stringify(e));
@@ -57,7 +65,10 @@ const index = () => {
         <title>Cliente - pedidos</title>
       </Head>
       <NavbarClient />
-      <Flex display="row" align="flex-start" marginX="3.5em" marginY="3em">
+      <Flex display="row" align="flex-start" marginX="3.5em" justifyContent="center" marginY="3em">
+        {!customer.phone ?? (
+          <AddPhone lang={locale} onSubmit={addPhone.addPhone} completed={addPhone.close} loading={addPhone.loading} />
+        )}
         <Tabs>
           <TabList>
             <Tab>Activos</Tab>

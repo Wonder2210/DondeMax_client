@@ -24,7 +24,7 @@ const ShoppingCart: React.FC<props> = ({
           .btnShooppingContainer {
             position: relative;
             height: 68%;
-            width: 76px;
+            width: 4.7em;
           }
         `}
       </style>

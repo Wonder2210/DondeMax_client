@@ -10,9 +10,11 @@ import CreateUser from "./CreateUser";
 import CreateClient from "./CreateClient";
 import LoginClient from "./LoginClient";
 import RegisterCheckout from "./RegisterCheckout";
+import AddPhone from "./AddPhone";
 
 export {
   ContactUs,
+  AddPhone,
   Login,
   Provider,
   Mercancia,

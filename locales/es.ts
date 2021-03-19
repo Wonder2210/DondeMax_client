@@ -89,6 +89,10 @@ const language: LocalesType = {
       phone: "Telefono",
       password: "Contraseña",
     },
+    addPhone: {
+      add: "Agrega tu numero de telefono",
+      phone: "Telefono",
+    },
   },
 };
 

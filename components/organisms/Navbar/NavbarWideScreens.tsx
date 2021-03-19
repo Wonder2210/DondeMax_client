@@ -23,7 +23,14 @@ const NavbarWideScreen: React.FC<{ lang: string }> = ({ lang }) => {
         <StyledLink href="/compra">{t.navbar.shop}</StyledLink>
       </Flex>
 
-      <Flex marginRight="1em" position="relative" marginTop="1em" flexDirection="row" w="20%" justify="flex-end">
+      <Flex
+        marginRight="1em"
+        position="relative"
+        marginTop="1em"
+        flexDirection="row"
+        w="max-content"
+        justify="flex-end"
+      >
         <LanguageDropDown />
         <CartList lang={lang} />
         <UserDropdown image="https://randomuser.me/api/portraits/men/23.jpg" imageAlt="Jhon Doe" userName="Jhon Doe" />

@@ -8,7 +8,7 @@ import { UserDropdown } from "../../molecules/Dropdown";
 import { useAuth } from "../../../utils/AuthHook";
 
 const NavbarClient: React.FC = () => {
-  const { user: userauth } = useAuth();
+  const { customer: userauth } = useAuth();
   const [date, setDate] = React.useState(new Date());
   function tick() {
     setDate(new Date());

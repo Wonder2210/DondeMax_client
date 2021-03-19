@@ -90,6 +90,10 @@ const language: LocalesType = {
       password: "Password",
       signUp: "Sign Up",
     },
+    addPhone: {
+      add: "Add Phone Number",
+      phone: "Phone",
+    },
   },
 };
 

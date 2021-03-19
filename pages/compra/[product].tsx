@@ -11,6 +11,7 @@ import {
   Stat,
   StatNumber,
   VStack,
+  createStandaloneToast,
   Badge,
 } from "@chakra-ui/react";
 import ReactStars from "react-rating-stars-component";
@@ -60,10 +61,11 @@ const query = gql`
 `;
 
 const ProductInfo = ({ data, id, product }) => {
+  const toast = createStandaloneToast();
   const [state, setState] = React.useState({
     qty: 1,
   });
-  const { addToCart: addToCartContext, openCart } = useAppContext();
+  const { addToCart: addToCartContext } = useAppContext();
   const { locale } = useRouter();
   const t = Language(locale);
 
@@ -76,7 +78,16 @@ const ProductInfo = ({ data, id, product }) => {
       price: data.product.precio,
       total: state.qty * data.product.precio,
     });
-    openCart();
+
+    toast({
+      id: "success",
+      title: "Succes",
+      position: "bottom-right",
+      description: "Added item to the cart",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   const onChangeQty = (valS: string, valN: number) => {

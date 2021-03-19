@@ -85,6 +85,10 @@ interface locales {
       email: string;
       password: string;
     };
+    addPhone: {
+      add: string;
+      phone: string;
+    };
   };
 }
 
