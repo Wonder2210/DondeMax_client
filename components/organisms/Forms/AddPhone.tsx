@@ -23,6 +23,7 @@ import Languages from "../../../locales";
 type props = {
   values?: { phone?: string };
   completed: boolean;
+  width?: string;
   loading: boolean;
   onSubmit: (phone: string) => void;
   lang: string;
@@ -37,7 +38,7 @@ const validationSchema = Yup.object().shape({
     .transform((value, originalValue) => (/\s/.test(originalValue) ? NaN : value)),
 });
 
-const AddPhone: React.FC<props> = ({ values = { phone: "" }, onSubmit, lang, completed, loading }) => {
+const AddPhone: React.FC<props> = ({ values = { phone: "" }, onSubmit, lang, completed, width = "70%", loading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const t = Languages(lang);
   React.useEffect(() => {
@@ -45,7 +46,7 @@ const AddPhone: React.FC<props> = ({ values = { phone: "" }, onSubmit, lang, com
   }, [completed]);
   return (
     <>
-      <Alert status="warning" width="70%" marginX="auto">
+      <Alert status="warning" width={width} marginX="auto">
         <Flex grow={1}>
           <AlertIcon />
           Seems your account is about expire, upgrade now

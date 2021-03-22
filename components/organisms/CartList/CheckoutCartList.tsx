@@ -1,13 +1,11 @@
 import React from "react";
 import { Flex, Spacer, Stat, StatNumber } from "@chakra-ui/react";
-
 import ProductCard from "./ProductCard";
 import { SubHeader, Header } from "../../atoms/Text";
 import { useAppContext } from "../../../utils/AppContext";
 import Languages from "../../../locales";
 
 type props = {
-  onClickCheckout: () => void;
   lang: string;
 };
 

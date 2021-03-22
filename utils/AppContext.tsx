@@ -37,7 +37,7 @@ export const AppProvider: React.FC = ({ children }) => {
     const adminPassword = 221099;
     const productsCart = Cookies.getJSON("productsCart") ?? [];
     const authToken = Cookies.get("authToken") ?? "";
-    const total = Cookies.get("total") ?? 0;
+    const total = Number(Cookies.get("total")) ?? 0;
 
     return {
       admin,
@@ -83,7 +83,7 @@ export const AppProvider: React.FC = ({ children }) => {
     Cookies.set("admin", String(state.admin), { expires: 1 });
     Cookies.set("adminPassword", String(state.adminPassword), { expires: 1 });
     Cookies.set("productsCart", stateJ, { expires: 1 });
-    Cookies.set("total", state.total, { expires: 1 });
+    Cookies.set("total", String(state.total), { expires: 1 });
     Cookies.set("authToken", state.authToken);
   }, [state]);
 

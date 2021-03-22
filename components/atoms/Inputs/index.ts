@@ -7,9 +7,11 @@ import DropImage from "./DropImage";
 import DynamicInput from "./DynamicType";
 import DynamicProductType from "./DynamicProductType";
 import RateInput from "./RateInput";
+import TimeInput from "./TimeInput";
 
 export {
   TextInput,
+  TimeInput,
   FormInput,
   SelectInput,
   NumberInput,

@@ -6,6 +6,7 @@ import "react-day-picker/lib/style.css";
 
 type props = {
   id: string;
+  disabled?: boolean;
   helper?: string;
   label: string;
   field?: { name: string };
@@ -15,15 +16,16 @@ type props = {
   isInvalid?: boolean;
   errorMessage: string;
 };
-const DateInput: React.FC<props> = ({ id, helper, label, field, isInvalid, form, errorMessage }) => {
+const DateInput: React.FC<props> = ({ id, helper, label, field, isInvalid, disabled, form, errorMessage }) => {
   return (
-    <FormControl isInvalid={isInvalid}>
+    <FormControl isInvalid={isInvalid} isDisabled={disabled}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
       <DayPickerInput
         data-testid="date-input"
         format="dd/mm/yyyy"
+        inputProps={{ disabled }}
         dayPickerProps={{ disabledDays: { before: new Date() } }}
-        onDayChange={(val) => form.setFieldValue(field.name, format(val, "MM/dd/yyyy"))}
+        onDayChange={(val) => form.setFieldValue(field.name, format(val, "dd/MM/yyyy"))}
       />
       <FormHelperText>{helper}</FormHelperText>
       <FormErrorMessage>{errorMessage}</FormErrorMessage>

@@ -25,7 +25,7 @@ function usuarios() {
       phone: "",
     },
   };
-  const { user } = useAuth();
+  const { employee: user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, setState] = React.useState<{
     edit: boolean;

@@ -239,6 +239,7 @@ export const TAKE_ORDER_CLIENT = gql`
     $payMethod: PayMethod!
     $note: String!
     $total: Float!
+    $deliveryTime: String!
     $monto: Float!
     $orderProducts: [ProductOrderInput!]!
   ) {
@@ -251,6 +252,7 @@ export const TAKE_ORDER_CLIENT = gql`
         stageStatus: false
         productionStatus: false
         abono: 0
+        deliveryTime: $deliveryTime
         total: $total
         monto: $monto
         orderProducts: $orderProducts

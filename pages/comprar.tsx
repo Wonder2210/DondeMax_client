@@ -60,8 +60,8 @@ const CheckoutCart = () => {
       variables: {
         ...data,
         orderProducts: context.productsCart.map((i) => ({ id: Number(i.id), quantity: Number(i.quantity) })),
-        total: context.total,
-        monto: context.total,
+        total: Number(context.total),
+        monto: Number(context.total),
       },
     });
   };
@@ -93,21 +93,24 @@ const CheckoutCart = () => {
           {customer.id ? (
             <>
               <Header>{t.checkout.info}</Header>
-              {!customer.phone ?? (
+              {!customer.phone ? (
                 <AddPhone
+                  width="90%"
                   lang={locale}
                   onSubmit={addPhone.addPhone}
                   completed={addPhone.close}
                   loading={addPhone.loading}
                 />
+              ) : (
+                ""
               )}
               <Flex marginTop="2.5em" maxHeight="min(80vh,80em)" height="min(80vh,80em)" boxShadow="md">
                 <OrderClient
                   isLoading={isTakingOrder}
                   total={12}
                   onSubmit={onSubmitOrder}
+                  disabled={!customer.phone}
                   lang={locale}
-                  productsList={productsCart}
                 />
               </Flex>
             </>

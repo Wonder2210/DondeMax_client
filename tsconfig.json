@@ -3,19 +3,15 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/atoms/*":["components/atoms/*"],
-      "@/molecules/*":["components/molecules/*"],
-      "@/organisms/*":["components/organisms/*"],
-      "@/layouts/*":["components/layouts/*"],
-      "@/utils/*":["utils/*"],
-      "@/graphql":["graphql/index"],
+      "@/atoms/*": ["components/atoms/*"],
+      "@/molecules/*": ["components/molecules/*"],
+      "@/organisms/*": ["components/organisms/*"],
+      "@/layouts/*": ["components/layouts/*"],
+      "@/utils/*": ["utils/*"],
+      "@/graphql": ["graphql/index"]
     },
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -28,13 +24,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "exclude": [
-    "node_modules",
-    "**/*.stories.tsx"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["node_modules", "**/*.stories.tsx"],
+  "include": ["next-env.d.ts", "types/**.d.ts", "**/*.ts", "**/*.tsx"]
 }
