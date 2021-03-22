@@ -9,7 +9,6 @@ import OrderClient from "./OrderClient";
 import CreateUser from "./CreateUser";
 import CreateClient from "./CreateClient";
 import LoginClient from "./LoginClient";
-import RegisterCheckout from "./RegisterCheckout";
 import AddPhone from "./AddPhone";
 
 export {
@@ -25,5 +24,4 @@ export {
   CreateClient,
   CreateUser,
   LoginClient,
-  RegisterCheckout,
 };

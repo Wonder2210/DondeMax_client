@@ -4,6 +4,7 @@ import { FormControl, FormLabel, FormHelperText, FormErrorMessage, Select } from
 
 type props = {
   id: string;
+  disabled?: boolean;
   helper?: string;
   label: string;
   placeholder: string;
@@ -19,6 +20,7 @@ type props = {
 const SelectInput: React.FC<props> = ({
   id,
   helper,
+  disabled,
   label,
   variant,
   placeholder,
@@ -44,9 +46,15 @@ const SelectInput: React.FC<props> = ({
     );
   });
   return (
-    <FormControl isInvalid={isInvalid}>
+    <FormControl isInvalid={isInvalid} isDisabled={disabled}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
-      <Select {...field} placeholder={placeholder} variant={variant} focusBorderColor={focusBorderColor}>
+      <Select
+        {...field}
+        placeholder={placeholder}
+        isDisabled={disabled}
+        variant={variant}
+        focusBorderColor={focusBorderColor}
+      >
         {optionsRender}
       </Select>
       <FormHelperText>{helper}</FormHelperText>

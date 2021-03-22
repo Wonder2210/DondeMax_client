@@ -1,18 +1,14 @@
 import * as React from "react";
 import { Box, Flex, useMediaQuery } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 import { NavbarDashboard } from "../../organisms/Navbar";
 import { SidebarDashboard } from "../../molecules/Sidebar";
-import { useAuth } from "../../../utils/AuthHook";
 
 type props = {
   sidebar: boolean;
 };
 
 const Dashboard = ({ children }) => {
-  const { user } = useAuth();
-  const router = useRouter();
   const [isMobile] = useMediaQuery("(min-width: 48em)");
   const [state, setState] = React.useState<props>({
     sidebar: isMobile,

@@ -23,7 +23,7 @@ type props = {
 };
 
 const SidebarDashboard: React.FC<props> = ({ open, close }) => {
-  const { user } = useAuth();
+  const { employee: user } = useAuth();
   const { pathname } = useRouter();
   const { state } = useAppContext();
   const verifySelected = (name) => {
@@ -78,7 +78,7 @@ const SidebarDashboard: React.FC<props> = ({ open, close }) => {
         <ListItemDashboard height="4em" icon={userIcon} selected={verifySelected("/usuarios")}>
           <Link href="/admin/usuarios">Usuarios</Link>
         </ListItemDashboard>
-        {state.admin && user.role == "ADMINISTRADOR" && (
+        {state.admin && user.role === "ADMINISTRADOR" && (
           <ListItemDashboard height="4em" icon={findInPage} selected={verifySelected("/auditorias")}>
             <Link href="/admin/auditorias">Auditorias</Link>
           </ListItemDashboard>
