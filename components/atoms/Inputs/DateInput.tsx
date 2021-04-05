@@ -25,7 +25,7 @@ const DateInput: React.FC<props> = ({ id, helper, label, field, isInvalid, disab
         format="dd/mm/yyyy"
         inputProps={{ disabled }}
         dayPickerProps={{ disabledDays: { before: new Date() } }}
-        onDayChange={(val) => form.setFieldValue(field.name, format(val, "dd/MM/yyyy"))}
+        onDayChange={(val) => form.setFieldValue(field.name, format(val, "MM/DD/YYYY"))}
       />
       <FormHelperText>{helper}</FormHelperText>
       <FormErrorMessage>{errorMessage}</FormErrorMessage>
