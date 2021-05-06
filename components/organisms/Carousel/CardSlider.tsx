@@ -30,7 +30,7 @@ const CardSlider = (props) => {
     minDeviceWidth: 960,
   });
   return (
-    <Box width="100%" display="relative" height="auto">
+    <Box width="100%" display="relative" paddingY="1em" height="auto">
       <Carousel
         swipeable
         draggable={false}

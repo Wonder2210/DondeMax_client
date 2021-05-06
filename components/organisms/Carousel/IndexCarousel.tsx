@@ -11,7 +11,15 @@ type props = {
 const IndexCarousel: React.FC<props> = ({ lang }) => {
   const t = Languages(lang);
   return (
-    <Box width="100%" alignItems="center" marginTop="auto" marginBottom="1em">
+    <Box
+      width="100%"
+      alignItems="center"
+      marginTop="auto"
+      marginBottom={{
+        base: "5.5em",
+        lg: "1em",
+      }}
+    >
       <CardSlider>
         <InitialCard
           alt="image of test"

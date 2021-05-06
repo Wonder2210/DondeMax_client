@@ -125,10 +125,7 @@ const index = () => {
             </Box>
             <IndexCarousel lang={locale} />
             <Flex
-              position={{
-                base: "fixed",
-                xl: "absolute",
-              }}
+              position="fixed"
               w="100%"
               display={{
                 base: "block",
@@ -140,7 +137,7 @@ const index = () => {
               justify="center"
               align="center"
               bottom="0"
-              height="10vh"
+              height="5.5em"
               backgroundColor="#E91E63"
             >
               <Flex align="center" justify="center" color="white" height="100%">

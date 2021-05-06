@@ -1,6 +1,7 @@
 .container {
-  padding-bottom: 2em;
-  margin: 0 auto 4vh auto;
+  padding-bottom: 2.3em;
+  padding-top: 2.3em;
+  margin: 0 auto 0 auto;
 }
 .container-products {
   padding-bottom: 2em;
